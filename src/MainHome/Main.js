@@ -52,21 +52,6 @@ const RightMain = styled.div`
     color: white;
     font-weight: bold;
 `;
-const Button = styled.button`
-    cursor: pointer;
-    margin: 5px;
-    width: 350px;
-    height: 44px;
-    border: 3px solid white;
-    font-size: 16px;
-    background-color: #4555AE ;
-    color: white;
-    font-weight: 600;
-    &:hover{
-        color: #4555AE;
-        background-color: white;
-    }
-`;
 const Title = styled.h1`
     font-size: 25px;
     text-align: left;
@@ -104,7 +89,8 @@ const ExMain = () => {
                         <br/>
                     </SemiTitle>
                     <Link to="/doLogin" className="doLogin">로그인하기</Link>
-                    <Button>회원가입</Button>
+                    <Link to="/join" className="doLogin">회원가입</Link>
+                    
                 </RightMain>
             </Container>
         </div>
