@@ -15,9 +15,8 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
+          dsdas
           Test -오민찬
-          test - 김세희
-          Learn React
         </a>
       </header>
     </div>
