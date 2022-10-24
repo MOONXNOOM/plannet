@@ -19,7 +19,7 @@ const Nav = () => {
             h1{
             font-family: 'Comfortaa';
             font-size: 36px;
-            color: 
+            color: black;
             }
         }
         
