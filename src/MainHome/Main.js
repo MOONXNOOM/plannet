@@ -71,12 +71,14 @@ const Title = styled.h1`
     font-size: 25px;
     text-align: left;
     width: 350px;
+    color: white;
 `;
 const SemiTitle = styled.h1`
     font-size: 15px;
     text-align: left;
     width: 350px;
     line-height: 20px;
+    color: white;
 `;
 const ExMain = () => {
     return(

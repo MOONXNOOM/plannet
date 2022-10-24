@@ -4,8 +4,9 @@ import ExMain from "../MainHome/Main";
 const Home = () => {
     return (
         <>
-            <Link to="/Write"> 글쓰기 </Link>
             <ExMain/>
+            <Link to="/Write">글쓰기</Link>
+            <Link to="/Board">자유게시판</Link>
         </>    
         
     );
