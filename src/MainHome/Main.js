@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import img1 from "../images/logoPic.png";
-// import kakaoimg from "../images/kakaotalk_logo2.png";
-// import naverimg from "../images/btnG_아이콘사각.png";
-// import googleimg1 from "../images/google-logo.png";
 import "../App";
+import { Link } from "react-router-dom";
+import "./Main.css";
+
 const Container = styled.div`
     width: 1120px;
     height: 630px;
@@ -103,7 +103,7 @@ const ExMain = () => {
                         <br/>
                         <br/>
                     </SemiTitle>
-                    <Button>로그인하기</Button>
+                    <Link to="/doLogin" className="doLogin">로그인하기</Link>
                     <Button>회원가입</Button>
                 </RightMain>
             </Container>

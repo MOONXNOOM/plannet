@@ -1,0 +1,17 @@
+.ex .doLogin {
+    cursor: pointer;
+    margin: 5px;
+    padding-top: 8px;
+    width: 350px;
+    height: 44px;
+    border: 3px solid white;
+    font-size: 16px;
+    background-color: #4555AE ;
+    color: white;
+    font-weight: 600;
+    text-decoration-line: none;
+}
+.ex .doLogin:hover{
+    color: #4555AE;
+    background-color: white;
+}

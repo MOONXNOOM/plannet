@@ -6,6 +6,8 @@ const Home = () => {
         <>
             <ExMain/>
             <Link to="/Write"> 글쓰기 </Link>
+            <Link to="/DoLogin"> 로그인 </Link>
+
         </>    
         
     );
