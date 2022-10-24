@@ -92,6 +92,7 @@ font-weight: bold;
   width: 1000px;
   height: 300px;
   margin-top: 20px;
+  font-size: 25px;
 
 }
 .memo {
@@ -105,9 +106,11 @@ font-weight: bold;
   width: 200px;
   height: 300px;
   margin-top: 20px;
+  font-size: 25px;
 }
 .doing {
   margin-top: 70px;
+  margin-left: 120px;
 }
 .do { 
   display: flex;
@@ -116,4 +119,6 @@ font-weight: bold;
   width: 200px;
   height: 300px;
   margin-top: 20px;
+  font-weight: 200;
+  font-size: 25px;
 }

@@ -31,27 +31,26 @@ function Login() {
                      <input type="text" class="txt-input" id="itemname">
                      </input>
                   </div>
-    </div>
+                  </div>
     <div>
       <div className='calendar'><h1>Calendar</h1>
           <div className='cal'>캘린더 자리</div>
       </div>
       <div className='list'><h1>List</h1>
-          <div className='li'>리스트 자리</div>
+          <textarea type='text' className='li' placeholder='리스트를 작성 하세요'></textarea>
       </div>
     </div>
       <div>
         <div className='memo'><h1>Memo</h1>
-          <div className='me'>메모 자리
+        <textarea type='text' className='me' placeholder='메모를 입력하세요'></textarea>
         </div>
           <div className='doing'><h1>Motivation</h1>
-            <div className='do'>동기부여 or 명언
+          <textarea type='text' className='do' placeholder='동기부여 되는 구문을 작성하세요'></textarea>
             </div>
           </div>
         </div>
-      </div>
-</div>
   );
 }
+
 export default Login;
 
