@@ -73,14 +73,15 @@
     justify-content: center;
     align-items: center;
     margin: 5px 0 5px 0;
-    border:1px solid rgba(0,0,0,0.26);
-    background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+    border:1px solid white;
+    background: #4555AE;
     font-weight: 500;
     font-size: 14px;
+    color: white;
   }
   .login2 .doLogin {
     margin: 5px 0 5px 0;
-    width: 358px;
+    width: 350px;
     height: 40px;
     border:1px solid white;
     background: #4555AE;
@@ -109,3 +110,6 @@
     font-size: 18px;
     color: rgba(0,0,0,0.50);
   }
+.login2 ::placeholder{
+  color: rgba(255,255,255,0.90);
+}

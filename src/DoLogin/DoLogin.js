@@ -7,10 +7,9 @@ import "./doLogin.css"
 import "../App";
 
 const ContainerLogin = styled.div`
-    width: 1120px;
-    height: 630px;
-    border: 1px solid black;
-    margin: 10px;
+    width: 100%;
+    height: 90vh;
+    margin: 0;
     padding: 0;
     display:flex ;
     justify-content:center;
@@ -24,7 +23,8 @@ const Logo = styled.div`
     color: #4555AE;
 `;
 const DoLogin = () => {
-    <div>
+    return (
+        <div>
         <ContainerLogin>
             <div className="login-logo"><img src={img1} alt="Logo" width={'90px'} height={'70px'}/><Logo>Plannet</Logo></div>
             <div className="login">
@@ -53,6 +53,6 @@ const DoLogin = () => {
             </div>        
         </ContainerLogin>
     </div>
- 
+    );
 };
 export default DoLogin;
