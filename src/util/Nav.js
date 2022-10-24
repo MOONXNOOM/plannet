@@ -1,3 +1,4 @@
+
 import styled from "styled-components"
 
 const Nav = () => {
@@ -35,7 +36,7 @@ const Nav = () => {
     return (
         <Box>
             <div className="logo">
-                {/* <img src="../im"/> */}
+                <img src="../logoPic.png" alt="logo" />
                 <h1>Plannet</h1>
                 <h2>Let's plan it!</h2>
             </div>
