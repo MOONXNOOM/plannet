@@ -17,7 +17,6 @@ function App() {
         >
           dsdas
           Test -오민찬
-          Learn React666
         </a>
       </header>
     </div>
