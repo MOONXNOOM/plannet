@@ -77,6 +77,7 @@ const SemiTitle = styled.h1`
     text-align: left;
     width: 350px;
     line-height: 20px;
+    color: white;
 `;
 const ExMain = () => {
     return(
