@@ -71,6 +71,7 @@ const Title = styled.h1`
     font-size: 25px;
     text-align: left;
     width: 350px;
+    color: white;
 `;
 const SemiTitle = styled.h1`
     font-size: 15px;
