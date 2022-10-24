@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500&display=swap');
+
+.container {
+  display: flex;
+  width: 90%;
+  border: 1px solid black;
+  background-color: rgb(223, 219, 219);
+  position: relative;
+  margin: 0 auto;
+  top: 30px;
+}
+.container .item {
+  display: block;
+  width: 300px;
+  height: 900px;
+  border-right: 1px solid black;
+  background-color: rgb(220, 220, 235);
+}
+.planet {
+  display: block;
+  margin: 0 auto;
+  width: 100px;
+}
+#plannet {
+  font-family: 'Comfortaa', cursive;
+  font-size: 30px;
+}
+#planit {
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-size: 12px;
+}
+.profile {
+  width: 130px;
+  margin-top: 80px;
+  margin-left: 85px;
+  border:1px solid #ccc;
+  border-radius:50%;      
+}
+.nickname {
+  margin-top: 20px;
+}
+.intro1 {
+  margin-top: 30px;
+}
+.intro2 {
+  margin-top: 40px;
+}
+.dust-class{
+width: 300px;
+margin-top: 50px;
+position: relative;
+}
+.dust-class label{
+display: inline-block;
+position: absolute;
+top: -5px;
+left: 15px;
+padding: 10px;
+font-size: 14px;
+font-weight: bold;
+}
+.dust-class input{
+  width: 95%;
+  border: 1px solid #dddddd;
+  font-size: 1rem;
+  border-radius: 8px;
+  padding: 80px;
+  margin-top: 12px;
+  margin-left: 7px;
+}
+.calendar {
+  margin-left: 50px;
+  margin-top: 50px;
+}
+.cal {
+  display: flex;
+  border: 1px solid black;
+  background-color: white;
+  width: 1000px;
+  height: 300px;
+  margin-top: 20px;
+}
+.list {
+  margin-left: 50px;
+  margin-top: 70px;
+}
+.li {
+  display: flex;
+  border: 1px solid black;
+  background-color: white;
+  width: 1000px;
+  height: 300px;
+  margin-top: 20px;
+
+}
+.memo {
+  margin-left: 120px;
+  margin-top: 50px;
+}
+.me {
+  display: flex;
+  border: 1px solid black;
+  background-color: white;
+  width: 200px;
+  height: 300px;
+  margin-top: 20px;
+}
+.doing {
+  margin-top: 70px;
+}
+.do { 
+  display: flex;
+  border: 1px solid black;
+  background-color: white;
+  width: 200px;
+  height: 300px;
+  margin-top: 20px;
+}
