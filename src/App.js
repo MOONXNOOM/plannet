@@ -16,6 +16,7 @@ function App() {
           rel="noopener noreferrer"
         >
           Test -오민찬
+          test - 김세희
           Learn React
         </a>
       </header>
