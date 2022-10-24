@@ -1,3 +1,4 @@
+
 // import logo from './logo.svg';
 // import './App.css';
 
@@ -30,12 +31,15 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './home/Home';
 import Write from './write/Write';
+import ExMain from './MainHome/Main';
+import './App.css';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />}/>
+        <Route path="/main" element={<ExMain />}/>
         <Route path="/write" element={<Write />}/>
       </Routes>
     </Router>

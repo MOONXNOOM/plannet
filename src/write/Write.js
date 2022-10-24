@@ -210,7 +210,7 @@ const StyledInput = styled.input`
 const Write = () => {
     return (
         <Wrap>
-            <Nav></Nav>
+            <Nav />
             <Section>
                 <div className="btnbox">
                     <button className="back">
