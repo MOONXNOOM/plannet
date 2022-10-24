@@ -13,6 +13,16 @@ const Nav = () => {
         float: left;
         overflow: hidden;
         text-align: center;
+        .logo{
+            width: 100%;
+            height: 90px;
+            h1{
+            font-family: 'Comfortaa';
+            font-size: 36px;
+            color: 
+            }
+        }
+        
         .userImgBox{
             width: 200px;
             height: 200px;
@@ -24,7 +34,8 @@ const Nav = () => {
     `;
     return (
         <Box>
-            <div>
+            <div className="logo">
+                {/* <img src="../im"/> */}
                 <h1>Plannet</h1>
                 <h2>Let's plan it!</h2>
             </div>
