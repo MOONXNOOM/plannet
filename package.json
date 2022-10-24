@@ -10,10 +10,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-<<<<<<< HEAD
-=======
     "sass": "^1.55.0",
->>>>>>> d62dc51817572e08f1a983d6406292c8ba0751f2
     "styled-components": "^5.3.6",
     "web-vitals": "^2.1.0"
   },
