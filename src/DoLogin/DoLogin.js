@@ -25,34 +25,34 @@ const Logo = styled.div`
 const DoLogin = () => {
     return (
         <div>
-        <ContainerLogin>
-            <div className="login-logo"><img src={img1} alt="Logo" width={'90px'} height={'70px'}/><Logo>Plannet</Logo></div>
-            <div className="login">
-                <button className="login-btn1">
-                    <img src={kakaoimg} alt="카카오로고" className="logImg"/>
-                    카카오톡으로 로그인
-                </button>
-                <button className="login-btn2">
-                    <img src={googleimg1} alt="구글로고" className="logImg"/>
-                    구글로 로그인
+            <ContainerLogin>
+                <div className="login-logo"><img src={img1} alt="Logo" width={'90px'} height={'70px'}/><Logo>Plannet</Logo></div>
+                <div className="login">
+                    <button className="login-btn1">
+                        <img src={kakaoimg} alt="카카오로고" className="logImg"/>
+                        카카오톡으로 로그인
                     </button>
-                <button className="login-btn3">
-                    <img src={naverimg} alt="네이버로고" className="logImg"/>
-                    네이버로 로그인
-                </button>
-            </div>
-            <p className="space-or">또는</p>
-            <div className="login2">
-                <input type="email" id="id" name="uid" placeholder="이메일 주소" required="" className="mainlogin" />
-                <input type="password" id="pwd" name="upw" placeholder="비밀번호" required="" className="mainlogin"/>
-                <button className="doLogin">로그인하기</button>
-            </div>
-            <div className="else">
-                <button className="join">회원가입</button>
-                <button className="find">아이디 / 비밀번호 찾기</button>
-            </div>        
-        </ContainerLogin>
-    </div>
+                    <button className="login-btn2">
+                        <img src={googleimg1} alt="구글로고" className="logImg"/>
+                        구글로 로그인
+                        </button>
+                    <button className="login-btn3">
+                        <img src={naverimg} alt="네이버로고" className="logImg"/>
+                        네이버로 로그인
+                    </button>
+                </div>
+                <p className="space-or">또는</p>
+                <div className="login2">
+                    <input type="email" id="id" name="uid" placeholder="이메일 주소" required="" className="mainlogin" />
+                    <input type="password" id="pwd" name="upw" placeholder="비밀번호" required="" className="mainlogin"/>
+                    <button className="doLogin">로그인하기</button>
+                </div>
+                <div className="else">
+                    <button className="join">회원가입</button>
+                    <button className="find">아이디 / 비밀번호 찾기</button>
+                </div>        
+            </ContainerLogin>
+        </div>
     );
 };
 export default DoLogin;

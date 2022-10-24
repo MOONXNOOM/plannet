@@ -1,8 +1,8 @@
-.joinTitle{
-    font-size: 20px;
+.session .joinTitle{
+    font-size: 100em;
     font-family: 'Montserrat Alternates', sans-serif;
 }
-.inputJoin{
+.session .inputJoin{
     width: 350px;
     height: 40px;
 }
