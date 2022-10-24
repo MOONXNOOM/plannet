@@ -40,9 +40,9 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />}/>
+        <Route path="/main" element={<ExMain />}/>
         <Route path="/write" element={<Write />}/>
       </Routes>
-      <ExMain/>
     </Router>
   );
 }
