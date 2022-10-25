@@ -8,7 +8,7 @@ const Container = styled.div`
     width: 100%;
     height: 100vh;
     border: 1px solid none;
-    margin: 10px 0 0 0;
+    margin: 0;
     padding: 0;
     display:flex ;
     justify-content:center;
@@ -17,7 +17,7 @@ const Container = styled.div`
 const LeftMain = styled.div`
     display: flex;
     width: 50%;
-    height: 100vh;
+    height: 90vh;
     /* border: 1px solid none; */
     box-sizing: border-box;
     margin: 0 auto;
@@ -41,7 +41,7 @@ const SubLogo = styled.div`
 const RightMain = styled.div`
     background-color: #4555AE;
     width: 50%;
-    height: 100vh;
+    height: 90vh;
     border: 1px solid none;
     margin: auto;
     display: flex;
