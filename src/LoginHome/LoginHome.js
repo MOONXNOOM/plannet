@@ -1,9 +1,9 @@
-import './LoginHome.css';
+import './App.css';
 import React from 'react';
 import Planet from './img/plannet.png';
-import Profile from './img/profile.jpg'
+import Profile from './img/profile.jpg';
 
-function Login() {
+function LoginHome() {
   return (
   <div className='container'>
     <div className='item'>
@@ -26,20 +26,19 @@ function Login() {
                   <p>Email : gildong123@naver.com</p>
                   <p>Instagram : gildong_123</p>
                   </div>
-                  <div className="dust-class">
-                    <label for="itemname">나의 달성률</label>
-                     <input type="text" class="txt-input" id="itemname">
-                     </input>
+                  <div className="achieve">
+                    <h2>전체 목표 달성률</h2>
+                     <textarea type="text" className="ach"></textarea>
                   </div>
-                  </div>
-    <div>
-      <div className='calendar'><h1>Calendar</h1>
-          <div className='cal'>캘린더 자리</div>
-      </div>
-      <div className='list'><h1>List</h1>
-          <textarea type='text' className='li' placeholder='리스트를 작성 하세요'></textarea>
-      </div>
     </div>
+      <div>
+        <div class="calendar"><h1>Calendar</h1>
+        <div class="cal">캘린더 자리</div>
+        </div>
+          <div className='list'><h1>List</h1>
+          <textarea type='text' className='li' placeholder='리스트를 작성 하세요'></textarea>
+          </div>
+      </div>
       <div>
         <div className='memo'><h1>Memo</h1>
         <textarea type='text' className='me' placeholder='메모를 입력하세요'></textarea>
@@ -51,5 +50,5 @@ function Login() {
         </div>
   );
 }
-export default Login;
+export default LoginHome;
 
