@@ -5,6 +5,8 @@ import googleimg1 from "../images/google-logo.png";
 import styled from "styled-components";
 import "./doLogin.css"
 import "../App";
+import Api from "../api/Api";
+import React, {useState } from 'react';
 
 const ContainerLogin = styled.div`
     width: 100%;
@@ -22,7 +24,39 @@ const Logo = styled.div`
     font-weight: bold;
     color: #4555AE;
 `;
+
+
 const DoLogin = () => {
+    // 키보드 입력
+    const [inputId, setInputId] = useState("");
+    const [inputPw, setInputPw] = useState("");
+     // 팝업
+    const [modalOpen, setModalOpen] = useState(false);
+    const openModal = () => {
+         setModalOpen(true);
+    };
+    const closeModal = () => {
+         setModalOpen(false);
+    };
+    const onClickLogin = async() => {
+        try {
+            // 로그인을 위한 axios 호출
+            const res = await Api.userLogin(inputId, inputPw);
+            console.log(res.data.result);
+           
+            if(res.data.result === "OK") {
+                window.localStorage.setItem("userId", inputId);
+                window.localStorage.setItem("userPw", inputPw);
+                window.location.replace("/home");
+            } else {
+                setModalOpen(true);
+            }
+            
+        } catch (e) {
+            setModalOpen(true);
+            console.log("로그인 에러..");
+        }
+    }
     return (
         <div>
             <ContainerLogin>
@@ -43,9 +77,9 @@ const DoLogin = () => {
                 </div>
                 <p className="space-or">또는</p>
                 <div className="login2">
-                    <input type="email" id="id" name="uid" placeholder="이메일 주소" required="" className="mainlogin" />
+                    <input type="text" id="id" name="uid" placeholder="아이디" required="" className="mainlogin" />
                     <input type="password" id="pwd" name="upw" placeholder="비밀번호" required="" className="mainlogin"/>
-                    <button className="doLogin">로그인하기</button>
+                    <button className="doLogin" onClick={onClickLogin}>로그인하기</button>
                 </div>
                 <div className="else">
                     <button className="join">회원가입</button>
