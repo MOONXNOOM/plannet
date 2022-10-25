@@ -1,0 +1,8 @@
+.session .joinTitle{
+    font-size: 100em;
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+.session .inputJoin{
+    width: 350px;
+    height: 40px;
+}

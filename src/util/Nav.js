@@ -133,7 +133,7 @@ const Nav = () => {
                 </div>
                 <ul className="menu">
                     <li><Link to="/Write">마이페이지</Link></li>
-                    <li><Link to="/Write">자유게시판</Link></li>
+                    <li><Link to="/Board">자유게시판</Link></li>
                     <li><Link to="/Write">설정</Link></li>
                 </ul>
             </div>

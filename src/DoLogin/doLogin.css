@@ -1,0 +1,115 @@
+.login-logo{
+    display: flex;
+    flex-direction:row ;
+  }
+.login .logImg{
+    width: 30px;
+}
+.login .login-btn1{
+    width: 350px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    border: 1px solid white;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: rgb(252,229,30);
+    color: rgb(59,29,20);
+    font-weight: 500;
+}
+.login .login-btn2{
+    width: 350px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: white;
+    border: 2px solid #e9ecef;
+    color: rgb(59,29,20);
+    font-weight: 500;
+  }
+  .login .login-btn3{
+    width: 350px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    border: 1px solid white;
+    background-color: rgb(3,199,90);
+    color: rgb(59,29,20);
+    font-weight: 500;
+  }
+  .space-or{
+    display: flex;
+    font-weight: bold;
+    height: 30px;
+    text-align: center;
+    font-size: 18px;
+    color: rgba(0,0,0,0.50);
+    justify-content: center;
+    align-items: center;
+  }
+  .login2{
+    display: flex;
+    flex-direction:column ;
+  }
+  .login2 .mainlogin {
+    cursor: pointer;
+    width: 350px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0 5px 0;
+    border:1px solid white;
+    background: #4555AE;
+    font-weight: 500;
+    font-size: 14px;
+    color: white;
+  }
+  .login2 .doLogin {
+    margin: 5px 0 5px 0;
+    width: 350px;
+    height: 40px;
+    border:1px solid white;
+    background: #4555AE;
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 18px;
+  }
+  .else{
+    margin-top: 20px;
+  }
+  .else .join{
+    border: none;
+    background: white;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-right: 30px;
+    font-size: 18px;
+    color: rgba(0,0,0,0.50);
+  }
+  .else .find{
+    border: none;
+    background: white;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 18px;
+    color: rgba(0,0,0,0.50);
+  }
+.login2 ::placeholder{
+  color: rgba(255,255,255,0.90);
+}
