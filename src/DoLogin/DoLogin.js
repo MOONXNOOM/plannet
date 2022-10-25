@@ -8,6 +8,7 @@ import "../App";
 import Api from "../api/Api";
 import React, {useState } from 'react';
 import Modal from '../util/Modal';
+import { Link } from "react-router-dom";
 
 const ContainerLogin = styled.div`
     width: 100%;
@@ -63,7 +64,8 @@ const DoLogin = () => {
     return (
         <div>
             <ContainerLogin>
-                <div className="login-logo"><img src={img1} alt="Logo" width={'90px'} height={'70px'}/><Logo>Plannet</Logo></div>
+                <div className="login-logo"><img src={img1} alt="Logo" width={'90px'} height={'70px'}/>
+                <Logo><Link to="/main" className="logo">Plannet</Link></Logo></div>
                 <div className="login">
                     <button className="login-btn1">
                         <img src={kakaoimg} alt="카카오로고" className="logImg"/>
@@ -87,7 +89,7 @@ const DoLogin = () => {
                     <Modal open={modalOpen} close={closeModal} header="오류">아이디 및 패스워드를 재확인해 주세요.</Modal>
                 </div>
                 <div className="else">
-                    <button className="join">회원가입</button>
+                    <Link to="/join" className="join">회원가입</Link>
                     <button className="find">아이디 / 비밀번호 찾기</button>
                 </div>        
             </ContainerLogin>
