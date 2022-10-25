@@ -1,6 +1,6 @@
 import axios from "axios";
 const HEADER = 'application/json';
-const PLANNET_DOMAIN = "http://localhost:8090/kh_mini_ex/";
+const PLANNET_DOMAIN = "http://localhost:8090/Plannet/";
 
 // 수정 전 상태로 코드만 일단 가져옴
 
