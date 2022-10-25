@@ -50,7 +50,7 @@ const DoLogin = () => {
             if(res.data.result === "OK") {
                 window.localStorage.setItem("userId", inputId);
                 window.localStorage.setItem("userPw", inputPw);
-                window.location.replace("/home");
+                window.location.replace("/");
             } else {
                 setModalOpen(true);
             }

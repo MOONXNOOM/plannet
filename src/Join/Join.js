@@ -195,7 +195,7 @@ const Join = () => {
                 <div className="session">
                     {/* 위 조건 성립시 넘어가기 구현 및 생년월일 받아오기 해결하기 */}
                     {(isId && isPw && isConPw && isName && isNickName && isMail && isTell)}
-                    <button className="doJoin" onClick={onClickLogin}>가입하기</button>:
+                    <button className="doJoin" onClick={onClickLogin}>가입하기</button>
                 </div>
             </ContainerJoin>
         </>
