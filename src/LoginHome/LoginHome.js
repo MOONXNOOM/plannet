@@ -1,4 +1,4 @@
-import './App.css';
+import './LoginHome.css';
 import React from 'react';
 import Planet from './img/plannet.png';
 import Profile from './img/profile.jpg';
