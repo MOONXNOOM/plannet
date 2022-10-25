@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import Nav from "../util/Nav";
 
@@ -7,7 +8,6 @@ const Wrap = styled.div`
     background-color: white;
     margin: 0 auto;
 `;
-
 const Section = styled.div`
     width: 850px;
     height: 100vh;
@@ -207,7 +207,44 @@ const StyledInput = styled.input`
     }
 `;
 
+
 const Write = () => {
+
+    //수정중
+    const [list, setList] = useState([
+        {id: 1, check: true, text: "청소하기"},
+        {id: 2, check: false, text: "점심먹기"},
+        {id: 3, check: false, text: "강아지랑 산책하기"},
+        {id: 4, check: false, text: "리액트 공부하기"}
+    ]);
+    const[inputTxt, setInputTxt] = useState("");
+    const[nextId, setNextId] = useState(5);
+    const onChange = e => setInputTxt(e.target.value);
+        const onClick = () => {
+            const nextNames = list.concat({id: nextId, text: inputTxt});
+            setNextId(nextId + 1);
+            setList(nextNames);
+            setInputTxt('');
+        };
+        const onRemove = id => {
+            const nextNames = list.filter(n => n.id !== id);
+            setList(nextNames);
+        };
+        const onKeyPress = e => {
+            if(e.key === "Enter"){
+                onClick();
+            }
+        };
+    
+    const namesList = list.map(n => 
+        <li key={n.id}>
+            <StyledInput type="checkbox"/>
+            <input type="text" value={inputTxt} onChange={onChange} onKeyPress={onKeyPress} maxLength={30} placeholder="체크리스트 작성"/>
+            <button onClick={() => onRemove(n.id)}><i class="bi bi-trash3-fill" /></button>
+        </li>
+    );
+    //수정중
+
     return (
         <Wrap>
             <Nav />
@@ -221,15 +258,10 @@ const Write = () => {
                 <div className="plan_it sub_box">
                     <h2>Plan it</h2>
                     <div className="write_box">
-                        <ul>
-                            <li>
-                                <StyledInput type="checkbox"/>
-                                <input type="text" maxLength={30} placeholder="체크리스트 작성"/>
-                                <button><i class="bi bi-trash3-fill"/></button>
-                            </li>
-                        </ul>
+                        <ul>{namesList}</ul> 
+                        {/* 수정중 */}
                         <hr/>
-                        <button>
+                        <button onClick={onClick}>
                             <i class="bi bi-plus-lg"></i> 추가하기
                         </button>
                     </div>
