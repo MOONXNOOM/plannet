@@ -57,21 +57,19 @@
   width: 240px;
   height: 200px;
 }
-.calendar {
+.plan {
   margin-left: 50px;
-  margin-top: 50px;
+  margin-top: 30px;
+
 }
-.cal {
+.App {
   display: flex;
-  border: 1px solid black;
-  background-color: white;
-  width: 1000px;
-  height: 300px;
+  margin-left: 50px;
   margin-top: 20px;
 }
 .list {
   margin-left: 50px;
-  margin-top: 70px;
+  margin-top: 370px;
 }
 .li {
   display: flex;
