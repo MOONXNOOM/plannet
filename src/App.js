@@ -7,7 +7,7 @@ import Board from './board/Board';
 import Create from './board/Create';
 import DoLogin from './DoLogin/DoLogin';
 import Join from './Join/Join';
-
+// 연습
 
 function App() {
   return (
