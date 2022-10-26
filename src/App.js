@@ -28,7 +28,7 @@
 // export default App;
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './Home/Home';
+import Home from './home/Home';
 // import Write from './Write/Write';
 import ExMain from './MainHome/Main';
 import Board from './Board/Board';

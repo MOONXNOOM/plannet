@@ -33,11 +33,41 @@ const DoLogin = () => {
     const [inputId, setInputId] = useState("");
     const [inputPw, setInputPw] = useState("");
     
+    // 오류 메시지
+    const [idMessage, setIdMessage] = useState("");
+    const [pwMessage, setPwMessage] = useState("");
+
      // 팝업
     const [modalOpen, setModalOpen] = useState(false);
     const openModal = () => {
          setModalOpen(true);
     };
+    // 유효성 검사
+    const [isId, setIsId] = useState("");
+    const [isPw, setIsPw] = useState("");
+    
+    const onChangId = (e) => {
+        setInputId(e.target.value)
+        if (e.target.value.length < 5 || e.target.value.length > 12) {
+            setIdMessage("5자리 이상 12자리 미만으로 입력해 주세요.");
+            setIsId(false);    
+        } else {
+            setIdMessage("올바른 형식 입니다.");
+            setIsId(true);
+        }
+    }
+    const onChangePw = (e) => {
+        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
+        const passwordCurrent = e.target.value ;
+        setInputPw(passwordCurrent)
+        if (!passwordRegex.test(passwordCurrent)) {
+            setPwMessage('숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!')
+            setIsPw(false)
+        } else {
+            setPwMessage('안전한 비밀번호에요 : )')
+            setIsPw(true);
+        }        
+    }
     const closeModal = () => {
          setModalOpen(false);
     };
@@ -83,8 +113,8 @@ const DoLogin = () => {
                 </div>
                 <p className="space-or">또는</p>
                 <div className="login2">
-                    <input type="text" id="id" name="uid" placeholder="아이디" required="" className="mainlogin" />
-                    <input type="password" id="pwd" name="upw" placeholder="비밀번호" required="" className="mainlogin"/>
+                    <input type="text" id="id" name="uid" placeholder="아이디" required="" className="mainlogin" value ={inputId} onChange={onChangId}/>
+                    <input type="password" id="pwd" name="upw" placeholder="비밀번호" required="" className="mainlogin" value ={inputPw} onChange={onChangePw}/>
                     <button className="doLogin" onClick={onClickLogin}>로그인하기</button>
                     <Modal open={modalOpen} close={closeModal} header="오류">아이디 및 패스워드를 재확인해 주세요.</Modal>
                 </div>
