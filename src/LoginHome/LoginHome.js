@@ -2,6 +2,9 @@ import './LoginHome.css';
 import React from 'react';
 import Planet from './img/plannet.png';
 import Profile from './img/profile.jpg';
+import "react-datepicker/dist/react-datepicker.css";
+import Calendar from './Calendar'  
+
 
 function LoginHome() {
   return (
@@ -32,8 +35,9 @@ function LoginHome() {
                   </div>
     </div>
       <div>
-        <div class="calendar"><h1>Calendar</h1>
-        <div class="cal">캘린더 자리</div>
+        <div className='plan'><h1>plan it</h1></div>
+        <div className="App">
+          <Calendar />
         </div>
           <div className='list'><h1>List</h1>
           <textarea type='text' className='li' placeholder='리스트를 작성 하세요'></textarea>
@@ -51,4 +55,3 @@ function LoginHome() {
   );
 }
 export default LoginHome;
-
