@@ -5,7 +5,7 @@ import googleimg1 from "../images/google-logo.png";
 import styled from "styled-components";
 import "./doLogin.css"
 import "../App";
-import Api from "../api/Api";
+import Api from "../api/plannetApi";
 import React, {useState } from 'react';
 import Modal from '../util/Modal';
 import { Link } from "react-router-dom";
