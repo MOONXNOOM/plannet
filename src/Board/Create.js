@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Nav from "../util/Nav";
+import Nav from "../Util/Nav";
 
 const Wrap = styled.div`
     width: 1130px;

@@ -1,10 +1,10 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './home/Home';
-import Write from './write/Write';
+import Home from './Home/Home';
+import Write from './Write/Write';
 import ExMain from './MainHome/Main';
-import Board from './board/Board';
-import Create from './board/Create';
+import Board from './Board/Board';
+import Create from './Board/Create';
 import DoLogin from './DoLogin/DoLogin';
 import Join from './Join/Join';
 
