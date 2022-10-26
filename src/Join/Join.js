@@ -5,7 +5,7 @@ import "../App";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Api from '../Api/PlannetApi';
-import Modal from '../Util/Modal.js';
+import Modal from '../util/Modal.js';
 const ContainerJoin = styled.div`
     height: 90vh;
     display:flex ;

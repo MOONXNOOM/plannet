@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import Nav from "../Util/Nav";
+import Nav from "../util/Nav";
 
 const Wrap = styled.div` 
     width: 1130px;
@@ -226,39 +226,8 @@ const StyledInput = styled.input`
 `;
 
 const Write = () => {
-    const date = "2022년 10월 26일";
-    //수정중
-    const [list, setList] = useState([
-        {id: 1, check: true, text: "청소하기"},
-        {id: 2, check: false, text: "점심먹기"},
-        {id: 3, check: false, text: "강아지랑 산책하기"},
-        {id: 4, check: false, text: "리액트 공부하기"}
-    ]);
-    const[inputTxt, setInputTxt] = useState("");
-    const[nextId, setNextId] = useState(5);
-    const[checked, setChecked] = useState(false);
-    const onChange = e => setInputTxt(e.target.value);
+    const [planList, setPlanList] = useState([]);
 
-    // const onClickCheck = (c) => {
-    //     if(c.target.checked) setChecked(true);
-    //     else setChecked(false);
-    //     console.log(c.target.checked);
-    // };
-
-    const onClick = () => {
-        const nextNames = list.concat({id: nextId, check: checked, text: inputTxt});
-            setNextId(nextId + 1);
-            setList(nextNames);
-            setInputTxt('');
-            setChecked(false);
-            console.log(list);
-    };
-    const onRemove = id => {
-            const nextNames = list.filter(n => n.id !== id);
-            setList(nextNames);
-            console.log(list);
-    };
-    
     const namesList = list.map(n => 
         <li key={n.id}>
             <StyledInput type="checkbox" />

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import Nav from "../Util/Nav";
+import Nav from "../util/Nav";
 
 const Wrap = styled.div` 
     width: 1130px;
