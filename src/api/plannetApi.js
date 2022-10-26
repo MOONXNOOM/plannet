@@ -2,6 +2,8 @@ import axios from "axios";
 const HEADER = 'application/json';
 const PLANNET_DOMAIN = "http://localhost:8090/Plannet/";
 
+// 추후에 없는 기능은 수업 진도 다 나가면 삭제하기 
+
 const plannetApi = {
     // 로그인 기능
     userLogin: async function(id, pw) {
@@ -16,7 +18,7 @@ const plannetApi = {
         const regCmd = {
             cmd : "MemberInfo"
         }
-        return await axios.post(PLANNET_DOMAIN + "member", regCmd, HEADER);
+        return await axios.post(PLANNET_DOMAIN + "MemberServlet", regCmd, HEADER);
     },
     // 회원 가입
     memberReg: async function(id, pwd, name, nickname, email, tel, birth, join_date ) {
