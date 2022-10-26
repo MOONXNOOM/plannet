@@ -2,8 +2,6 @@ import axios from "axios";
 const HEADER = 'application/json';
 const PLANNET_DOMAIN = "http://localhost:8090/Plannet/";
 
-// 수정 전 상태로 코드만 일단 가져옴
-
 const plannetApi = {
     // 로그인 기능
     userLogin: async function(id, pw) {
