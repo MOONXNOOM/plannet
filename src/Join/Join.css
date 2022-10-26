@@ -1,8 +1,29 @@
 .session .joinTitle{
-    font-size: 100em;
+    font-size: 20px;
     font-family: 'Montserrat Alternates', sans-serif;
+    font-weight: 600;
 }
 .session .inputJoin{
     width: 350px;
     height: 40px;
+    background: #4555AE;
+    border: 1px solid white;
+    color: white;
+}
+.session .doJoin{
+    margin: 15px 0 15px 0;
+    width: 350px;
+    height: 40px;
+    border:1px solid white;
+    background: #4555AE;
+    color: white;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 18px;
+}
+.logo{
+    font-size: 70px;
+    color: #4555AE;
+    font-family: 'Comfortaa', cursive;
+    font-weight: bold;
 }
