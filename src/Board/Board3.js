@@ -17,7 +17,7 @@ const BoardSi3 = () => {
                     <div>
                         <h2>내용보기</h2>
                         <hr></hr>
-                        <div><h3>게시글 제목 불러오기</h3></div>
+                        <div><h3>게시글 제목 불러오기 22222</h3></div>
                         <hr></hr>
                         <div>
                                 <p>
