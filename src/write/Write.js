@@ -275,7 +275,7 @@ const Write = () => {
             <Section>
                 <div className="btnbox">
                     <button className="back">
-                    <i class="bi bi-chevron-compact-left"/>{date}
+                    <i className="bi bi-chevron-compact-left"/>{date}
                     </button>
                 </div>
                 <div className="plan_it sub_box">
