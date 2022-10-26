@@ -79,11 +79,29 @@ const Section = styled.div`
             height: 300px;
             padding-bottom: 0;
         }
-        ul{height: 230px;}
+        ul{height: 230px;
+            overflow-y: scroll;
+                &:focus {outline: none;}
+                &::-webkit-scrollbar {
+                    width: 20px;
+                    padding: 15px;
+                }
+                &::-webkit-scrollbar-thumb {
+                    height: 30%; /* 스크롤바의 길이 */
+                    background: #ddd; /* 스크롤바의 색상 */
+                    border-radius: 10px;
+                    border: 7px solid transparent;
+                    background-clip: padding-box;
+                }
+                &::-webkit-scrollbar-track {
+                    background: none;
+                    /*스크롤바 뒷 배경 색상*/
+                }
+        }
         li{
             line-height: 30px; 
             margin-bottom: 5px; 
-            border-bottom: 2px solid #efefef;
+            border-bottom: 2px solid #f5f5f5;
             transition: all .1s ease-in;
             &:focus-within{
                 border-bottom: 2px solid #4555AE;
@@ -209,7 +227,7 @@ const StyledInput = styled.input`
 
 
 const Write = () => {
-
+    const date = "2022년 10월 26일";
     //수정중
     const [list, setList] = useState([
         {id: 1, check: true, text: "청소하기"},
@@ -219,27 +237,33 @@ const Write = () => {
     ]);
     const[inputTxt, setInputTxt] = useState("");
     const[nextId, setNextId] = useState(5);
+    const[checked, setChecked] = useState(false);
     const onChange = e => setInputTxt(e.target.value);
-        const onClick = () => {
-            const nextNames = list.concat({id: nextId, text: inputTxt});
+
+    const onClickCheck = (c) => {
+        if(c.target.checked) setChecked(true);
+        else setChecked(false);
+        console.log(c.target.checked);
+    };
+
+    const onClick = () => {
+        const nextNames = list.concat({id: nextId, check: checked, text: inputTxt});
             setNextId(nextId + 1);
             setList(nextNames);
             setInputTxt('');
-        };
-        const onRemove = id => {
+            setChecked(false);
+            console.log(list);
+    };
+    const onRemove = id => {
             const nextNames = list.filter(n => n.id !== id);
             setList(nextNames);
-        };
-        const onKeyPress = e => {
-            if(e.key === "Enter"){
-                onClick();
-            }
-        };
+            console.log(list);
+    };
     
     const namesList = list.map(n => 
         <li key={n.id}>
-            <StyledInput type="checkbox"/>
-            <input type="text" value={inputTxt} onChange={onChange} onKeyPress={onKeyPress} maxLength={30} placeholder="체크리스트 작성"/>
+            <StyledInput type="checkbox" checked={checked} onClick={onClickCheck} readOnly/>
+            <input type="text" value={list.text} onChange={onChange} maxLength={30} placeholder="체크리스트 작성"/>
             <button onClick={() => onRemove(n.id)}><i class="bi bi-trash3-fill" /></button>
         </li>
     );
@@ -251,8 +275,7 @@ const Write = () => {
             <Section>
                 <div className="btnbox">
                     <button className="back">
-                    <i class="bi bi-chevron-compact-left"/>
-                        2022년 10월 21일
+                    <i class="bi bi-chevron-compact-left"/>{date}
                     </button>
                 </div>
                 <div className="plan_it sub_box">
