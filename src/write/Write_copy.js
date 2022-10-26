@@ -225,7 +225,7 @@ const StyledInput = styled.input`
     }
 `;
 
-const Write = () => {
+const Write_copy = () => {
     const date = "2022년 10월 26일";
     //수정중
     const [list, setList] = useState([
@@ -302,4 +302,4 @@ const Write = () => {
         </Wrap>
     );
 }
-export default Write;
+export default Write_copy;
