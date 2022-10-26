@@ -21,7 +21,7 @@ const plannetApi = {
         return await axios.post(PLANNET_DOMAIN + "MemberServlet", regCmd, HEADER);
     },
     // 회원 가입
-    memberReg: async function(id, pwd, name, nickname, email, tel, birth, join_date ) {
+    memberReg: async function(id, pwd, name, nickname, email, tel, birth, join_date) {
         const memberObj = {
             id: id,
             pwd: pwd,
