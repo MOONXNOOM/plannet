@@ -1,8 +1,8 @@
 import axios from "axios";
 const HEADER = 'application/json';
-const PLANNET_DOMAIN = "http://localhost:8090/kh_mini_ex/";
+const PLANNET_DOMAIN = "http://localhost:8090/Plannet/";
 
-// 수정 전 상태로 코드만 일단 가져옴
+// 추후에 없는 기능은 수업 진도 다 나가면 삭제하기 
 
 const plannetApi = {
     // 로그인 기능
@@ -18,15 +18,19 @@ const plannetApi = {
         const regCmd = {
             cmd : "MemberInfo"
         }
-        return await axios.post(PLANNET_DOMAIN + "member", regCmd, HEADER);
+        return await axios.post(PLANNET_DOMAIN + "MemberServlet", regCmd, HEADER);
     },
     // 회원 가입
-    memberReg: async function(id, pwd, name, mail) {
+    memberReg: async function(id, pwd, name, nickname, email, tel, birth, join_date ) {
         const memberObj = {
             id: id,
             pwd: pwd,
             name: name,
-            mail: mail
+            nickname: nickname,
+            email: email,
+            tel: tel,
+            birth: birth,
+            join_date: join_date
         };
         return await axios.post(PLANNET_DOMAIN + "memberReg", memberObj, HEADER);
     },
@@ -37,7 +41,6 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "memberCheck", regCheck, HEADER);
     }
-
 }
 
 export default plannetApi;

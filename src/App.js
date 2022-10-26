@@ -32,6 +32,7 @@ import Home from './home/Home';
 import Write from './write/Write';
 import ExMain from './MainHome/Main';
 import Board from './board/Board';
+import Create from './board/Create';
 import DoLogin from './DoLogin/DoLogin';
 import Join from './Join/Join';
 
@@ -44,6 +45,7 @@ function App() {
         <Route path="/main" element={<ExMain />}/>
         <Route path="/write" element={<Write />}/>
         <Route path="/board" element={<Board />}/>
+        <Route path="/create" element={<Create />}/>
         <Route path="/doLogin" element={<DoLogin />}/>
         <Route path="/join" element={<Join />}/>
       </Routes>

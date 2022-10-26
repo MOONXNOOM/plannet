@@ -129,13 +129,13 @@ const Board2 = () => {
                     <h2>자유게시판</h2>
                     <p>
                         <span>작성 시 유의해 주세요! 비방, 광고, 불건전한 내용의 글은 사전 동의 없이 삭제될 수 있습니다.</span>
-                        <button>뒤로가기</button>
                     </p>                
                 </div>
                 <div>
-                    <p2>글 제목</p2>
                     <table>
-                        
+                        <tr>
+                            <th>글제목</th>
+                        </tr>
                     </table>
                 </div>
                 <p className="copy">&#169; Plannet.</p>

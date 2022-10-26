@@ -6,7 +6,7 @@ const Home = () => {
         <>
             <ExMain/>
             <Link to="/Write">글쓰기</Link>
-            <Link to="/Board">자유게시판</Link>
+            <Link to="/Create">자유게시판2</Link>
         </>    
         
     );

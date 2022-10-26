@@ -46,28 +46,16 @@
 .intro2 {
   margin-top: 40px;
 }
-.dust-class{
-width: 300px;
-margin-top: 50px;
-position: relative;
+.achieve{
+  margin-left: 30px;
+  margin-top: 50px;
 }
-.dust-class label{
-display: inline-block;
-position: absolute;
-top: -5px;
-left: 15px;
-padding: 10px;
-font-size: 14px;
-font-weight: bold;
-}
-.dust-class input{
-  width: 95%;
-  border: 1px solid #dddddd;
-  font-size: 1rem;
-  border-radius: 8px;
-  padding: 80px;
-  margin-top: 12px;
-  margin-left: 7px;
+.ach {
+  display: flex;
+  border: 1px solid white;
+  background-color: white;
+  width: 240px;
+  height: 200px;
 }
 .calendar {
   margin-left: 50px;
@@ -87,13 +75,12 @@ font-weight: bold;
 }
 .li {
   display: flex;
-  border: 1px solid black;
+  border: 1px solid white;
   background-color: white;
   width: 1000px;
   height: 300px;
   margin-top: 20px;
   font-size: 25px;
-
 }
 .memo {
   margin-left: 120px;
@@ -101,7 +88,7 @@ font-weight: bold;
 }
 .me {
   display: flex;
-  border: 1px solid black;
+  border: 1px solid white;
   background-color: white;
   width: 200px;
   height: 300px;
@@ -114,7 +101,7 @@ font-weight: bold;
 }
 .do { 
   display: flex;
-  border: 1px solid black;
+  border: 1px solid white;
   background-color: white;
   width: 200px;
   height: 300px;

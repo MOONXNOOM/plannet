@@ -7,6 +7,8 @@ import "./doLogin.css"
 import "../App";
 import Api from "../api/Api";
 import React, {useState } from 'react';
+import Modal from '../util/Modal';
+import { Link } from "react-router-dom";
 
 const ContainerLogin = styled.div`
     width: 100%;
@@ -30,6 +32,7 @@ const DoLogin = () => {
     // 키보드 입력
     const [inputId, setInputId] = useState("");
     const [inputPw, setInputPw] = useState("");
+    
      // 팝업
     const [modalOpen, setModalOpen] = useState(false);
     const openModal = () => {
@@ -47,7 +50,7 @@ const DoLogin = () => {
             if(res.data.result === "OK") {
                 window.localStorage.setItem("userId", inputId);
                 window.localStorage.setItem("userPw", inputPw);
-                window.location.replace("/home");
+                window.location.replace("/");
             } else {
                 setModalOpen(true);
             }
@@ -57,14 +60,17 @@ const DoLogin = () => {
             console.log("로그인 에러..");
         }
     }
+    
     return (
         <div>
             <ContainerLogin>
-                <div className="login-logo"><img src={img1} alt="Logo" width={'90px'} height={'70px'}/><Logo>Plannet</Logo></div>
+                <div className="login-logo"><img src={img1} alt="Logo" width={'90px'} height={'70px'}/>
+                <Logo><Link to="/main" className="logo">Plannet</Link></Logo></div>
                 <div className="login">
                     <button className="login-btn1">
                         <img src={kakaoimg} alt="카카오로고" className="logImg"/>
                         카카오톡으로 로그인
+                        <Modal open={modalOpen} close={closeModal} header="오류">서비스 준비중...</Modal>
                     </button>
                     <button className="login-btn2">
                         <img src={googleimg1} alt="구글로고" className="logImg"/>
@@ -80,9 +86,10 @@ const DoLogin = () => {
                     <input type="text" id="id" name="uid" placeholder="아이디" required="" className="mainlogin" />
                     <input type="password" id="pwd" name="upw" placeholder="비밀번호" required="" className="mainlogin"/>
                     <button className="doLogin" onClick={onClickLogin}>로그인하기</button>
+                    <Modal open={modalOpen} close={closeModal} header="오류">아이디 및 패스워드를 재확인해 주세요.</Modal>
                 </div>
                 <div className="else">
-                    <button className="join">회원가입</button>
+                    <Link to="/join" className="join">회원가입</Link>
                     <button className="find">아이디 / 비밀번호 찾기</button>
                 </div>        
             </ContainerLogin>
