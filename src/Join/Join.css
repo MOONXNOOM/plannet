@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Montserrat+Alternates:wght@200&display=swap');
 .session .joinTitle{
     font-size: 20px;
     font-family: 'Montserrat Alternates', sans-serif;
@@ -26,4 +28,9 @@
     color: #4555AE;
     font-family: 'Comfortaa', cursive;
     font-weight: bold;
+}
+.session ::placeholder{
+    color: rgba(255,255,255,0.90);
+    font-size: 16px;
+    /* font-family: ; */
 }

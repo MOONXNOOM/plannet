@@ -4,7 +4,7 @@ import img1 from "../images/logoPic.png";
 import "../App";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import Api from '../api/Api';
+import Api from '../api/plannetApi';
 import Modal from '../util/Modal.js';
 const ContainerJoin = styled.div`
     height: 90vh;
@@ -151,7 +151,7 @@ const Join = () => {
                 <Logo><Link to="/main" className="logo">Plannet</Link></Logo></div>
                 <div className="session">
                     <p className="joinTitle">아이디</p>
-                    <input className="inputJoin" value ={inputId} onChange={onChangId} type={'text'}/>
+                    <input className="inputJoin" placeholder="아이디" value ={inputId} onChange={onChangId} type={'text'}/>
                 </div>
                 <div className="hint">
                     {inputId.length > 0 && <span className={`message ${isId ? 'success' : 'error'}`}>{idMessage}</span>}
