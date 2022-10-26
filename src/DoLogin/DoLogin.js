@@ -1,11 +1,11 @@
-import img1 from "../images/logoPic.png";
-import kakaoimg from "../images/kakaotalk_logo2.png";
-import naverimg from "../images/btnG_아이콘사각.png";
-import googleimg1 from "../images/google-logo.png";
+import img1 from "../Images/logoPic.png";
+import kakaoimg from "../Images/kakaotalk_logo2.png";
+import naverimg from "../Images/btnG_아이콘사각.png";
+import googleimg1 from "../Images/google-logo.png";
 import styled from "styled-components";
-import "./doLogin.css"
+import "./DoLogin.css"
 import "../App";
-import Api from "../api/plannetApi";
+import Api from "../Api/PlannetApi";
 import React, {useState } from 'react';
 import Modal from '../Util/Modal';
 import { Link } from "react-router-dom";

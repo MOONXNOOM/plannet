@@ -1,10 +1,10 @@
 import "./Join.css"
 import React, { useState } from 'react';
-import img1 from "../images/logoPic.png";
+import img1 from "../Images/logoPic.png";
 import "../App";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import Api from '../api/plannetApi';
+import Api from '../Api/PlannetApi';
 import Modal from '../Util/Modal.js';
 const ContainerJoin = styled.div`
     height: 90vh;
