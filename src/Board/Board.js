@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Nav from "../util/Nav";
+import Link from "react-router-dom";
 
 const Wrap = styled.div`
     width: 1130px;
@@ -129,7 +130,7 @@ const Board = () => {
                     <h2>자유게시판</h2>
                     <p>
                         <span>전 세계의 Plannet 이용자들과 한 곳에서 소통해 보세요!</span>
-                        <button>글쓰기</button>
+                        <Link to='/create'><button>글쓰기</button></Link>
                     </p>
                     <table>
                         <tr>
