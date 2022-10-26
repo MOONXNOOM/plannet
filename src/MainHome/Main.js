@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import img1 from "../Images/logoPic.png";
+import img1 from "../images/logoPic.png";
 import "../App";
 import { Link } from "react-router-dom";
 import "./Main.css";
