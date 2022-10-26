@@ -79,10 +79,10 @@
     font-size: 14px;
     color: white;
   }
-  /* .login2 .mainlogin :hover{
+  .login2 .mainlogin:focus{
     background-color: #A6A0D8;
-    color: #4555AE;
-  }  */
+    color: black;
+  } 
   .login2 .doLogin {
     margin: 5px 0 5px 0;
     width: 350px;
