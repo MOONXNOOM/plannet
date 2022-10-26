@@ -21,12 +21,16 @@ const plannetApi = {
         return await axios.post(PLANNET_DOMAIN + "member", regCmd, HEADER);
     },
     // 회원 가입
-    memberReg: async function(id, pwd, name, mail) {
+    memberReg: async function(id, pwd, name, nickname, email, tel, birth, join_date ) {
         const memberObj = {
             id: id,
             pwd: pwd,
             name: name,
-            mail: mail
+            nickname: nickname,
+            email: email,
+            tel: tel,
+            birth: birth,
+            join_date: join_date
         };
         return await axios.post(PLANNET_DOMAIN + "memberReg", memberObj, HEADER);
     },
@@ -37,7 +41,6 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "memberCheck", regCheck, HEADER);
     }
-
 }
 
 export default plannetApi;
