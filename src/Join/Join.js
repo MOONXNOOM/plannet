@@ -28,7 +28,7 @@ const Join = () => {
      const [inputNickName, setInputNickName] = useState(inputName);
      const [inputEmail, setInputEmail] = useState("");
      const [inputTell, setInputTell] = useState("");
-     const [inputBirth,setInputBirth] = useState("2000-01-01");
+    //  const [inputBirth,setInputBirth] = useState("2000-01-01");
  
      // 오류 메시지
      const [idMessage, setIdMessage] = useState("");
@@ -115,10 +115,10 @@ const Join = () => {
         setIsTell(true);
     }
     //  onChangeBirth 다시 구현
-    const onChangeBirth = (e) => {
-        const a=setInputBirth(e.target.value);
-        console.log(a);
-    }
+    // const onChangeBirth = (e) => {
+    //     const a=setInputBirth(e.target.value);
+    //     console.log(a);
+    // }
 
      const onClickLogin = async() => {
         console.log("Click 회원가입");
@@ -188,10 +188,10 @@ const Join = () => {
                     <p className="joinTitle">전화번호</p>
                     <input className="inputJoin" type='tel' placeholder="휴대폰번호" value ={inputTell} onChange={onChangeTell}/>
                 </div>
-                <div className="session">
+                {/* <div className="session">
                     <p className="joinTitle">생년월일</p>
                     <input className="inputJoin" type={'date'} value={inputBirth} onChange={onChangeBirth}/>
-                </div> 
+                </div>  */}
                 <div className="session">
                     {/* 위 조건 성립시 넘어가기 구현 및 생년월일 받아오기 해결하기 */}
                     {(isId && isPw && isConPw && isName && isNickName && isMail && isTell)}
