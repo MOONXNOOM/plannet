@@ -27,7 +27,7 @@ const Join = () => {
      const [inputName, setInputName] = useState("");
      const [inputNickName, setInputNickName] = useState(inputName);
      const [inputEmail, setInputEmail] = useState("");
-     const [inputTel, setInputTel] = useState("");
+     const [inputTell, setInputTell] = useState("");
     //  const [inputBirth,setInputBirth] = useState("2000-01-01");
  
      // 오류 메시지
@@ -41,7 +41,7 @@ const Join = () => {
      const [isPw, setIsPw] = useState(false)
      const [isConPw, setIsConPw] = useState(false);
      const [isName, setIsName] = useState(false);
-     const [isNickname, setIsNickname] = useState(false);
+     const [isNickName, setIsNickName] = useState(false);
      const [isMail, setIsMail] = useState(false);
      const [isTell, setIsTell] = useState(false);
      // 팝업
@@ -96,23 +96,23 @@ const Join = () => {
         // const NickNameCurrnet=e.target.value;
         // if(NickNameCurrnet===null) {
         //     setInputNickName(inputName);
-        //     setIsNickname(true);
+        //     setIsNickName(true);
         // }
         // else {
         //     setInputNickName(e.target.value);
-        //     setIsNickname(true);
+        //     setIsNickName(true);
         // }
         setInputNickName(e.target.value);
-        setIsNickname(true);
+        setIsNickName(true);
     }
  
      const onChangeMail = (e) => {
          setInputEmail(e.target.value);
          setIsMail(true);
      }
-     const onChangeTel = (e) => {
-        setInputTel(e.target.value);
-        setIsTel(true);
+     const onChangeTell = (e) => {
+        setInputTell(e.target.value);
+        setIsTell(true);
     }
     //  onChangeBirth 다시 구현
     // const onChangeBirth = (e) => {
@@ -123,7 +123,7 @@ const Join = () => {
      const onClickLogin = async() => {
         console.log("Click 회원가입");
         // 가입 여부 우선 확인
-        const memberCheck = await plannetApi.memberRegCheck(inputId, inputPw, inputName, inputNickname, inputEmail, inputTel);
+        const memberCheck = await Api.memberRegCheck(inputId);
         console.log(memberCheck.data.result);
         // 가입 여부 확인 후 가입 절차 진행
 
@@ -186,7 +186,7 @@ const Join = () => {
                 </div>
                 <div className="session">
                     <p className="joinTitle">전화번호</p>
-                    <input className="inputJoin" type='tel' placeholder="휴대폰번호('-' 제외)" value ={inputTel} onChange={onChangeTel}/>
+                    <input className="inputJoin" type='tel' placeholder="휴대폰번호('-' 제외)" value ={inputTell} onChange={onChangeTell}/>
                 </div>
                 {/* <div className="session">
                     <p className="joinTitle">생년월일</p>
@@ -194,7 +194,7 @@ const Join = () => {
                 </div>  */}
                 <div className="session">
                     {/* 위 조건 성립시 넘어가기 구현 및 생년월일 받아오기 해결하기 */}
-                    {(isId && isPw && isConPw && isName && isNickname && isMail && isTel)}
+                    {(isId && isPw && isConPw && isName && isNickName && isMail && isTell)}
                     <button className="doJoin" onClick={onClickLogin}>가입하기</button>
                 </div>
             </ContainerJoin>
