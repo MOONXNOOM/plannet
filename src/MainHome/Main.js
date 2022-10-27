@@ -33,7 +33,7 @@ const LeftMain = styled.div`
         position: absolute;
         right: 70px;
         top: 50%;
-        margin-top: -150px;        
+        margin-top: -170px;        
     }
 `;
 const Logo = styled.div`
