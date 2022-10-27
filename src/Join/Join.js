@@ -6,6 +6,10 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Api from '../api/plannetApi';
 import Modal from '../util/Modal.js';
+
+// 구현해야 할 것
+// 1. ID 중복확인 구현
+
 const ContainerJoin = styled.div`
     height: 90vh;
     display:flex ;
@@ -20,79 +24,87 @@ const Logo = styled.div`
 
 
 const Join = () => {
-     // 키보드 입력
-     const [inputId, setInputId] = useState("");
-     const [inputPw, setInputPw] = useState("");
-     const [inputConPw, setInputConPw] = useState("");
-     const [inputName, setInputName] = useState("");
-     const [inputNickname, setInputNickname] = useState(inputName);
-     const [inputEmail, setInputEmail] = useState("");
-     const [inputTel, setInputTel] = useState("");
-    //  const [inputBirth,setInputBirth] = useState("2000-01-01");
+    // 키보드 입력
+    const [inputId, setInputId] = useState("");
+    const [inputPw, setInputPw] = useState("");
+    const [inputConPw, setInputConPw] = useState("");
+    const [inputName, setInputName] = useState("");
+    const [inputNickname, setInputNickname] = useState(inputName);
+    const [inputEmail, setInputEmail] = useState("");
+    const [inputTel, setInputTel] = useState("");
+    // const [inputBirth,setInputBirth] = useState("2000-01-01");
  
-     // 오류 메시지
-     const [idMessage, setIdMessage] = useState("");
-     const [pwMessage, setPwMessage] = useState("");
-     const [conPwMessage, setConPwMessage] = useState("");
-    //  const [mailMessage, setMailMessage] = useState("");
+    // 오류 메시지
+    const [idMessage, setIdMessage] = useState("");
+    const [pwMessage, setPwMessage] = useState("");
+    const [conPwMessage, setConPwMessage] = useState("");
+    // const [mailMessage, setMailMessage] = useState("");
  
-     // 유효성 검사
-     const [isId, setIsId] = useState(false);
-     const [isPw, setIsPw] = useState(false)
-     const [isConPw, setIsConPw] = useState(false);
-     const [isName, setIsName] = useState(false);
-     const [isNickname, setIsNickname] = useState(false);
-     const [isMail, setIsMail] = useState(false);
-     const [isTel, setIsTel] = useState(false);
-     // 팝업
-     const [modalOpen, setModalOpen] = useState(false);
-     const [modalText, setModelText] = useState("중복된 아이디 입니다.");
+    // 유효성 검사
+    const [isId, setIsId] = useState(false);
+    const [isPw, setIsPw] = useState(false)
+    const [isConPw, setIsConPw] = useState(false);
+    const [isName, setIsName] = useState(false);
+    const [isNickname, setIsNickname] = useState(false);
+    const [isMail, setIsMail] = useState(false);
+    const [isTel, setIsTel] = useState(false);
+
+    // 팝업
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalText, setModelText] = useState("중복된 아이디 입니다.");
  
-     const closeModal = () => {
-         setModalOpen(false);
-     };
+    const closeModal = () => {
+        setModalOpen(false);
+    };
  
-     const onChangId = (e) => {
-         setInputId(e.target.value)
-         if (e.target.value.length < 5 || e.target.value.length > 12) {
-             setIdMessage("5자리 이상 12자리 미만으로 입력해 주세요.");
-             setIsId(false);    
-         } else {
-             setIdMessage("올바른 형식 입니다.");
-             setIsId(true);
-         }
-     }
-     const onChangePw = (e) => {
-         //const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/
-         const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
-         const passwordCurrent = e.target.value ;
-         setInputPw(passwordCurrent);
-         if (!passwordRegex.test(passwordCurrent)) {
-             setPwMessage('숫자+영문자 조합으로 8자리 이상 입력해주세요!')
-             setIsPw(false)
-         } else {
-             setPwMessage('안전한 비밀번호에요 : )')
-             setIsPw(true);
-         }        
-     }
- 
-     const onChangeConPw = (e) => {
-         const passwordCurrent = e.target.value ;
-         setInputConPw(passwordCurrent)
-         if (passwordCurrent !== inputPw) {
-             setConPwMessage('비밀 번호가 일치하지 않습니다.')
-             setIsConPw(false)
-         } else {
-             setConPwMessage('비밀 번호가 일치 합니다. )')
-             setIsConPw(true);
-         }      
-     }
- 
-     const onChangeName = (e) => {
-         setInputName(e.target.value);
-         setIsName(true);
-     }
-     const onChangeNickname = (e) => {
+    // ID 길이 체크
+    const onChangId = (e) => {
+        setInputId(e.target.value)
+        if (e.target.value.length < 5 || e.target.value.length > 12) {
+            setIdMessage("5자리 이상 12자리 미만으로 입력해 주세요.");
+            setIsId(false);    
+        } else {
+            setIdMessage("올바른 형식입니다.");
+            setIsId(true);
+        }
+    }
+
+    // ID 중복확인 버튼 구현
+
+    // 비밀번호 정규식 체크
+    const onChangePw = (e) => {
+        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
+        const passwordCurrent = e.target.value ;
+        setInputPw(passwordCurrent);
+        if (!passwordRegex.test(passwordCurrent)) {
+            setPwMessage('숫자+영문자 조합으로 8자리 이상 입력해 주세요.')
+            setIsPw(false)
+        } else {
+            setPwMessage('안전한 비밀번호에요 : )')
+            setIsPw(true);
+        }        
+    }
+
+    // 비밀번호 확인 체크
+    const onChangeConPw = (e) => {
+        const passwordCurrent = e.target.value ;
+        setInputConPw(passwordCurrent)
+        if (passwordCurrent !== inputPw) {
+            setConPwMessage('비밀 번호가 일치하지 않습니다.')
+            setIsConPw(false)
+        } else {
+            setConPwMessage('비밀 번호가 일치 합니다. )')
+            setIsConPw(true);
+        }      
+    }
+
+    
+    const onChangeName = (e) => {
+        setInputName(e.target.value);
+        setIsName(true);
+    }
+    
+    const onChangeNickname = (e) => {
         // const NicknameCurrnet=e.target.value;
         // if(NicknameCurrnet===null) {
         //     setInputNickname(inputName);
