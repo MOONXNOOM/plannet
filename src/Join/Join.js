@@ -191,7 +191,7 @@ const Join = () => {
                 </div>
                 <div className="session">
                     <p className="joinTitle">전화번호</p>
-                    <input className="inputJoin" type='tel' placeholder="휴대폰번호('-' 제외)" value ={inputTel} onChange={onChangeTel}/>
+                    <input className="inputJoin" type='tel' placeholder="휴대폰번호('-' 제외)" value ={inputTel} onChange={onChangeTel} onKeyUp={f_enter}/>
                 </div>
                 {/* <div className="session">
                     <p className="joinTitle">생년월일</p>
