@@ -129,7 +129,7 @@ const Join = () => {
 
         if (memberCheck.data.result === "OK") {
             console.log("가입된 아이디가 없습니다. 다음 단계 진행 합니다.");
-            const memberReg = await Api.memberReg(inputId, inputPw, inputName, inputEmail);
+            const memberReg = await Api.memberReg(inputId, inputPw, inputName, inputNickName, inputEmail, inputTell);
             console.log(memberReg.data.result);
             if(memberReg.data.result === "OK") {
                 window.location.replace("/board");
