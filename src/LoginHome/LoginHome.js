@@ -1,4 +1,5 @@
-import './LoginHome.css';
+import "./LoginHome";
+import "../App";
 import React from 'react';
 import Planet from '../images/logoPic.png';
 import Profile from '../images/profile.jpg';
