@@ -29,7 +29,7 @@ const Join = () => {
     const [inputPw, setInputPw] = useState("");
     const [inputConPw, setInputConPw] = useState("");
     const [inputName, setInputName] = useState("");
-    const [inputNickname, setInputNickname] = useState(inputName);
+    const [inputNickname, setInputNickname] = useState("");
     const [inputEmail, setInputEmail] = useState("");
     const [inputTel, setInputTel] = useState("");
     // const [inputBirth,setInputBirth] = useState("2000-01-01");
