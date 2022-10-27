@@ -1,9 +1,9 @@
 import './LoginHome.css';
 import React from 'react';
-import Planet from './img/plannet.png';
-import Profile from './img/profile.jpg';
-import "react-datepicker/dist/react-datepicker.css";
-import Calendar from './Calendar'  
+import Planet from '../images/logoPic.png';
+import Profile from '../images/profile.jpg';
+// import "react-datepicker/dist/react-datepicker.css";
+// import Calendar from './Calendar'  
 
 
 function LoginHome() {
@@ -37,7 +37,7 @@ function LoginHome() {
       <div>
         <div className='plan'><h1>plan it</h1></div>
         <div className="App">
-          <Calendar />
+          {/* <Calendar /> */}
         </div>
           <div className='list'><h1>List</h1>
           <textarea type='text' className='li' placeholder='리스트를 작성 하세요'></textarea>

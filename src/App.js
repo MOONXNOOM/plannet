@@ -36,6 +36,7 @@ import Create from './Board/Create';
 import DoLogin from './DoLogin/DoLogin';
 import Join from './Join/Join';
 import Writecopy from './write/Write_copy';
+import LoginHome from './LoginHome/LoginHome';
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
         <Route path="/create" element={<Create />}/>
         <Route path="/doLogin" element={<DoLogin />}/>
         <Route path="/join" element={<Join />}/>
+        <Route parh="/loginHome" element={<LoginHome />}/>
       </Routes>
     </Router>
   );
