@@ -3,7 +3,7 @@ import kakaoimg from "../images/kakaotalk_logo2.png";
 import naverimg from "../images/btnG_아이콘사각.png";
 import googleimg1 from "../images/google-logo.png";
 import styled from "styled-components";
-import "./doLogin.css"
+import "./DoLogin.css"
 import "../App";
 import Api from "../api/plannetApi";
 import React, {useState } from 'react';
@@ -21,6 +21,7 @@ const ContainerLogin = styled.div`
     flex-direction: column;
 `;
 const Logo = styled.div`
+
     font-family: 'Comfortaa', cursive;
     font-size: 70px;
     font-weight: bold;
@@ -72,7 +73,7 @@ const DoLogin = () => {
          setModalOpen(false);
     };
     function f_enter(){
-        if(window.event.keyCode ==13){
+        if(window.event.keyCode ===13){
             onClickLogin();
         }
     }
