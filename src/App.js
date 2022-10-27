@@ -22,7 +22,7 @@ function App() {
         <Route path="/create" element={<Create />}/>
         <Route path="/doLogin" element={<DoLogin />}/>
         <Route path="/join" element={<Join />}/>
-        {/* <Route parh="/loginHome" element={<LoginHome />}/> */}
+        <Route parh="/loginHome" element={<LoginHome />}/>
       </Routes>
     </Router>
   );
