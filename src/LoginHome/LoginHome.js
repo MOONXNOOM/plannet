@@ -1,58 +1,59 @@
-import "./LoginHome";
+// import "./LoginHome.css";
 import "../App";
-import React from 'react';
-import Planet from '../images/logoPic.png';
-import Profile from '../images/profile.jpg';
+import { useState } from "react";
+import styled from "styled-components"
+import Nav from '../util/Nav';
 // import "react-datepicker/dist/react-datepicker.css";
 // import Calendar from './Calendar'  
 
-
-function LoginHome() {
-  return (
-  <div className='container'>
-    <div className='item'>
-      <img className='planet' src={Planet} alt="행성"/>
-          <p id='plannet' align="center" top="10px">plannet</p>
-          <p id='planit' align="center">let's plan it</p>
-            <img className='profile' src={Profile} alt="프로필"/>
-              <div className='nickname' align="center">
-                <p><b>홍길동</b></p>
-                <p>(gildong123)</p>
+const Wrap = styled.div`
+    width: 1130px;
+    height: 100vh;
+    background-color: white;
+    margin: 0 auto;
+`;
+const Section = styled.div`
+    width: 850px;
+    height: 100vh;
+    float: left;
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    div{
+        width: 100%;
+        padding: 10px 30px;
+    }
+    .calendar {
+      h2 {
+        font-size: 28px;
+        margin-top: 100px;
+        font-weight: 900;
+      }
+    }
+    &::-webkit-scrollbar {
+        width: 12px;
+        padding: 15px;
+    }
+    &::-webkit-scrollbar-thumb {
+        height: 30%; /* 스크롤바의 길이 */
+        background: #333; /* 스크롤바의 색상 */
+        border-radius: 10px;
+        border: 3px solid transparent;
+        background-clip: padding-box;
+    }
+`;
+ 
+const LoginHome= () => {
+    return (
+        <Wrap>
+            <Nav />
+            <Section>
+              <div className="calendar"><h2>Calendar</h2>
               </div>
-                <div className='intro1' align="center">
-                  <p>개발하는 홍길동의 플래닛</p>
-                  <p>#개발자</p>
-                  <p>#백엔드</p>
-                  <p>#프론트엔드</p>
-                </div>
-                  <div className='intro2' align="center">
-                  <p>Phone : 010-1234-5678</p>
-                  <p>Email : gildong123@naver.com</p>
-                  <p>Instagram : gildong_123</p>
-                  </div>
-                  <div className="achieve">
-                    <h2>전체 목표 달성률</h2>
-                     <textarea type="text" className="ach"></textarea>
-                  </div>
-    </div>
-      <div>
-        <div className='plan'><h1>plan it</h1></div>
-        <div className="App">
-          {/* <Calendar /> */}
-        </div>
-          <div className='list'><h1>List</h1>
-          <textarea type='text' className='li' placeholder='리스트를 작성 하세요'></textarea>
-          </div>
-      </div>
-      <div>
-        <div className='memo'><h1>Memo</h1>
-        <textarea type='text' className='me' placeholder='메모를 입력하세요'></textarea>
-        </div>
-          <div className='doing'><h1>Motivation</h1>
-          <textarea type='text' className='do' placeholder='동기부여 되는 구문을 작성하세요'></textarea>
-            </div>
-          </div>
-        </div>
-  );
+              
+                
+            </Section>
+        </Wrap>
+    );
 }
 export default LoginHome;
