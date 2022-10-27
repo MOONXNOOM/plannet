@@ -56,8 +56,16 @@ const PlanItem = ({planItem, planList, setPlanList}) => {
         e.target.value === "일정을 입력해주세요." ? (e.target.value = ""):(e.target.value = newText)
     }
 
-    const onChangeEditInput= (e) => {
+    const onChangeEditInput = (e) => {
         setNewText(e.target.value);
+    }
+
+    const onClickRemove = (e) => {
+        const nextPlanList = planList.map((item) => ({
+            ...item,
+            deleted: item.id === planItem.id ? !item.deleted : item.deleted,
+        }));
+        setPlanList(nextPlanList);
     }
 
     const editInputRef = useRef(null);
@@ -83,20 +91,8 @@ const PlanItem = ({planItem, planList, setPlanList}) => {
                     <span className={testStyle} onClick={onClickEdit}>{planItem.text}</span>
                 )
             }
-            <button><i class="bi bi-trash3-fill" /></button>
-        </li>
-    //     <>
-    //     <li>
-    //         <StyledInput type="checkbox" checked={planItem.checked} onChange={onChangeCheckbox}/>
-    //                     <input type="text" value={newText} ref={editInputRef} onChange={onChangeEditInput} onBlur={onBlurSubmit}/>
-    //         <button><i class="bi bi-trash3-fill" /></button>
-    //     </li>
-    //     <li>
-    //     <StyledInput type="checkbox" checked={planItem.checked} onChange={onChangeCheckbox}/>
-    //                 <span className={`defaultInput ${planItem.checked ? 'firstInput' : 'defaultInput'}`} onClick={onClickEdit}>{planItem.text}</span>
-    //     <button><i class="bi bi-trash3-fill" /></button>
-    // </li>  
-    // </>      
+            <button onClick={onClickRemove}><i class="bi bi-trash3-fill" /></button>
+        </li>    
     );
 }
 export default PlanItem;

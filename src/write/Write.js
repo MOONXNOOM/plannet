@@ -229,7 +229,8 @@ const Write = () => {
         const nextPlanList = planList.concat({
             id: planList.length,
             checked: false,
-            text: "일정을 입력해주세요."
+            text: "일정을 입력해주세요.",
+            deleted: false
         });
         setPlanList(nextPlanList);
     }
