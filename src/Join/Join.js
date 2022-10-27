@@ -132,7 +132,7 @@ const Join = () => {
             const memberReg = await Api.memberReg(inputId, inputPw, inputName, inputNickname, inputEmail, inputTel);
             console.log(memberReg.data.result);
             if(memberReg.data.result === "OK") {
-                window.location.replace("Home");
+                window.location.replace("/Home");
             } else {
                 setModalOpen(true);
                 setModelText("회원 가입에 실패 했습니다.");
