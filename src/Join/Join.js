@@ -6,6 +6,10 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Api from '../api/plannetApi';
 import Modal from '../util/Modal.js';
+
+// 구현해야 할 것
+// 1. ID 중복확인 구현
+
 const ContainerJoin = styled.div`
     height: 90vh;
     display:flex ;
@@ -20,107 +24,120 @@ const Logo = styled.div`
 
 
 const Join = () => {
-     // 키보드 입력
-     const [inputId, setInputId] = useState("");
-     const [inputPw, setInputPw] = useState("");
-     const [inputConPw, setInputConPw] = useState("");
-     const [inputName, setInputName] = useState("");
-     const [inputNickName, setInputNickName] = useState(inputName);
-     const [inputEmail, setInputEmail] = useState("");
-     const [inputTell, setInputTell] = useState("");
-     const [inputBirth,setInputBirth] = useState("2000-01-01");
+    // 키보드 입력
+    const [inputId, setInputId] = useState("");
+    const [inputPw, setInputPw] = useState("");
+    const [inputConPw, setInputConPw] = useState("");
+    const [inputName, setInputName] = useState("");
+    const [inputNickname, setInputNickname] = useState(inputName);
+    const [inputEmail, setInputEmail] = useState("");
+    const [inputTel, setInputTel] = useState("");
+    // const [inputBirth,setInputBirth] = useState("2000-01-01");
  
-     // 오류 메시지
-     const [idMessage, setIdMessage] = useState("");
-     const [pwMessage, setPwMessage] = useState("");
-     const [conPwMessage, setConPwMessage] = useState("");
-    //  const [mailMessage, setMailMessage] = useState("");
+    // 오류 메시지
+    const [idMessage, setIdMessage] = useState("");
+    const [pwMessage, setPwMessage] = useState("");
+    const [conPwMessage, setConPwMessage] = useState("");
+    // const [mailMessage, setMailMessage] = useState("");
  
-     // 유효성 검사
-     const [isId, setIsId] = useState(false);
-     const [isPw, setIsPw] = useState(false)
-     const [isConPw, setIsConPw] = useState(false);
-     const [isName, setIsName] = useState(false);
-     const [isNickName, setIsNickName] = useState(false);
-     const [isMail, setIsMail] = useState(false);
-     const [isTell, setIsTell] = useState(false);
-     // 팝업
-     const [modalOpen, setModalOpen] = useState(false);
-     const [modalText, setModelText] = useState("중복된 아이디 입니다.");
+    // 유효성 검사
+    const [isId, setIsId] = useState(false);
+    const [isPw, setIsPw] = useState(false)
+    const [isConPw, setIsConPw] = useState(false);
+    const [isName, setIsName] = useState(false);
+    const [isNickname, setIsNickname] = useState(false);
+    const [isMail, setIsMail] = useState(false);
+    const [isTel, setIsTel] = useState(false);
+
+    // 팝업
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalText, setModelText] = useState("중복된 아이디 입니다.");
  
-     const closeModal = () => {
-         setModalOpen(false);
-     };
+    const closeModal = () => {
+        setModalOpen(false);
+    };
  
-     const onChangId = (e) => {
-         setInputId(e.target.value)
-         if (e.target.value.length < 5 || e.target.value.length > 12) {
-             setIdMessage("5자리 이상 12자리 미만으로 입력해 주세요.");
-             setIsId(false);    
-         } else {
-             setIdMessage("올바른 형식 입니다.");
-             setIsId(true);
-         }
-     }
-     const onChangePw = (e) => {
-         //const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/
-         const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
-         const passwordCurrent = e.target.value ;
-         setInputPw(passwordCurrent);
-         if (!passwordRegex.test(passwordCurrent)) {
-             setPwMessage('숫자+영문자 조합으로 8자리 이상 입력해주세요!')
-             setIsPw(false)
-         } else {
-             setPwMessage('안전한 비밀번호에요 : )')
-             setIsPw(true);
-         }        
-     }
- 
-     const onChangeConPw = (e) => {
-         const passwordCurrent = e.target.value ;
-         setInputConPw(passwordCurrent)
-         if (passwordCurrent !== inputPw) {
-             setConPwMessage('비밀 번호가 일치하지 않습니다.')
-             setIsConPw(false)
-         } else {
-             setConPwMessage('비밀 번호가 일치 합니다. )')
-             setIsConPw(true);
-         }      
-     }
- 
-     const onChangeName = (e) => {
-         setInputName(e.target.value);
-         setIsName(true);
-     }
-     const onChangeNickName = (e) => {
-        // const NickNameCurrnet=e.target.value;
-        // if(NickNameCurrnet===null) {
-        //     setInputNickName(inputName);
-        //     setIsNickName(true);
+    // ID 길이 체크
+    const onChangId = (e) => {
+        setInputId(e.target.value)
+        if (e.target.value.length < 5 || e.target.value.length > 12) {
+            setIdMessage("5자리 이상 12자리 미만으로 입력해 주세요.");
+            setIsId(false);    
+        } else {
+            setIdMessage("올바른 형식입니다.");
+            setIsId(true);
+        }
+    }
+
+    // ID 중복확인 버튼 구현
+
+    // 비밀번호 정규식 체크
+    const onChangePw = (e) => {
+        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
+        const passwordCurrent = e.target.value ;
+        setInputPw(passwordCurrent);
+        if (!passwordRegex.test(passwordCurrent)) {
+            setPwMessage('숫자+영문자 조합으로 8자리 이상 입력해 주세요.')
+            setIsPw(false)
+        } else {
+            setPwMessage('안전한 비밀번호에요 : )')
+            setIsPw(true);
+        }        
+    }
+
+    // 비밀번호 확인 체크
+    const onChangeConPw = (e) => {
+        const passwordCurrent = e.target.value ;
+        setInputConPw(passwordCurrent)
+        if (passwordCurrent !== inputPw) {
+            setConPwMessage('비밀 번호가 일치하지 않습니다.')
+            setIsConPw(false)
+        } else {
+            setConPwMessage('비밀 번호가 일치 합니다. )')
+            setIsConPw(true);
+        }      
+    }
+
+    
+    const onChangeName = (e) => {
+        setInputName(e.target.value);
+        setIsName(true);
+    }
+    
+    const onChangeNickname = (e) => {
+        // const NicknameCurrnet=e.target.value;
+        // if(NicknameCurrnet===null) {
+        //     setInputNickname(inputName);
+        //     setIsNickname(true);
         // }
         // else {
-        //     setInputNickName(e.target.value);
-        //     setIsNickName(true);
+        //     setInputNickname(e.target.value);
+        //     setIsNickname(true);
         // }
-        setInputNickName(e.target.value);
-        setIsNickName(true);
+        setInputNickname(e.target.value);
+        setIsNickname(true);
     }
  
      const onChangeMail = (e) => {
          setInputEmail(e.target.value);
          setIsMail(true);
      }
-     const onChangeTell = (e) => {
-        setInputTell(e.target.value);
-        setIsTell(true);
+     const onChangeTel = (e) => {
+        setInputTel(e.target.value);
+        setIsTel(true);
     }
     //  onChangeBirth 다시 구현
-    const onChangeBirth = (e) => {
-        const a=setInputBirth(e.target.value);
-        console.log(a);
-    }
+    // const onChangeBirth = (e) => {
+    //     const a=setInputBirth(e.target.value);
+    //     console.log(a);
+    // }
 
-     const onClickLogin = async() => {
+    function f_enter(){
+        if(window.event.keyCode ===13){
+            onClickJoin();
+        }
+    }
+    const onClickJoin = async() => {
         console.log("Click 회원가입");
         // 가입 여부 우선 확인
         const memberCheck = await Api.memberRegCheck(inputId);
@@ -129,10 +146,10 @@ const Join = () => {
 
         if (memberCheck.data.result === "OK") {
             console.log("가입된 아이디가 없습니다. 다음 단계 진행 합니다.");
-            const memberReg = await Api.memberReg(inputId, inputPw, inputName, inputEmail);
+            const memberReg = await Api.memberReg(inputId, inputPw, inputName, inputNickname, inputEmail, inputTel);
             console.log(memberReg.data.result);
             if(memberReg.data.result === "OK") {
-                window.location.replace("/");
+                window.location.replace("/Home");
             } else {
                 setModalOpen(true);
                 setModelText("회원 가입에 실패 했습니다.");
@@ -178,7 +195,7 @@ const Join = () => {
                 </div>
                 <div className="session">
                     <p className="joinTitle">닉네임</p>
-                    <input className="inputJoin" type='text' placeholder="닉네임" value ={inputNickName} onChange={onChangeNickName}/>
+                    <input className="inputJoin" type='text' placeholder="닉네임" value ={inputNickname} onChange={onChangeNickname}/>
                 </div>
                 <div className="session">
                     <p className="joinTitle">이메일</p>
@@ -186,16 +203,16 @@ const Join = () => {
                 </div>
                 <div className="session">
                     <p className="joinTitle">전화번호</p>
-                    <input className="inputJoin" type='tel' placeholder="휴대폰번호" value ={inputTell} onChange={onChangeTell}/>
+                    <input className="inputJoin" type='tel' placeholder="휴대폰번호('-' 제외)" value ={inputTel} onChange={onChangeTel} onKeyUp={f_enter}/>
                 </div>
-                <div className="session">
+                {/* <div className="session">
                     <p className="joinTitle">생년월일</p>
                     <input className="inputJoin" type={'date'} value={inputBirth} onChange={onChangeBirth}/>
-                </div> 
+                </div>  */}
                 <div className="session">
                     {/* 위 조건 성립시 넘어가기 구현 및 생년월일 받아오기 해결하기 */}
-                    {(isId && isPw && isConPw && isName && isNickName && isMail && isTell)}
-                    <button className="doJoin" onClick={onClickLogin}>가입하기</button>
+                    {(isId && isPw && isConPw && isName && isNickname && isMail && isTel)}
+                    <button className="doJoin" onClick={onClickJoin}>가입하기</button>
                 </div>
             </ContainerJoin>
         </>
