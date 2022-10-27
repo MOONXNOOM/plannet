@@ -132,7 +132,7 @@ const Join = () => {
             const memberReg = await Api.memberReg(inputId, inputPw, inputName, inputEmail);
             console.log(memberReg.data.result);
             if(memberReg.data.result === "OK") {
-                window.location.replace("/");
+                window.location.replace("/board");
             } else {
                 setModalOpen(true);
                 setModelText("회원 가입에 실패 했습니다.");
@@ -186,7 +186,7 @@ const Join = () => {
                 </div>
                 <div className="session">
                     <p className="joinTitle">전화번호</p>
-                    <input className="inputJoin" type='tel' placeholder="휴대폰번호" value ={inputTell} onChange={onChangeTell}/>
+                    <input className="inputJoin" type='tel' placeholder="휴대폰번호('-' 제외)" value ={inputTell} onChange={onChangeTell}/>
                 </div>
                 {/* <div className="session">
                     <p className="joinTitle">생년월일</p>
