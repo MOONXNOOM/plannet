@@ -28,7 +28,7 @@ const Join = () => {
      const [inputNickName, setInputNickName] = useState(inputName);
      const [inputEmail, setInputEmail] = useState("");
      const [inputTell, setInputTell] = useState("");
-     const [inputBirth,setInputBirth] = useState("2000-01-01");
+    //  const [inputBirth,setInputBirth] = useState("2000-01-01");
  
      // 오류 메시지
      const [idMessage, setIdMessage] = useState("");
@@ -115,10 +115,10 @@ const Join = () => {
         setIsTell(true);
     }
     //  onChangeBirth 다시 구현
-    const onChangeBirth = (e) => {
-        const a=setInputBirth(e.target.value);
-        console.log(a);
-    }
+    // const onChangeBirth = (e) => {
+    //     const a=setInputBirth(e.target.value);
+    //     console.log(a);
+    // }
 
      const onClickLogin = async() => {
         console.log("Click 회원가입");
@@ -129,10 +129,10 @@ const Join = () => {
 
         if (memberCheck.data.result === "OK") {
             console.log("가입된 아이디가 없습니다. 다음 단계 진행 합니다.");
-            const memberReg = await Api.memberReg(inputId, inputPw, inputName, inputEmail);
+            const memberReg = await Api.memberReg(inputId, inputPw, inputName, inputNickName, inputEmail, inputTell);
             console.log(memberReg.data.result);
             if(memberReg.data.result === "OK") {
-                window.location.replace("/");
+                window.location.replace("/board");
             } else {
                 setModalOpen(true);
                 setModelText("회원 가입에 실패 했습니다.");
@@ -186,12 +186,12 @@ const Join = () => {
                 </div>
                 <div className="session">
                     <p className="joinTitle">전화번호</p>
-                    <input className="inputJoin" type='tel' placeholder="휴대폰번호" value ={inputTell} onChange={onChangeTell}/>
+                    <input className="inputJoin" type='tel' placeholder="휴대폰번호('-' 제외)" value ={inputTell} onChange={onChangeTell}/>
                 </div>
-                <div className="session">
+                {/* <div className="session">
                     <p className="joinTitle">생년월일</p>
                     <input className="inputJoin" type={'date'} value={inputBirth} onChange={onChangeBirth}/>
-                </div> 
+                </div>  */}
                 <div className="session">
                     {/* 위 조건 성립시 넘어가기 구현 및 생년월일 받아오기 해결하기 */}
                     {(isId && isPw && isConPw && isName && isNickName && isMail && isTell)}
