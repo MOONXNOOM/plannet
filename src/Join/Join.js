@@ -120,7 +120,12 @@ const Join = () => {
     //     console.log(a);
     // }
 
-     const onClickLogin = async() => {
+    function f_enter(){
+        if(window.event.keyCode ===13){
+            onClickJoin();
+        }
+    }
+    const onClickJoin = async() => {
         console.log("Click 회원가입");
         // 가입 여부 우선 확인
         const memberCheck = await Api.memberRegCheck(inputId);
@@ -186,7 +191,7 @@ const Join = () => {
                 </div>
                 <div className="session">
                     <p className="joinTitle">전화번호</p>
-                    <input className="inputJoin" type='tel' placeholder="휴대폰번호('-' 제외)" value ={inputTell} onChange={onChangeTell}/>
+                    <input className="inputJoin" type='tel' placeholder="휴대폰번호('-' 제외)" value ={inputTell} onChange={onChangeTell} onKeyUp={f_enter}/>
                 </div>
                 {/* <div className="session">
                     <p className="joinTitle">생년월일</p>
@@ -195,7 +200,7 @@ const Join = () => {
                 <div className="session">
                     {/* 위 조건 성립시 넘어가기 구현 및 생년월일 받아오기 해결하기 */}
                     {(isId && isPw && isConPw && isName && isNickName && isMail && isTell)}
-                    <button className="doJoin" onClick={onClickLogin}>가입하기</button>
+                    <button className="doJoin" onClick={onClickJoin}>가입하기</button>
                 </div>
             </ContainerJoin>
         </>
