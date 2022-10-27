@@ -20,9 +20,8 @@ function App() {
         <Route path="/write" element={<Writecopy />}/>
         <Route path="/board" element={<Board />}/>
         <Route path="/create" element={<Create />}/>
-        <Route path="/doLogin" element={<DoLogin />}/>
         <Route path="/join" element={<Join />}/>
-        <Route parh="/loginHome" element={<LoginHome />}/>
+        <Route path="/loginHome" element={<LoginHome />}/>
       </Routes>
     </Router>
   );
