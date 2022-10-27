@@ -25,9 +25,9 @@ const Join = () => {
      const [inputPw, setInputPw] = useState("");
      const [inputConPw, setInputConPw] = useState("");
      const [inputName, setInputName] = useState("");
-     const [inputNickName, setInputNickName] = useState(inputName);
+     const [inputNickname, setInputNickname] = useState(inputName);
      const [inputEmail, setInputEmail] = useState("");
-     const [inputTell, setInputTell] = useState("");
+     const [inputTel, setInputTel] = useState("");
     //  const [inputBirth,setInputBirth] = useState("2000-01-01");
  
      // 오류 메시지
@@ -41,9 +41,9 @@ const Join = () => {
      const [isPw, setIsPw] = useState(false)
      const [isConPw, setIsConPw] = useState(false);
      const [isName, setIsName] = useState(false);
-     const [isNickName, setIsNickName] = useState(false);
+     const [isNickname, setIsNickname] = useState(false);
      const [isMail, setIsMail] = useState(false);
-     const [isTell, setIsTell] = useState(false);
+     const [isTel, setIsTel] = useState(false);
      // 팝업
      const [modalOpen, setModalOpen] = useState(false);
      const [modalText, setModelText] = useState("중복된 아이디 입니다.");
@@ -92,27 +92,27 @@ const Join = () => {
          setInputName(e.target.value);
          setIsName(true);
      }
-     const onChangeNickName = (e) => {
-        // const NickNameCurrnet=e.target.value;
-        // if(NickNameCurrnet===null) {
-        //     setInputNickName(inputName);
-        //     setIsNickName(true);
+     const onChangeNickname = (e) => {
+        // const NicknameCurrnet=e.target.value;
+        // if(NicknameCurrnet===null) {
+        //     setInputNickname(inputName);
+        //     setIsNickname(true);
         // }
         // else {
-        //     setInputNickName(e.target.value);
-        //     setIsNickName(true);
+        //     setInputNickname(e.target.value);
+        //     setIsNickname(true);
         // }
-        setInputNickName(e.target.value);
-        setIsNickName(true);
+        setInputNickname(e.target.value);
+        setIsNickname(true);
     }
  
      const onChangeMail = (e) => {
          setInputEmail(e.target.value);
          setIsMail(true);
      }
-     const onChangeTell = (e) => {
-        setInputTell(e.target.value);
-        setIsTell(true);
+     const onChangeTel = (e) => {
+        setInputTel(e.target.value);
+        setIsTel(true);
     }
     //  onChangeBirth 다시 구현
     // const onChangeBirth = (e) => {
@@ -134,10 +134,10 @@ const Join = () => {
 
         if (memberCheck.data.result === "OK") {
             console.log("가입된 아이디가 없습니다. 다음 단계 진행 합니다.");
-            const memberReg = await Api.memberReg(inputId, inputPw, inputName, inputNickName, inputEmail, inputTell);
+            const memberReg = await Api.memberReg(inputId, inputPw, inputName, inputNickname, inputEmail, inputTel);
             console.log(memberReg.data.result);
             if(memberReg.data.result === "OK") {
-                window.location.replace("/board");
+                window.location.replace("/Home");
             } else {
                 setModalOpen(true);
                 setModelText("회원 가입에 실패 했습니다.");
@@ -183,7 +183,7 @@ const Join = () => {
                 </div>
                 <div className="session">
                     <p className="joinTitle">닉네임</p>
-                    <input className="inputJoin" type='text' placeholder="닉네임" value ={inputNickName} onChange={onChangeNickName}/>
+                    <input className="inputJoin" type='text' placeholder="닉네임" value ={inputNickname} onChange={onChangeNickname}/>
                 </div>
                 <div className="session">
                     <p className="joinTitle">이메일</p>
@@ -191,7 +191,7 @@ const Join = () => {
                 </div>
                 <div className="session">
                     <p className="joinTitle">전화번호</p>
-                    <input className="inputJoin" type='tel' placeholder="휴대폰번호('-' 제외)" value ={inputTell} onChange={onChangeTell} onKeyUp={f_enter}/>
+                    <input className="inputJoin" type='tel' placeholder="휴대폰번호('-' 제외)" value ={inputTel} onChange={onChangeTel}/>
                 </div>
                 {/* <div className="session">
                     <p className="joinTitle">생년월일</p>
@@ -199,7 +199,7 @@ const Join = () => {
                 </div>  */}
                 <div className="session">
                     {/* 위 조건 성립시 넘어가기 구현 및 생년월일 받아오기 해결하기 */}
-                    {(isId && isPw && isConPw && isName && isNickName && isMail && isTell)}
+                    {(isId && isPw && isConPw && isName && isNickname && isMail && isTel)}
                     <button className="doJoin" onClick={onClickJoin}>가입하기</button>
                 </div>
             </ContainerJoin>
