@@ -20,6 +20,7 @@ function App() {
         <Route path="/write" element={<Write />}/>
         <Route path="/board" element={<Board />}/>
         <Route path="/create" element={<Create />}/>
+        <Route path="/dologin" element={<DoLogin />}/>
         <Route path="/join" element={<Join />}/>
         <Route path="/loginHome" element={<LoginHome />}/>
       </Routes>
