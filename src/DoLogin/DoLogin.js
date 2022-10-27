@@ -113,7 +113,7 @@ const DoLogin = () => {
                 </div>
                 <p className="space-or">또는</p>
                 <div className="login2">
-                    <input type="text" id="id" name="uid" placeholder="아이디" required="" className="mainlogin" value ={inputId} onChange={onChangId}/>
+                    <input type="text" id="id" name="uid" placeholder="아이디" required="" className="ma    inlogin" value ={inputId} onChange={onChangId}/>
                     <input type="password" id="pwd" name="upw" placeholder="비밀번호" required="" className="mainlogin" value ={inputPw} onChange={onChangePw}/>
                     <button className="doLogin" onClick={onClickLogin}>로그인하기</button>
                     <Modal open={modalOpen} close={closeModal} header="오류">아이디 및 패스워드를 재확인해 주세요.</Modal>
