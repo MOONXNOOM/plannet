@@ -1,6 +1,6 @@
 import axios from "axios";
 const HEADER = 'application/json';
-const PLANNET_DOMAIN = "http://localhost:8090/Plannet/";
+const PLANNET_DOMAIN = "http://localhost:8090/Plannet_servlet/";
 
 // 추후에 없는 기능은 수업 진도 다 나가면 삭제하기 
 
