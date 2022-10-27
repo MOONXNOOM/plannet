@@ -8,7 +8,10 @@ import Api from '../api/plannetApi';
 import Modal from '../util/Modal.js';
 
 // 구현해야 할 것
-// 1. ID 중복확인 구현
+// 1. 닉네임을 적지 않았을 때 자동으로 DB에 이름이 닉네임으로 동일하게 전송되도록
+// 2. 이메일 오류 유효성 검사
+// 3. 전반적인 디자인 수정
+// 4. 다 채우지 않았을 때 MODAL 띄우거나 혹은 아예 버튼을 DISABLE 속성을 넣어두기
 
 const ContainerJoin = styled.div`
     height: 90vh;
@@ -16,12 +19,10 @@ const ContainerJoin = styled.div`
     justify-content:center;
     align-items: center;
     flex-direction: column;
-    
 `;
 const Logo = styled.div`
     text-decoration: none;
 `;
-
 
 const Join = () => {
     // 키보드 입력
@@ -49,10 +50,13 @@ const Join = () => {
     const [isMail, setIsMail] = useState(false);
     const [isTel, setIsTel] = useState(false);
 
-    // 팝업
     const [modalOpen, setModalOpen] = useState(false);
+    const [modalClose, setModalClose] =useState(false);
     const [modalText, setModelText] = useState("중복된 아이디 입니다.");
- 
+    // 팝업
+    const openModal = () => {
+        setModalOpen(true);
+    };
     const closeModal = () => {
         setModalOpen(false);
     };
@@ -69,7 +73,36 @@ const Join = () => {
         }
     }
 
-    // ID 중복확인 버튼 구현
+    // 중복 체크
+    const onBlurIdCheck = async() => {
+        // 가입 여부 우선 확인
+        const memberCheck = await Api.memberRegCheck(inputId, "TYPE_ID");
+        if (memberCheck.data.result === "OK") {
+            setIdMessage("사용가능한 ID입니다.");
+        } else {
+            setIdMessage("이미 사용하고 있는 ID입니다.");
+        } 
+    }
+
+    const onBlurEmailCheck = async() => {
+        // 가입 여부 우선 확인
+        const memberCheck = await Api.memberRegCheck(inputEmail, "TYPE_EMAIL");
+        if (memberCheck.data.result === "OK") {
+            setIdMessage("사용가능한 닉네임입니다.");
+        } else {
+            setIdMessage("이미 사용하고 있는 닉네임입니다.");
+        } 
+    }
+
+    const onBlurTelCheck = async() => {
+        // 가입 여부 우선 확인
+        const memberCheck = await Api.memberRegCheck(inputTel, "TYPE_TEL");
+        if (memberCheck.data.result === "OK") {
+            setIdMessage("사용가능한 이메일입니다.");
+        } else {
+            setIdMessage("이미 사용하고 있는 이메일입니다.");
+        } 
+    }
 
     // 비밀번호 정규식 체크
     const onChangePw = (e) => {
@@ -97,49 +130,52 @@ const Join = () => {
             setIsConPw(true);
         }      
     }
-
     
     const onChangeName = (e) => {
         setInputName(e.target.value);
         setIsName(true);
     }
     
+    // 닉네임을 적었으면 해당 닉네임으로 저장
     const onChangeNickname = (e) => {
-        // const NicknameCurrnet=e.target.value;
-        // if(NicknameCurrnet===null) {
-        //     setInputNickname(inputName);
-        //     setIsNickname(true);
-        // }
-        // else {
-        //     setInputNickname(e.target.value);
-        //     setIsNickname(true);
-        // }
-        setInputNickname(e.target.value);
-        setIsNickname(true);
+            setInputNickname(e.target.value);
+            setIsNickname(true);
+    }
+
+    // 닉네임을 적지 않았으면, inputName의 값으로 저장
+    const onBlurNickname = (e) => {
+        const NicknameCurrnet = e.target.value;
+        if (NicknameCurrnet.length === 0){ 
+            setInputNickname(inputName);
+        }
     }
  
-     const onChangeMail = (e) => {
-         setInputEmail(e.target.value);
-         setIsMail(true);
-     }
-     const onChangeTel = (e) => {
-        setInputTel(e.target.value);
-        setIsTel(true);
+    const onChangeMail = (e) => {
+        setInputEmail(e.target.value);
+        setIsMail(true);
     }
-    //  onChangeBirth 다시 구현
+
+    const onChangeTel = (e) => {
+       setInputTel(e.target.value);
+       setIsTel(true);
+    }
+
+    //  onChangeBirth
     // const onChangeBirth = (e) => {
-    //     const a=setInputBirth(e.target.value);
+    //     const a = setInputBirth(e.target.value);
     //     console.log(a);
     // }
 
+    // ENTER 키를 눌렀을 때 회원가입 전송
     function f_enter(){
-        if(window.event.keyCode ===13){
+        if(window.event.keyCode === 13){
             onClickJoin();
         }
     }
+
     const onClickJoin = async() => {
         console.log("Click 회원가입");
-        // 가입 여부 우선 확인
+        // 가입 여부 우선 확인  
         const memberCheck = await Api.memberRegCheck(inputId);
         console.log(memberCheck.data.result);
         // 가입 여부 확인 후 가입 절차 진행
@@ -152,7 +188,7 @@ const Join = () => {
                 window.location.replace("/Home");
             } else {
                 setModalOpen(true);
-                setModelText("회원 가입에 실패 했습니다.");
+                setModelText("회원 가입에 실패 했습니다. 중복체크나 공란을 확인하세요.");
             }
 
         } else {
@@ -161,6 +197,7 @@ const Join = () => {
             setModelText("이미 가입된 회원 입니다.");
         } 
     }
+
     return(
         <>
             <ContainerJoin>
@@ -168,7 +205,7 @@ const Join = () => {
                 <Logo><Link to="/main" className="logo">Plannet</Link></Logo></div>
                 <div className="session">
                     <p className="joinTitle">아이디</p>
-                    <input className="inputJoin" placeholder="아이디" value ={inputId} onChange={onChangId} type={'text'}/>
+                    <input className="inputJoin" placeholder="아이디" value ={inputId} onChange={onChangId} type={'text'} onBlur={onBlurIdCheck}/>
                 </div>
                 <div className="hint">
                     {inputId.length > 0 && <span className={`message ${isId ? 'success' : 'error'}`}>{idMessage}</span>}
@@ -195,7 +232,7 @@ const Join = () => {
                 </div>
                 <div className="session">
                     <p className="joinTitle">닉네임</p>
-                    <input className="inputJoin" type='text' placeholder="닉네임" value ={inputNickname} onChange={onChangeNickname}/>
+                    <input className="inputJoin" type='text' placeholder="닉네임" value ={inputNickname} onChange={onChangeNickname} onBlur={onBlurNickname}/>
                 </div>
                 <div className="session">
                     <p className="joinTitle">이메일</p>
@@ -210,13 +247,12 @@ const Join = () => {
                     <input className="inputJoin" type={'date'} value={inputBirth} onChange={onChangeBirth}/>
                 </div>  */}
                 <div className="session">
-                    {/* 위 조건 성립시 넘어가기 구현 및 생년월일 받아오기 해결하기 */}
                     {(isId && isPw && isConPw && isName && isNickname && isMail && isTel)}
                     <button className="doJoin" onClick={onClickJoin}>가입하기</button>
                 </div>
             </ContainerJoin>
-        </>
-        
+        </> 
     );
 };
+
 export default Join;

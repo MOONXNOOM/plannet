@@ -21,7 +21,6 @@ const ContainerLogin = styled.div`
     flex-direction: column;
 `;
 const Logo = styled.div`
-
     font-family: 'Comfortaa', cursive;
     font-size: 70px;
     font-weight: bold;
@@ -72,11 +71,6 @@ const DoLogin = () => {
     const closeModal = () => {
          setModalOpen(false);
     };
-    function f_enter(){
-        if(window.event.keyCode ===13){
-            onClickLogin();
-        }
-    }
     const onClickLogin = async() => {
         try {
             // 로그인을 위한 axios 호출
@@ -86,7 +80,7 @@ const DoLogin = () => {
             if(res.data.result === "OK") {
                 window.localStorage.setItem("userId", inputId);
                 window.localStorage.setItem("userPw", inputPw);
-                window.location.replace("/board");
+                window.location.replace("/");
             } else {
                 setModalOpen(true);
             }
@@ -120,8 +114,8 @@ const DoLogin = () => {
                 <p className="space-or">또는</p>
                 <div className="login2">
                     <input type="text" id="id" name="uid" placeholder="아이디" required="" className="mainlogin" value ={inputId} onChange={onChangId}/>
-                    <input type="password" id="pwd" name="upw" placeholder="비밀번호" required="" className="mainlogin" value ={inputPw} onChange={onChangePw} onKeyUp={f_enter}/>
-                    <button className="doLogin" onClick={onClickLogin} >로그인하기</button>
+                    <input type="password" id="pwd" name="upw" placeholder="비밀번호" required="" className="mainlogin" value ={inputPw} onChange={onChangePw}/>
+                    <button className="doLogin" onClick={onClickLogin}>로그인하기</button>
                     <Modal open={modalOpen} close={closeModal} header="오류">아이디 및 패스워드를 재확인해 주세요.</Modal>
                 </div>
                 <div className="else">
