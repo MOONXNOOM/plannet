@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import img1 from "../images/logoPic.png";
 import {ReactComponent as LogoImg} from "../images/planet-001.svg";
 import "../App";
 import { Link } from "react-router-dom";
@@ -90,14 +89,6 @@ const Explain = styled.div`
     color: white;
     font-weight: 400;
     line-height: 1.3;
-`;
-const Test_box = styled.div`
-    position: absolute;
-    border: 1px solid red;
-    width: 1130px;
-    height: 100vh;
-    margin: 0 auto;
-    z-index: -1;
 `;
 
 const ExMain = () => {
