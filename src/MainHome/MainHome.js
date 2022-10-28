@@ -4,6 +4,9 @@ import styled from 'styled-components';
 // import "react-datepicker/dist/react-datepicker.css";
 // import Calendar from './Calendar'  
 import CalEx from '../MainHome/CalEx';
+import Modal from '../Utill/Modal';
+import plannetApi from '../api/plannetApi';
+import Memo from './Memo';
 import Memo from './Memo';
 import List from './List';
 
@@ -101,6 +104,10 @@ const Section = styled.div`
 `;
 
 const MainHome = () => {
+
+  const localId = window.localStorage.getItem("userId");
+  const localPw = window.localStorage.getItem("userPw");
+
   const motivation = "동기부여가 되는 문구가 출력됩니다.";
 
   return (
@@ -114,7 +121,7 @@ const MainHome = () => {
         <div className='etc'>
           <div className='memo'>
             <h2>Memo</h2>
-            <Memo />
+            <Memo localId={localId}/>
           </div>
           <div className='moti'>
             <h2>Motivation</h2>
@@ -123,6 +130,10 @@ const MainHome = () => {
         </div>
         <div className="list">
           <h2>List</h2>
+          <div className="history" >
+                   <p>회원 아이디 : {localId}</p>
+                   <p>회원 패스워드 : {localPw}</p>
+                </div>
           <List />
         </div>
       </Section>

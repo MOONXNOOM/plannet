@@ -42,28 +42,44 @@ const Content = styled.div`
     }
 `;
 
-const Memo = () => {
-    const [memoText, setMemoText] = useState('');
+const Memo = ({localId}) => {
+    const getId = window.localStorage.getItem("userId");
+    const [memoText, setMemoText] = useState("");
+    
+    useEffect(() => {
+        const memoList = async () => {
+            try {
+                const response = await plannetApi.memberMemo(getId);
+                setMemoText(response.data.text);
+                console.log(response.data + "프론트");
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        memoList();
+    }, []);
+
     // const wrapRef = useRef(null);
     const headerRef = useRef(null);
 
     const onFocusout = useCallback(({ target }) => {
         setMemoText(target.value);
-    }, [memoText]);
+    }, []);
 
     return (
         <Wrap>
+            <p>{memoText}</p>
             <Header 
                 ref={headerRef}
                 // onMouseDown={onMouseDown}
             >
-                MEMO
             </Header>
             <Content>
                 <textarea 
                     placeholder="자유롭게 메모하세요."
                     onBlur={onFocusout}    
-                ></textarea>
+                >{memoText}
+                </textarea>
             </Content>
         </Wrap>
     );

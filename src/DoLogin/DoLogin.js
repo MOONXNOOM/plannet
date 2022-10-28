@@ -48,6 +48,25 @@ const DoLogin = () => {
     const [isLink, setLink] = useState(false);
     // const [isLogin, setLogin] = useState(false);
     const [comment, setCommnet] = useState("");
+
+
+const localId = window.localStorage.getItem("userId");
+  const localPw = window.localStorage.getItem("userPw");
+//   const [modalOpen, setModalOpen] = useState(false);
+
+//   const closeModal = () => {
+//     setModalOpen(false);
+// };
+
+  const confirmModal = async() => {
+    setModalOpen(false);
+    const memberReg = await Api.memberDelete(localId);
+    console.log(memberReg.data.result);
+    if(memberReg.data.result === "OK") {
+        window.location.replace("/");
+    }
+};
+
     
     const onChangId = (e) => {
         setInputId(e.target.value)
