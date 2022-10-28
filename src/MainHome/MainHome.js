@@ -11,6 +11,14 @@ const Wrap = styled.div`
     height: 100vh;
     background-color: white;
     margin: 0 auto;
+    .copy{
+        width: 830px;
+        text-align: center;
+        color: #dfdfdf;
+        line-height: 40px;
+        float: left;
+        background-color: red;
+    }
 `;
 const Section = styled.div`
     width: 850px;
@@ -42,7 +50,6 @@ const Section = styled.div`
       &>div{
         background-color: red;
         width: 100%;
-        height: 450px;
       }
     }
     .etc{
@@ -98,8 +105,8 @@ const MainHome = () => {
         <div className="list">
           <h2>List</h2>
         </div>
+        
       </Section>
-      <div className="copy">&#169; Plannet.</div>
     </Wrap>
   );
 }
