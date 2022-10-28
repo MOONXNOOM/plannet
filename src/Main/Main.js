@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {ReactComponent as LogoImg} from "../images/planet-001.svg";
+import {ReactComponent as LogoImg} from "../Images/planet-001.svg";
 import "../App";
 import { Link } from "react-router-dom";
 import "./Main.css";
