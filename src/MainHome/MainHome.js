@@ -7,7 +7,7 @@ import CalEx from '../MainHome/CalEx';
 import Modal from '../Utill/Modal';
 import plannetApi from '../api/plannetApi';
 import Memo from './Memo';
-import Memo from './Memo';
+// import Memo from './Memo';
 import List from './List';
 
 const Wrap = styled.div`
