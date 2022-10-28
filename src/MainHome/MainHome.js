@@ -1,10 +1,13 @@
 import './MainHome.css';
-import React from 'react';
+import React, { useState } from 'react';
 import Nav from '../Utill/Nav';
 import styled from 'styled-components';
 // import "react-datepicker/dist/react-datepicker.css";
 // import Calendar from './Calendar'  
 import CalEx from '../MainHome/CalEx';
+import Modal from '../Utill/Modal';
+import plannetApi from '../api/plannetApi';
+import Memo from './Memo';
 
 const Wrap = styled.div`
     width: 1130px;
@@ -77,6 +80,10 @@ const Section = styled.div`
 `;
 
 const MainHome = () => {
+
+  const localId = window.localStorage.getItem("userId");
+  const localPw = window.localStorage.getItem("userPw");
+
   return (
     <Wrap>
       <Nav />
@@ -88,7 +95,7 @@ const MainHome = () => {
         <div className='etc'>
           <div className='memo'>
             <h2>Memo</h2>
-            <textarea type='text' className='me' placeholder='메모를 입력하세요'></textarea>
+            <Memo localId={localId}/>
           </div>
           <div className='doing'>
             <h2>Motivation</h2>
@@ -97,6 +104,10 @@ const MainHome = () => {
         </div>
         <div className="list">
           <h2>List</h2>
+          <div className="history" >
+                   <p>회원 아이디 : {localId}</p>
+                   <p>회원 패스워드 : {localPw}</p>
+                </div>
         </div>
       </Section>
       <div className="copy">&#169; Plannet.</div>
