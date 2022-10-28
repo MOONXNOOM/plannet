@@ -31,3 +31,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.copy{
+  width: 830px;
+  text-align: center;
+  color: #dfdfdf;
+  line-height: 40px;
+  float: left;
+}

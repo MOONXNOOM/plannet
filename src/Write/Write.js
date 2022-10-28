@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Nav from "../Utill/Nav";
 import PlanList from "./PlanList";
 
-const Wrap = styled.div` 
+const Wrap = styled.div`
     width: 1130px;
     height: 100vh;
     background-color: white;
@@ -11,11 +11,26 @@ const Wrap = styled.div`
 `;
 const Section = styled.div`
     width: 850px;
-    height: 100vh;
+    height: calc(100vh - 40px);
     float: left;
     position: relative;
     overflow-y: scroll;
     overflow-x: hidden;
+    &::-webkit-scrollbar {
+        width: 20px;
+        padding: 15px;
+    }
+    &::-webkit-scrollbar-thumb {
+        height: 30%; /* 스크롤바의 길이 */
+        background: #ddd; /* 스크롤바의 색상 */
+        border-radius: 10px;
+        border: 7px solid transparent;
+        background-clip: padding-box;
+    }
+    &::-webkit-scrollbar-track {
+        background: none;
+        /*스크롤바 뒷 배경 색상*/
+    }
     div{
         width: 100%;
         padding: 10px 30px;
@@ -185,25 +200,6 @@ const Section = styled.div`
         border: none;
          background: #ddd;
         height: 2px; 
-    }
-    .copy{
-        width: 850px;
-        position: absolute;
-        bottom: 0;
-        text-align: center;
-        color: #dfdfdf;
-        line-height: 50px;
-    }
-    &::-webkit-scrollbar {
-        width: 12px;
-        padding: 15px;
-    }
-    &::-webkit-scrollbar-thumb {
-        height: 30%; /* 스크롤바의 길이 */
-        background: #333; /* 스크롤바의 색상 */
-        border-radius: 10px;
-        border: 3px solid transparent;
-        background-clip: padding-box;
     }
     .defaultPlanColor{
         color:#333;
