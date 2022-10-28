@@ -7,7 +7,7 @@ import "./DoLogin.css"
 import "../App";
 import Api from "../api/plannetApi";
 import React, {useState } from 'react';
-import Modal from '../UtillUpper/Modal';
+import Modal from '../Utill/Modal';
 import { Link } from "react-router-dom";
 
 const ContainerLogin = styled.div`

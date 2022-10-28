@@ -5,7 +5,7 @@ import "../App";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Api from '../api/plannetApi';
-import Modal from '../UtillUpper/Modal.js';
+import Modal from '../Utill/Modal.js';
 
 // 구현해야 할 것
 // 1. 닉네임을 적지 않았을 때 자동으로 DB에 이름이 닉네임으로 동일하게 전송되도록
