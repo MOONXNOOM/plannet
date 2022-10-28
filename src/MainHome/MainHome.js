@@ -1,57 +1,113 @@
 import './MainHome.css';
 import React from 'react';
-import Planet from '../Images/logoPic.png';
-import Profile from '../Images/profile.jpg';
+import Nav from '../Utill/Nav';
+import styled from 'styled-components';
 // import "react-datepicker/dist/react-datepicker.css";
 // import Calendar from './Calendar'  
+import CalEx from '../MainHome/CalEx';
 
+const Wrap = styled.div`
+    width: 1130px;
+    height: 100vh;
+    background-color: white;
+    margin: 0 auto;
+    .copy{
+        width: 830px;
+        text-align: center;
+        color: #dfdfdf;
+        line-height: 40px;
+        float: left;
+        background-color: red;
+    }
+`;
+const Section = styled.div`
+    width: 850px;
+    height: calc(100vh - 40px);
+    float: left;
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+        width: 20px;
+        padding: 15px;
+    }
+    &::-webkit-scrollbar-thumb {
+        height: 30%; /* 스크롤바의 길이 */
+        background: #ddd; /* 스크롤바의 색상 */
+        border-radius: 10px;
+        border: 7px solid transparent;
+        background-clip: padding-box;
+    }
+    &::-webkit-scrollbar-track {
+        background: none;
+        /*스크롤바 뒷 배경 색상*/
+    }
+    .plan{
+      width: 70%;
+      height: 70vh;
+      background: rosybrown;
+      height: 550px;
+      &>div{
+        background-color: red;
+        width: 100%;
+      }
+    }
+    .etc{
+      width: 30%;
+      background-color: royalblue;
 
-function MainHome() {
+    }
+    .plan, .etc{
+      height: 580px;
+      float: left;  
+      padding: 10px 30px;
+      h2{
+        margin-top: 35px;
+      }
+    }
+    .list{
+      width: 100%;
+      height: 300px;
+      padding: 10px 30px;
+      background-color: blanchedalmond;
+      clear: both;
+    }
+    h2{
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+    textarea{
+      width: 100%;
+      background: blanchedalmond;
+    }
+`;
+
+const MainHome = () => {
   return (
-  <div className='container'>
-    <div className='item'>
-      <img className='planet' src={Planet} alt="행성"/>
-          <p id='plannet' align="center" top="10px">plannet</p>
-          <p id='planit' align="center">let's plan it</p>
-            <img className='profile' src={Profile} alt="프로필"/>
-              <div className='nickname' align="center">
-                <p><b>홍길동</b></p>
-                <p>(gildong123)</p>
-              </div>
-                <div className='intro1' align="center">
-                  <p>개발하는 홍길동의 플래닛</p>
-                  <p>#개발자</p>
-                  <p>#백엔드</p>
-                  <p>#프론트엔드</p>
-                </div>
-                  <div className='intro2' align="center">
-                  <p>Phone : 010-1234-5678</p>
-                  <p>Email : gildong123@naver.com</p>
-                  <p>Instagram : gildong_123</p>
-                  </div>
-                  <div className="achieve">
-                    <h2>전체 목표 달성률</h2>
-                     <textarea type="text" className="ach"></textarea>
-                  </div>
-    </div>
-      <div>
-        <div className='plan'><h1>plan it</h1></div>
-        <div className="App">
-          {/* <Calendar /> */}
+    <Wrap>
+      <Nav />
+      <Section>
+        <div className="plan">
+          <h2>Plan it</h2>
+          <CalEx/>
         </div>
-          <div className='list'><h1>List</h1>
-          <textarea type='text' className='li' placeholder='리스트를 작성 하세요'></textarea>
+        <div className='etc'>
+          <div className='memo'>
+            <h2>Memo</h2>
+            <textarea type='text' className='me' placeholder='메모를 입력하세요'></textarea>
           </div>
-      </div>
-      <div>
-        <div className='memo'><h1>Memo</h1>
-        <textarea type='text' className='me' placeholder='메모를 입력하세요'></textarea>
-        </div>
-          <div className='doing'><h1>Motivation</h1>
-          <textarea type='text' className='do' placeholder='동기부여 되는 구문을 작성하세요'></textarea>
-            </div>
+          <div className='doing'>
+            <h2>Motivation</h2>
+            <textarea type='text' className='do' placeholder='동기부여 되는 구문을 작성하세요'></textarea>
           </div>
         </div>
+        <div className="list">
+          <h2>List</h2>
+        </div>
+        
+      </Section>
+    </Wrap>
   );
 }
 export default MainHome;

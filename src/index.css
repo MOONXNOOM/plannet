@@ -21,7 +21,7 @@
   -moz-osx-font-smoothing: grayscale; */
 }
 
-html{overflow-x: hidden;} 
+html{overflow: hidden;} 
 /* h1{display:none;} */
 img{border: 0;}
 ul, li{list-style: none;}

@@ -266,8 +266,8 @@ const Write = () => {
                 <div className="btnbox">
                     <button className="save">SAVE</button>
                 </div>
-                <p className="copy">&#169; Plannet.</p>
             </Section>
+            <div className="copy">&#169; Plannet.</div>
         </Wrap>
     );
 }
