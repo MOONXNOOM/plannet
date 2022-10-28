@@ -31,7 +31,14 @@ const plannetApi = {
             id: id,
         }
         return await axios.post(PLANNET_DOMAIN + "MemberCheck", regCheck, HEADER);
-    }
+    },
+    // 회원 메모 조회
+    memberMemo: async function() {
+        const regCmd = {
+            cmd : "MemberMemo"
+        }
+        return await axios.post(PLANNET_DOMAIN + "MemberMemo", regCmd, HEADER);
+    },
 }
 
 export default plannetApi;

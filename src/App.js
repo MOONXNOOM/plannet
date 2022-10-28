@@ -9,6 +9,7 @@ import Create from './Board/Create';
 import DoLogin from './DoLogin/DoLogin';
 import Join from './Join/Join';
 import MainHome from './MainHome/MainHome';
+import Memo from './MainHome/Memo';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/dologin" element={<DoLogin />}/>
         <Route path="/join" element={<Join />}/>
         <Route path="/MainHome" element={<MainHome />}/>
+        <Route path="Memo" element={<Memo />}/>
       </Routes>
     </Router>
   );

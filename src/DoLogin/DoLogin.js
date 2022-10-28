@@ -46,7 +46,7 @@ const DoLogin = () => {
     const [isId, setIsId] = useState("");
     const [isPw, setIsPw] = useState("");
     const [isLink, setLink] = useState(false);
-    const [isLogin, setLogin] = useState(false);
+    // const [isLogin, setLogin] = useState(false);
     const [comment, setCommnet] = useState("");
     
     const onChangId = (e) => {
@@ -71,6 +71,9 @@ const DoLogin = () => {
             setIsPw(true);
         }        
     }
+
+
+    
     const onClickLink = () => {
        setModalOpen(true);
        setLink(true);
@@ -80,7 +83,7 @@ const DoLogin = () => {
     const closeModal = () => {
         setModalOpen(false);
         setLink(false);
-        setLogin(false);
+        // setLogin(false);
 
     };
     const onClickLogin = async() => {
@@ -96,12 +99,12 @@ const DoLogin = () => {
                 window.location.replace("/");
             } else {
                 setModalOpen(true);
-                setLogin(true);
+                // setLogin(true);
             }
             
         } catch (e) {
             setModalOpen(true);
-            setLogin(true);
+            // setLogin(true);
             console.log("로그인 에러..");
         }
     }
@@ -142,7 +145,7 @@ const DoLogin = () => {
                     <Link to="/join" className="join">회원가입</Link>
                     <button className="find">아이디 / 비밀번호 찾기</button>
                 </div>   
-                {(setLink || isLogin)  && <Modal open={modalOpen} close={closeModal} header="오류">{comment}</Modal>}     
+                {<Modal open={modalOpen} close={closeModal} header="오류">{comment}</Modal>}     
             </ContainerLogin>
         </div>
     );
