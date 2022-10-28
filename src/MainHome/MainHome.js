@@ -1,7 +1,7 @@
 import './MainHome.css';
 import React from 'react';
-import Planet from '../images/logoPic.png';
-import Profile from '../images/profile.jpg';
+import Planet from '../Images/logoPic.png';
+import Profile from '../Images/profile.jpg';
 // import "react-datepicker/dist/react-datepicker.css";
 // import Calendar from './Calendar'  
 
