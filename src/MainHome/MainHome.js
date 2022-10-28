@@ -1,4 +1,4 @@
-import './LoginHome.css';
+import './MainHome.css';
 import React from 'react';
 import Planet from '../images/logoPic.png';
 import Profile from '../images/profile.jpg';
@@ -6,7 +6,7 @@ import Profile from '../images/profile.jpg';
 // import Calendar from './Calendar'  
 
 
-function LoginHome() {
+function MainHome() {
   return (
   <div className='container'>
     <div className='item'>
@@ -54,4 +54,4 @@ function LoginHome() {
         </div>
   );
 }
-export default LoginHome;
+export default MainHome;

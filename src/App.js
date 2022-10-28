@@ -3,12 +3,12 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './home/Home';
 import Write from './write/Write';
-import ExMain from './MainHome/Main';
+import ExMain from './Main/Main';
 import Board from './Board/Board';
 import Create from './Board/Create';
 import DoLogin from './DoLogin/DoLogin';
 import Join from './Join/Join';
-import LoginHome from './LoginHome/LoginHome';
+import MainHome from './MainHome/MainHome';
 
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
         <Route path="/create" element={<Create />}/>
         <Route path="/dologin" element={<DoLogin />}/>
         <Route path="/join" element={<Join />}/>
-        <Route path="/loginHome" element={<LoginHome />}/>
+        <Route path="/MainHome" element={<MainHome />}/>
       </Routes>
     </Router>
   );
