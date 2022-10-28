@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components"
-import {ReactComponent as Logo} from "../images/planet-001.svg";
+import {ReactComponent as Logo} from "../ImagesUpper/planet-001.svg";
 
 const Nav = () => {
     const userSrc = "https://images.unsplash.com/photo-1666473574427-253b43283677?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80";

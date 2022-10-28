@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import Nav from "../util/Nav";
+import Nav from "../UtillUpper/Nav";
 import PlanList from "./PlanList";
 
 const Wrap = styled.div` 

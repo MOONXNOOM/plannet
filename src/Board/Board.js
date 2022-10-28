@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Nav from "../util/Nav";
+import Nav from "../UtillUpper/Nav";
 
 const Wrap = styled.div`
     width: 1130px;
