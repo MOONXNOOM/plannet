@@ -1,10 +1,11 @@
-import './MainHome.css';
 import React from 'react';
 import Nav from '../Utill/Nav';
 import styled from 'styled-components';
 // import "react-datepicker/dist/react-datepicker.css";
 // import Calendar from './Calendar'  
 import CalEx from '../MainHome/CalEx';
+import Memo from './Memo';
+import List from './List';
 
 const Wrap = styled.div`
     width: 1130px;
@@ -34,35 +35,62 @@ const Section = styled.div`
         background: none;
         /*스크롤바 뒷 배경 색상*/
     }
+    .plan, .etc{
+      height: 550px;
+      float: left;  
+      padding: 10px 30px 10px 0;
+      h2{
+        margin-top: 35px;
+      }
+    }
     .plan{
       width: 70%;
-      height: 70vh;
-      background: rosybrown;
-      height: 550px;
+      padding-left: 30px;
       &>div{
-        background-color: red;
+        background-color: rosybrown;
         width: 100%;
         height: 450px;
       }
     }
     .etc{
       width: 30%;
-      background-color: royalblue;
-
-    }
-    .plan, .etc{
-      height: 580px;
-      float: left;  
-      padding: 10px 30px;
-      h2{
-        margin-top: 35px;
+      .moti h2{
+          margin-top: 20px;
+      }
+      textarea{
+        width: 100%;
+        height: 320px;
+        resize: none;
+        outline: none;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        border: 2px solid #f9f9f9;
+        transition: all .1s ease-in;
+        &::-webkit-scrollbar {
+          width: 12px;
+        }
+        &::-webkit-scrollbar-thumb {
+            height: 30%; /* 스크롤바의 길이 */
+            background: #ddd; /* 스크롤바의 색상 */
+            border-radius: 3px;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+        }
+        &::-webkit-scrollbar-track {
+            background: none;
+            /*스크롤바 뒷 배경 색상*/
+        }
+        &:focus{
+          border: 2px solid #f0f0f0;
+        }
       }
     }
     .list{
       width: 100%;
       height: 300px;
-      padding: 10px 30px;
-      background-color: blanchedalmond;
+      padding: 20px 30px 10px;
+      /* background-color: blanchedalmond; */
       clear: both;
     }
     h2{
@@ -70,13 +98,11 @@ const Section = styled.div`
       font-weight: 900;
       margin-bottom: 10px;
     }
-    textarea{
-      width: 100%;
-      background: blanchedalmond;
-    }
 `;
 
 const MainHome = () => {
+  const motivation = "동기부여가 되는 문구가 출력됩니다.";
+
   return (
     <Wrap>
       <Nav />
@@ -88,15 +114,16 @@ const MainHome = () => {
         <div className='etc'>
           <div className='memo'>
             <h2>Memo</h2>
-            <textarea type='text' className='me' placeholder='메모를 입력하세요'></textarea>
+            <Memo />
           </div>
-          <div className='doing'>
+          <div className='moti'>
             <h2>Motivation</h2>
-            <textarea type='text' className='do' placeholder='동기부여 되는 구문을 작성하세요'></textarea>
+            <p>{motivation}</p>
           </div>
         </div>
         <div className="list">
           <h2>List</h2>
+          <List />
         </div>
       </Section>
       <div className="copy">&#169; Plannet.</div>
