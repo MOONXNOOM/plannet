@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components"
-import {ReactComponent as Logo} from "../images/planet-001.svg";
+import {ReactComponent as Logo} from "../Images/planet-001.svg";
 
 const Nav = () => {
     const userSrc = "https://images.unsplash.com/photo-1666473574427-253b43283677?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80";
@@ -18,11 +18,10 @@ const Nav = () => {
         height: 100vh;
         background-color: aliceblue;
         float: left;
-        overflow: hidden;
         text-align: center;        
         .logo{
             width: 100%;
-            height: 100px;
+            height: 140px;
             h1{
                 font-family: 'Comfortaa';
                 font-size: 24px;
@@ -36,7 +35,7 @@ const Nav = () => {
             }
         }
         .userinfo{
-            padding-top: 80px;
+            padding-top: 40px;
             .userName{
                 margin-top: 15px;
                 font-size: 16px;
@@ -48,16 +47,33 @@ const Nav = () => {
                 font-size: 12px;
             }
             .userPro1{
-                height: 350px;
-                padding: 25px 0 10px;
+                height: calc(80vh - 420px);
+                margin: 25px 0;
+                padding-left:17px;
+                overflow-y: scroll;
+                &::-webkit-scrollbar {
+                    width: 20px;
+                    padding: 15px;
+                }
+                &::-webkit-scrollbar-thumb {
+                    height: 30%; /* 스크롤바의 길이 */
+                    background: #ddd; /* 스크롤바의 색상 */
+                    border-radius: 10px;
+                    border: 7px solid transparent;
+                    background-clip: padding-box;
+                }
+                &::-webkit-scrollbar-track {
+                    background: none;
+                    /*스크롤바 뒷 배경 색상*/
+                }
             }
             .userPro2{
                 p{font-size: 11px;
                 color: #888;}
             }
             .userImgBox{
-                width: 180px;
-                height: 180px;
+                height: 20vh;
+                aspect-ratio: auto 1 / 1;
                 border-radius: 100%;
                 overflow: hidden;
                 margin: 0 auto;

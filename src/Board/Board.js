@@ -1,17 +1,24 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Nav from "../util/Nav";
+import Nav from "../Utill/Nav";
 
 const Wrap = styled.div`
     width: 1130px;
     height: 100vh;
     background-color: white;
     margin: 0 auto;
+    .copy{
+        width: 830px;
+        text-align: center;
+        color: #dfdfdf;
+        line-height: 40px;
+        float: left;
+    }
 `;
 
 const Section = styled.div`
     width: 850px;
-    height: 100vh;
+    height: calc(100vh - 40px);
     float: left;
     position: relative;
     overflow-y: scroll;
@@ -88,14 +95,6 @@ const Section = styled.div`
         td:nth-child(2){width: 400px; text-align: left; padding-left: 20px;}  
         tr:hover td, tr:hover a{color: #4555AE;}
     }
-    .copy{
-        width: 850px;
-        position: absolute;
-        bottom: 0;
-        text-align: center;
-        color: #dfdfdf;
-        line-height: 50px;
-    }
     .util_box{
         .page_list {
             width: 500px; float:left;
@@ -124,7 +123,7 @@ const Section = styled.div`
 const Board = () => {
     return (
         <Wrap>
-            <Nav></Nav>
+            <Nav />
             <Section>
                 <div className="board_list sub_box"> 
                     <h2>자유게시판</h2>
@@ -262,8 +261,8 @@ const Board = () => {
                         <a href="#" onclick="submit"><i class="bi bi-search"></i></a>
                     </form>
                 </div>
-                <p className="copy">&#169; Plannet.</p>
             </Section>
+            <div className="copy">&#169; Plannet.</div>
         </Wrap>
     )
 };

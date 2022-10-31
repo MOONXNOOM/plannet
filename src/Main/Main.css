@@ -1,7 +1,9 @@
 .ex .doLogin {
     cursor: pointer;
     margin: 5px;
+    margin-left: 70px;
     padding-top: 8px;
+    display: block;
     width: 350px;
     height: 44px;
     border: 3px solid white;
@@ -10,6 +12,7 @@
     color: white;
     font-weight: 600;
     text-decoration-line: none;
+    transition: all .1s ease-in;
 }
 .ex .doLogin:hover{
     color: #4555AE;

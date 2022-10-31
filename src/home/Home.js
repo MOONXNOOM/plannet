@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ExMain from "../MainHome/Main";
+import ExMain from "../Main/Main";
 
 const Home = () => {
     return (

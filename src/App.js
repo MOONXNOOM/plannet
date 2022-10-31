@@ -1,14 +1,15 @@
+// export default App;
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './home/Home';
-// import Write from './Write/Write';
-import ExMain from './MainHome/Main';
+import Home from './Home/Home';
+import Write from './Write/Write';
+import ExMain from './Main/Main';
 import Board from './Board/Board';
 import Create from './Board/Create';
 import DoLogin from './DoLogin/DoLogin';
 import Join from './Join/Join';
-import Writecopy from './write/Write_copy';
-import LoginHome from './LoginHome/LoginHome';
+import MainHome from './MainHome/MainHome';
+import Memo from './MainHome/Memo';
 
 
 
@@ -18,12 +19,17 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}/>
         <Route path="/main" element={<ExMain />}/>
-        <Route path="/write" element={<Writecopy />}/>
+        <Route path="/write" element={<Write />}/>
         <Route path="/board" element={<Board />}/>
         <Route path="/create" element={<Create />}/>
-        <Route path="/doLogin" element={<DoLogin />}/>
+        <Route path="/dologin" element={<DoLogin />}/>
         <Route path="/join" element={<Join />}/>
+<<<<<<< HEAD
         <Route path="/loginHome" element={<LoginHome />}/>
+=======
+        <Route path="/MainHome" element={<MainHome />}/>
+        <Route path="Memo" element={<Memo />}/>
+>>>>>>> 4d1bf7ae55415f426c79d956073753e7ddb71082
       </Routes>
     </Router>
   );

@@ -11,8 +11,8 @@
   font-size: 14px;
   margin:0; 
   padding:0; 
-  box-sizing: 
-  border-box; color:#333;
+  box-sizing: border-box; 
+  color:#333;
   font-family: "Pretendard Variable", Pretendard, 
   -apple-system, BlinkMacSystemFont, system-ui, Roboto, 
   "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", 
@@ -21,7 +21,7 @@
   -moz-osx-font-smoothing: grayscale; */
 }
 
-html{overflow-x: hidden;} 
+html{overflow: hidden;} 
 /* h1{display:none;} */
 img{border: 0;}
 ul, li{list-style: none;}
@@ -30,4 +30,12 @@ a{text-decoration: none;}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.copy{
+  width: 830px;
+  text-align: center;
+  color: #dfdfdf;
+  line-height: 40px;
+  float: left;
 }
