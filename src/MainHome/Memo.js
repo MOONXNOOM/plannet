@@ -18,7 +18,7 @@ const Memo = () => {
         const memoList = async() => {
             try{
                 const response = await Api.memberMemo(getId);
-                setMemoText(response.data["0"].memo);
+                setMemoText(response.data[0].memo);
             } catch(e){
                 console.log(e);
             }
