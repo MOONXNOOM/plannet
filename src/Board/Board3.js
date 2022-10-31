@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 //import './App.css';
 import './style2.css';
 
+// 임시파일
+
 const BoardSi3 = () => {
     
     return(

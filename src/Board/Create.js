@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Nav from "../Utill/Nav";
 
+// 임시파일
+
 const Wrap = styled.div`
     width: 1130px;
     height: 100vh;
@@ -115,7 +117,6 @@ const Section = styled.div`
             width: 200px; height: 35px; padding: 0 10px; border: solid 2px #ddd; 
             background-color: white;
             input{width: 150px; height: 31px; border: 0px; outline: none; margin-right: 10px;}
-
         }
     }
 `;
@@ -145,8 +146,6 @@ const Board2 = () => {
 };
 
 export default Board2;
-
-
 
 // <div className="boardmain"> 
 // <div>

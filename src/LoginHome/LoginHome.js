@@ -188,10 +188,7 @@ const LoginHome= () => {
                 <div className="btnbox">
                   <button className="save">SAVE</button>
                 </div>
-                  <p className="copy">&#169; Plannet.</p>
-                
-              
-                
+                  <p className="copy">&#169; Plannet.</p>  
             </Section>
         </Wrap>
     );

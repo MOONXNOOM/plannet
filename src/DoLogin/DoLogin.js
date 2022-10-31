@@ -6,7 +6,7 @@ import styled from "styled-components";
 import "./doLogin.scss"
 import "../App";
 import Api from "../api/plannetApi";
-import React, {useState } from 'react';
+import React, {useState, useEffect} from 'react';
 import Modal from '../Utill/Modal';
 import { Link } from "react-router-dom";
 
@@ -29,8 +29,9 @@ const Logo = styled.div`
     }
 `;
 
-
 const DoLogin = () => {
+    window.localStorage.setItem("isLogin", "FALSE");
+
     // 키보드 입력
     const [inputId, setInputId] = useState("");
     const [inputPw, setInputPw] = useState("");
@@ -38,38 +39,33 @@ const DoLogin = () => {
     // 오류 메시지
     const [idMessage, setIdMessage] = useState("");
     const [pwMessage, setPwMessage] = useState("");
+    const [comment, setCommnet] = useState("");
 
      // 팝업
     const [modalOpen, setModalOpen] = useState(false);
     const openModal = () => {
          setModalOpen(true);
     };
+    const closeModal = () => {
+        setModalOpen(false);
+    };
+
+    // 자동 로그인
+    const [isAuto, setIsAuto] = useState(true);
+
+    useEffect(() => {
+    });
+
+    const autoSign = () => {
+        setIsAuto(isAuto => !isAuto);
+        console.log(isAuto)
+    }
+
     // 유효성 검사
     const [isId, setIsId] = useState("");
     const [isPw, setIsPw] = useState("");
-    const [isLink, setLink] = useState(false);
-    // const [isLogin, setLogin] = useState(false);
-    const [comment, setCommnet] = useState("");
 
-
-const localId = window.localStorage.getItem("userId");
-  const localPw = window.localStorage.getItem("userPw");
-//   const [modalOpen, setModalOpen] = useState(false);
-
-//   const closeModal = () => {
-//     setModalOpen(false);
-// };
-
-  const confirmModal = async() => {
-    setModalOpen(false);
-    const memberReg = await Api.memberDelete(localId);
-    console.log(memberReg.data.result);
-    if(memberReg.data.result === "OK") {
-        window.location.replace("/");
-    }
-};
-
-    
+    // ID 체크
     const onChangId = (e) => {
         setInputId(e.target.value)
         if (e.target.value.length < 5 || e.target.value.length > 12) {
@@ -80,12 +76,14 @@ const localId = window.localStorage.getItem("userId");
             setIsId(true);
         }
     }
+
+    // PW 체크
     const onChangePw = (e) => {
         const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
         const passwordCurrent = e.target.value ;
         setInputPw(passwordCurrent)
         if (!passwordRegex.test(passwordCurrent)) {
-            setPwMessage('숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!')
+            setPwMessage('숫자 + 영문자 + 특수문자 조합으로 8자리 이상 입력해주세요!')
             setIsPw(false)
         } else {
             setPwMessage('안전한 비밀번호에요 : )')
@@ -93,20 +91,20 @@ const localId = window.localStorage.getItem("userId");
         }        
     }
 
-
-    
     const onClickLink = () => {
-       setModalOpen(true);
-       setLink(true);
-       setCommnet("서비스 준비중 입니다 ...");
-       console.log("서비스 준비중...");
+        setModalOpen(true);
+        setCommnet("서비스 준비중 입니다 ...");
+        console.log("서비스 준비중...");
     }
-    const closeModal = () => {
-        setModalOpen(false);
-        setLink(false);
-        // setLogin(false);
 
-    };
+    // const confirmModal = async() => {
+    //     setModalOpen(false);
+    //     const memberReg = await Api.memberDelete(localId);
+    //     console.log(memberReg.data.result);
+    //     if(memberReg.data.result === "OK") {
+    //         window.location.replace("/");
+    // }
+
     const onClickLogin = async() => {
         try {
             // 로그인을 위한 axios 호출
@@ -117,16 +115,14 @@ const localId = window.localStorage.getItem("userId");
             if(res.data.result === "OK") {
                 window.localStorage.setItem("userId", inputId);
                 window.localStorage.setItem("userPw", inputPw);
-                window.location.replace("/");
+                window.localStorage.setItem("isLogin", "TRUE");
+                window.location.replace("/loginhome");
             } else {
                 setModalOpen(true);
-                // setLogin(true);
             }
-            
         } catch (e) {
             setModalOpen(true);
-            // setLogin(true);
-            console.log("로그인 에러..");
+            console.log("로그인 에러...");
         }
     }
     
@@ -154,12 +150,6 @@ const localId = window.localStorage.getItem("userId");
                     <input type="password" id="pwd" name="upw" placeholder="비밀번호" required="" value ={inputPw} onChange={onChangePw}/>
                     <button className="doLogin" onClick={onClickLogin}>로그인하기</button>
                     <Modal open={modalOpen} close={closeModal} header="오류">아이디 및 패스워드를 재확인해 주세요.</Modal>
-
-                    {/* <input type="password" id="pwd" name="upw" placeholder="비밀번호" required="" className="mainlogin" value ={inputPw} onChange={onChangePw} onKeyUp={f_enter}/>
-                    <button className="doLogin" onClick={onClickLogin} >로그인하기</button> */}
-
-                    
-                    
                 </div>
                 <div className="else">
                     <Link to="/join" className="join">회원가입</Link>
@@ -170,4 +160,5 @@ const localId = window.localStorage.getItem("userId");
         </div>
     );
 };
+
 export default DoLogin;

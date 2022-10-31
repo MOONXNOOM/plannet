@@ -48,6 +48,13 @@ const plannetApi = {
         };
         return await axios.post(PLANNET_DOMAIN + "MemberMemoSave", object, HEADER);
     },
+    // 회원 탈퇴
+    memberDelete: async function(id) {
+        const regCheck = {
+            id: id,
+        }
+        return await axios.post(PLANNET_DOMAIN + "MemberDeleteServlet", regCheck, HEADER);
+    }
 }
 
 export default plannetApi;
