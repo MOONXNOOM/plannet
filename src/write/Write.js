@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Nav from "../Utill/Nav";
 import PlanList from "./PlanList";
+import Api from "../api/plannetApi";
 
 const Wrap = styled.div`
     width: 1130px;
@@ -216,6 +217,7 @@ const Section = styled.div`
 
 const Write = () => {
     const date = "2022/10/27";
+    const getId = window.localStorage.getItem("userId");
     const [planList, setPlanList] = useState([]);
     const [diary, setDiary] = useState();
     const onChangeDiary = (e) => {
@@ -230,9 +232,14 @@ const Write = () => {
         });
         setPlanList(nextPlanList);
     }
+
     useEffect(() => {  // todoList가 변했을때만 실행
         console.log(planList);
     }, [planList]);
+
+    const onClickSave = async() => {
+        await Api.memberMemoSave(getId, planList, diary);
+    }
 
     return (
         <Wrap>
