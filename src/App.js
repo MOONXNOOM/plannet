@@ -24,12 +24,10 @@ function App() {
         <Route path="/create" element={<Create />}/>
         <Route path="/dologin" element={<DoLogin />}/>
         <Route path="/join" element={<Join />}/>
-
         {/* <Route path="/loginHome" element={<LoginHome />}/> */}
-
         <Route path="/MainHome" element={<MainHome />}/>
         <Route path="/Memo" element={<Memo />}/>
-
+        <Route path="/loginHome" element={<MainHome />}/>
       </Routes>
     </Router>
   );
