@@ -1,17 +1,17 @@
-import "./Join.css"
+import "./Join.scss"
 import React, { useState } from 'react';
-import img1 from "../Images/logoPic.png";
+import {ReactComponent as LogoImg} from "../Images/planet-001.svg";
 import "../App";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Api from '../api/plannetApi';
-import Modal from '../Utill/Modal.js';
 
 // 구현해야 할 것
 // 1. 닉네임을 적지 않았을 때 자동으로 DB에 이름이 닉네임으로 동일하게 전송되도록
 // 2. 이메일 오류 유효성 검사 - 구현 완료
-// 3. 전반적인 디자인 수정
-// 4. 다 채우지 않았을 때 MODAL 띄우거나 혹은 아예 버튼을 DISABLE 속성을 넣어두기
+// 3. 전반적인 디자인 수정 - 수정완
+// 4. 다 채우지 않았을 때 MODAL 띄우거나 혹은 아예 버튼을 DISABLE 속성을 넣어두기-수정완
+// 5. 전화번호 정규식 추가
 
 const ContainerJoin = styled.div`
     height: 90vh;
@@ -21,7 +21,12 @@ const ContainerJoin = styled.div`
     flex-direction: column;
 `;
 const Logo = styled.div`
-    text-decoration: none;
+    a{
+        font-family: 'Comfortaa', cursive;
+        font-size: 67px;
+        font-weight: bold;
+        color: #4555AE;
+    }
 `;
 
 const Join = () => {
@@ -77,9 +82,12 @@ const Join = () => {
     const onBlurIdCheck = async() => {
         // 가입 여부 우선 확인
         const memberCheck = await Api.memberRegCheck(inputId, "TYPE_ID");
-        if (memberCheck.data.result === "OK") {
+        if (memberCheck.data.result === "OK" && isId) {
             setIdMessage("사용가능한 ID입니다.");
-        } else {
+        } else if(memberCheck.data.result === "OK" && !isId){
+            setIdMessage("5자리 이상 12자리 미만으로 입력해 주세요.");
+        }
+        else {
             setIdMessage("이미 사용하고 있는 ID입니다.");
         } 
     }
@@ -123,10 +131,10 @@ const Join = () => {
         const passwordCurrent = e.target.value ;
         setInputConPw(passwordCurrent)
         if (passwordCurrent !== inputPw) {
-            setConPwMessage('비밀 번호가 일치하지 않습니다.')
+            setConPwMessage('비밀번호가 일치하지 않습니다.')
             setIsConPw(false)
         } else {
-            setConPwMessage('비밀 번호가 일치 합니다. )')
+            setConPwMessage('비밀번호가 일치 합니다. )')
             setIsConPw(true);
         }      
     }
@@ -210,58 +218,53 @@ const Join = () => {
     return(
         <>
             <ContainerJoin>
-                <div className="login-logo"><img src={img1} alt="Logo" width={'90px'} height={'70px'}/>
-                <Logo><Link to="/main" className="logo">Plannet</Link></Logo></div>
+                <Logo><LogoImg width="90px" viewBox="30 150 430 220"/><Link to="/main" className="logo">Plannet</Link></Logo>
                 <div className="session">
-                    <p className="joinTitle">아이디</p>
-                    <input className="inputJoin" placeholder="아이디" value ={inputId} onChange={onChangId} type={'text'} onBlur={onBlurIdCheck}/>
-                </div>
-                <div className="hint">
-                    {inputId.length > 0 && <span className={`message ${isId ? 'success' : 'error'}`}>{idMessage}</span>}
-                </div> 
-                <div className="session">
-                    <p className="joinTitle">비밀번호</p>
-                    <input className="inputJoin" type='password' placeholder="패스워드" value ={inputPw} onChange={onChangePw}/>
-                </div>
-                <div className="hint">
-                    {inputPw.length > 0 && (
-                    <span className={`message ${isPw ? 'success' : 'error'}`}>{pwMessage}</span>)}
-                </div> 
-                <div className="session"n>
-                    <p className="joinTitle">비밀번호 확인</p>
-                    <input className="inputJoin" type='password' placeholder="패스워드 확인" value ={inputConPw} onChange={onChangeConPw}/>
-                </div>
-                <div className="hint">
-                    {inputPw.length > 0 && (
-                    <span className={`message ${isConPw ? 'success' : 'error'}`}>{conPwMessage}</span>)}
-                </div> 
-                <div className="session">
-                    <p className="joinTitle">이름</p>
-                    <input className="inputJoin" type='text'placeholder="이름" value ={inputName} onChange={onChangeName}/>
+                    <p>
+                        아이디
+                        {inputId.length > 0 && <span>{idMessage}</span>}
+                    </p>
+                    <input placeholder="아이디" value ={inputId} onChange={onChangId} type={'text'} onBlur={onBlurIdCheck}/>
                 </div>
                 <div className="session">
-                    <p className="joinTitle">닉네임</p>
-                    <input className="inputJoin" type='text' placeholder="닉네임" value ={inputNickname} onChange={onChangeNickname} onBlur={onBlurNickname}/>
+                    <p>
+                        비밀번호
+                        {inputPw.length > 0 && <span>{pwMessage}</span>}
+                    </p>
+                    <input type='password' placeholder="패스워드" value ={inputPw} onChange={onChangePw}/>
                 </div>
                 <div className="session">
-                    <p className="joinTitle">이메일</p>
-                    <input className="inputJoin" type='email' placeholder="이메일" value ={inputEmail} onChange={onChangeMail}/>
-                </div>
-                <div className="hint">
-                    {inputEmail.length > 0 && (
-                    <span className={`message ${isMail ? 'success' : 'error'}`}>{mailMessage}</span>)}
+                    <p>
+                        비밀번호 확인
+                        {inputPw.length > 0 && <span>{conPwMessage}</span>}
+                    </p>
+                    <input type='password' placeholder="패스워드 확인" value ={inputConPw} onChange={onChangeConPw}/>
                 </div>
                 <div className="session">
-                    <p className="joinTitle">전화번호</p>
-                    <input className="inputJoin" type='tel' placeholder="휴대폰번호('-' 제외)" value ={inputTel} onChange={onChangeTel} onKeyUp={f_enter}/>
+                    <p>이름</p>
+                    <input type='text'placeholder="이름" value ={inputName} onChange={onChangeName}/>
+                </div>
+                <div className="session">
+                    <p>닉네임</p>
+                    <input type='text' placeholder="닉네임" value ={inputNickname} onChange={onChangeNickname} onBlur={onBlurNickname}/>
+                </div>
+                <div className="session">
+                    <p>
+                        이메일
+                        {inputEmail.length > 0 && <span>{mailMessage}</span>}
+                    </p>
+                    <input type='email' placeholder="이메일" value ={inputEmail} onChange={onChangeMail}/>
+                </div>
+                <div className="session">
+                    <p>전화번호</p>
+                    <input type='tel' placeholder="휴대폰번호('-' 제외)" value ={inputTel} onChange={onChangeTel} onKeyUp={f_enter}/>
                 </div>
                 {/* <div className="session">
                     <p className="joinTitle">생년월일</p>
                     <input className="inputJoin" type={'date'} value={inputBirth} onChange={onChangeBirth}/>
                 </div>  */}
                 <div className="session">
-                    {(isId && isPw && isConPw && isName && isNickname && isMail && isTel)}
-                    <button className="doJoin" onClick={onClickJoin}>가입하기</button>
+                    <button onClick={onClickJoin} disabled={!(isId && isPw && isConPw && isName && isNickname && isMail && isTel)}>가입하기</button>
                 </div>
             </ContainerJoin>
         </> 

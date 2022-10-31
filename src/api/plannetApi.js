@@ -26,9 +26,10 @@ const plannetApi = {
         return await axios.post(PLANNET_DOMAIN + "MemberRegServlet", memberObj, HEADER);
     },
     // 회원 가입 여부 확인
-    memberRegCheck: async function(id) {
+    memberRegCheck: async function(uni, type) {
         const regCheck = {
-            id: id,
+            uni: uni,
+            type: type
         }
         return await axios.post(PLANNET_DOMAIN + "MemberCheck", regCheck, HEADER);
     },

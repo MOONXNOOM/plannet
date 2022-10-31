@@ -1,0 +1,59 @@
+.session{
+    margin-top: 8px;
+    p{
+        font-size: 18px;
+        font-weight: 600; 
+        line-height: 24px;
+        margin-bottom: 2px;
+    }
+    input{
+        padding: 0 15px;
+        border-radius: 5px;
+        width: 350px;
+        height: 40px;
+        color: #333;
+        background: #e8f0fe;
+        border: none;
+        font-weight: 500;
+        outline: none;
+        &:focus{
+            background-color: #b8b9f1;
+            color: #222;
+        }
+        &:focus::placeholder{
+            color: #888;
+        }
+        &::placeholder{
+            color: #bbb;
+        }
+    }
+    button{
+        border-radius: 5px;
+        margin: 15px 0 15px 0;
+        width: 350px;
+        height: 45px;
+        border:1px solid white;
+        background: #4555AE;
+        color: white;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 18px;
+        &:hover{
+            background-color: rgb(55, 67, 134);
+            color: #eee;
+        }
+        &:disabled{
+            background-color: #aaa;
+            color: #eee;
+            cursor: default;
+        }
+    }
+    span{
+        color: #666;
+        font-weight: 400;
+        float: right;
+        margin-left: 10px;
+        line-height: 24px;
+    }
+
+}

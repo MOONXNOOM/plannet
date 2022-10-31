@@ -1,4 +1,3 @@
-import img1 from "../Images/logoPic.png";
 import {ReactComponent as LogoImg} from "../Images/planet-001.svg";
 import kakaoimg from "../Images/kakaotalk_logo2.png";
 import naverimg from "../Images/btnG_아이콘사각.png";
@@ -22,10 +21,12 @@ const ContainerLogin = styled.div`
     flex-direction: column;
 `;
 const Logo = styled.div`
-    font-family: 'Comfortaa', cursive;
-    font-weight: bold;
-    color: #4555AE;
-    a{font-size: 67px;}
+    a{
+        font-size: 67px;
+        font-family: 'Comfortaa', cursive;
+        font-weight: bold;
+        color: #4555AE;
+    }
 `;
 
 

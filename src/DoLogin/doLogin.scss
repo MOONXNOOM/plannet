@@ -4,10 +4,6 @@
  }
 
 .login{
-  .logImg{
-    width: 30px;
-  }
-
   button{
     width: 350px;
     height: 40px;
@@ -58,7 +54,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 5px 0 5px 0;
+    margin: 5px 0;
     padding: 0 15px;
     border:none;
     color: #333;
@@ -67,26 +63,32 @@
     font-size: 14px;
     outline: none;
     border-radius: 5px;
-
     &:focus{
       background-color: #b8b9f1;
-      font-weight: bold;
+      color: #222;
+    }
+    &:focus::placeholder{
+        color: #888;
     }
     &::placeholder{
-      color: #777;
+        color: #bbb;
     }
   }
   .doLogin {
     margin: 5px 0 5px 0;
     width: 350px;
-    height: 40px;
-    border:1px solid white;
+    height: 45px;
+    border:none;
     background: rgb(69, 85, 174);
     border-radius: 5px;
     color: white;
     cursor: pointer;
     font-weight: 500;
     font-size: 18px;
+    &:hover{
+      background-color: rgb(55, 67, 134);
+      color: #eee;
+  }
   }
 }
 
