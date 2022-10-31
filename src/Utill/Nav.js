@@ -148,6 +148,7 @@ const Nav = () => {
                     <p>SNS : {userSNS}</p>
                 </div>
                 <ul className="menu">
+                    <li>로그아웃</li> 
                     <li><Link to="/Write">마이페이지</Link></li>
                     <li><Link to="/Board">자유게시판</Link></li>
                     <li><Link to="/Write">설정</Link></li>
