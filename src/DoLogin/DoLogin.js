@@ -116,7 +116,7 @@ const DoLogin = () => {
                 window.localStorage.setItem("userId", inputId);
                 window.localStorage.setItem("userPw", inputPw);
                 window.localStorage.setItem("isLogin", "TRUE");
-                window.location.replace("/mainHome");
+                window.location.replace("/Home");
             } else {
                 setModalOpen(true);
             }
