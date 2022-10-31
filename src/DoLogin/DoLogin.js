@@ -1,9 +1,10 @@
 import img1 from "../Images/logoPic.png";
+import {ReactComponent as LogoImg} from "../Images/planet-001.svg";
 import kakaoimg from "../Images/kakaotalk_logo2.png";
 import naverimg from "../Images/btnG_아이콘사각.png";
 import googleimg1 from "../Images/google-logo.png";
 import styled from "styled-components";
-import "./doLogin.css"
+import "./doLogin.scss"
 import "../App";
 import Api from "../api/plannetApi";
 import React, {useState } from 'react';
@@ -22,9 +23,9 @@ const ContainerLogin = styled.div`
 `;
 const Logo = styled.div`
     font-family: 'Comfortaa', cursive;
-    font-size: 70px;
     font-weight: bold;
     color: #4555AE;
+    a{font-size: 67px;}
 `;
 
 
@@ -131,8 +132,7 @@ const localId = window.localStorage.getItem("userId");
     return (
         <div>
             <ContainerLogin>
-                <div className="login-logo"><img src={img1} alt="Logo" width={'90px'} height={'70px'}/>
-                <Logo><Link to="/main" className="logo">Plannet</Link></Logo></div>
+                <Logo><LogoImg width="90px" viewBox="30 150 430 220"/><Link to="/main" className="logo">Plannet</Link></Logo>
                 <div className="login">
                     <button className="login-btn1" onClick={onClickLink}>
                         <img src={kakaoimg} alt="카카오로고" className="logImg"/>
@@ -149,8 +149,8 @@ const localId = window.localStorage.getItem("userId");
                 </div>
                 <p className="space-or">또는</p>
                 <div className="login2">
-                    <input type="text" id="id" name="uid" placeholder="아이디" required="" className="mainlogin" value ={inputId} onChange={onChangId}/>
-                    <input type="password" id="pwd" name="upw" placeholder="비밀번호" required="" className="mainlogin" value ={inputPw} onChange={onChangePw}/>
+                    <input type="text" id="id" name="uid" placeholder="아이디" required="" value ={inputId} onChange={onChangId}/>
+                    <input type="password" id="pwd" name="upw" placeholder="비밀번호" required="" value ={inputPw} onChange={onChangePw}/>
                     <button className="doLogin" onClick={onClickLogin}>로그인하기</button>
                     <Modal open={modalOpen} close={closeModal} header="오류">아이디 및 패스워드를 재확인해 주세요.</Modal>
 
