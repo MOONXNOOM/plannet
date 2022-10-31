@@ -93,6 +93,7 @@ const Explain = styled.div`
 
 const Main = () => {
     window.localStorage.setItem("isLogin", "FALSE");
+
     
     return(
         <div className="ex">
