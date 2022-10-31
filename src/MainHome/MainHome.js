@@ -121,7 +121,7 @@ const MainHome = () => {
         <div className='etc'>
           <div className='memo'>
             <h2>Memo</h2>
-            <Memo localId={localId}/>
+            <Memo/>
           </div>
           <div className='moti'>
             <h2>Motivation</h2>
