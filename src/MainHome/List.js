@@ -25,7 +25,7 @@ const List = () => {
         <ListBox>
             <ul>
                 <p>월요일</p>
-                <li>일정1ssㅁㄴㅇㅁㄴㅇssss</li>
+                <li>일정1</li>
                 <li>일정1</li>
                 <li>일정1</li>
             </ul>
