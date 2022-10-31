@@ -24,12 +24,7 @@ function App() {
         <Route path="/create" element={<Create />}/>
         <Route path="/dologin" element={<DoLogin />}/>
         <Route path="/join" element={<Join />}/>
-<<<<<<< HEAD
-        <Route path="/loginHome" element={<LoginHome />}/>
-=======
-        <Route path="/MainHome" element={<MainHome />}/>
-        <Route path="Memo" element={<Memo />}/>
->>>>>>> 4d1bf7ae55415f426c79d956073753e7ddb71082
+        <Route path="/loginHome" element={<MainHome />}/>
       </Routes>
     </Router>
   );
