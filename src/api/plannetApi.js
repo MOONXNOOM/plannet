@@ -70,7 +70,17 @@ const plannetApi = {
             tel : tel
         }
         return await axios.post(PLANNET_DOMAIN + "MemberFindPwdServlet", reg, HEADER);
-    }
+    },
+    //플랜리스트.다이어리 저장
+    writeSave: async function(id, date, planList, diary) {
+        const object = {
+            id: id,
+            date: date,
+            plan: planList,
+            diary: diary
+        }
+        return await axios.post(PLANNET_DOMAIN + "WriteSave", object, HEADER);
+    },
 }
 
 export default plannetApi;
