@@ -106,11 +106,10 @@ const Main = () => {
                     <Title>Plannet</Title>
                     <SemiTitle>Let's plan it!</SemiTitle>
                         <Explain>오늘의 끝에서 내일을 계획하다.
-                            <br/> 저희는 하루의 일정을
-                            <br/> 계획하여 성취하도록 도우며
-                            <br/> 하루의 끝에서 오늘의 하루를 돌아보며
-                            <br/> 하루를 정리 할 수 있는 플래너 입니다.
-                            <br/> 오늘 느낌 강점을 소소하게 적어보세요
+                            <br/> 하루의 끝에서 오늘을 되돌아보며 정리할 수 있는 플래너. 
+                            <br/> Plannet은 하루의 시작부터 마무리까지 
+                            <br/> 일정을 계획해 성취하도록 돕습니다.
+                            <br/> 오늘 느낌 강점을 소소하게 적어보세요.
                             <br/> 내일의 일정 또한 완벽하게 작성 할 수 있을 것입니다.
                         </Explain>
                     <Link to="/doLogin" className="doLogin">로그인하기</Link>
