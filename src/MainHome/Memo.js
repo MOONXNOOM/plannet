@@ -26,11 +26,16 @@ const Memo = () => {
         memoList();
     },[getId]);
 
+    const onBlurSave = async() => {
+        await Api.memberMemoSave(getId, memoText);
+    }
+
     return (
         <textarea 
             placeholder="자유롭게 메모하세요."
             value={memoText}
             onChange={onChange}
+            onBlur={onBlurSave}
             maxLength="2400"
         />
     );

@@ -40,6 +40,14 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "MemberMemo", object, HEADER);
     },
+    // 회원 메모 저장
+    memberMemoSave: async function(id, memo) {
+        const object = {
+            id: id,
+            memo: memo
+        };
+        return await axios.post(PLANNET_DOMAIN + "MemberMemoSave", object, HEADER);
+    },
 }
 
 export default plannetApi;
