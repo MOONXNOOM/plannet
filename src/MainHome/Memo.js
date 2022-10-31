@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // import styled from 'styled-components';
-import plannetApi from '../api/plannetApi';
+import Api from "../api/plannetApi";
 // import { Link } from "react-router-dom";
 // import App from '../App';
 
@@ -9,7 +9,7 @@ import plannetApi from '../api/plannetApi';
 const Memo = () => {
     const getId = window.localStorage.getItem("userId");
     const [memoText, setMemoText] = useState('');
-
+    
     const onChange = (e) => {
         setMemoText(e.target.value);
     };
@@ -17,17 +17,14 @@ const Memo = () => {
     useEffect(() => {
         const memoList = async() => {
             try{
-                const response = await plannetApi.memberMemo(getId); 
-                setMemoText(response.data.text);
-                console.log(response.date + "프론트");
+                const response = await Api.memberMemo(getId);
+                setMemoText(response.data["0"].memo);
             } catch(e){
                 console.log(e);
             }
         }
         memoList();
     },[getId]);
-
-
 
     return (
         <textarea 
