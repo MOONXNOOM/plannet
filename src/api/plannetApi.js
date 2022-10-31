@@ -54,7 +54,17 @@ const plannetApi = {
             id: id,
         }
         return await axios.post(PLANNET_DOMAIN + "MemberDeleteServlet", regCheck, HEADER);
-    }
+    },
+    //플랜리스트.다이어리 저장
+    writeSave: async function(id, date, planList, diary) {
+        const object = {
+            id: id,
+            date: date,
+            plan: planList,
+            diary: diary
+        }
+        return await axios.post(PLANNET_DOMAIN + "WriteSave", object, HEADER);
+    },
 }
 
 export default plannetApi;

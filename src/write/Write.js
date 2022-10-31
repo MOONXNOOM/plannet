@@ -238,7 +238,7 @@ const Write = () => {
     }, [planList]);
 
     const onClickSave = async() => {
-        await Api.memberMemoSave(getId, planList, diary);
+        await Api.memberMemoSave(getId, date, planList, diary);
     }
 
     return (
@@ -267,7 +267,7 @@ const Write = () => {
                     </div>
                 </div>
                 <div className="btnbox">
-                    <button className="save">SAVE</button>
+                    <button className="save" onClick={onClickSave}>SAVE</button>
                 </div>
             </Section>
             <div className="copy">&#169; Plannet.</div>
