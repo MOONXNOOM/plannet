@@ -9,6 +9,7 @@ import Create from './Board/Create';
 import DoLogin from './DoLogin/DoLogin';
 import Join from './Join/Join';
 import MainHome from './MainHome/MainHome';
+import LoginHome from './LoginHome/LoginHome';
 import Memo from './MainHome/Memo';
 
 
@@ -25,7 +26,7 @@ function App() {
         <Route path="/dologin" element={<DoLogin />}/>
         <Route path="/join" element={<Join />}/>
 
-        {/* <Route path="/loginHome" element={<LoginHome />}/> */}
+        <Route path="/loginHome" element={<LoginHome />}/>
         <Route path="/MainHome" element={<MainHome />}/>
         <Route path="/Memo" element={<Memo />}/>
         <Route path="/loginHome" element={<MainHome />}/>

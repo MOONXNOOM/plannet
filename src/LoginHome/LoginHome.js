@@ -2,7 +2,7 @@
 import "../App";
 import { useState } from "react";
 import styled from "styled-components"
-import Nav from '../util/Nav';
+import Nav from '../Utill/Nav';
 // import "react-datepicker/dist/react-datepicker.css";
 // import Calendar from './Calendar'  
 
