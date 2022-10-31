@@ -91,7 +91,7 @@ const Explain = styled.div`
     line-height: 1.3;
 `;
 
-const ExMain = () => {
+const Main = () => {
     return(
         <div className="ex">
             <Container>
@@ -120,4 +120,4 @@ const ExMain = () => {
         </div>
     );
 }
-export default ExMain;      
+export default Main;      
