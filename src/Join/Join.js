@@ -9,7 +9,7 @@ import Modal from '../Utill/Modal.js';
 
 // 구현해야 할 것
 // 1. 닉네임을 적지 않았을 때 자동으로 DB에 이름이 닉네임으로 동일하게 전송되도록
-// 2. 이메일 오류 유효성 검사
+// 2. 이메일 오류 유효성 검사 - 구현 완료
 // 3. 전반적인 디자인 수정
 // 4. 다 채우지 않았을 때 MODAL 띄우거나 혹은 아예 버튼을 DISABLE 속성을 넣어두기
 
@@ -39,7 +39,7 @@ const Join = () => {
     const [idMessage, setIdMessage] = useState("");
     const [pwMessage, setPwMessage] = useState("");
     const [conPwMessage, setConPwMessage] = useState("");
-    // const [mailMessage, setMailMessage] = useState("");
+    const [mailMessage, setMailMessage] = useState("");
  
     // 유효성 검사
     const [isId, setIsId] = useState(false);
@@ -149,10 +149,19 @@ const Join = () => {
             setInputNickname(inputName);
         }
     }
- 
+    
+    // 이메일 확인 체크
     const onChangeMail = (e) => {
-        setInputEmail(e.target.value);
-        setIsMail(true);
+        const mailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        const mailCurrent = e.target.value ;
+        setInputEmail(mailCurrent);
+        if(!mailRegex.test(mailCurrent)){
+            setMailMessage('이메일의 형식이 올바르지 않습니다.')
+            setIsMail(false);
+        } else {
+            setMailMessage('이메일의 형식이 올바르게 입력되었습니다.')
+            setIsMail(true);
+        }
     }
 
     const onChangeTel = (e) => {
@@ -237,6 +246,10 @@ const Join = () => {
                 <div className="session">
                     <p className="joinTitle">이메일</p>
                     <input className="inputJoin" type='email' placeholder="이메일" value ={inputEmail} onChange={onChangeMail}/>
+                </div>
+                <div className="hint">
+                    {inputEmail.length > 0 && (
+                    <span className={`message ${isMail ? 'success' : 'error'}`}>{mailMessage}</span>)}
                 </div>
                 <div className="session">
                     <p className="joinTitle">전화번호</p>
