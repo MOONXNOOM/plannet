@@ -54,6 +54,22 @@ const plannetApi = {
             id: id,
         }
         return await axios.post(PLANNET_DOMAIN + "MemberDeleteServlet", regCheck, HEADER);
+    },
+    // 회원 아이디 찾기
+    memberFindId: async function(name, tel){
+        const reg = {
+            name : name,
+            tel : tel
+        }
+        return await axios.post(PLANNET_DOMAIN + "MemberFindIdServlet", reg, HEADER);
+    },
+    // 회원 비밀번호 찾기
+    memberFindPwd: async function(id, tel){
+        const reg = {
+            id : id,
+            tel : tel
+        }
+        return await axios.post(PLANNET_DOMAIN + "MemberFindPwdServlet", reg, HEADER);
     }
 }
 

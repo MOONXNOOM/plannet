@@ -8,6 +8,7 @@ import Join from './Join/Join';
 import LoginHome from './LoginHome/LoginHome';
 import Main from './Main/Main';
 import Home from './Home/Home';
+import Find from './Join/Find';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Main />}/>
         <Route path="/doLogin" element={<DoLogin />}/>
         <Route path="/join" element={<Join />}/>
+        <Route path="/find" element={<Find />}/>
 
         <Route path="/home" element={<Home />}/>
         <Route path="/write" element={<Write />}/>
