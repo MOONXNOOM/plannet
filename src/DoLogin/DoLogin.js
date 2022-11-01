@@ -116,7 +116,7 @@ const DoLogin = () => {
                 window.localStorage.setItem("userId", inputId);
                 window.localStorage.setItem("userPw", inputPw);
                 window.localStorage.setItem("isLogin", "TRUE");
-                window.location.replace("/Home");
+                window.location.replace("/home");
             } else {
                 setModalOpen(true);
             }
@@ -153,7 +153,7 @@ const DoLogin = () => {
                 </div>
                 <div className="else">
                     <Link to="/join" className="join">회원가입</Link>
-                    <button className="find">아이디 / 비밀번호 찾기</button>
+                    <Link to="/find" className="join">아이디 / 비밀번호 찾기</Link>
                 </div>   
                 {<Modal open={modalOpen} close={closeModal} header="오류">{comment}</Modal>}     
             </ContainerLogin>

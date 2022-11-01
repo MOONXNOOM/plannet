@@ -55,13 +55,63 @@ const plannetApi = {
         };
         return await axios.post(PLANNET_DOMAIN + "MemberMemoSave", object, HEADER);
     },
+
     // 명언 랜덤 출력
     quoteRandom: async function(num) {
         const object = {
             num: num,
         };
         return await axios.post(PLANNET_DOMAIN + "QuoteRandom", object, HEADER);
-    }
+    },
+
+    // 회원 탈퇴
+    memberDelete: async function(id) {
+        const regCheck = {
+            id: id,
+        }
+        return await axios.post(PLANNET_DOMAIN + "MemberDeleteServlet", regCheck, HEADER);
+    },
+    // 회원 아이디 찾기
+    memberFindId: async function(name, tel){
+        const reg = {
+            name : name,
+            tel : tel
+        }
+        return await axios.post(PLANNET_DOMAIN + "MemberFindIdServlet", reg, HEADER);
+    },
+    // 회원 비밀번호 찾기
+    memberFindPwd: async function(id, tel){
+        const reg = {
+            id : id,
+            tel : tel
+        }
+        return await axios.post(PLANNET_DOMAIN + "MemberFindPwdServlet", reg, HEADER);
+    },
+    //플랜리스트.다이어리 저장
+    writeSave: async function(id, date, planList, diary) {
+        const object = {
+            id: id,
+            date: date,
+            plan: planList,
+            diary: diary
+        }
+        return await axios.post(PLANNET_DOMAIN + "WriteSave", object, HEADER);
+    },
+    //플랜리스트.다이어리 로드
+    writeLoad: async function(id, date) {
+        const object = {
+            id: id,
+            date: date
+        }
+        return await axios.post(PLANNET_DOMAIN + "WriteLoad", object, HEADER);
+    },
+    // listLoad: async function(id, date) {
+    //     const object = {
+    //         id: id,
+    //         date: date,
+    //     }
+    //     return await axios.post(PLANNET_DOMAIN + "ListLoad", object, HEADER);
+    // },
 }
 
 export default plannetApi;

@@ -47,7 +47,7 @@ const Section = styled.div`
       width: 70%;
       padding-left: 30px;
       &>div{
-        background-color: rosybrown;
+        /* background-color: rosybrown; */
         width: 100%;
         height: 450px;
       }
