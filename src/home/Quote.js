@@ -21,10 +21,7 @@ const Quote = () => {
     },[getRandom]);
 
     return (
-        <textarea 
-            placeholder="자유롭게 메모하세요."      
-            value={quoteText}
-        />
+        <p>{quoteText}</p>
     );
 };
 
