@@ -5,7 +5,6 @@ import CalEx from './CalEx';
 import Memo from './Memo';
 import List from './List';
 import App from '../App';
-import Quote from './Quote';
 
 const Wrap = styled.div`
     width: 1130px;
@@ -105,7 +104,7 @@ const Home = () => {
   const localId = window.localStorage.getItem("userId");
   const localPw = window.localStorage.getItem("userPw");
 
-  const motivation = [];
+  const motivation = "동기부여가 되는 문구가 출력됩니다.";
 
   return (
     <Wrap>
@@ -122,7 +121,7 @@ const Home = () => {
           </div>
           <div className='moti'>
             <h2>Motivation</h2>
-            <Quote/>
+            <p>{motivation}</p>
           </div>
         </div>
         <div className="list">
