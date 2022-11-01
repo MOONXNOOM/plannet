@@ -1,7 +1,27 @@
 button.react-calendar__tile.react-calendar__month-view__days__day {
-    height: 70px;
+    height: 60px;
     background-color: #f9f9f9;
 }
 .react-calendar {
     width: 500px; 
+}
+button.react-calendar__navigation__arrow.react-calendar__navigation__prev-button {
+    font-size: 40px;
+    background-color: #f9f9f9;
+}
+button.react-calendar__navigation__arrow.react-calendar__navigation__prev2-button {
+    font-size: 40px;
+    background-color: #f9f9f9;
+}
+button.react-calendar__navigation__arrow.react-calendar__navigation__next-button{
+    font-size: 40px;
+    background-color: #f9f9f9;
+}
+button.react-calendar__navigation__arrow.react-calendar__navigation__next2-button {
+    font-size: 40px;
+    background-color: #f9f9f9;
+}
+button.react-calendar__navigation__label {
+    background-color: #f9f9f9;
+  
 }
