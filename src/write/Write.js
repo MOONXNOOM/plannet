@@ -216,7 +216,8 @@ const Section = styled.div`
 
 
 const Write = () => {
-    const date = "2022/10/27";
+    const dateStr = "2022/10/27";
+    const date = dateStr.replaceAll('/','-');
     const getId = window.localStorage.getItem("userId");
     const [planList, setPlanList] = useState([]);
     const [diary, setDiary] = useState();

@@ -81,6 +81,21 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "WriteSave", object, HEADER);
     },
+    //플랜리스트.다이어리 로드
+    writeLoad: async function(id, date) {
+        const object = {
+            id: id,
+            date: date
+        }
+        return await axios.post(PLANNET_DOMAIN + "WriteLoad", object, HEADER);
+    },
+    // listLoad: async function(id, date) {
+    //     const object = {
+    //         id: id,
+    //         date: date,
+    //     }
+    //     return await axios.post(PLANNET_DOMAIN + "ListLoad", object, HEADER);
+    // },
 }
 
 export default plannetApi;
