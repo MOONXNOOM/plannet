@@ -29,8 +29,13 @@ span.react-calendar__navigation__label__labelText.react-calendar__navigation__la
     font-size: 25px;
 }
 button.react-calendar__tile.react-calendar__month-view__days__day.react-calendar__month-view__days__day--weekend abbr {
+    color: blue;
+}
+
+button.react-calendar__tile.react-calendar__month-view__days__day:nth-child(7n) abbr {
     color: red;
 }
+
 button.react-calendar__tile.react-calendar__month-view__days__day.react-calendar__month-view__days__day--neighboringMonth abbr {
     color: rgb(221, 215, 215);
 }
