@@ -40,37 +40,7 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "MemberDeleteServlet", regCheck, HEADER);
     },
-    // 회원 메모 조회
-    memberMemo: async function(id) {
-        const object = {
-            id : id
-        }
-        return await axios.post(PLANNET_DOMAIN + "MemberMemo", object, HEADER);
-    },
-    // 회원 메모 저장
-    memberMemoSave: async function(id, memo) {
-        const object = {
-            id: id,
-            memo: memo
-        };
-        return await axios.post(PLANNET_DOMAIN + "MemberMemoSave", object, HEADER);
-    },
 
-    // 명언 랜덤 출력
-    quoteRandom: async function(num) {
-        const object = {
-            num: num,
-        };
-        return await axios.post(PLANNET_DOMAIN + "QuoteRandom", object, HEADER);
-    },
-
-    // 회원 탈퇴
-    memberDelete: async function(id) {
-        const regCheck = {
-            id: id,
-        }
-        return await axios.post(PLANNET_DOMAIN + "MemberDeleteServlet", regCheck, HEADER);
-    },
     // 회원 아이디 찾기
     memberFindId: async function(name, tel){
         const reg = {
@@ -86,6 +56,28 @@ const plannetApi = {
             tel : tel
         }
         return await axios.post(PLANNET_DOMAIN + "MemberFindPwdServlet", reg, HEADER);
+    },
+    // 회원 메모 조회
+    memberMemo: async function(id) {
+        const object = {
+            id : id
+        }
+        return await axios.post(PLANNET_DOMAIN + "MemberMemo", object, HEADER);
+    },
+    // 회원 메모 저장
+    memberMemoSave: async function(id, memo) {
+        const object = {
+            id: id,
+            memo: memo
+        };
+        return await axios.post(PLANNET_DOMAIN + "MemberMemoSave", object, HEADER);
+    },
+    // 명언 랜덤 출력
+    quoteRandom: async function(num) {
+        const object = {
+            num: num,
+        };
+        return await axios.post(PLANNET_DOMAIN + "QuoteRandom", object, HEADER);
     },
     //플랜리스트.다이어리 저장
     writeSave: async function(id, date, planList, diary) {
