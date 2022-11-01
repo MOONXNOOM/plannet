@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "../Utill/Nav";
+import Api from '../api/plannetApi'
 
 const Wrap = styled.div`
     width: 1130px;
@@ -119,8 +121,22 @@ const Section = styled.div`
         }
     }
 `;
-
+// 아직 구현이 안됨
 const Board = () => {
+    const [boardTitle,setBoardTitle] = useState('');
+    useEffect(()=>{
+        const boardData = async () => {
+            try{
+                const response = await Api.boardTitle();
+                setBoardTitle(response.data);
+                console.log(response.data);
+            }catch(e){
+                console.log(e);
+            }
+        };
+        boardData();
+    },[]);
+
     return (
         <Wrap>
             <Nav />
@@ -132,6 +148,7 @@ const Board = () => {
                         <Link to='/create'><button>글쓰기</button></Link>
                     </p>
                     <table>
+                        
                         <tr>
                             <th>No.</th>
                             <th>Title</th>
@@ -139,14 +156,16 @@ const Board = () => {
                             <th>Views</th>
                             <th>Date</th>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td><a href="#">제목을 누르면 게시물로 이동</a></td>
-                            <td>작성자</td>
-                            <td>434</td>
-                            <td>22.10.21</td>
-                        </tr>
-                        <tr>
+                        {boardTitle && boardTitle.map(e=>(
+                            <tr key={e.no}>
+                                <td>{e.no}</td>
+                                <td><a href="#">{e.title}</a></td>
+                                <td>{e.id}</td>
+                                <td>434</td>
+                                <td>{e.date}</td>
+                            </tr>
+                        ))}
+                        {/* <tr>
                             <td>2</td>
                             <td><a href="#">제목을 누르면 게시물로 이동</a></td>
                             <td>작성자</td>
@@ -243,7 +262,7 @@ const Board = () => {
                             <td>작성자</td>
                             <td>434</td>
                             <td>22.10.21</td>
-                        </tr>
+                        </tr> */}
                     </table>
                 </div>
                 <div className="util_box">
