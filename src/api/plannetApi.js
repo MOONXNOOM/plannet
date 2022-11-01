@@ -97,6 +97,7 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "WriteLoad", object, HEADER);
     },
+    
     // listLoad: async function(id, date) {
     //     const object = {
     //         id: id,
