@@ -128,8 +128,6 @@ const Home = () => {
         <div className="list">
           <h2>List</h2>
           <div className="history" >
-                   <p>회원 아이디 : {localId}</p>
-                   <p>회원 패스워드 : {localPw}</p>
                 </div>
           <List />
         </div>
