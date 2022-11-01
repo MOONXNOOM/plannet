@@ -33,6 +33,13 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "MemberCheck", regCheck, HEADER);
     },
+    // 회원 탈퇴
+    memberDelete: async function(id) {
+        const regCheck = {
+            id: id,
+        }
+        return await axios.post(PLANNET_DOMAIN + "MemberDeleteServlet", regCheck, HEADER);
+    },
     // 회원 메모 조회
     memberMemo: async function(id) {
         const object = {
@@ -48,12 +55,12 @@ const plannetApi = {
         };
         return await axios.post(PLANNET_DOMAIN + "MemberMemoSave", object, HEADER);
     },
-    // 회원 탈퇴
-    memberDelete: async function(id) {
-        const regCheck = {
-            id: id,
-        }
-        return await axios.post(PLANNET_DOMAIN + "MemberDeleteServlet", regCheck, HEADER);
+    // 명언 랜덤 출력
+    quoteRandom: async function(num) {
+        const object = {
+            num: num,
+        };
+        return await axios.post(PLANNET_DOMAIN + "QuoteRandom", object, HEADER);
     }
 }
 
