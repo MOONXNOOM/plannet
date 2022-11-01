@@ -1,9 +1,9 @@
+.react-calendar {
+    width: 500px; 
+}
 button.react-calendar__tile.react-calendar__month-view__days__day {
     height: 60px;
     background-color: #f9f9f9;
-}
-.react-calendar {
-    width: 500px; 
 }
 button.react-calendar__navigation__arrow.react-calendar__navigation__prev-button {
     font-size: 40px;
@@ -23,5 +23,13 @@ button.react-calendar__navigation__arrow.react-calendar__navigation__next2-butto
 }
 button.react-calendar__navigation__label {
     background-color: #f9f9f9;
-  
+}
+span.react-calendar__navigation__label__labelText.react-calendar__navigation__label__labelText--from {
+    font-size: 25px;
+}
+button.react-calendar__tile.react-calendar__month-view__days__day.react-calendar__month-view__days__day--weekend abbr {
+    color: red;
+}
+button.react-calendar__tile.react-calendar__month-view__days__day.react-calendar__month-view__days__day--neighboringMonth abbr {
+    color: rgb(221, 215, 215);
 }
