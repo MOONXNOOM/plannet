@@ -1,5 +1,7 @@
 button.react-calendar__tile.react-calendar__month-view__days__day {
     height: 70px;
     background-color: #f9f9f9;
-    
+}
+.react-calendar {
+    width: 500px; 
 }
