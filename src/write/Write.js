@@ -216,7 +216,7 @@ const Section = styled.div`
 
 
 const Write = () => {
-    const dateStr = "2022/10/27";
+    const dateStr = "2022/11/01";
     const date = dateStr.replaceAll('/','-');
     const getId = window.localStorage.getItem("userId");
     const [planList, setPlanList] = useState([]);
@@ -232,14 +232,26 @@ const Write = () => {
             deleted: false
         });
         setPlanList(nextPlanList);
+        console.log(planList);
     }
 
-    useEffect(() => {  // todoList가 변했을때만 실행
-        console.log(planList);
-    }, [planList]);
+
+    useEffect(() => {
+        const writeLoad = async() => {
+            try{
+                const response = await Api.writeLoad(getId, date);
+                setPlanList(response.data[0].plan);
+                setDiary(response.data[0].diary);
+            } catch(e){
+                console.log(e);
+            }
+        }
+        writeLoad();
+    },[getId, date]);
 
     const onClickSave = async() => {
-        await Api.memberMemoSave(getId, date, planList, diary);
+        await Api.writeSave(getId, date, planList, diary);
+        window.location.assign('/home');
     }
 
     return (

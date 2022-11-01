@@ -106,6 +106,7 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "BoardTitleServlet", object, HEADER);
     }
+    
     // listLoad: async function(id, date) {
     //     const object = {
     //         id: id,
