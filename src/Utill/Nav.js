@@ -144,27 +144,12 @@ const Nav = () => {
         userInfoLoad();
     },[userId]);
 
-    // const proPrint = (e) => {
-    //     const result = [];
-    //     for(let i = 0; i < e.length; i++) {
-    //         result.push(<p ket={i}>{e[i]}</p>);
-    //     }
-    //     return result;
-    // }
-
     // 로그아웃 팝업
     const [comment, setCommnet] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
     const closeModal = () => {
         setModalOpen(false);
     };
-    const onClickLogout = () => {
-        console.log("Logout 추가");
-        window.localStorage.setItem("userId", "");
-        window.localStorage.setItem("userPw", "");
-        window.localStorage.setItem("isLogin", "FALSE");
-        window.location.replace("/");
-    }
     const onClickBtn = () => {
         setModalOpen(true);
         setCommnet("로그아웃 하시겠습니까?");
