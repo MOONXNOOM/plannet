@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Nav from "../Utill/Nav";
 import PlanList from "./PlanList";
 import Api from "../api/plannetApi";
+import { useHistory, useParams } from "react-router-dom";
 
 const Wrap = styled.div`
     width: 1130px;
@@ -216,13 +217,15 @@ const Section = styled.div`
 
 
 const Write = () => {
+    const { date } = useParams();
+    useParams(window.localStorage.getItem("localDate"))
 
     const getDate = window.localStorage.getItem("localDate");
     const dateStr = getDate;
     console.log(getDate);
 
     // const dateStr = "2022/11/01";
-    const date = dateStr.replaceAll('/','-');
+    // const date = dateStr.replaceAll('/','-');
     const getId = window.localStorage.getItem("userId");
     const [planList, setPlanList] = useState([]);
     const [diary, setDiary] = useState();

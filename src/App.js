@@ -22,8 +22,8 @@ function App() {
         <Route path="/find" element={<Find />}/>
 
         <Route path="/home" element={<Home />}/>
-        <Route path="/write" element={<Write />}/>
-        <Route exact path='/Write/:no' component={Write} />
+        {/* <Route path="/write" element={<Write />}/> */}
+        <Route path='/write/:date' element={<Write />} />
 
         <Route path="/board" element={<Board />}/>
         <Route exact path='/postView/:no' component={PostView} />
