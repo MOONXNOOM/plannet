@@ -1,13 +1,136 @@
 import React, {useState, useEffect} from 'react';
 //import './App.css';
 import './style2.css';
+import styled from 'styled-components';
+import Nav from '../Utill/Nav';
+import { Link } from "react-router-dom";
 
 // 임시파일
+const Wrap = styled.div`
+    width: 1130px;
+    height: 100vh;
+    background-color: white;
+    margin: 0 auto;
+    .copy{
+        width: 830px;
+        text-align: center;
+        color: #dfdfdf;
+        line-height: 40px;
+        float: left;
+    }
+`;
 
-const BoardSi3 = () => {
-    
+const Section = styled.div`
+    width: 850px;
+    height: calc(100vh - 40px);
+    float: left;
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+        width: 20px;
+        padding: 15px;
+    }
+    &::-webkit-scrollbar-thumb {
+        height: 30%; /* 스크롤바의 길이 */
+        background: #ddd; /* 스크롤바의 색상 */
+        border-radius: 10px;
+        border: 7px solid transparent;
+        background-clip: padding-box;
+    }
+    &::-webkit-scrollbar-track {
+        background: none;
+        /*스크롤바 뒷 배경 색상*/
+    }
+    div{
+        width: 100%;
+        padding: 10px 30px;
+    }
+    .sub_box{
+        h2{
+            font-size: 28px;
+            margin-top: 35px;
+            font-weight: 900;
+        }
+        span{
+            float: left;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+        button{
+            float:right;
+            font-weight: 600;
+            display: block;
+            font-size: 16px;
+            padding: 8px 35px;
+            border-radius: 25px;
+            background-color: #4555AE;
+            color: white;
+            border: none;
+            &:hover{background-color: #666;}
+        }
+    }
+    button{
+        border: none;
+        padding-right: 20px; 
+        background: none;
+        font-size: 16px; 
+        color: #bbb;
+        font-weight: 700;
+        transition: all .1s ease-in;
+        &:hover, &:hover i{color: #888;}
+        i{
+            font-size: 16px; 
+            line-height: 48px; 
+            color: #bbb;
+            transition: all .1s ease-in;
+        }
+    }
+    table{
+        border-collapse: collapse; 
+        width:100%;
+        background-color: #4555AE;
+        border-bottom: solid 1px #4555AE;
+        text-align: center;
+        tr:nth-child(2n) td{background-color: #f9f9f9;}
+        th{padding: 10px; color: white;}
+        td{padding: 10px; background-color: white; border-left: solid 1px #bbb; border-top: solid 1px #ddd;}
+        td:first-child{border-left: none};
+        td:nth-child(2){width: 400px; text-align: left; padding-left: 20px;}  
+        tr:hover td, tr:hover a{color: #4555AE;}
+    }
+    .util_box{
+        .page_list {
+            width: 500px; float:left;
+            li{list-style-type: none; display: inline; padding: 0px 5px;
+                a{
+                    display: inline-block; text-decoration: none; padding: 5px 10px; color:#000;
+                    border-radius: 5px;
+                    -webkit-transition: background-color 0.3s;
+                    transition: background-color 0.3s;
+                    &:active {background-color: #4caf50; color: #fff;}
+                    &:hover{color:#0d3c01; font-weight: bold;}
+                    &:hover:not(.active) {background-color: #4555AE; color:white;}
+                }
+            } 
+        }
+        .search{
+            float: right;
+            width: 200px; height: 35px; padding: 0 10px; border: solid 2px #ddd; 
+            background-color: white;
+            input{width: 150px; height: 31px; border: 0px; outline: none; margin-right: 10px;}
+
+        }
+    }
+`;
+
+
+const BoardDetail = () => {
     return(
-        <div className="wrap">
+        <Wrap>
+            <Nav />
+            <Section>
+            <div className="wrap">
             <div className="board" >
                 {/* <div className="sidenav left">
                     <a href="#about">메뉴부분</a>
@@ -66,7 +189,9 @@ const BoardSi3 = () => {
                 </div>
             </div>
         </div>
+            </Section>
+        </Wrap>
     )
 };
 
-export default BoardSi3;
+export default BoardDetail;
