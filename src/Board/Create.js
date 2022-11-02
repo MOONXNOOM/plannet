@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import Nav from "../Utill/Nav";
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {useState} from 'react';
 
 // 임시파일
 
@@ -119,6 +122,56 @@ const Section = styled.div`
             input{width: 150px; height: 31px; border: 0px; outline: none; margin-right: 10px;}
         }
     }
+    .form-wrapper {
+        width: 100%;
+        margin: 0 auto;
+    }
+    .title-input {
+        width: 400px;
+        height: 40px;
+        text-align: center;
+        margin-left: 185px;
+        margin-bottom: 30px;
+    }
+    .text-area {
+        width: 80%;
+        min-height: 500px;
+    }
+    .submit-button1 {
+        font-weight: 600;
+        display: block;
+        position: absolute; 
+        right: 30px;
+        font-size: 16px;
+        padding: 8px 35px;
+        border-radius: 25px;
+        background-color: #4555AE;
+        color: white;
+        border: none;
+        transition: all .1s ease-in;
+        &:hover{
+            background-color: #4555AE;
+        }
+    }
+    .submit-button2 {
+        font-weight: 600;
+        display: block;
+        position: absolute;
+        right: 18%;
+        font-size: 16px;
+        padding: 8px 35px;
+        border-radius: 25px;
+        background-color: #4555AE;
+        color: white;
+        border: none;
+        transition: all .1s ease-in;
+        &:hover{
+            background-color: #4555AE;
+        }
+    }
+    .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
+        height: 600px; 
+    }
 `;
 
 const Create = () => {
@@ -139,7 +192,28 @@ const Create = () => {
                         </tr>
                     </table>
                 </div>
-                <p className="copy">&#169; Plannet.</p>
+                <div className='form-wrapper'>
+                  <CKEditor
+          editor={ClassicEditor}
+          data="<p>Hello from CKEditor 5!</p>"
+          onReady={editor => {
+            console.log('Editor is ready to use!', editor);
+          }}
+          onChange={(event, editor) => {
+            const data = editor.getData();
+            console.log({ event, editor, data });
+          }}
+          onBlur={(event, editor) => {
+            console.log('Blur.', editor);
+          }}
+          onFocus={(event, editor) => {
+            console.log('Focus.', editor);
+          }}
+        />
+            </div>
+            <button className="submit-button1">취소</button>
+            <button className="submit-button2">등록</button>
+            <p className="copy">&#169; Plannet.</p>
             </Section>
         </Wrap>
     )

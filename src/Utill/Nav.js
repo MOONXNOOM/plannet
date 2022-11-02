@@ -119,31 +119,30 @@ const Nav = () => {
     const userId = window.localStorage.getItem("userId");
     const [userSrc, setUserSrc] = useState("https://images.unsplash.com/photo-1666473574427-253b43283677?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80");
     const useImg = {backgroundImage: "url(" + userSrc + ")"};
-    const [userNickName, setUserNickName] = useState("홍길동");
-    const [userEmail, setUserEmail] = useState("랄랄라");
-    const [userPhone, setUserPhone] = useState("룰룰루");
-    const [userSNS, setUserSNS] = useState("럴럴러");
-    const [userPro, setUserPro] = useState("랄랄라");
-    const pes = {width: '85%'};
+    const [userNickname, setUserNickname] = useState("");
+    const [userEmail, setUserEmail] = useState("");
+    const [userPhone, setUserPhone] = useState("");
+    const [userSNS, setUserSNS] = useState("");
+    const [userPro, setUserPro] = useState("");
+    const [num, setNum] = useState('0');
+    const pes = {width: num+'%'};
 
     useEffect(() => {
         const userInfoLoad = async() => {
             try{
                 const response = await Api.userInfoLoad(userId);
+                console.log(response.data);
+                setUserNickname(response.data[0].nickname);
+                setUserEmail(response.data[0].email);
+                setUserPhone(response.data[0].phone);
+                setUserSNS(response.data[0].sns);
+                setUserPro(response.data[0].profile);
             } catch(e){
                 console.log(e);
             }
         }
         userInfoLoad();
-    },[]);
-
-    // const proPrint = (e) => {
-    //     const result = [];
-    //     for(let i = 0; i < e.length; i++) {
-    //         result.push(<p ket={i}>{e[i]}</p>);
-    //     }
-    //     return result;
-    // }
+    },[userId]);
 
     // 로그아웃 팝업
     const [comment, setCommnet] = useState("");
@@ -151,13 +150,6 @@ const Nav = () => {
     const closeModal = () => {
         setModalOpen(false);
     };
-    const onClickLogout = () => {
-        console.log("Logout 추가");
-        window.localStorage.setItem("userId", "");
-        window.localStorage.setItem("userPw", "");
-        window.localStorage.setItem("isLogin", "FALSE");
-        window.location.replace("/");
-    }
     const onClickBtn = () => {
         setModalOpen(true);
         setCommnet("로그아웃 하시겠습니까?");
@@ -180,7 +172,7 @@ const Nav = () => {
             </div>
             <div className="userinfo">
                 <div className="userImgBox" style={useImg}/>
-                <p className="userName">{userNickName}</p>
+                <p className="userName">{userNickname}</p>
                 <p className="userId">&#40;{userId}&#41;</p>
                 <div className="userPro1">{userPro}</div>
                 <div className="pes">
@@ -192,7 +184,7 @@ const Nav = () => {
                 <div className="userPro2">
                     <p>Email : {userEmail}</p>
                     <p>Phone : {userPhone}</p>
-                    <p>SNS : {userSNS}</p>
+                    {userSNS? <p>SNS : @{userSNS}</p> : <p>SNS : - </p> }
                 </div>
                 <ul className="menu">
                     <li><Link to="/home">마이페이지</Link></li>

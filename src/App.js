@@ -4,7 +4,6 @@ import Write from './Write/Write';
 import Board from './Board/Board';
 import DoLogin from './DoLogin/DoLogin';
 import Join from './Join/Join';
-import LoginHome from './LoginHome/LoginHome';
 import Main from './Main/Main';
 import Home from './Home/Home';
 import Find from './Join/Find';
@@ -22,14 +21,11 @@ function App() {
         <Route path="/find" element={<Find />}/>
 
         <Route path="/home" element={<Home />}/>
-        <Route exact path='/write/:no' component={Write} />
+        <Route path='/write/:date' element={<Write />} />
         <Route path="/setting" element={<Setting />}/>
-        
         <Route path="/board" element={<Board />}/>
-        <Route exact path='/postView/:no' component={PostView} />
+        <Route exact path='/postView/:no' element={<PostView />}/>
         <Route path="/create" element={<Create />}/>
-      
-        <Route path="/loginHome" element={<LoginHome />}/>
       </Routes>
     </Router>
   );

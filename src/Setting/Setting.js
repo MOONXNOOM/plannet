@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Nav from "../Utill/Nav";
+import Api from "../api/plannetApi";
 
 const Wrap = styled.div`
     width: 1130px;
@@ -157,16 +158,38 @@ const Section = styled.div`
 
 
 const Setting = () => {
+    const userId = window.localStorage.getItem("userId");
     const [userSrc, setUserSrc] = useState("https://images.unsplash.com/photo-1666473574427-253b43283677?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80");
     const useImg = {backgroundImage: "url(" + userSrc + ")"};
-    const [userNickName, setUserNickName] = useState("");
+    const [userNickname, setUserNickname] = useState("");
     const [userEmail, setUserEmail] = useState("");
     const [userPhone, setUserPhone] = useState("");
     const [userSNS, setUserSNS] = useState("");
     const [userPro, setUserPro] = useState("");
 
+    useEffect(() => {
+        const userInfoLoad = async() => {
+            try{
+                const response = await Api.userInfoLoad(userId);
+                setUserNickname(response.data[0].nickname);
+                setUserEmail(response.data[0].email);
+                setUserPhone(response.data[0].phone);
+                setUserSNS(response.data[0].sns);
+                setUserPro(response.data[0].profile);
+            } catch(e){
+                console.log(e);
+            }
+        }
+        userInfoLoad();
+    },[userId]);
+
+    const onClickSave = async() => {
+        await Api.userInfoSave(userId, userNickname, userEmail, userPhone, userSNS, userPro);
+        window.location.assign("/home");
+    }
+
     const onChangeNickname = (e) => {
-        setUserNickName(e.target.value);
+        setUserNickname(e.target.value);
     }
     const onChangeEmail = (e) => {
         setUserEmail(e.target.value);
@@ -189,14 +212,14 @@ const Setting = () => {
                     <h2>Setting</h2>
                     <div className="userImgBox" style={useImg}>
                         <label>
-                            <input type="file"/>
+                            <input type="file" accept="image/*"/>
                             <div><i class="bi bi-pencil-fill"></i></div>
                         </label>
                     </div>
                     <div className="userInfo">
                         <div className="session">
                             <p>닉네임</p>
-                            <input onChange={onChangeNickname} value={userNickName} placeholder="닉네임"/>
+                            <input onChange={onChangeNickname} value={userNickname} placeholder="닉네임"/>
                         </div>
                         <div className="session">
                             <p>이메일</p>
@@ -217,7 +240,7 @@ const Setting = () => {
                     </div>
                 </div>
                 <div className="btnbox">
-                    <button className="save">SAVE</button>
+                    <button onClick={onClickSave} className="save">SAVE</button>
                 </div>
             </Section>
             <div className="copy">&#169; Plannet.</div>
