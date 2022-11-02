@@ -9,7 +9,8 @@ import Main from './Main/Main';
 import Home from './Home/Home';
 import Find from './Join/Find';
 import Create from './Board/Create';
-import PostView from './'
+import PostView from './Board/PostView';
+
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
 
         <Route path="/home" element={<Home />}/>
         <Route path="/write" element={<Write />}/>
+        <Route exact path='/Write/:no' component={Write} />
 
         <Route path="/board" element={<Board />}/>
         <Route exact path='/postView/:no' component={PostView} />

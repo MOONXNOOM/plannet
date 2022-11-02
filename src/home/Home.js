@@ -105,7 +105,11 @@ const Home = () => {
   const localId = window.localStorage.getItem("userId");
   const localPw = window.localStorage.getItem("userPw");
 
-  const motivation = [];
+  // const [ dataList, setDataList ] = useState([]);
+
+  // // useEffect(() => {
+  // //   setDataList(postList);
+  // // }, [ ])
 
   return (
     <Wrap>
