@@ -195,7 +195,7 @@ const Create = () => {
                 <div className='form-wrapper'>
                   <CKEditor
           editor={ClassicEditor}
-          data="<p>Hello from CKEditor 5!</p>"
+          data="<p>자유롭게 글을 작성하세요!</p>"
           onReady={editor => {
             console.log('Editor is ready to use!', editor);
           }}
