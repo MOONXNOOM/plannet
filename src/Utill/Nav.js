@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components"
 import {ReactComponent as Logo} from "../Images/planet-001.svg";
+import Modal from "./Modal";
+import { useState } from "react";
 
 const Nav = () => {
     const userSrc = "https://images.unsplash.com/photo-1666473574427-253b43283677?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80";
@@ -81,11 +83,13 @@ const Nav = () => {
             }
             .menu{
                 width: 208px;
+                width: 253px;
                 height: 50px;
                 margin: 0 auto;
                 li{
                     float: left;
                     a{padding: 0px 10px; line-height:50px; border-left: 1px solid #555; font-weight: 600;}
+                    a, span{padding: 0px 7px; line-height:50px; border-left: 1px solid #555; font-weight: 400;}
                 }
                 li:first-child a{border-left: none;
                 }
@@ -124,6 +128,29 @@ const Nav = () => {
         return result;
     }
 
+    // 팝업
+
+    const [comment, setCommnet] = useState("");
+
+    const [modalOpen, setModalOpen] = useState(false);
+    const closeModal = () => {
+        setModalOpen(false);
+    };
+
+    const onClickLogout = () => {
+        console.log("Logout 추가");
+        window.localStorage.setItem("userId", "");
+        window.localStorage.setItem("userPw", "");
+        window.localStorage.setItem("isLogin", "FALSE");
+        window.location.replace("/");
+    }
+
+
+    const onClickBtn = () => {
+        setModalOpen(true);
+        setCommnet("로그아웃 하시겠습니까?");
+    }
+
     return (
         <Box>
             <div className="logo">
@@ -148,8 +175,10 @@ const Nav = () => {
                     <p>SNS : {userSNS}</p>
                 </div>
                 <ul className="menu">
-                    <li><Link to="/Write">마이페이지</Link></li>
+                <li><Link to="/Write">마이페이지</Link></li>
                     <li><Link to="/Board">자유게시판</Link></li>
+                    <li onClick={onClickBtn}><span>로그아웃</span></li>
+                    <Modal open={modalOpen} close={closeModal} header="안내">{comment}</Modal>
                     <li><Link to="/Write">설정</Link></li>
                 </ul>
             </div>
