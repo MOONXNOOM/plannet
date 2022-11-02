@@ -125,7 +125,7 @@ const Section = styled.div`
 `;
 
 
-const BoardDetail = () => {
+const PostView = () => {
     return(
         <Wrap>
             <Nav />
@@ -194,4 +194,4 @@ const BoardDetail = () => {
     )
 };
 
-export default BoardDetail;
+export default PostView;
