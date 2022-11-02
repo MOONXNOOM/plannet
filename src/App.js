@@ -9,7 +9,7 @@ import Main from './Main/Main';
 import Home from './Home/Home';
 import Find from './Join/Find';
 import Create from './Board/Create';
-import BoardDetail from './Board/BoardDetail';
+import BoardDetail from './Board/PostView';
 
 function App() {
   return (
@@ -24,6 +24,8 @@ function App() {
         <Route path="/write" element={<Write />}/>
 
         <Route path="/board" element={<Board />}/>
+        <Route exact path='/postView/:no' component={PostView} />
+        <Route exact path='/' component={PostMain} />
         <Route path="/boardDetail" element={<BoardDetail />}/>
         <Route path="/create" element={<Create />}/>
       
