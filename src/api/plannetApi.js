@@ -105,14 +105,37 @@ const plannetApi = {
             write_date:date
         }
         return await axios.post(PLANNET_DOMAIN + "BoardTitleServlet", object, HEADER);
-    }
-    
-    // listLoad: async function(id, date) {
+    },
+    //userInfo 불러오기
+    userInfoLoad: async function(id){
+        const object = {
+            id:id
+        }
+        return await axios.post(PLANNET_DOMAIN + "UserInfoLoad", object, HEADER);
+    },
+    //userInfo 저장하기
+    userInfoSave: async function(id, nickname, email, phone, sns, profile) {
+        const object = {
+            id: id,
+            nickname: nickname,
+            email: email,
+            phone: phone,
+            sns: sns,
+            profile: profile
+        }
+        return await axios.post(PLANNET_DOMAIN + "UserInfoSave", object, HEADER);
+    },
+    //달성률
+    // userInfoSave: async function(id, nickname, email, phone, sns, profile) {
     //     const object = {
     //         id: id,
-    //         date: date,
+    //         nickname: nickname,
+    //         email: email,
+    //         phone: phone,
+    //         sns: sns,
+    //         profile: profile
     //     }
-    //     return await axios.post(PLANNET_DOMAIN + "ListLoad", object, HEADER);
+    //     return await axios.post(PLANNET_DOMAIN + "UserInfoSave", object, HEADER);
     // },
 }
 
