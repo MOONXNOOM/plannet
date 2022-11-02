@@ -185,6 +185,7 @@ const Setting = () => {
 
     const onClickSave = async() => {
         await Api.userInfoSave(userId, userNickname, userEmail, userPhone, userSNS, userPro);
+        window.location.assign("/home");
     }
 
     const onChangeNickname = (e) => {
