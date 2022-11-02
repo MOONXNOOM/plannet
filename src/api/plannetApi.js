@@ -98,11 +98,9 @@ const plannetApi = {
         return await axios.post(PLANNET_DOMAIN + "WriteLoad", object, HEADER);
     },
     // 자유게시판
-    boardTitle: async function(no,id,date){
+    boardTitle: async function(no){
         const object = {
-            board_no:no,
-            id:id,
-            write_date:date
+            board_no:no
         }
         return await axios.post(PLANNET_DOMAIN + "BoardTitleServlet", object, HEADER);
     }
