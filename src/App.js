@@ -10,6 +10,7 @@ import Home from './Home/Home';
 import Find from './Join/Find';
 import Create from './Board/Create';
 import BoardDetail from './Board/BoardDetail';
+import Setting from './Setting/Setting';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
 
         <Route path="/home" element={<Home />}/>
         <Route path="/write" element={<Write />}/>
+        <Route path="/setting" element={<Setting />}/>
 
         <Route path="/board" element={<Board />}/>
         <Route path="/boardDetail" element={<BoardDetail />}/>

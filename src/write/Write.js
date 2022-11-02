@@ -259,11 +259,15 @@ const Write = () => {
         window.location.assign('/home');
     }
 
+    const onClickBack = () => {
+        window.location.assign('/home');
+    }
+
     return (
         <Wrap>
             <Nav />
             <Section>
-                <div className="btnbox">
+                <div className="btnbox" onClick={onClickBack}>
                     <button className="back">
                     <i className="bi bi-chevron-compact-left"/>{date}
                     </button>
