@@ -37,7 +37,7 @@ const Nav = () => {
             }
         }
         .userinfo{
-            padding-top: 40px;
+            padding-top: 30px;
             .userName{
                 margin-top: 15px;
                 font-size: 16px;
@@ -50,7 +50,7 @@ const Nav = () => {
             }
             .userPro1{
                 height: calc(80vh - 420px);
-                margin: 25px 0;
+                margin: 20px 0;
                 padding-left:17px;
                 overflow-y: scroll;
                 &::-webkit-scrollbar {
@@ -88,11 +88,14 @@ const Nav = () => {
                 margin: 0 auto;
                 li{
                     float: left;
-                    a{padding: 0px 10px; line-height:50px; border-left: 1px solid #555; font-weight: 600;}
-                    a, span{padding: 0px 7px; line-height:50px; border-left: 1px solid #555; font-weight: 400;}
+                    a, span{
+                        padding: 0px 7px; 
+                        line-height:50px; 
+                        border-left: 1px solid #555; 
+                        font-weight: 600; 
+                        cursor: pointer;}
                 }
-                li:first-child a{border-left: none;
-                }
+                li:first-child a{border-left: none;}
             }
             .pes{
                 clear: both;
@@ -114,6 +117,7 @@ const Nav = () => {
                         text-align: right;
                         font-size: 12px;
                         padding-right: 10px;
+                        line-height: 12px;
                     }
                 }
             }
