@@ -104,10 +104,6 @@ const Section = styled.div`
 `;
 
 const Home = () => {
-
-  const localId = window.localStorage.getItem("userId");
-  const localPw = window.localStorage.getItem("userPw");
-
   return (
     <Wrap>
       <Nav />
