@@ -47,9 +47,12 @@ const Section = styled.div`
       width: 70%;
       padding-left: 30px;
       &>div{
-        /* background-color: rosybrown; */
+        background-color: #f9f9f9;
         width: 100%;
         height: 450px;
+        border-radius: 5px;
+        overflow: hidden;
+
       }
     }
     .etc{
@@ -101,10 +104,6 @@ const Section = styled.div`
 `;
 
 const Home = () => {
-
-  const localId = window.localStorage.getItem("userId");
-  const localPw = window.localStorage.getItem("userPw");
-
   return (
     <Wrap>
       <Nav />
