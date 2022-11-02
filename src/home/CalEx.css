@@ -42,6 +42,13 @@ button.react-calendar__tile.react-calendar__month-view__days__day.react-calendar
 .react-calendar__month-view__weekdays abbr {
     font-size: 18px;
     text-decoration: none;
-    
-    
+}
+
+.react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus {
+    background-color: #4555AE;
+}
+
+.react-calendar__tile--active:enabled:hover abbr, .react-calendar__tile--active:enabled:focus abbr {
+    color: white;
+    font-weight: 500;
 }

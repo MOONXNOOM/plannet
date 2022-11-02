@@ -22,11 +22,10 @@ function App() {
         <Route path="/find" element={<Find />}/>
 
         <Route path="/home" element={<Home />}/>
-        <Route exact path='/write/:no' component={Write} />
+        <Route path='/write/:date' element={<Write />} />
         <Route path="/setting" element={<Setting />}/>
-        
         <Route path="/board" element={<Board />}/>
-        <Route exact path='/postView/:no' component={PostView} />
+        <Route exact path='/postView/:no' element={<PostView />}/>
         <Route path="/create" element={<Create />}/>
       
         <Route path="/loginHome" element={<LoginHome />}/>
