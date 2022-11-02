@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Nav from "../Utill/Nav";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import ReactHtmlParser from 'react-html-parser';
 import {useState} from 'react';
 
 // 임시파일
@@ -137,27 +138,11 @@ const Section = styled.div`
         width: 80%;
         min-height: 500px;
     }
-    .submit-button1 {
+    .submit-button {
         font-weight: 600;
         display: block;
         position: absolute; 
         right: 30px;
-        font-size: 16px;
-        padding: 8px 35px;
-        border-radius: 25px;
-        background-color: #4555AE;
-        color: white;
-        border: none;
-        transition: all .1s ease-in;
-        &:hover{
-            background-color: #4555AE;
-        }
-    }
-    .submit-button2 {
-        font-weight: 600;
-        display: block;
-        position: absolute;
-        right: 18%;
         font-size: 16px;
         padding: 8px 35px;
         border-radius: 25px;
@@ -174,12 +159,35 @@ const Section = styled.div`
     }
 `;
 
-const Create = () => {
+function Create() {
+    const [creatBoard, setCreateBoard] = useState ({
+        title: '',
+        board: ''
+    })
+    const [viewBoard, setViewBoard] = useState([]);
+    const getValue = e => {
+        const { name, value } = e.target;
+        setCreateBoard ({
+            ...creatBoard,
+            [name]: value
+        })
+        console.log(creatBoard);
+    };
+    const onclickUpload = () => {
+        setViewBoard(viewBoard.concat({...creatBoard}))};
     return (
         <Wrap>
             <Nav></Nav>
             <Section>
-                <div className="board_list sub_box"> 
+                <div className="board_list sub_box">
+                    {viewBoard.map(element =>
+                      <div style={{ border: '1px solid #333' }}>
+                        <h2>{element.title}</h2>
+                        <div>
+                            {(element.board)}
+                            </div>
+                        </div>
+                    )}
                     <h2>자유게시판</h2>
                     <p>
                         <span>작성 시 유의해 주세요! 비방, 광고, 불건전한 내용의 글은 사전 동의 없이 삭제될 수 있습니다.</span>
@@ -188,12 +196,13 @@ const Create = () => {
                 <div>
                     <table>
                         <tr>
-                            <th>글제목</th>
+                            <th>게시물 작성</th>
                         </tr>
                     </table>
                 </div>
                 <div className='form-wrapper'>
-                  <CKEditor
+                  <input className="title-input" type='text' placeholder='제목' onChange={getValue} name='title' />
+                <CKEditor
           editor={ClassicEditor}
           data="<p>자유롭게 글을 작성하세요!</p>"
           onReady={editor => {
@@ -202,6 +211,11 @@ const Create = () => {
           onChange={(event, editor) => {
             const data = editor.getData();
             console.log({ event, editor, data });
+            setCreateBoard ({
+                ...creatBoard,
+                board: data
+            })
+            console.log(creatBoard);
           }}
           onBlur={(event, editor) => {
             console.log('Blur.', editor);
@@ -211,8 +225,8 @@ const Create = () => {
           }}
         />
             </div>
-            <button className="submit-button1">취소</button>
-            <button className="submit-button2">등록</button>
+            <button className="submit-button"
+            onClick={onclickUpload}>등록</button>
             <p className="copy">&#169; Plannet.</p>
             </Section>
         </Wrap>
