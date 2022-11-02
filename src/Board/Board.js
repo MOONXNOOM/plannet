@@ -173,7 +173,7 @@ const Board = () => {
                                 <td>{e.date}</td>
                             </tr>     
                         ))}
-                        {/* <tr>
+                        <tr>
                             <td>2</td>
                             <td><a href="#">제목을 누르면 게시물로 이동</a></td>
                             <td>작성자</td>
@@ -187,7 +187,7 @@ const Board = () => {
                             <td>434</td>
                             <td>22.10.21</td>
                         </tr>
-                        <tr>
+                        {/* <tr>
                             <td>4</td>
                             <td><a href="#">제목을 누르면 게시물로 이동</a></td>
                             <td>작성자</td>
