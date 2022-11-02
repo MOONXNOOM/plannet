@@ -123,19 +123,27 @@ const Section = styled.div`
 `;
 // 아직 구현이 안됨
 const Board = () => {
-    const [boardTitle,setBoardTitle] = useState('');
-    useEffect(()=>{
+    const [boardList, setBoardList] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
         const boardData = async () => {
-            try{
-                const response = await Api.boardTitle();
-                setBoardTitle(response.data);
-                console.log(response.data);
-            }catch(e){
+            setLoading(true);
+            try {
+                const response = await Api.memberInfo("ALL");
+                setBoardList(response.data);
+                console.log(response.data)
+            } catch (e) {
                 console.log(e);
             }
+            setLoading(false);
         };
         boardData();
-    },[]);
+    }, []);
+
+    if(loading) {
+        return <Section>대기 중...</Section>
+    }
 
     return (
         <Wrap>
@@ -156,16 +164,16 @@ const Board = () => {
                             <th>Views</th>
                             <th>Date</th>
                         </tr>
-                        {boardTitle && boardTitle.map(e=>(
+                        {boardList && boardList.map(e => (
                             <tr key={e.no}>
                                 <td>{e.no}</td>
-                                <td><a href="#">{e.title}</a></td>
+                                <td>{e.title}</td>
                                 <td>{e.id}</td>
-                                <td>434</td>
+                                <td>{e.views}</td>
                                 <td>{e.date}</td>
-                            </tr>
+                            </tr>     
                         ))}
-                        {/* <tr>
+                        <tr>
                             <td>2</td>
                             <td><a href="#">제목을 누르면 게시물로 이동</a></td>
                             <td>작성자</td>
@@ -179,7 +187,7 @@ const Board = () => {
                             <td>434</td>
                             <td>22.10.21</td>
                         </tr>
-                        <tr>
+                        {/* <tr>
                             <td>4</td>
                             <td><a href="#">제목을 누르면 게시물로 이동</a></td>
                             <td>작성자</td>
