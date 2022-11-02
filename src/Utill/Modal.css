@@ -24,6 +24,11 @@
     animation: modal-show 0.3s;
     overflow: hidden;
   }
+
+  .btn-m {
+    margin-right: 10px;
+  }
+  
   .modal > section > header {
     position: relative;
     padding: 16px 64px 16px 16px;

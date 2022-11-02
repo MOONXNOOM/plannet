@@ -174,7 +174,7 @@ const Section = styled.div`
     }
 `;
 
-const Board2 = () => {
+const Create = () => {
     return (
         <Wrap>
             <Nav></Nav>
@@ -219,7 +219,7 @@ const Board2 = () => {
     )
 };
 
-export default Board2;
+export default Create;
 
 // <div className="boardmain"> 
 // <div>
