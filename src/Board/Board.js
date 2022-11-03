@@ -124,6 +124,12 @@ const Section = styled.div`
 // 아직 구현이 안됨
 const Board = () => {
     const [boardList, setBoardList] = useState([]);
+    const [clickNum, setClickNum] = useState('');
+
+    const onClickBoard = (value) => {
+        window.localStorage.setItem("boardNum",value);
+        console.log(window.localStorage.getItem("boardNum"));
+    }
 
     useEffect(() => {
         const boardData = async () => {
@@ -159,7 +165,7 @@ const Board = () => {
                         {boardList && boardList.map(e => (
                             <tr key={e.num}>
                                 <td>{e.num}</td>
-                                <td>{e.title}</td>
+                                <td onClick={onClickBoard}><Link to='/postView/:no'>{e.title}</Link></td>
                                 <td>{e.id}</td>
                                 <td>{e.views}</td>
                                 <td>{(e.date).substring(0,10)}</td>
