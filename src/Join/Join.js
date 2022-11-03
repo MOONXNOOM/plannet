@@ -14,13 +14,15 @@ import Api from '../api/plannetApi';
 // 5. 전화번호 정규식 추가
 
 const ContainerJoin = styled.div`
-    height: 90vh;
+    height: 100vh;
     display:flex ;
     justify-content:center;
     align-items: center;
     flex-direction: column;
+    background-color: white;
 `;
 const Logo = styled.div`
+    margin-top: -30px;
     a{
         font-family: 'Comfortaa', cursive;
         font-size: 67px;
@@ -44,16 +46,16 @@ const Join = () => {
     const [idMessage, setIdMessage] = useState("");
     const [pwMessage, setPwMessage] = useState("");
     const [conPwMessage, setConPwMessage] = useState("");
-    const [mailMessage, setMailMessage] = useState("");
+    const [emailMessage, setEmailMessage] = useState("");
+    const [telMessage, setTelMessage] = useState("");
  
     // 유효성 검사
     const [isId, setIsId] = useState(false);
     const [isPw, setIsPw] = useState(false)
     const [isConPw, setIsConPw] = useState(false);
     const [isName, setIsName] = useState(false);
-    const [isNickname, setIsNickname] = useState(false);
-    const [isMail, setIsMail] = useState(false);
-    const [isTel, setIsTel] = useState(false);
+    const [isEmail, setIsEmail] = useState(false);
+    const [isTel, setIsTel] = useState(true);
 
     const [modalOpen, setModalOpen] = useState(false);
     const [modalClose, setModalClose] =useState(false);
@@ -89,26 +91,7 @@ const Join = () => {
         }
         else {
             setIdMessage("이미 사용하고 있는 ID입니다.");
-        } 
-    }
-
-    const onBlurEmailCheck = async() => {
-        // 가입 여부 우선 확인
-        const memberCheck = await Api.memberRegCheck(inputEmail, "TYPE_EMAIL");
-        if (memberCheck.data.result === "OK") {
-            setIdMessage("사용가능한 닉네임입니다.");
-        } else {
-            setIdMessage("이미 사용하고 있는 닉네임입니다.");
-        } 
-    }
-
-    const onBlurTelCheck = async() => {
-        // 가입 여부 우선 확인
-        const memberCheck = await Api.memberRegCheck(inputTel, "TYPE_TEL");
-        if (memberCheck.data.result === "OK") {
-            setIdMessage("사용가능한 이메일입니다.");
-        } else {
-            setIdMessage("이미 사용하고 있는 이메일입니다.");
+            setIsId(false);
         } 
     }
 
@@ -121,7 +104,7 @@ const Join = () => {
             setPwMessage('숫자+영문자 조합으로 8자리 이상 입력해 주세요.')
             setIsPw(false)
         } else {
-            setPwMessage('안전한 비밀번호에요 : )')
+            setPwMessage('안전한 비밀번호에요 :)')
             setIsPw(true);
         }        
     }
@@ -134,7 +117,7 @@ const Join = () => {
             setConPwMessage('비밀번호가 일치하지 않습니다.')
             setIsConPw(false)
         } else {
-            setConPwMessage('비밀번호가 일치 합니다. )')
+            setConPwMessage('비밀번호가 일치 합니다. :)')
             setIsConPw(true);
         }      
     }
@@ -147,36 +130,49 @@ const Join = () => {
     // 닉네임을 적었으면 해당 닉네임으로 저장
     const onChangeNickname = (e) => {
             setInputNickname(e.target.value);
-            setIsNickname(true);
-    }
-
-    // 닉네임을 적지 않았으면, inputName의 값으로 저장
-    const onBlurNickname = (e) => {
-        const NicknameCurrnet = e.target.value;
-        if (NicknameCurrnet.length === 0){ 
-            setInputNickname(inputName);
-        }
     }
     
     // 이메일 확인 체크
-    const onChangeMail = (e) => {
-        const mailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-        const mailCurrent = e.target.value ;
-        setInputEmail(mailCurrent);
-        if(!mailRegex.test(mailCurrent)){
-            setMailMessage('이메일의 형식이 올바르지 않습니다.')
-            setIsMail(false);
+    const onChangeEmail = (e) => {
+        const emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        const emailCurrent = e.target.value ;
+        setInputEmail(emailCurrent);
+        if(!emailRegex.test(emailCurrent)){
+            setEmailMessage('이메일의 형식이 올바르지 않습니다.')
+            setIsEmail(false);
         } else {
-            setMailMessage('이메일의 형식이 올바르게 입력되었습니다.')
-            setIsMail(true);
+            setEmailMessage('이메일의 형식이 올바르게 입력되었습니다.')
+            setIsEmail(true);
         }
+    }
+
+    const onBlurEmailCheck = async() => {
+        // 가입 여부 우선 확인
+        const memberCheck = await Api.memberRegCheck(inputEmail, "TYPE_EMAIL");
+        if (memberCheck.data.result === "OK" && isEmail) {
+            setEmailMessage("사용가능한 Email입니다.");
+        } else if(memberCheck.data.result === "OK" && !isEmail){
+            setEmailMessage("이메일의 형식이 올바르지 않습니다.");
+        } else {
+            setEmailMessage("이미 사용하고 있는 Email입니다.");
+            setIsEmail(false);
+        } 
     }
 
     const onChangeTel = (e) => {
        setInputTel(e.target.value);
-       setIsTel(true);
     }
 
+    const onBlurTelCheck = async() => {
+        // 가입 여부 우선 확인
+        const memberCheck = await Api.memberRegCheck(inputTel, "TYPE_TEL");
+        if (memberCheck.data.result === "OK" ) {
+            setTelMessage("사용가능한 전화번호입니다.");
+        } else {
+            setTelMessage("이미 사용하고 있는 전화번호입니다.");
+            setIsTel(false)
+        } 
+    }
     //  onChangeBirth
     // const onChangeBirth = (e) => {
     //     const a = setInputBirth(e.target.value);
@@ -221,14 +217,14 @@ const Join = () => {
                 <Logo><LogoImg width="90px" viewBox="30 150 430 220"/><Link to="/main" className="logo">Plannet</Link></Logo>
                 <div className="session">
                     <p>
-                        아이디
+                        아이디*
                         {inputId.length > 0 && <span>{idMessage}</span>}
                     </p>
                     <input placeholder="아이디" value ={inputId} onChange={onChangId} type={'text'} onBlur={onBlurIdCheck}/>
                 </div>
                 <div className="session">
                     <p>
-                        비밀번호
+                        비밀번호*
                         {inputPw.length > 0 && <span>{pwMessage}</span>}
                     </p>
                     <input type='password' placeholder="패스워드" value ={inputPw} onChange={onChangePw}/>
@@ -241,30 +237,33 @@ const Join = () => {
                     <input type='password' placeholder="패스워드 확인" value ={inputConPw} onChange={onChangeConPw}/>
                 </div>
                 <div className="session">
-                    <p>이름</p>
+                    <p>이름*</p>
                     <input type='text'placeholder="이름" value ={inputName} onChange={onChangeName}/>
                 </div>
                 <div className="session">
                     <p>닉네임</p>
-                    <input type='text' placeholder="닉네임" value ={inputNickname} onChange={onChangeNickname} onBlur={onBlurNickname}/>
+                    <input type='text' placeholder="닉네임" value ={inputNickname} onChange={onChangeNickname}/>
                 </div>
                 <div className="session">
                     <p>
-                        이메일
-                        {inputEmail.length > 0 && <span>{mailMessage}</span>}
+                        이메일*
+                        {inputEmail.length > 0 && <span>{emailMessage}</span>}
                     </p>
-                    <input type='email' placeholder="이메일" value ={inputEmail} onChange={onChangeMail}/>
+                    <input type='email' placeholder="이메일" value={inputEmail} onChange={onChangeEmail} onBlur={onBlurEmailCheck}/>
                 </div>
                 <div className="session">
-                    <p>전화번호</p>
-                    <input type='tel' placeholder="휴대폰번호('-' 제외)" value ={inputTel} onChange={onChangeTel} onKeyUp={f_enter}/>
+                    <p>
+                        전화번호
+                        {inputTel.length > 0 && <span>{telMessage}</span>}
+                    </p>
+                    <input type='tel' placeholder="휴대폰번호('-' 제외)" value ={inputTel} onChange={onChangeTel} onBlur={onBlurTelCheck} onKeyUp={f_enter}/>
                 </div>
                 {/* <div className="session">
                     <p className="joinTitle">생년월일</p>
                     <input className="inputJoin" type={'date'} value={inputBirth} onChange={onChangeBirth}/>
                 </div>  */}
                 <div className="session">
-                    <button onClick={onClickJoin} disabled={!(isId && isPw && isConPw && isName && isNickname && isMail && isTel)}>가입하기</button>
+                    <button onClick={onClickJoin} disabled={!(isId && isPw && isConPw && isName && isEmail && isTel)}>가입하기</button>
                 </div>
             </ContainerJoin>
         </> 

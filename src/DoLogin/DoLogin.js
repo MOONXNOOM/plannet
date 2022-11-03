@@ -22,6 +22,7 @@ const ContainerLogin = styled.div`
     background-color: white;
 `;
 const Logo = styled.div`
+    margin-top: -30px;
     a{
         font-size: 67px;
         font-family: 'Comfortaa', cursive;
