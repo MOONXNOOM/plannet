@@ -2,8 +2,10 @@ import styled from "styled-components";
 import Nav from "../Utill/Nav";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Api from "../api/plannetApi";
 // import ReactHtmlParser from 'react-html-parser';
 import {useState} from 'react';
+import { Link } from "react-router-dom";
 // // 임시파일
 
 // // const Wrap = styled.div`
@@ -19,7 +21,6 @@ const Wrap = styled.div`
     background-color: white;
     margin: 0 auto;
 `;
-
 const Section = styled.div`
     width: 850px;
     height: 100vh;
@@ -160,27 +161,43 @@ const Section = styled.div`
             background-color: #4555AE;
         }
     }
+
     .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
-        height: 600px; 
+        height: 500px; 
     }
+    .ck-editor__main {padding: 0;}
 `;
 
 function Create() {
-    const [creatBoard, setCreateBoard] = useState ({
-        title: '',
-        detail: ''
-    })
+    const getId = window.localStorage.getItem("userId");
+    const [title, setTitle] = useState();
+    const [nickname, setNickname] = useState();
+    const [detail, setDetail] = useState();
+    const [anonymous, setAnonymous] = useState(false); 
+
+    const onClickSave = async() => {
+        await Api.boardCreate(getId, title, nickname, detail);
+        window.location.assign('/board');
+    }
+    
+    const onChangeDetail = (e) => {
+        setDetail(e.target.value);
+    }
+
+    // ---------------------------------------------------
+
     const [viewBoard, setViewBoard] = useState([]);
-    const getValue = e => {
-        const { name, value } = e.target;
-        setCreateBoard ({
-            ...creatBoard,
-            [name]: value
-        })
-        console.log(creatBoard);
-    };
-    const onclickUpload = () => {
-        setViewBoard(viewBoard.concat({...creatBoard}))};
+    // const getValue = e => {
+    //     const { name, value } = e.target;
+    //     setCreateBoard ({
+    //         ...creatBoard,
+    //         [name]: value
+    //     })
+    //     console.log(creatBoard);
+    // };
+
+    // ------------------------------------------------
+
     return (
         <Wrap>
             <Nav></Nav>
@@ -197,43 +214,30 @@ function Create() {
                     <h2>자유게시판</h2>
                     <p>
                         <span>작성 시 유의해 주세요! 비방, 광고, 불건전한 내용의 글은 사전 동의 없이 삭제될 수 있습니다.</span>
-                    </p>                
-                </div>
-                <div>
-                    <table>
-                        <tr>
-                            <th>게시물 작성</th>
-                        </tr>
-                    </table>
+                    </p>    
+                    <div>
+                        <table>
+                            <tr>
+                                <th>게시물 작성</th>
+                            </tr>
+                        </table>
+                    </div>            
                 </div>
                 <div className='form-wrapper'>
-                  <input className="title-input" type='text' placeholder='제목' onChange={getValue} name='title' />
-                <CKEditor
-          editor={ClassicEditor}
-          data="<p>자유롭게 글을 작성하세요!</p>"
-          onReady={editor => {
-            console.log('Editor is ready to use!', editor);
-          }}
-          onChange={(event, editor) => {
-            const data = editor.getData();
-            console.log({ event, editor, data });
-            setCreateBoard ({
-                ...creatBoard,
-                detail: data
-            })
-            console.log(creatBoard);
-          }}
-          onBlur={(event, editor) => {
-            console.log('Blur.', editor);
-          }}
-          onFocus={(event, editor) => {
-            console.log('Focus.', editor);
-          }}
-        />
-            </div>
-            <button className="submit-button"
-            onClick={onclickUpload}>등록</button>
-            <p className="copy">&#169; Plannet.</p>
+                            <input className="title-input" type='text' placeholder='제목' value={title} onChange={setTitle} name='title' />
+                            <CKEditor editor={ClassicEditor} data={detail} 
+                                onChange={(event, editor) => {
+                                    const data = editor.getData();
+                                    console.log({event, editor, data});
+                                    setDetail(data);
+                                    }}
+                            />
+                       </div>
+            
+                <button className="submit-button" onClick={onClickSave}>SAVE</button>
+                {/* <button className="submit-button">CANCLE</button> */}
+                {/* /* <Link to ='/board'></Link> */}
+                <p className="copy">&#169; Plannet.</p>
             </Section>
         </Wrap>
     )

@@ -1,6 +1,4 @@
 import React, {useState, useEffect} from 'react';
-//import './App.css';
-import './style2.css';
 import styled from 'styled-components';
 import Nav from '../Utill/Nav';
 import Api from '../api/plannetApi'
