@@ -38,9 +38,8 @@ const plannetApi = {
         const regCheck = {
             id: id,
         }
-        return await axios.post(PLANNET_DOMAIN + "MemberDeleteServlet", regCheck, HEADER);
+        return await axios.post(PLANNET_DOMAIN + "MemberDelete", regCheck, HEADER);
     },
-
     // 회원 아이디 찾기
     memberFindId: async function(name, tel){
         const reg = {
