@@ -129,8 +129,9 @@ const Board = () => {
     useEffect(() => {
         const boardData = async () => {
             setLoading(true);
+
             try {
-                const response = await Api.BoardTitleServlet("BoadrTitle");
+                const response = await Api.BoardTitleServlet("1","2","3");
                 setBoardList(response.data);
                 console.log(response.data)
             } catch (e) {
@@ -164,15 +165,16 @@ const Board = () => {
                             <th>Date</th>
                         </tr>
                         {boardList && boardList.map(e => (
-                            <tr key={e.no}>
-                                <td>1</td>
+                            <tr key={e.board_no}>
+                                <td>{e.board_no}</td>
                                 <td>{e.title}</td>
                                 <td>{e.id}</td>
-                                <td>{e.views}</td>
-                                <td>{e.date}</td>
+                                <td>{e.view}</td>
+                                <td>{e.write_date}</td>
                             </tr>     
                         ))}
-                        <tr>
+                        
+                        {/* <tr>
                             <td>2</td>
                             <td><a href="#">제목을 누르면 게시물로 이동</a></td>
                             <td>작성자</td>
@@ -185,7 +187,7 @@ const Board = () => {
                             <td>작성자</td>
                             <td>434</td>
                             <td>22.10.21</td>
-                        </tr>
+                        </tr> */}
                         {/* <tr>
                             <td>4</td>
                             <td><a href="#">제목을 누르면 게시물로 이동</a></td>
