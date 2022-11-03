@@ -130,7 +130,7 @@ const Board = () => {
         const boardData = async () => {
             setLoading(true);
             try {
-                const response = await Api.memberInfo("ALL");
+                const response = await Api.BoardTitleServlet("BoadrTitle");
                 setBoardList(response.data);
                 console.log(response.data)
             } catch (e) {
@@ -156,7 +156,6 @@ const Board = () => {
                         <Link to='/create'><button>글쓰기</button></Link>
                     </p>
                     <table>
-                        
                         <tr>
                             <th>No.</th>
                             <th>Title</th>
@@ -166,7 +165,7 @@ const Board = () => {
                         </tr>
                         {boardList && boardList.map(e => (
                             <tr key={e.no}>
-                                <td>{e.no}</td>
+                                <td>1</td>
                                 <td>{e.title}</td>
                                 <td>{e.id}</td>
                                 <td>{e.views}</td>
