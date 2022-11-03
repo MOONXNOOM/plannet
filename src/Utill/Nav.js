@@ -43,6 +43,7 @@ const Box = styled.div`
             height: calc(80vh - 420px);
             margin: 20px 0;
             padding-left:17px;
+            white-space: pre;
             overflow-y: scroll;
             &::-webkit-scrollbar {
                 width: 20px;
@@ -110,6 +111,7 @@ const Box = styled.div`
                     padding-right: 10px;
                     line-height: 12px;
                     text-shadow: 1px 1px 1px #555;
+                    overflow: hidden;
                 }
             }
         }
@@ -187,7 +189,7 @@ const Nav = () => {
                 </div>
                 <div className="userPro2">
                     <p>Email : {userEmail}</p>
-                    <p>Phone : {userPhone}</p>
+                    <p>{userPhone? <p>Phone : @{userPhone}</p> : <p>Phone : - </p> }</p>
                     {userSNS? <p>SNS : @{userSNS}</p> : <p>SNS : - </p> }
                 </div>
                 <ul className="menu">

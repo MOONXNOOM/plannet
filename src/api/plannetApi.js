@@ -103,13 +103,6 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "BoardList", object, HEADER);
     },
-    // 글 쓰기
-    boardCreat: async function() {
-        const object = {
-            cmd : "boardCreat"
-        }
-        return await axios.post(PLANNET_DOMAIN + "BoardCreat", object, HEADER);
-    },
     // 게시판 내용보기
     boardBody: async function(num){
         const object = {
@@ -150,6 +143,8 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "PlanMark", object, HEADER);
     },
+
+
 }
 
 export default plannetApi;
