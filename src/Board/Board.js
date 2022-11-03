@@ -131,10 +131,11 @@ const Board = () => {
     const numPages = Math.ceil(boardList.length / limit); // 필요한 페이지 개수
     const [clickNum, setClickNum] = useState('');
 
-    const onClickBoard = (value) => {
-        window.localStorage.setItem("boardNum",value);
-        console.log(window.localStorage.getItem("boardNum"));
-    }
+    // const onClickBoard = (value) => {
+    //     window.localStorage.setItem("boardNum",value);
+    //     console.log(window.localStorage.getItem("boardNum"));
+    // }
+    // onClick={window.localStorage.setItem("clickNum",setClickNum(num))}
 
     useEffect(() => {
         const boardData = async () => {
@@ -170,7 +171,7 @@ const Board = () => {
                         {boardList.slice(offset, offset + limit).map(({num, title, id, views, date}) => (
                             <tr key={num}>
                                 <td>{num}</td>
-                                <td onClick={onClickBoard}><Link to='/postView/:no'>{title}</Link></td>
+                                <td><Link to='/postView/:no'>{title}</Link></td>
                                 <td>{id}</td>
                                 <td>{views}</td>
                                 <td>{(date).substring(0,10)}</td>
