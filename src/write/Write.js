@@ -53,6 +53,7 @@ const Section = styled.div`
             background: none;
             border: none;
             transition: all .1s ease-in;
+            cursor: pointer;
         }
         button.save{
             font-weight: 600;
