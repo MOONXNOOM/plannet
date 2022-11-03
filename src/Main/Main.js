@@ -6,7 +6,7 @@ import "./Main.css";
 
 const Container = styled.div`
     width: 100%;
-    height: 98vh;
+    height: 100vh;
     border: 1px solid none;
     margin: 0;
     padding: 0;
@@ -49,7 +49,7 @@ const SubLogo = styled.div`
     color: #4555AE;
 `;
 const RightMain = styled.div`
-    background-color: #4555AE;
+    background: rgba(255,255,255,0);
     width: 50%;
     height: 100%;
     border: 1px solid none;
@@ -61,12 +61,10 @@ const RightMain = styled.div`
     flex-direction: column;
     color: white;
     font-weight: bold;
-    div{
-        margin: 20px 0;
-    }
     h1, h2, div, a{
         margin-left: 70px;
     }
+    div{margin-bottom: 20px}
 `;
 const Title = styled.h1`
     font-size: 28px;
@@ -80,6 +78,7 @@ const SemiTitle = styled.h2`
     text-align: left;
     width: 350px;
     line-height: 20px;
+    margin-bottom: 5px;
     color: white;
 `;
 const Explain = styled.div`

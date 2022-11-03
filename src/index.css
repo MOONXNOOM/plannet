@@ -23,9 +23,9 @@
 
 html{overflow: hidden;
   background:
-  linear-gradient(217deg, rgb(0, 82, 212, .8), rgba(255,0,0,0) 70.71%),
-  linear-gradient(127deg, rgb(66, 99, 247, .8), rgba(0,255,0,0) 70.71%),
-  linear-gradient(336deg, rgb(111, 177, 252, .8), rgba(0,0,255,0) 70.71%);
+    linear-gradient(60deg, rgb(111, 177, 252), rgba(255,0,0,0)),
+    linear-gradient(180deg, rgb(0, 82, 212), rgba(0,255,0,0)),
+    linear-gradient(270deg, rgb(69, 85, 174), rgba(0,0,255,0));
 }
 /* h1{display:none;} */
 img{border: 0;}
