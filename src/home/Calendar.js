@@ -6,6 +6,7 @@ import './Calendar.css';
 import Api from "../api/plannetApi";
 
 const CalEx = () => {
+
   const [value, setValue] = useState(new Date());
   //날짜 클릭시 해당날짜의 write로 이동
   const dayIn = (value) => {
@@ -34,10 +35,14 @@ const CalEx = () => {
     return(
         <div>
             <Calendar 
+            returnValue="range"
+            calendarType="US"
             onChange={setValue} 
             value={value} 
             onClickDay={dayIn}
-            formatDay={(locale, date) => moment(date).format("DD")}
+            formatShortWeekday={(locale,value) => ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'][value.getDay()]}
+            formatDay={(locale, date) => date.toLocaleString('en', { day: 'numeric' })}
+            minDetail="month"
             tileContent={({ date, view }) => { // 날짜 타일에 컨텐츠 추가하기 (html 태그)
                 let html = [];
                 // 현재 날짜가 post 작성한 날짜 배열(mark)에 있다면, dot div 추가
