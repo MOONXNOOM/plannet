@@ -1,8 +1,13 @@
 import React from 'react';
 import '../App';
 import './Modal.css';
+import Api from "../api/plannetApi";
 
 const Modal = (props) => {
+    const { open, close, header } = props;
+    
+    const getId = window.localStorage.getItem("userId");
+
     const onClickLogout = () => {
         console.log("Logout 추가");
         window.localStorage.setItem("userId", "");
@@ -10,7 +15,12 @@ const Modal = (props) => {
         window.localStorage.setItem("isLogin", "FALSE");
         window.location.replace("/");
     }
-    const { open, close, header } = props;
+    const onClickWithdraw = async() => {
+        await Api.memberDelete(getId);
+        window.localStorage.setItem("userId", "");
+        window.localStorage.setItem("userPw", "");
+        window.location.replace("/");
+    }
     return (
         <div className={open ? 'openModal modal' : 'modal'}>
             {open && 
@@ -24,6 +34,7 @@ const Modal = (props) => {
                     <main>{props.children}</main>
                     <footer>
                         {(header === '안내') ? <button className='yes btn-m' onClick={onClickLogout}>yes</button>: ''}
+                        {(header === '탈퇴') ? <button className='yes btn-m' onClick={onClickWithdraw}>yes</button>: ''}
                         <button className='close' onClick={close}>close</button>
                     </footer>
                 </section>
