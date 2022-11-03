@@ -38,9 +38,8 @@ const plannetApi = {
         const regCheck = {
             id: id,
         }
-        return await axios.post(PLANNET_DOMAIN + "MemberDeleteServlet", regCheck, HEADER);
+        return await axios.post(PLANNET_DOMAIN + "MemberDelete", regCheck, HEADER);
     },
-
     // 회원 아이디 찾기
     memberFindId: async function(name, tel){
         const reg = {
@@ -98,12 +97,11 @@ const plannetApi = {
         return await axios.post(PLANNET_DOMAIN + "WriteLoad", object, HEADER);
     },
     // 자유게시판
-    BoardTitleServlet: async function(cmd,no){
+    boardList: async function(){
         const object = {
-            cmd:"BoadrTitle",
-            board_no:no
+            cmd : "boardList"
         }
-        return await axios.post(PLANNET_DOMAIN + "BoardTitleServlet", object, HEADER);
+        return await axios.post(PLANNET_DOMAIN + "BoardList", object, HEADER);
     },
     //userInfo 불러오기
     userInfoLoad: async function(id){

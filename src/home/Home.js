@@ -1,7 +1,7 @@
 import React from 'react';
 import Nav from '../Utill/Nav';
 import styled from 'styled-components';
-import CalEx from './CalEx';
+import Calendar from './Calendar';
 import Memo from './Memo';
 import List from './List';
 import Quote from './Quote';
@@ -109,7 +109,7 @@ const Home = () => {
       <Section>
         <div className="plan">
           <h2>Plan it</h2>
-          <CalEx/>
+          <Calendar/>
         </div>
         <div className='etc'>
           <div className='memo'>

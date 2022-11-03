@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Nav from "../Utill/Nav";
 import Api from "../api/plannetApi";
+import Modal from "../Utill/Modal";
 
 const Wrap = styled.div`
     width: 1130px;
@@ -153,6 +154,12 @@ const Section = styled.div`
             }
         }
     }
+    .withdrawal{
+        cursor: pointer;
+        text-align: left;
+        text-decoration: underline;
+        color: #ccc;
+    }
     
 `;
 
@@ -203,6 +210,18 @@ const Setting = () => {
     const onChangePro = (e) => {
         setUserPro(e.target.value);
     }
+
+
+    //회원탈퇴 팝업
+    const [comment, setCommnet] = useState("");
+    const [modalOpen, setModalOpen] = useState(false);
+    const closeModal = () => {
+        setModalOpen(false);
+    };
+    const onClickWithdraw = () => {
+        setModalOpen(true);
+        setCommnet("탈퇴 하시겠습니까?");
+    }
     
     return (
         <Wrap>
@@ -237,6 +256,8 @@ const Setting = () => {
                             <p>자기소개글</p>
                             <textarea onChange={onChangePro} value={userPro} placeholder="자기소개글" maxlength="100" />
                         </div>
+                        <span className="withdrawal" onClick={onClickWithdraw}>회원탈퇴</span>
+                        <Modal open={modalOpen} close={closeModal} header="탈퇴">{comment}</Modal>
                     </div>
                 </div>
                 <div className="btnbox">
