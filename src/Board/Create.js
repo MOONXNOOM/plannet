@@ -162,7 +162,7 @@ const Section = styled.div`
 function Create() {
     const [creatBoard, setCreateBoard] = useState ({
         title: '',
-        board: ''
+        detail: ''
     })
     const [viewBoard, setViewBoard] = useState([]);
     const getValue = e => {
@@ -184,7 +184,7 @@ function Create() {
                       <div style={{ border: '1px solid #333' }}>
                         <h2>{element.title}</h2>
                         <div>
-                            {(element.board)}
+                            {(element.detail)}
                             </div>
                         </div>
                     )}
@@ -213,7 +213,7 @@ function Create() {
             console.log({ event, editor, data });
             setCreateBoard ({
                 ...creatBoard,
-                board: data
+                detail: data
             })
             console.log(creatBoard);
           }}
