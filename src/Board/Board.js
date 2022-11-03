@@ -123,27 +123,20 @@ const Section = styled.div`
 `;
 // 아직 구현이 안됨
 const Board = () => {
-    const [boardList, setBoardList] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [boardList, setBoardList] = useState([]);
 
     useEffect(() => {
         const boardData = async () => {
-            setLoading(true);
             try {
-                const response = await Api.memberInfo("ALL");
+                const response = await Api.boardList();
                 setBoardList(response.data);
-                console.log(response.data)
+                console.log(response.data);
             } catch (e) {
                 console.log(e);
             }
-            setLoading(false);
         };
         boardData();
     }, []);
-
-    if(loading) {
-        return <Section>대기 중...</Section>
-    }
 
     return (
         <Wrap>
@@ -165,15 +158,15 @@ const Board = () => {
                             <th>Date</th>
                         </tr>
                         {boardList && boardList.map(e => (
-                            <tr key={e.no}>
-                                <td>{e.no}</td>
+                            <tr key={e.num}>
+                                <td>{e.num}</td>
                                 <td>{e.title}</td>
                                 <td>{e.id}</td>
                                 <td>{e.views}</td>
-                                <td>{e.date}</td>
+                                <td>{(e.date).substring(0,10)}</td>
                             </tr>     
                         ))}
-                        <tr>
+                        {/* <tr>
                             <td>2</td>
                             <td><a href="#">제목을 누르면 게시물로 이동</a></td>
                             <td>작성자</td>
@@ -186,7 +179,7 @@ const Board = () => {
                             <td>작성자</td>
                             <td>434</td>
                             <td>22.10.21</td>
-                        </tr>
+                        </tr> */}
                         {/* <tr>
                             <td>4</td>
                             <td><a href="#">제목을 누르면 게시물로 이동</a></td>
