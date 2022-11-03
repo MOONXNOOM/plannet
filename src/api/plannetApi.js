@@ -103,6 +103,26 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "BoardList", object, HEADER);
     },
+
+    // 자유게시판 글 작성
+    boardCreate: async function(num, id, title, nickname, detail){
+        const object = {
+            num : num,
+            id : id,
+            title : title,
+            nickname : nickname,
+            detail : detail
+        }
+        return await axios.post(PLANNET_DOMAIN + "BoardCreate", object, HEADER);
+    },
+
+    // 게시판 내용보기
+    boardBody: async function(num){
+        const object = {
+            num : num
+        }
+        return await axios.post(PLANNET_DOMAIN + "BoardBody", object, HEADER);
+    },
     //userInfo 불러오기
     userInfoLoad: async function(id){
         const object = {
@@ -136,6 +156,8 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "PlanMark", object, HEADER);
     },
+
+
 }
 
 export default plannetApi;

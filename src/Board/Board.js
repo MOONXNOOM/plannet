@@ -101,14 +101,15 @@ const Section = styled.div`
         .page_list {
             width: 500px; float:left;
             li{list-style-type: none; display: inline; padding: 0px 5px;
-                a{
+                span{
                     display: inline-block; text-decoration: none; padding: 5px 10px; color:#000;
                     border-radius: 5px;
                     -webkit-transition: background-color 0.3s;
                     transition: background-color 0.3s;
-                    &:active {background-color: #4caf50; color: #fff;}
+                    &:active {background-color: #4555AE; color: #fff;}
                     &:hover{color:#0d3c01; font-weight: bold;}
-                    &:hover:not(.active) {background-color: #4555AE; color:white;}
+                    &[aria-current] {background-color: #4555AE; color:white;}
+                    &[disabled] {background: #eee; cursor: revert; transform: revert;}
                 }
             } 
         }
@@ -121,9 +122,19 @@ const Section = styled.div`
         }
     }
 `;
-// 아직 구현이 안됨
+
 const Board = () => {
     const [boardList, setBoardList] = useState([]);
+    const [limit, setLimit] = useState(15);  // 페이지당 게시물 수 (현재는 15개 고정)
+    const [page, setPage] = useState(1); // 현재 페이지 번호
+    const offset = (page - 1) * limit; // 게시물 위치 계산
+    const numPages = Math.ceil(boardList.length / limit); // 필요한 페이지 개수
+    const [clickNum, setClickNum] = useState('');
+
+    const onClickBoard = (value) => {
+        window.localStorage.setItem("boardNum",value);
+        console.log(window.localStorage.getItem("boardNum"));
+    }
 
     useEffect(() => {
         const boardData = async () => {
@@ -156,31 +167,33 @@ const Board = () => {
                             <th>Views</th>
                             <th>Date</th>
                         </tr>
-                        {boardList && boardList.map(e => (
-                            <tr key={e.num}>
-                                <td>{e.num}</td>
-                                <td>{e.title}</td>
-                                <td>{e.id}</td>
-                                <td>{e.views}</td>
-                                <td>{(e.date).substring(0,10)}</td>
+                        {boardList.slice(offset, offset + limit).map(({num, title, id, views, date}) => (
+                            <tr key={num}>
+                                <td>{num}</td>
+                                <td onClick={onClickBoard}><Link to='/postView/:no'>{title}</Link></td>
+                                <td>{id}</td>
+                                <td>{views}</td>
+                                <td>{(date).substring(0,10)}</td>
                             </tr>     
                         ))}
                     </table>
                 </div>
                 <div className="util_box">
                     <ul className="page_list">
-                        <li><a href="#">«</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">»</a></li>
+                        <li><span onclick = {()=> setPage(page - 1)} disabled = {page === 1}>«</span></li>
+                        {/*Array(numPages) :  페이지 수만큼의 size를 가지고 있는 배열을 생성하고 
+                          .fill() : undefine으로 모든 칸 할당
+                          .map(arr, i) : arr은 현재값, i는 인덱스로 각 자리 인덱스에 해당하는 값 할당 
+                          Array(numPages).fill()의 값을 map()을 통해 하나씩 불러와 i로 return*/}
+                        {Array(numPages).fill().map((_, i) => (
+                        <li><span key={i + 1} onClick={() => setPage(i + 1)} aria-current={page === i + 1 ? "page" : null}>{i + 1}</span></li>
+                        ))}
+                        <li><span onclick = {()=> setPage(page + 1)} disabled = {page === numPages}>»</span></li>
                     </ul> 
                     <form className="search" id="search" name="search" method="post">
                         <input name="product_search" title="검색" placeholder="검색어 입력"/>
                         <a href="#" onclick="submit"><i class="bi bi-search"></i></a>
-                    </form>
+                    </form> 
                 </div>
             </Section>
             <div className="copy">&#169; Plannet.</div>
