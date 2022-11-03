@@ -109,6 +109,7 @@ const Box = styled.div`
                     font-size: 12px;
                     padding-right: 10px;
                     line-height: 12px;
+                    text-shadow: 1px 1px 1px #555;
                 }
             }
         }
@@ -131,14 +132,12 @@ const Nav = () => {
         const userInfoLoad = async() => {
             try{
                 const response = await Api.userInfoLoad(userId);
-                console.log(response.data);
                 setUserNickname(response.data[0].nickname);
                 setUserEmail(response.data[0].email);
                 setUserPhone(response.data[0].phone);
                 setUserSNS(response.data[0].sns);
                 setUserPro(response.data[0].profile);
                 const resNum = await Api.userDo(userId);
-                console.log(resNum);
                 setNum(resNum.data.pes);
             } catch(e){
                 console.log(e);

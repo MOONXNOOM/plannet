@@ -188,27 +188,15 @@ const Join = () => {
 
     const onClickJoin = async() => {
         console.log("Click 회원가입");
-        // 가입 여부 우선 확인  
-        const memberCheck = await Api.memberRegCheck(inputId);
-        console.log(memberCheck.data.result);
-        // 가입 여부 확인 후 가입 절차 진행
-
-        if (memberCheck.data.result === "OK") {
-            console.log("가입된 아이디가 없습니다. 다음 단계 진행 합니다.");
-            const memberReg = await Api.memberReg(inputId, inputPw, inputName, inputNickname, inputEmail, inputTel);
-            console.log(memberReg.data.result);
-            if(memberReg.data.result === "OK") {
-                window.location.replace("/Home");
-            } else {
-                setModalOpen(true);
-                setModelText("회원 가입에 실패 했습니다. 중복체크나 공란을 확인하세요.");
-            }
-
+        const memberReg = await Api.memberReg(inputId, inputPw, inputName, inputNickname, inputEmail, inputTel);
+        console.log(memberReg.data.result);
+        if(memberReg.data.result === "OK") {
+            window.localStorage.setItem("userId", inputId);
+            window.location.replace("/Home");
         } else {
-            console.log("이미 가입된 회원 입니다.")
             setModalOpen(true);
-            setModelText("이미 가입된 회원 입니다.");
-        } 
+            setModelText("회원 가입에 실패 했습니다. 중복체크나 공란을 확인하세요.");
+        }
     }
 
     return(
