@@ -7,12 +7,12 @@ import {useState} from 'react';
 
 // // 임시파일
 
-// const Wrap = styled.div`
-//     width: 1130px;
-//     height: 100vh;
-//     background-color: white;
-//     margin: 0 auto;
-// `;
+const Wrap = styled.div`
+    width: 1130px;
+    height: 100vh;
+    background-color: white;
+    margin: 0 auto;
+`;
 
 const Section = styled.div`
     width: 850px;
@@ -233,7 +233,7 @@ function Create() {
     )
 };
 
-// export default Create;
+export default Create;
 
 // // <div className="boardmain"> 
 // // <div>

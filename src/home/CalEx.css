@@ -80,7 +80,15 @@
 .react-calendar__viewContainer{
     background-color: #f9f9f9;
 }
-.dot {
+.dotEnd {
+    height: 8px;
+    width: 8px;
+    background-color: #aed0f5;
+    border-radius: 50%;
+    display: flex;
+    margin-left: 1px;
+ }
+ .dotDo {
     height: 8px;
     width: 8px;
     background-color: #ffca3a;
