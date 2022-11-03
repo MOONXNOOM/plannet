@@ -125,17 +125,12 @@ const plannetApi = {
         return await axios.post(PLANNET_DOMAIN + "UserInfoSave", object, HEADER);
     },
     //달성률
-    // userInfoSave: async function(id, nickname, email, phone, sns, profile) {
-    //     const object = {
-    //         id: id,
-    //         nickname: nickname,
-    //         email: email,
-    //         phone: phone,
-    //         sns: sns,
-    //         profile: profile
-    //     }
-    //     return await axios.post(PLANNET_DOMAIN + "UserInfoSave", object, HEADER);
-    // },
+    userDo: async function(id) {
+        const object = {
+            id: id
+        }
+        return await axios.post(PLANNET_DOMAIN + "UserDo", object, HEADER);
+    },
 }
 
 export default plannetApi;

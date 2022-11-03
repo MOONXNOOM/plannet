@@ -12,13 +12,14 @@ import { Link } from "react-router-dom";
 
 const ContainerLogin = styled.div`
     width: 100%;
-    height: 90vh;
+    height: 100vh;
     margin: 0;
     padding: 0;
     display:flex ;
     justify-content:center;
     align-items: center;
     flex-direction: column;
+    background-color: white;
 `;
 const Logo = styled.div`
     a{

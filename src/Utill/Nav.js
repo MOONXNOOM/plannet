@@ -8,7 +8,7 @@ import Api from "../api/plannetApi";
 const Box = styled.div`
     width: 280px;
     height: 100vh;
-    background-color: aliceblue;
+    background-color: #e8f0fe;
     float: left;
     text-align: center;        
     .logo{
@@ -137,6 +137,9 @@ const Nav = () => {
                 setUserPhone(response.data[0].phone);
                 setUserSNS(response.data[0].sns);
                 setUserPro(response.data[0].profile);
+                const resNum = await Api.userDo(userId);
+                console.log(resNum);
+                setNum(resNum.data.pes);
             } catch(e){
                 console.log(e);
             }
@@ -161,12 +164,14 @@ const Nav = () => {
     }
 
     //유저정보가져오기
-
+    const logoStyle = {
+    fill:
+  "linear-gradient(217deg, rgb(0, 82, 212, .8), rgba(255,0,0,0) 70.71%), linear-gradient(127deg, rgb(66, 99, 247, .8), rgba(0,255,0,0) 70.71%), linear-gradient(336deg, rgb(111, 177, 252, .8), rgba(0,0,255,0) 70.71%)"};
 
     return (
         <Box>
             <div className="logo" onClick={onClickLogo}>
-                <Logo/>
+                <Logo style={logoStyle}/>
                 <h1>plannet</h1>
                 <h2>Let's plan it!</h2>
             </div>
