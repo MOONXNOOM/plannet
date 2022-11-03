@@ -98,11 +98,18 @@ const plannetApi = {
         return await axios.post(PLANNET_DOMAIN + "WriteLoad", object, HEADER);
     },
     // 자유게시판
-    boardTitle: async function(no){
+    boardTitle: async function(){
+        const object = {
+            cmd : "boardList"
+        }
+        return await axios.post(PLANNET_DOMAIN + "BoardTitleServlet", object, HEADER);
+    },
+
+    boardList: async function(no){
         const object = {
             board_no:no
         }
-        return await axios.post(PLANNET_DOMAIN + "BoardTitleServlet", object, HEADER);
+        return await axios.post(PLANNET_DOMAIN + "BoardList", object, HEADER);
     },
     //userInfo 불러오기
     userInfoLoad: async function(id){
