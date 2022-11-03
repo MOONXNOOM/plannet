@@ -131,6 +131,13 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "UserDo", object, HEADER);
     },
+    //달력
+    planMark: async function(id) {
+        const object = {
+            id: id
+        }
+        return await axios.post(PLANNET_DOMAIN + "PlanMark", object, HEADER);
+    },
 }
 
 export default plannetApi;

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import CalEx from './CalEx';
 import Memo from './Memo';
 import List from './List';
-import App from '../App';
 import Quote from './Quote';
 
 const Wrap = styled.div`
