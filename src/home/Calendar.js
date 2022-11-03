@@ -2,7 +2,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // css import
 import moment from "moment";
 import React, { useEffect, useState } from 'react';
-import './CalEx.css';
+import './Calendar.css';
 import Api from "../api/plannetApi";
 
 const CalEx = () => {

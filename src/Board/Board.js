@@ -123,28 +123,20 @@ const Section = styled.div`
 `;
 // 아직 구현이 안됨
 const Board = () => {
-    const [boardList, setBoardList] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [boardList, setBoardList] = useState([]);
 
     useEffect(() => {
         const boardData = async () => {
-            setLoading(true);
-
             try {
-                const response = await Api.BoardTitleServlet("1","2","3");
+                const response = await Api.boardList();
                 setBoardList(response.data);
-                console.log(response.data)
+                console.log(response.data);
             } catch (e) {
                 console.log(e);
             }
-            setLoading(false);
         };
         boardData();
     }, []);
-
-    if(loading) {
-        return <Section>대기 중...</Section>
-    }
 
     return (
         <Wrap>
@@ -165,113 +157,14 @@ const Board = () => {
                             <th>Date</th>
                         </tr>
                         {boardList && boardList.map(e => (
-                            <tr key={e.board_no}>
-                                <td>{e.board_no}</td>
+                            <tr key={e.num}>
+                                <td>{e.num}</td>
                                 <td>{e.title}</td>
                                 <td>{e.id}</td>
-                                <td>{e.view}</td>
-                                <td>{e.write_date}</td>
+                                <td>{e.views}</td>
+                                <td>{(e.date).substring(0,10)}</td>
                             </tr>     
                         ))}
-                        
-                        {/* <tr>
-                            <td>2</td>
-                            <td><a href="#">제목을 누르면 게시물로 이동</a></td>
-                            <td>작성자</td>
-                            <td>434</td>
-                            <td>22.10.21</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td><a href="#">제목을 누르면 게시물로 이동</a></td>
-                            <td>작성자</td>
-                            <td>434</td>
-                            <td>22.10.21</td>
-                        </tr> */}
-                        {/* <tr>
-                            <td>4</td>
-                            <td><a href="#">제목을 누르면 게시물로 이동</a></td>
-                            <td>작성자</td>
-                            <td>434</td>
-                            <td>22.10.21</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td><a href="#">제목을 누르면 게시물로 이동</a></td>
-                            <td>작성자</td>
-                            <td>434</td>
-                            <td>22.10.21</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td><a href="#">제목을 누르면 게시물로 이동</a></td>
-                            <td>작성자</td>
-                            <td>434</td>
-                            <td>22.10.21</td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td><a href="#">제목을 누르면 게시물로 이동</a></td>
-                            <td>작성자</td>
-                            <td>434</td>
-                            <td>22.10.21</td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td><a href="#">제목을 누르면 게시물로 이동</a></td>
-                            <td>작성자</td>
-                            <td>434</td>
-                            <td>22.10.21</td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td><a href="#">제목을 누르면 게시물로 이동</a></td>
-                            <td>작성자</td>
-                            <td>434</td>
-                            <td>22.10.21</td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td><a href="#">제목을 누르면 게시물로 이동</a></td>
-                            <td>작성자</td>
-                            <td>434</td>
-                            <td>22.10.21</td>
-                        </tr>
-                        <tr>
-                            <td>11</td>
-                            <td><a href="#">제목을 누르면 게시물로 이동</a></td>
-                            <td>작성자</td>
-                            <td>434</td>
-                            <td>22.10.21</td>
-                        </tr>
-                        <tr>
-                            <td>12</td>
-                            <td><a href="#">제목을 누르면 게시물로 이동</a></td>
-                            <td>작성자</td>
-                            <td>434</td>
-                            <td>22.10.21</td>
-                        </tr>
-                        <tr>
-                            <td>13</td>
-                            <td><a href="#">제목을 누르면 게시물로 이동</a></td>
-                            <td>작성자</td>
-                            <td>434</td>
-                            <td>22.10.21</td>
-                        </tr>
-                        <tr>
-                            <td>14</td>
-                            <td><a href="#">제목을 누르면 게시물로 이동</a></td>
-                            <td>작성자</td>
-                            <td>434</td>
-                            <td>22.10.21</td>
-                        </tr>
-                        <tr>
-                            <td>15</td>
-                            <td><a href="#">제목을 누르면 게시물로 이동</a></td>
-                            <td>작성자</td>
-                            <td>434</td>
-                            <td>22.10.21</td>
-                        </tr> */}
                     </table>
                 </div>
                 <div className="util_box">
