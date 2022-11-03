@@ -2,9 +2,14 @@
     width: 521px;
     border: none;
 }
+.react-calendar__month-view__days__day abbr{
+    display: block;
+    margin-top: -15px;
+}
 .react-calendar__month-view__days__day {
     height: 60px;
     background-color: #f9f9f9;
+    position: relative;
 }
 .react-calendar__navigation__label {
     background-color: #f9f9f9;
@@ -17,7 +22,6 @@
 .react-calendar__month-view__weekdays__weekday--weekend abbr {
     color: #3249ce;
 }
-
 .react-calendar__month-view__days__day:nth-child(7n) abbr,
 .react-calendar__month-view__weekdays__weekday:nth-child(7n) abbr {
     color: rgb(206, 36, 36);
@@ -26,8 +30,6 @@
 .react-calendar__month-view__days__day--neighboringMonth abbr {
     color: rgb(221, 215, 215)!important;
 }
-
-
 .react-calendar__navigation{
     margin-top: 1px;
     margin-bottom: 0;
@@ -54,22 +56,22 @@
     background-color: #f9f9f9;
     padding: .8em;
 }
-.react-calendar__tile--now, 
-.react-calendar__tile--active, 
 .react-calendar__tile--range, 
-.react-calendar__tile--rangeStart, 
-.react-calendar__tile--rangeEnd, 
-.react-calendar__tile--rangeBothEnds{
+.react-calendar__tile--rangeStart{
+    background-color: #f9f9f9 !important;
+}
+.react-calendar__tile--now{
     background-color: #4555AE !important;
 }
-.react-calendar__tile--active:enabled:hover, 
-.react-calendar__tile--active:enabled:focus, 
-.react-calendar__tile--hasActive:enabled:hover, 
-.react-calendar__tile--hasActive:enabled:focus{
+.react-calendar__tile--now:enabled:hover{
     background-color: #384696 !important;
 }
+.react-calendar__tile--range:enabled:hover abbr, 
+.react-calendar__tile--rangeStart:enabled:hover abbr{
+    color: #333;
+}
 .react-calendar__tile--active:enabled:hover abbr, 
-.react-calendar__tile--active:enabled:focus abbr, 
+.react-calendar__tile--active:enabled:focus abbr,
 .react-calendar__tile--hasActive abbr,
 .react-calendar__tile--now abbr{
     color: white;
@@ -77,4 +79,22 @@
 }
 .react-calendar__viewContainer{
     background-color: #f9f9f9;
+}
+.dot {
+    height: 8px;
+    width: 8px;
+    background-color: #ffca3a;
+    border-radius: 50%;
+    display: flex;
+    margin-left: 1px;
+ }
+.dotBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 14px;
+    
 }
