@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 import './style2.css';
 import styled from 'styled-components';
 import Nav from '../Utill/Nav';
+import Api from '../api/plannetApi'
 import { Link } from "react-router-dom";
 
 // 임시파일
@@ -126,6 +127,22 @@ const Section = styled.div`
 
 
 const PostView = () => {
+    const [boardDetail, setBoardDetail] = useState([]);
+    const getNum = window.localStorage.getItem("boardNum");
+
+    
+    useEffect(() => {
+        const boardData = async () => {
+            try {
+                const response = await Api.boardBody(getNum);
+                setBoardDetail(response.data);
+                console.log(response.data);
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        boardData();
+    }, []);
     return(
         <Wrap>
             <Nav />
@@ -142,6 +159,11 @@ const PostView = () => {
                     <div>
                         <h2>내용보기</h2>
                         <hr></hr>
+                        {boardDetail&&boardDetail.map(e => (
+                            <div key={getNum}>
+                                <h3>{e.title}</h3>
+                            </div>
+                        ))}
                         <div><h3>게시글 제목 불러오기 22222</h3></div>
                         <hr></hr>
                         <div>

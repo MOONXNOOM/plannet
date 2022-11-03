@@ -1,18 +1,24 @@
-import styled from "styled-components";
-import Nav from "../Utill/Nav";
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-// import ReactHtmlParser from 'react-html-parser';
-import {useState} from 'react';
+// import styled from "styled-components";
+// import Nav from "../Utill/Nav";
+// import { CKEditor } from '@ckeditor/ckeditor5-react';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// // import ReactHtmlParser from 'react-html-parser';
+// import {useState} from 'react';
+// // // 임시파일
 
-// // 임시파일
+// // const Wrap = styled.div`
+// //     width: 1130px;
+// //     height: 100vh;
+// //     background-color: white;
+// //     margin: 0 auto;
+// // `;
 
-const Wrap = styled.div`
-    width: 1130px;
-    height: 100vh;
-    background-color: white;
-    margin: 0 auto;
-`;
+// const Wrap = styled.div`
+//     width: 1130px;
+//     height: 100vh;
+//     background-color: white;
+//     margin: 0 auto;
+// `;
 
 const Section = styled.div`
     width: 850px;
@@ -162,7 +168,7 @@ const Section = styled.div`
 function Create() {
     const [creatBoard, setCreateBoard] = useState ({
         title: '',
-        board: ''
+        detail: ''
     })
     const [viewBoard, setViewBoard] = useState([]);
     const getValue = e => {
@@ -184,7 +190,7 @@ function Create() {
                       <div style={{ border: '1px solid #333' }}>
                         <h2>{element.title}</h2>
                         <div>
-                            {(element.board)}
+                            {(element.detail)}
                             </div>
                         </div>
                     )}
@@ -213,7 +219,7 @@ function Create() {
             console.log({ event, editor, data });
             setCreateBoard ({
                 ...creatBoard,
-                board: data
+                detail: data
             })
             console.log(creatBoard);
           }}
@@ -233,34 +239,34 @@ function Create() {
     )
 };
 
-export default Create;
+// export default Create;
 
-// // <div className="boardmain"> 
-// // <div>
-// //     <h1>자유게시판</h1>
-// //     <p>뭔가 들어갈 글이 필요하려나? 작성 시 유의해 주세요! 비방, 광고, 불건전한 내용의 글은 사전 동의 없이 삭제될 수 있습니다.</p> 
-// // </div>
-// // <br></br>
-// // <div style={{background:'gray', height:'500px'}}> 
-// //     <div>
-// //        제목<input type="text"></input><br></br>
-// //        작성자<input type="text"></input><br></br>
-// //     </div>
-// //     <hr></hr>
-// //     <div>
-// //         내용 <br></br>
-// //         여기에 이제 게시판 관련 플러그인 추가, 위즈윅 에디터, summernote, 리액트로 에디터 구현 등 
-// //         https://github.com/jpuri/react-draft-wysiwyg
-// //         https://github.com/channaveer/tutorial-summernote-texteditor
-// //         no jquery summernote editor
-// //     </div>
-// // </div>
-// // <div>첨부파일</div>
-// // <br></br>
-// // <div className='center'>
-// //     <button>등록</button>
-// //     <button>취소</button>
-// // </div>
-// // </div>
-// // </div>
-// // </div>
+// // // <div className="boardmain"> 
+// // // <div>
+// // //     <h1>자유게시판</h1>
+// // //     <p>뭔가 들어갈 글이 필요하려나? 작성 시 유의해 주세요! 비방, 광고, 불건전한 내용의 글은 사전 동의 없이 삭제될 수 있습니다.</p> 
+// // // </div>
+// // // <br></br>
+// // // <div style={{background:'gray', height:'500px'}}> 
+// // //     <div>
+// // //        제목<input type="text"></input><br></br>
+// // //        작성자<input type="text"></input><br></br>
+// // //     </div>
+// // //     <hr></hr>
+// // //     <div>
+// // //         내용 <br></br>
+// // //         여기에 이제 게시판 관련 플러그인 추가, 위즈윅 에디터, summernote, 리액트로 에디터 구현 등 
+// // //         https://github.com/jpuri/react-draft-wysiwyg
+// // //         https://github.com/channaveer/tutorial-summernote-texteditor
+// // //         no jquery summernote editor
+// // //     </div>
+// // // </div>
+// // // <div>첨부파일</div>
+// // // <br></br>
+// // // <div className='center'>
+// // //     <button>등록</button>
+// // //     <button>취소</button>
+// // // </div>
+// // // </div>
+// // // </div>
+// // // </div>
