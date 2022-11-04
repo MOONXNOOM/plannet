@@ -1,24 +1,239 @@
-// import styled from "styled-components";
-// import Nav from "../Utill/Nav";
-// import { CKEditor } from '@ckeditor/ckeditor5-react';
-// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-// // import ReactHtmlParser from 'react-html-parser';
-// import {useState} from 'react';
-// // 임시파일
+import styled from "styled-components";
+import Nav from "../Utill/Nav";
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Api from "../api/plannetApi";
+import {useState} from 'react';
 
-// // const Wrap = styled.div`
-// //     width: 1130px;
-// //     height: 100vh;
-// //     background-color: white;
-// //     margin: 0 auto;
-// // `;
+const Wrap = styled.div`
+    width: 1130px;
+    height: 100vh;
+    background-color: white;
+    margin: 0 auto;
+`;
+const Section = styled.div`
+    width: 850px;
+    height: 100vh;
+    float: left;
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+        width: 20px;
+        padding: 15px;
+    }
+    &::-webkit-scrollbar-thumb {
+        height: 30%; /* 스크롤바의 길이 */
+        background: #ddd; /* 스크롤바의 색상 */
+        border-radius: 10px;
+        border: 7px solid transparent;
+        background-clip: padding-box;
+    }
+    &::-webkit-scrollbar-track {
+        background: none;
+        /*스크롤바 뒷 배경 색상*/
+    }
+    div{
+        width: 100%;
+        padding: 10px 30px;
+    }
+    .sub_box{
+        h2{
+            font-size: 28px;
+            margin-top: 35px;
+            font-weight: 900;
+        }
+        span{
+            float: left;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+        button{
+            float:right;
+            font-weight: 600;
+            display: block;
+            font-size: 16px;
+            padding: 8px 35px;
+            border-radius: 25px;
+            background-color: #4555AE;
+            color: white;
+            border: none;
+            &:hover{background-color: #666;}
+        }
+    }
+    button{
+        border: none;
+        padding-right: 20px; 
+        background: none;
+        font-size: 16px; 
+        color: #bbb;
+        font-weight: 700;
+        transition: all .1s ease-in;
+        &:hover, &:hover i{color: #888;}
+        i{
+            font-size: 16px; 
+            line-height: 48px; 
+            color: #bbb;
+            transition: all .1s ease-in;
+        }
+    }
+    table{
+        border-collapse: collapse; 
+        width: 100%;
+        background-color: #4555AE;
+        border-bottom: solid 1px #4555AE;
+        text-align: center;
+        tr:nth-child(2n) td{background-color: #f9f9f9;}
+        th{padding: 10px; color: white;}
+        td{padding: 10px; background-color: white; border-left: solid 1px #bbb; border-top: solid 1px #ddd;}
+        td:first-child{border-left: none};
+        td:nth-child(2){width: 400px; text-align: left; padding-left: 20px;}  
+        tr:hover td, tr:hover a{color: #4555AE;}
+    }
+    .copy{
+        width: 850px;
+        position: absolute;
+        bottom: 0;
+        text-align: center;
+        color: #dfdfdf;
+        line-height: 50px;
+    }
+    .util_box{
+        .page_list {
+            width: 500px; float:left;
+            li{list-style-type: none; display: inline; padding: 0px 5px;
+                a{
+                    display: inline-block; text-decoration: none; padding: 5px 10px; color:#000;
+                    border-radius: 5px;
+                    -webkit-transition: background-color 0.3s;
+                    transition: background-color 0.3s;
+                    &:active {background-color: #4caf50; color: #fff;}
+                    &:hover{color:#0d3c01; font-weight: bold;}
+                    &:hover:not(.active) {background-color: #4555AE; color:white;}
+                }
+            } 
+        }
+        .search{
+            float: right;
+            width: 200px; height: 35px; padding: 0 10px; border: solid 2px #ddd; 
+            background-color: white;
+            input{width: 150px; height: 31px; border: 0px; outline: none; margin-right: 10px;}
+        }
+    }
+    .form-wrapper {
+        width: 100%;
+        margin: 0 auto;
+    }
+    .title-input {
+        width: 770px;
+        height: 40px;
+        text-align: center;
+        outline: none;
+        display: block;
+        margin-bottom: 30px;
+        margin: 0 auto;
+    }
+    .text-area {
+        width: 80%;
+        min-height: 500px;
+    }
+    .submit-button {
+        font-weight: 600;
+        display: block;
+        position: absolute; 
+        right: 30px;
+        font-size: 16px;
+        padding: 8px 35px;
+        border-radius: 25px;
+        background-color: #4555AE;
+        color: white;
+        border: none;
+        transition: all .1s ease-in;
+        &:hover{
+            background-color: #4555AE;
+        }
+    }
 
-// const Wrap = styled.div`
-//     width: 1130px;
-//     height: 100vh;
-//     background-color: white;
-//     margin: 0 auto;
-// `;
+    .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
+        height: 500px; 
+    }
+    .ck-editor__main {padding: 0;}
+`;
+
+function Create() {
+    const getId = window.localStorage.getItem("userId");
+    const [title, setTitle] = useState();
+    const [nickname, setNickname] = useState();
+    const [detail, setDetail] = useState();
+    const [anonymous, setAnonymous] = useState(false); 
+
+    const onClickSave = async() => {
+        await Api.boardCreate(getId, title, nickname, detail);
+        window.location.assign('/board');
+    }
+
+    const onChangeTitle = (e) => {
+        setTitle(e.target.value);
+    }
+    
+    const onChangeDetail = (e) => {
+        setDetail(e.target.value);
+    }
+
+    // ---------------------------------------------------
+
+    const [viewBoard, setViewBoard] = useState([]);
+    // const getValue = e => {
+    //     const { name, value } = e.target;
+    //     setCreateBoard ({
+    //         ...creatBoard,
+    //         [name]: value
+    //     })
+    //     console.log(creatBoard);
+    // };
+
+    // ------------------------------------------------
+
+    return (
+        <Wrap>
+            <Nav></Nav>
+            <Section>
+                <div className="board_list sub_box">
+                    <h2>자유게시판</h2>
+                    <p>
+                        <span>작성 시 유의해 주세요! 비방, 광고, 불건전한 내용의 글은 사전 동의 없이 삭제될 수 있습니다.</span>
+                    </p>    
+                    <table>
+                        <tr>
+                            <th colSpan={2}>게시물 작성</th>
+                        </tr>
+                        <tr>
+                            <td>세부정보</td>
+                            <td><input type="checkbox"/>비공개</td>
+                        </tr>
+                    </table>           
+                </div>
+                <div className='form-wrapper'>
+                    <input className="title-input" type='text' placeholder='제목을 입력하세요.' value={title} onChange={onChangeTitle} name='title' />
+                    <CKEditor editor={ClassicEditor} data={detail} 
+                        onChange={(event, editor) => {
+                            const data = editor.getData();
+                            console.log({event, editor, data});
+                            setDetail(data);
+                            }}
+                    />
+                </div>
+            
+                <button className="submit-button" onClick={onClickSave}>SAVE</button>
+                {/* <button className="submit-button">CANCLE</button> */}
+                {/* /* <Link to ='/board'></Link> */}
+                <p className="copy">&#169; Plannet.</p>
+            </Section>
+        </Wrap>
+    )
+};
+
+export default Create;
 
 // function Create() {
 //     const [creatBoard, setCreateBoard] = useState ({

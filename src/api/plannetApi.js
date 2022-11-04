@@ -105,9 +105,8 @@ const plannetApi = {
     },
 
     // 자유게시판 글 작성
-    boardCreate: async function(num, id, title, nickname, detail){
+    boardCreate: async function(id, title, nickname, detail){
         const object = {
-            num : num,
             id : id,
             title : title,
             nickname : nickname,
@@ -115,6 +114,7 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "BoardCreate", object, HEADER);
     },
+
 
     // 게시판 내용보기
     boardBody: async function(num){
