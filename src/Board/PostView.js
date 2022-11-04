@@ -164,8 +164,7 @@ const PostView = () => {
                             </tr>
                         </table>))}
                     </div>
-{/* 
-
+{/*
                     <div className='center'>
                         다시 누르면 좋아요 취소되게 할지, 혹은 값 변동 안 되고 대신 '좋아요는 한번만 누를 수 있다' modal 띄우기
                         <button>좋아요 + 좋아요 수 함께 뜨는 버튼</button>
