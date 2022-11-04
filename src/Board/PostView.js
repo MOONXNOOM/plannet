@@ -168,10 +168,9 @@ const PostView = () => {
                                     </div>
                                 </div>
                             </>
-                            
                         ))}
-                        
-                    </div>
+                </div>
+                    
                     <div>첨부파일 l 첨부된 파일</div>
                     <br></br>
                     <hr></hr>
