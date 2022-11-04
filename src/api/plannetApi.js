@@ -114,8 +114,7 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "BoardCreate", object, HEADER);
     },
-
-
+    
     // 게시판 내용보기
     boardBody: async function(num){
         const object = {
