@@ -16,7 +16,7 @@ const ListBox = styled.div`
         float: left;
         margin-right: 5px;
         padding: 5px;
-        p{
+        &>p{
             width: 100%;
             font-size: 15px;
             line-height: 26px;
@@ -26,6 +26,7 @@ const ListBox = styled.div`
             border-bottom: 2px solid #eee;
         }
         ul{
+            
             height: 180px;
             overflow: hidden;
             overflow-y: scroll;
@@ -58,6 +59,19 @@ const ListBox = styled.div`
                     display: inline;
                     margin-left: -8px;
                 }
+                &.chkPlan{
+                    text-decoration: line-through;
+                    color: #bbb;
+                    span{
+                        color: #bbb;
+                    }
+                }
+            }
+            p.noPlan{
+                color: #d9d9d9;
+                text-align: center;
+                line-height: 160px;
+                margin-left: 8px;
             }
         }
         
@@ -81,14 +95,13 @@ const List = () => {
       const planLoad = async() => {
           try{
                 const response = await Api.weekList(getId);
-                console.log(response.data);
-                setSunList();
-                setMonList();
-                setTueList();
-                setWedList();
-                setThuList();
-                setFriList();
-                setSatList();
+                setSunList(response.data.weekPlan.sun);
+                setMonList(response.data.weekPlan.mon);
+                setTueList(response.data.weekPlan.tue);
+                setWedList(response.data.weekPlan.wed);
+                setThuList(response.data.weekPlan.thu);
+                setFriList(response.data.weekPlan.fri);
+                setSatList(response.data.weekPlan.sat);
           } catch(e){
               console.log(e);
           }
@@ -100,73 +113,78 @@ const List = () => {
             <div>
                 <p>SUN</p>
                 <ul>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
+                    {sunList.length !== 0 ? 
+                        sunList.map((planItem) => {
+                            if((planItem.checked) ==='0') return (<li key={planItem.no}><span>{planItem.plan}</span></li>);
+                            else return (<li key={planItem.no} className="chkPlan"><span>{planItem.plan}</span></li>);
+                        }) : <p className="noPlan">일정없음</p>
+                    }
                 </ul>
             </div>
             <div>
                 <p>MON</p>
                 <ul>
-                    <li><span>일정111111111</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
+                    {monList.length !== 0 ?
+                        monList.map((planItem) => {
+                            if((planItem.checked) ==='0') return (<li key={planItem.no}><span>{planItem.plan}</span></li>);
+                            else return (<li key={planItem.no} className="chkPlan"><span>{planItem.plan}</span></li>);
+                        }) : <p className="noPlan">일정없음</p>
+                    }
                 </ul>
             </div>
             <div>
                 <p>TUE</p>
                 <ul>
-                    <li><span>일정111111111</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
+                    {tueList.length !== 0 ? 
+                        tueList.map((planItem) => {
+                            if((planItem.checked) ==='0') return (<li key={planItem.no}><span>{planItem.plan}</span></li>);
+                            else return (<li key={planItem.no} className="chkPlan"><span>{planItem.plan}</span></li>);
+                        }) : <p className="noPlan">일정없음</p>
+                    }
                 </ul>
             </div>
             <div>
                 <p>WED</p>
                 <ul>
-                    <li><span>일정111111111</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
+                    {wedList.length !== 0 ? 
+                        wedList.map((planItem) => {
+                            if((planItem.checked) ==='0') return (<li key={planItem.no}><span>{planItem.plan}</span></li>);
+                            else return (<li key={planItem.no} className="chkPlan"><span>{planItem.plan}</span></li>);
+                        }) : <p className="noPlan">일정없음</p>
+                    }
                 </ul>
             </div>
             <div>
                 <p>THU</p>
                 <ul>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
+                    {thuList.length !== 0 ?  
+                        thuList.map((planItem) => {
+                            if((planItem.checked) ==='0') return (<li key={planItem.no}><span>{planItem.plan}</span></li>);
+                            else return (<li key={planItem.no} className="chkPlan"><span>{planItem.plan}</span></li>);
+                        }) : <p className="noPlan">일정없음</p>
+                    }
                 </ul>
             </div>
             <div>
                 <p>FRI</p>
                 <ul>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
+                    {friList.length !== 0 ? 
+                        friList.map((planItem) => {
+                            if((planItem.checked) ==='0') return (<li key={planItem.no}><span>{planItem.plan}</span></li>);
+                            else return (<li key={planItem.no} className="chkPlan"><span>{planItem.plan}</span></li>);
+                        }) : <p className="noPlan">일정없음</p>
+                    }
                 </ul>
             </div>
             <div>
                 <p>SAT</p>
                 <ul>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
-                    <li><span>일정1</span></li>
+                    {satList.length !== 0 ? 
+                        satList.map((planItem) => {
+                            if((planItem.checked) ==='0') return (<li key={planItem.no}><span>{planItem.plan}</span></li>);
+                            else return (<li key={planItem.no} className="chkPlan"><span>{planItem.plan}</span></li>);
+                        }) : <p className="noPlan">일정없음</p>
+                    }
                 </ul>
             </div>
             
