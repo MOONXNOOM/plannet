@@ -247,22 +247,18 @@ const Write = () => {
         }
         writeLoad();
     },[getId, date]);
-
+    console.log(planList);
     const onClickSave = async() => {
         await Api.writeSave(getId, date, planList, diary);
-        window.location.assign('/home');
-    }
-
-    const onClickBack = () => {
-        window.location.assign('/home');
+        window.location.replace('/home');
     }
 
     return (
         <Wrap>
             <Nav />
             <Section>
-                <div className="btnbox" onClick={onClickBack}>
-                    <button className="back">
+                <div className="btnbox">
+                    <button className="back" onClick={onClickSave}>
                     <i className="bi bi-chevron-compact-left"/>{date}
                     </button>
                 </div>

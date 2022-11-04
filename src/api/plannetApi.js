@@ -156,6 +156,13 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "PlanMark", object, HEADER);
     },
+    //주간일정 출력
+    weekList: async function(id) {
+        const object = {
+            id: id
+        }
+        return await axios.post(PLANNET_DOMAIN + "WeekList", object, HEADER);
+    },
 
 
 }

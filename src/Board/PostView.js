@@ -146,12 +146,6 @@ const PostView = () => {
             <Section>
             <div className="wrap">
             <div className="board" >
-                {/* <div className="sidenav left">
-                    <a href="#about">메뉴부분</a>
-                    <a href="#services">만들어지면</a>
-                    <a href="#clients">가져오기</a>
-                    <a href="#contact">채우기용 영역</a>
-                </div> */}
                 <div className="boardmain"> 
                     <div>
                         <h2>내용보기</h2>
