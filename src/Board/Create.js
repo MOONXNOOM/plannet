@@ -79,7 +79,7 @@ const Section = styled.div`
     }
     table{
         border-collapse: collapse; 
-        width:100%;
+        width: 100%;
         background-color: #4555AE;
         border-bottom: solid 1px #4555AE;
         text-align: center;
@@ -125,11 +125,13 @@ const Section = styled.div`
         margin: 0 auto;
     }
     .title-input {
-        width: 400px;
+        width: 770px;
         height: 40px;
         text-align: center;
-        margin-left: 185px;
+        outline: none;
+        display: block;
         margin-bottom: 30px;
+        margin: 0 auto;
     }
     .text-area {
         width: 80%;
@@ -169,6 +171,10 @@ function Create() {
         await Api.boardCreate(getId, title, nickname, detail);
         window.location.assign('/board');
     }
+
+    const onChangeTitle = (e) => {
+        setTitle(e.target.value);
+    }
     
     const onChangeDetail = (e) => {
         setDetail(e.target.value);
@@ -193,36 +199,30 @@ function Create() {
             <Nav></Nav>
             <Section>
                 <div className="board_list sub_box">
-                    {viewBoard.map(element =>
-                      <div style={{ border: '1px solid #333' }}>
-                        <h2>{element.title}</h2>
-                        <div>
-                            {(element.detail)}
-                            </div>
-                        </div>
-                    )}
                     <h2>자유게시판</h2>
                     <p>
                         <span>작성 시 유의해 주세요! 비방, 광고, 불건전한 내용의 글은 사전 동의 없이 삭제될 수 있습니다.</span>
                     </p>    
-                    <div>
-                        <table>
-                            <tr>
-                                <th>게시물 작성</th>
-                            </tr>
-                        </table>
-                    </div>            
+                    <table>
+                        <tr>
+                            <th colSpan={2}>게시물 작성</th>
+                        </tr>
+                        <tr>
+                            <td>세부정보</td>
+                            <td><input type="checkbox"/>비공개</td>
+                        </tr>
+                    </table>           
                 </div>
                 <div className='form-wrapper'>
-                            <input className="title-input" type='text' placeholder='제목' value={title} onChange={setTitle} name='title' />
-                            <CKEditor editor={ClassicEditor} data={detail} 
-                                onChange={(event, editor) => {
-                                    const data = editor.getData();
-                                    console.log({event, editor, data});
-                                    setDetail(data);
-                                    }}
-                            />
-                       </div>
+                    <input className="title-input" type='text' placeholder='제목을 입력하세요.' value={title} onChange={onChangeTitle} name='title' />
+                    <CKEditor editor={ClassicEditor} data={detail} 
+                        onChange={(event, editor) => {
+                            const data = editor.getData();
+                            console.log({event, editor, data});
+                            setDetail(data);
+                            }}
+                    />
+                </div>
             
                 <button className="submit-button" onClick={onClickSave}>SAVE</button>
                 {/* <button className="submit-button">CANCLE</button> */}
@@ -232,6 +232,8 @@ function Create() {
         </Wrap>
     )
 };
+
+export default Create;
 
 // function Create() {
 //     const [creatBoard, setCreateBoard] = useState ({
