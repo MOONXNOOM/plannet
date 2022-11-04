@@ -23,7 +23,7 @@ function App() {
         <Route path='/find' element={<PublicRoute><Find /></PublicRoute>}/>
 
         <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>}/>
-        <Route path="/write" element={<PrivateRoute><Write /></PrivateRoute>}/>
+        <Route path="/write/:date" element={<PrivateRoute><Write /></PrivateRoute>}/>
         <Route path="/setting" element={<PrivateRoute><Setting /></PrivateRoute>}/>
         <Route path="/board" element={<PrivateRoute><Board /></PrivateRoute>}/>
         <Route exact path='/postView/:no' element={<PrivateRoute><PostView /></PrivateRoute>}/>
