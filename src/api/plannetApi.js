@@ -105,12 +105,12 @@ const plannetApi = {
     },
 
     // 자유게시판 글 작성
-    boardCreate: async function(id, title, nickname, detail){
+    boardCreate: async function(id, title, detail, isChecked){
         const object = {
             id : id,
             title : title,
-            nickname : nickname,
-            detail : detail
+            detail : detail,
+            isChecked : isChecked
         }
         return await axios.post(PLANNET_DOMAIN + "BoardCreate", object, HEADER);
     },

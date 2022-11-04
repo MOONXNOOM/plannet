@@ -11,6 +11,28 @@ const Wrap = styled.div`
     background-color: white;
     margin: 0 auto;
 `;
+
+const StyledInput = styled.input`
+        appearance: none;
+        border: 2px solid #bbb;
+        border-radius: 0.2rem;
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+        transition: all .03s ease-in;
+        vertical-align: middle;
+
+    &:checked {
+        border-color: transparent;
+        background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
+        background-size: 150% 150%;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-color: #4555AE;
+    }
+`;
+
+
 const Section = styled.div`
     width: 850px;
     height: 100vh;
@@ -125,14 +147,19 @@ const Section = styled.div`
         margin: 0 auto;
     }
     .title-input {
-        width: 770px;
+        font-size: 20px;
+        width: 650px;
         height: 40px;
-        text-align: center;
         outline: none;
         display: block;
         margin-bottom: 30px;
+        padding-left: 15px;
         margin: 0 auto;
+        border: none;
+        background: none;
+        &:focus{border: none; background:none;}
     }
+
     .text-area {
         width: 80%;
         min-height: 500px;
@@ -153,7 +180,6 @@ const Section = styled.div`
             background-color: #4555AE;
         }
     }
-
     .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
         height: 500px; 
     }
@@ -163,37 +189,22 @@ const Section = styled.div`
 function Create() {
     const getId = window.localStorage.getItem("userId");
     const [title, setTitle] = useState();
-    const [nickname, setNickname] = useState();
     const [detail, setDetail] = useState();
-    const [anonymous, setAnonymous] = useState(false); 
+    const [isChecked, setIsChecked] = useState(false);
 
     const onClickSave = async() => {
-        await Api.boardCreate(getId, title, nickname, detail);
+        await Api.boardCreate(getId, title, detail, isChecked);
         window.location.assign('/board');
     }
 
     const onChangeTitle = (e) => {
         setTitle(e.target.value);
     }
-    
-    const onChangeDetail = (e) => {
-        setDetail(e.target.value);
-    }
 
-
-    // --------------------------------------------------- 아직체크중
-
-    const [viewBoard, setViewBoard] = useState([]);
-    // const getValue = e => {
-    //     const { name, value } = e.target;
-    //     setCreateBoard ({
-    //         ...creatBoard,
-    //         [name]: value
-    //     })
-    //     console.log(creatBoard);
-    // };
-
-    // ------------------------------------------------
+    const handleChecked = (e) => {
+        setIsChecked(e.target.checked);
+        console.log(isChecked);
+      };
 
     return (
         <Wrap>
@@ -209,22 +220,19 @@ function Create() {
                             <th colSpan={2}>게시물 작성</th>
                         </tr>
                         <tr>
-                            <td>세부정보</td>
-                            <td><input type="checkbox"/>비공개</td>
+                            {/* 아직 디자인 안 함 */}
+                            <td><input className="title-input" type='text' placeholder='제목을 입력하세요.' value={title} onChange={onChangeTitle} name='title' /></td>
+                            <td><StyledInput type="checkbox" checked={isChecked} onChange={handleChecked}/>익명</td>
                         </tr>
                     </table>           
                 </div>
                 <div className='form-wrapper'>
-                    <input className="title-input" type='text' placeholder='제목을 입력하세요.' value={title} onChange={onChangeTitle} name='title' />
-                    <CKEditor editor={ClassicEditor} data={detail} 
-                        onChange={(event, editor) => {
+                    <CKEditor editor={ClassicEditor} data={detail} onChange={(event, editor) => {
                             const data = editor.getData();
                             console.log({event, editor, data});
                             setDetail(data);
-                            }}
-                    />
+                        }}/>
                 </div>
-            
                 <button className="submit-button" onClick={onClickSave}>SAVE</button>
                 {/* <button className="submit-button">CANCLE</button> */}
                 <p className="copy">&#169; Plannet.</p>
@@ -234,110 +242,3 @@ function Create() {
 };
 
 export default Create;
-
-// 아직체크중
-// function Create() {
-//     const [creatBoard, setCreateBoard] = useState ({
-//         title: '',
-//         detail: ''
-//     })
-//     const [viewBoard, setViewBoard] = useState([]);
-//     const getValue = e => {
-//         const { name, value } = e.target;
-//         setCreateBoard ({
-//             ...creatBoard,
-//             [name]: value
-//         })
-//         console.log(creatBoard);
-//     };
-//     const onclickUpload = () => {
-//         setViewBoard(viewBoard.concat({...creatBoard}))};
-//     return (
-//         <Wrap>
-//             <Nav></Nav>
-//             <Section>
-//                 <div className="board_list sub_box">
-//                     {viewBoard.map(element =>
-//                       <div style={{ border: '1px solid #333' }}>
-//                         <h2>{element.title}</h2>
-//                         <div>
-//                             {(element.detail)}
-//                             </div>
-//                         </div>
-//                     )}
-//                     <h2>자유게시판</h2>
-//                     <p>
-//                         <span>작성 시 유의해 주세요! 비방, 광고, 불건전한 내용의 글은 사전 동의 없이 삭제될 수 있습니다.</span>
-//                     </p>                
-//                 </div>
-//                 <div>
-//                     <table>
-//                         <tr>
-//                             <th>게시물 작성</th>
-//                         </tr>
-//                     </table>
-//                 </div>
-//                 <div className='form-wrapper'>
-//                   <input className="title-input" type='text' placeholder='제목' onChange={getValue} name='title' />
-//                 <CKEditor
-//           editor={ClassicEditor}
-//           data="<p>자유롭게 글을 작성하세요!</p>"
-//           onReady={editor => {
-//             console.log('Editor is ready to use!', editor);
-//           }}
-//           onChange={(event, editor) => {
-//             const data = editor.getData();
-//             console.log({ event, editor, data });
-//             setCreateBoard ({
-//                 ...creatBoard,
-//                 detail: data
-//             })
-//             console.log(creatBoard);
-//           }}
-//           onBlur={(event, editor) => {
-//             console.log('Blur.', editor);
-//           }}
-//           onFocus={(event, editor) => {
-//             console.log('Focus.', editor);
-//           }}
-//         />
-//             </div>
-//             <button className="submit-button"
-//             onClick={onclickUpload}>등록</button>
-//             <p className="copy">&#169; Plannet.</p>
-//             </Section>
-//         </Wrap>
-//     )
-// };
-
-// export default Create;
-
-// // // // <div className="boardmain"> 
-// // // // <div>
-// // // //     <h1>자유게시판</h1>
-// // // //     <p>뭔가 들어갈 글이 필요하려나? 작성 시 유의해 주세요! 비방, 광고, 불건전한 내용의 글은 사전 동의 없이 삭제될 수 있습니다.</p> 
-// // // // </div>
-// // // // <br></br>
-// // // // <div style={{background:'gray', height:'500px'}}> 
-// // // //     <div>
-// // // //        제목<input type="text"></input><br></br>
-// // // //        작성자<input type="text"></input><br></br>
-// // // //     </div>
-// // // //     <hr></hr>
-// // // //     <div>
-// // // //         내용 <br></br>
-// // // //         여기에 이제 게시판 관련 플러그인 추가, 위즈윅 에디터, summernote, 리액트로 에디터 구현 등 
-// // // //         https://github.com/jpuri/react-draft-wysiwyg
-// // // //         https://github.com/channaveer/tutorial-summernote-texteditor
-// // // //         no jquery summernote editor
-// // // //     </div>
-// // // // </div>
-// // // // <div>첨부파일</div>
-// // // // <br></br>
-// // // // <div className='center'>
-// // // //     <button>등록</button>
-// // // //     <button>취소</button>
-// // // // </div>
-// // // // </div>
-// // // // </div>
-// // // // </div>
