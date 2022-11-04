@@ -2,9 +2,7 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import Nav from '../Utill/Nav';
 import Api from '../api/plannetApi'
-import { Link } from "react-router-dom";
 
-// 임시파일
 const Wrap = styled.div`
     width: 1130px;
     height: 100vh;
@@ -123,71 +121,69 @@ const Section = styled.div`
     }
 `;
 
-
 const PostView = () => {
-    const [boardDetail, setBoardDetail] = useState([]);
-    const getNum = window.localStorage.getItem("boardNum");
+    const [boardLoad, setBoardLoad] = useState();
+    const getNum = window.localStorage.getItem("boardNo");
+    console.log(getNum);
 
     
     useEffect(() => {
         const boardData = async () => {
             try {
-                const response = await Api.boardBody(getNum);
-                setBoardDetail(response.data[0]);
-                console.log(response.data[0]);
+                const response = await Api.boardLoad(getNum);
+                setBoardLoad(response.data);
+                console.log(response.data);
             } catch (e) {
                 console.log(e);
             }
         };
         boardData();
-    }, [getNum]);
+    }, []);
     return(
         <Wrap>
             <Nav />
             <Section>
-            <div className="wrap">
-            <div className="board" >
-                <div className="boardmain"> 
-                    <div>
+                <div className="board_list sub_box"> 
                         <h2>내용보기</h2>
-                        <hr></hr>
-                        {boardDetail&&boardDetail.map(getNum=>(
-                            <div key={getNum.num}>
-                                <h3>게시글 제목 불러오기 {getNum.title}</h3>
-                            </div>
+                        <hr></hr> 
+                        {boardLoad&&boardLoad.map(e=>(
+                            <>
+                                <div key={e.num}>
+                                    <h3>{e.title}</h3>
+                                </div>
+                                <hr></hr> 
+                                <div>
+                                    <p>
+                                        <span>작성자 : {e.id} /</span>
+                                        <span>작성일 : {e.date} /</span>
+                                        <span>조회수 : {e.views} /</span>
+                                        <span>♥</span>
+                                        <span>좋아요수</span>
+                                    </p>
+                                </div>
+                                <hr></hr>
+                                <div style={{background:'gray', height:'500px'}}> 
+                                    <div key={e.num}>
+                                        {e.detail}
+                                    </div>
+                                </div>
+                            </>
+                            
                         ))}
-                        <hr></hr>
-                        <div>
-                                <p>
-                                    <span>작성자</span>
-                                    <span>작성자</span>
-                                    <span>작성일</span>
-                                    <span>작성일</span>
-                                    <span>조회수</span>
-                                    <span>조회수</span>
-                                    <span>♥</span>
-                                    <span>좋아요수</span>
-                                </p>
-                        </div>
-                    </div>
-                    <hr></hr>
-                    <div style={{background:'gray', height:'500px'}}> 
-                        <div>
-                            본문 내용
-                        </div>
+                        
                     </div>
                     <div>첨부파일 l 첨부된 파일</div>
                     <br></br>
                     <hr></hr>
                     <div className='center'>
-                        {/* 다시 누르면 좋아요 취소되게 할지, 혹은 값 변동 안 되고 대신 '좋아요는 한번만 누를 수 있다' modal 띄우기 */}
+                        다시 누르면 좋아요 취소되게 할지, 혹은 값 변동 안 되고 대신 '좋아요는 한번만 누를 수 있다' modal 띄우기
                         <button>좋아요 + 좋아요 수 함께 뜨는 버튼</button>
-                        {/* https://ablue-1.tistory.com/21 */}
+                        https://ablue-1.tistory.com/21
                     </div>
                     <div className='center'>
                         <button>목록보기</button>
                         <button>글쓰기</button>
-                        {/* 수정/삭제하려면 비밀번호 확인 modal 뜨게 하기 or 자신의 글만 애초에 수정 버튼이 뜨게 구현 */}
+                        * 수정/삭제하려면 비밀번호 확인 modal 뜨게 하기 or 자신의 글만 애초에 수정 버튼이 뜨게 구현
                         <button>수정</button>
                         <button>삭제</button>
                     </div>
@@ -198,13 +194,67 @@ const PostView = () => {
                         댓글란 - 닉네임, 내용, 작성시간, 댓글에 hover하면 자신의 댓글인 경우 오른쪽 모서리 상단에 x버튼 뜨게:삭제기능
                         댓글 늘어날 때마다 전체 페이지 스크롤 늘어나게, 아니면 또 페이지 구현 
                     </div>
-                
-                </div>
-            </div>
-        </div>
             </Section>
         </Wrap>
     )
 };
 
 export default PostView;
+
+// <div className="wrap">
+//     <div className="board" >
+//         <div className="boardmain"> 
+//             <div>
+//                 <h2>내용보기</h2>
+//                 <hr></hr>
+//                 {boardDetail&&boardDetail.map(getNum=>(
+//                     <div key={getNum.num}>
+//                         <h3>게시글 제목 불러오기 {getNum.title}</h3>
+//                     </div>
+//                 ))}
+//                 <hr></hr>
+//                 <div>
+//                         <p>
+//                             <span>작성자</span>
+//                             <span>작성자</span>
+//                             <span>작성일</span>
+//                             <span>작성일</span>
+//                             <span>조회수</span>
+//                             <span>조회수</span>
+//                             <span>♥</span>
+//                             <span>좋아요수</span>
+//                         </p>
+//                 </div>
+//             </div>
+//             <hr></hr>
+//             <div style={{background:'gray', height:'500px'}}> 
+//                 <div>
+//                     본문 내용
+//                 </div>
+//             </div>
+//             <div>첨부파일 l 첨부된 파일</div>
+//             <br></br>
+//             <hr></hr>
+//             <div className='center'>
+//                 {/* 다시 누르면 좋아요 취소되게 할지, 혹은 값 변동 안 되고 대신 '좋아요는 한번만 누를 수 있다' modal 띄우기 */}
+//                 <button>좋아요 + 좋아요 수 함께 뜨는 버튼</button>
+//                 {/* https://ablue-1.tistory.com/21 */}
+//             </div>
+//             <div className='center'>
+//                 <button>목록보기</button>
+//                 <button>글쓰기</button>
+//                 {/* 수정/삭제하려면 비밀번호 확인 modal 뜨게 하기 or 자신의 글만 애초에 수정 버튼이 뜨게 구현 */}
+//                 <button>수정</button>
+//                 <button>삭제</button>
+//             </div>
+//             <div style={{background:'green', height:'100px'}}>
+//                 댓글작성란
+//             </div>
+//             <div style={{background:'gray', height:'300px'}}>
+//                 댓글란 - 닉네임, 내용, 작성시간, 댓글에 hover하면 자신의 댓글인 경우 오른쪽 모서리 상단에 x버튼 뜨게:삭제기능
+//                 댓글 늘어날 때마다 전체 페이지 스크롤 늘어나게, 아니면 또 페이지 구현 
+//             </div>
+        
+//         </div>
+//     </div>
+// </div>

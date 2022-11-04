@@ -180,7 +180,8 @@ function Create() {
         setDetail(e.target.value);
     }
 
-    // ---------------------------------------------------
+
+    // --------------------------------------------------- 아직체크중
 
     const [viewBoard, setViewBoard] = useState([]);
     // const getValue = e => {
@@ -226,7 +227,6 @@ function Create() {
             
                 <button className="submit-button" onClick={onClickSave}>SAVE</button>
                 {/* <button className="submit-button">CANCLE</button> */}
-                {/* /* <Link to ='/board'></Link> */}
                 <p className="copy">&#169; Plannet.</p>
             </Section>
         </Wrap>
@@ -235,6 +235,7 @@ function Create() {
 
 export default Create;
 
+// 아직체크중
 // function Create() {
 //     const [creatBoard, setCreateBoard] = useState ({
 //         title: '',
