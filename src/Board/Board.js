@@ -135,6 +135,7 @@ const Board = () => {
         window.localStorage.setItem("boardNum",value);
         console.log(window.localStorage.getItem("boardNum"));
     }
+    // onClick={window.localStorage.setItem("clickNum",setClickNum(num))}
 
     useEffect(() => {
         const boardData = async () => {

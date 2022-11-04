@@ -1,6 +1,4 @@
 import React, {useState, useEffect} from 'react';
-//import './App.css';
-import './style2.css';
 import styled from 'styled-components';
 import Nav from '../Utill/Nav';
 import Api from '../api/plannetApi'
@@ -135,36 +133,29 @@ const PostView = () => {
         const boardData = async () => {
             try {
                 const response = await Api.boardBody(getNum);
-                setBoardDetail(response.data);
-                console.log(response.data);
+                setBoardDetail(response.data[0]);
+                console.log(response.data[0]);
             } catch (e) {
                 console.log(e);
             }
         };
         boardData();
-    }, []);
+    }, [getNum]);
     return(
         <Wrap>
             <Nav />
             <Section>
             <div className="wrap">
             <div className="board" >
-                {/* <div className="sidenav left">
-                    <a href="#about">메뉴부분</a>
-                    <a href="#services">만들어지면</a>
-                    <a href="#clients">가져오기</a>
-                    <a href="#contact">채우기용 영역</a>
-                </div> */}
                 <div className="boardmain"> 
                     <div>
                         <h2>내용보기</h2>
                         <hr></hr>
-                        {boardDetail&&boardDetail.map(e => (
-                            <div key={getNum}>
-                                <h3>{e.title}</h3>
+                        {boardDetail&&boardDetail.map(getNum=>(
+                            <div key={getNum.num}>
+                                <h3>게시글 제목 불러오기 {getNum.title}</h3>
                             </div>
                         ))}
-                        <div><h3>게시글 제목 불러오기 22222</h3></div>
                         <hr></hr>
                         <div>
                                 <p>
