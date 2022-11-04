@@ -123,7 +123,6 @@ const Section = styled.div`
     }
 `;
 
-
 const PostView = () => {
     const [boardDetail, setBoardDetail] = useState([]);
     const getNum = window.localStorage.getItem("boardNum");

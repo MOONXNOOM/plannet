@@ -129,7 +129,7 @@ const Board = () => {
     const [page, setPage] = useState(1); // 현재 페이지 번호
     const offset = (page - 1) * limit; // 게시물 위치 계산
     const numPages = Math.ceil(boardList.length / limit); // 필요한 페이지 개수
-    const [clickNum, setClickNum] = useState('');
+
 
     const onClickBoard = (value) => {
         window.localStorage.setItem("boardNum",value);
@@ -171,7 +171,7 @@ const Board = () => {
                         {boardList.slice(offset, offset + limit).map(({num, title, id, views, date}) => (
                             <tr key={num}>
                                 <td>{num}</td>
-                                <td onClick={onClickBoard}><Link to='/postView/:no'>{title}</Link></td>
+                                <td><Link to='/postView/:no' onClick={onClickBoard}>{title}</Link></td>
                                 <td>{id}</td>
                                 <td>{views}</td>
                                 <td>{(date).substring(0,10)}</td>
