@@ -91,6 +91,7 @@ const Box = styled.div`
         }
         .pes{
             clear: both;
+            p{margin-bottom: 7px;}
             .chartBackground{
                 width: 75%;
                 height: 12px;

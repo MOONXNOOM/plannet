@@ -32,8 +32,6 @@ const Logo = styled.div`
 `;
 
 const DoLogin = () => {
-    window.localStorage.setItem("isLogin", "FALSE");
-
     // 키보드 입력
     const [inputId, setInputId] = useState("");
     const [inputPw, setInputPw] = useState("");
@@ -115,9 +113,9 @@ const DoLogin = () => {
             setCommnet("아이디 또는 비밀번호가 정확하지 않습니다.");
            
             if(res.data.result === "OK") {
+                window.localStorage.setItem("isLogin", "true");
                 window.localStorage.setItem("userId", inputId);
                 window.localStorage.setItem("userPw", inputPw);
-                window.localStorage.setItem("isLogin", "TRUE");
                 window.location.replace("/home");
             } else {
                 setModalOpen(true);
@@ -127,7 +125,7 @@ const DoLogin = () => {
             console.log("로그인 에러...");
         }
     }
-    
+
     return (
         <div>
             <ContainerLogin>
