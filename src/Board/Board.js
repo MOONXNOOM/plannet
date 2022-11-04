@@ -170,11 +170,11 @@ const Board = () => {
                             <th>Views</th>
                             <th>Date</th>
                         </tr>
-                        {boardList.slice(offset, offset + limit).map(({num, title, id, views, date}) => (
+                        {boardList.slice(offset, offset + limit).map(({num, title, nickname, views, date}) => (
                             <tr key={num}>
                                 <td>{num}</td>
                                 <td onChange={setBoardNo} onClick={()=> onClickBoard(num)}>{title}</td>
-                                <td>{id}</td>
+                                <td>{nickname}</td>
                                 <td>{views}</td>
                                 <td>{(date).substring(0,10)}</td>
                             </tr>     

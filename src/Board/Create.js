@@ -220,7 +220,6 @@ function Create() {
                             <th colSpan={2}>게시물 작성</th>
                         </tr>
                         <tr>
-                            {/* 아직 디자인 안 함 */}
                             <td><input className="title-input" type='text' placeholder='제목을 입력하세요.' value={title} onChange={onChangeTitle} name='title' /></td>
                             <td><StyledInput type="checkbox" checked={isChecked} onChange={handleChecked}/>익명</td>
                         </tr>
