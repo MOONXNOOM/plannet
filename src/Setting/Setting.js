@@ -64,6 +64,11 @@ const Section = styled.div`
             &:hover{
                 background-color: #666;
             }
+            &:disabled{
+                background-color: #aaa;
+                color: #eee;
+                cursor: default;
+            }
         }        
     }
     .setting{
@@ -81,6 +86,13 @@ const Section = styled.div`
                     font-weight: 600; 
                     line-height: 18px;
                     margin-bottom: 4px;
+                    span{
+                        color: #666;
+                        font-weight: 400;
+                        float: right;
+                        margin-left: 10px;
+                        line-height: 20px;
+                    }
                 }
                 input, textarea{
                     padding: 0 15px;
@@ -174,12 +186,20 @@ const Setting = () => {
     const [userSNS, setUserSNS] = useState("");
     const [userPro, setUserPro] = useState("");
 
+    const [changeEmail, setChangeEmail] = useState("");
+    const [changePhone, setChangePhone] = useState("");
+    
+    const [emailMessage, setEmailMessage] = useState("");
+    const [telMessage, setTelMessage] = useState("");
+
     useEffect(() => {
         const userInfoLoad = async() => {
             try{
                 const response = await Api.userInfoLoad(userId);
                 setUserNickname(response.data[0].nickname);
+                setChangeEmail(response.data[0].email);
                 setUserEmail(response.data[0].email);
+                setChangePhone(response.data[0].phone);
                 setUserPhone(response.data[0].phone);
                 setUserSNS(response.data[0].sns);
                 setUserPro(response.data[0].profile);
@@ -198,11 +218,8 @@ const Setting = () => {
     const onChangeNickname = (e) => {
         setUserNickname(e.target.value);
     }
-    const onChangeEmail = (e) => {
-        setUserEmail(e.target.value);
-    }
     const onChangePhone = (e) => {
-        setUserPhone(e.target.value);
+        setChangePhone(e.target.value);
     }
     const onChangeSNS = (e) => {
         setUserSNS(e.target.value);
@@ -222,6 +239,59 @@ const Setting = () => {
         setModalOpen(true);
         setCommnet("탈퇴 하시겠습니까?");
     }
+
+    const [isEmail, setIsEmail] = useState(true);
+    const [isTel, setIsTel] = useState(true);
+
+
+    // 전화번호/이메일 중복확인
+    const onBlurTelCheck = async() => {
+        const memberCheck = await Api.memberRegCheck(changePhone, "TYPE_TEL");
+        if (memberCheck.data.result === "OK" ) {
+            console.log(memberCheck.data.result);
+            setTelMessage("사용가능한 전화번호입니다.");
+            setIsTel(true)
+        } else if(memberCheck.data.result === "NOK" && userPhone ===  changePhone){
+            setTelMessage("기존 전화번호입니다.");
+            setIsTel(true);
+        } else {
+            setTelMessage("중복된 전화번호입니다.");
+            setIsTel(false)
+        } 
+    }
+
+    const onChangeEmail = (e) => {
+        const emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        const emailCurrent = e.target.value ;
+        setChangeEmail(emailCurrent);
+            if(!emailRegex.test(emailCurrent)){
+                setEmailMessage('이메일의 형식이 올바르지 않습니다.')
+                setIsEmail(false);
+            } else {
+                setEmailMessage('이메일의 형식이 올바르게 입력되었습니다.')
+                setIsEmail(true);
+            }
+    }
+
+    const onBlurEmailCheck = async() => {
+        // 가입 여부 우선 확인
+        const memberCheck = await Api.memberRegCheck(changeEmail, "TYPE_EMAIL");
+        if (memberCheck.data.result === "OK" && isEmail) {
+            setEmailMessage("사용가능한 Email입니다.");
+            setIsEmail(true);
+        } else if(memberCheck.data.result === "OK" && !isEmail){
+            setEmailMessage("이메일의 형식이 올바르지 않습니다.");
+            setIsEmail(false);
+        } else if(memberCheck.data.result === "NOK" && userEmail ===  changeEmail){
+            setEmailMessage("기존 Email입니다.");
+            setIsEmail(true);
+        } else {
+            setEmailMessage("이미 사용하고 있는 Email입니다.");
+            setIsEmail(false);
+        } 
+    }
+
+
     
     return (
         <Wrap>
@@ -241,12 +311,12 @@ const Setting = () => {
                             <input onChange={onChangeNickname} value={userNickname} placeholder="닉네임"/>
                         </div>
                         <div className="session">
-                            <p>이메일</p>
-                            <input onChange={onChangeEmail} value={userEmail} placeholder="이메일"/>
+                            <p>이메일 {changeEmail && <span>{emailMessage}</span>}</p>
+                            <input onChange={onChangeEmail} value={changeEmail} onBlur={onBlurEmailCheck} placeholder="이메일"/>
                         </div>
                         <div className="session">
-                            <p>전화번호</p>
-                            <input onChange={onChangePhone} value={userPhone} placeholder="전화번호"/>
+                            <p>전화번호 {changePhone && <span>{telMessage}</span>}</p>
+                            <input onChange={onChangePhone} onBlur={onBlurTelCheck} value={changePhone} placeholder="전화번호"/>
                         </div>
                         <div className="session">
                             <p>SNS</p>
@@ -261,7 +331,7 @@ const Setting = () => {
                     </div>
                 </div>
                 <div className="btnbox">
-                    <button onClick={onClickSave} className="save">SAVE</button>
+                    <button onClick={onClickSave} className="save" disabled={!(isEmail && isTel)}>SAVE</button>
                 </div>
             </Section>
             <div className="copy">&#169; Plannet.</div>
