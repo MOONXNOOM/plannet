@@ -136,6 +136,7 @@ const Board = () => {
         console.log(boardNo);
         const link = "/postView/" + boardNo;
         window.location.assign(link);
+        window.localStorage.setItem("boardNo", boardNo);
     }
     
     useEffect(() => {
