@@ -8,11 +8,11 @@ import Api from "../api/plannetApi";
 const CalEx = () => {
 
   const [value, setValue] = useState(new Date());
-  //날짜 클릭시 해당날짜의 write로 이동
+    //날짜 클릭시 해당날짜의 write로 이동
   const dayIn = (value) => {
-    const selectDate = moment(value).format('YYYY-MM-DD');
-    const link = "/write/" + selectDate;
-    window.location.assign(link);
+  const selectDate = moment(value).format('YYYY-MM-DD');
+  const link = "/write/" + selectDate;
+  window.location.assign(link);
   }
   //일정이 있는 날짜를 불러옴
   const getId = window.localStorage.getItem("userId");
