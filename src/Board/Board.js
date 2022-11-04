@@ -129,14 +129,16 @@ const Board = () => {
     const [page, setPage] = useState(1); // 현재 페이지 번호
     const offset = (page - 1) * limit; // 게시물 위치 계산
     const numPages = Math.ceil(boardList.length / limit); // 필요한 페이지 개수
-    const [clickNum, setClickNum] = useState('');
 
-    // const onClickBoard = (value) => {
-    //     window.localStorage.setItem("boardNum",value);
-    //     console.log(window.localStorage.getItem("boardNum"));
-    // }
-    // onClick={window.localStorage.setItem("clickNum",setClickNum(num))}
-
+    const [boardNo, setBoardNo] = useState();
+    //날짜 클릭시 해당 번호의 postView로 이동
+    const onClickBoard = (boardNo) => {
+        console.log(boardNo);
+        const link = "/postView/" + boardNo;
+        window.location.assign(link);
+        window.localStorage.setItem("boardNo",boardNo);
+    }
+    
     useEffect(() => {
         const boardData = async () => {
             try {
@@ -168,11 +170,11 @@ const Board = () => {
                             <th>Views</th>
                             <th>Date</th>
                         </tr>
-                        {boardList.slice(offset, offset + limit).map(({num, title, id, views, date}) => (
+                        {boardList.slice(offset, offset + limit).map(({num, title, nickname, views, date}) => (
                             <tr key={num}>
                                 <td>{num}</td>
-                                <td><Link to='/postView/:no'>{title}</Link></td>
-                                <td>{id}</td>
+                                <td onChange={setBoardNo} onClick={()=> onClickBoard(num)}>{title}</td>
+                                <td>{nickname}</td>
                                 <td>{views}</td>
                                 <td>{(date).substring(0,10)}</td>
                             </tr>     

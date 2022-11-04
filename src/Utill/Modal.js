@@ -12,7 +12,7 @@ const Modal = (props) => {
         console.log("Logout 추가");
         window.localStorage.setItem("userId", "");
         window.localStorage.setItem("userPw", "");
-        window.localStorage.setItem("isLogin", "FALSE");
+        window.localStorage.setItem("isLogin", "false");
         window.location.replace("/");
     }
     const onClickWithdraw = async() => {

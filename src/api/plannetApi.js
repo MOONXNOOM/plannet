@@ -103,25 +103,23 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "BoardList", object, HEADER);
     },
-
     // 자유게시판 글 작성
-    boardCreate: async function(id, title, nickname, detail){
+    boardCreate: async function(id, title, detail, isChecked){
         const object = {
             id : id,
             title : title,
-            nickname : nickname,
-            detail : detail
+            detail : detail,
+            isChecked : isChecked
         }
         return await axios.post(PLANNET_DOMAIN + "BoardCreate", object, HEADER);
     },
-
-
+    
     // 게시판 내용보기
-    boardBody: async function(num){
+    boardLoad: async function(num){
         const object = {
             num : num
         }
-        return await axios.post(PLANNET_DOMAIN + "BoardBody", object, HEADER);
+        return await axios.post(PLANNET_DOMAIN + "BoardLoad", object, HEADER);
     },
     //userInfo 불러오기
     userInfoLoad: async function(id){
@@ -155,6 +153,13 @@ const plannetApi = {
             id: id
         }
         return await axios.post(PLANNET_DOMAIN + "PlanMark", object, HEADER);
+    },
+    //주간일정 출력
+    weekList: async function(id) {
+        const object = {
+            id: id
+        }
+        return await axios.post(PLANNET_DOMAIN + "WeekList", object, HEADER);
     },
 
 
