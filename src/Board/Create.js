@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import Nav from "../Utill/Nav";
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-// import ReactHtmlParser from 'react-html-parser';
-import {useState} from 'react';
+// import styled from "styled-components";
+// import Nav from "../Utill/Nav";
+// import { CKEditor } from '@ckeditor/ckeditor5-react';
+// import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// // import ReactHtmlParser from 'react-html-parser';
+// import {useState} from 'react';
 // // 임시파일
 
 // // const Wrap = styled.div`
@@ -13,12 +13,12 @@ import {useState} from 'react';
 // //     margin: 0 auto;
 // // `;
 
-const Wrap = styled.div`
-    width: 1130px;
-    height: 100vh;
-    background-color: white;
-    margin: 0 auto;
-`;
+// const Wrap = styled.div`
+//     width: 1130px;
+//     height: 100vh;
+//     background-color: white;
+//     margin: 0 auto;
+// `;
 
 // function Create() {
 //     const [creatBoard, setCreateBoard] = useState ({
@@ -94,7 +94,7 @@ const Wrap = styled.div`
 //     )
 // };
 
-export default Create;
+// export default Create;
 
 // // // // <div className="boardmain"> 
 // // // // <div>
