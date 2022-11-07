@@ -137,6 +137,17 @@ const plannetApi = {
         return await axios.post(PLANNET_DOMAIN + "BoardDelete", regCheck, HEADER);
     },
 
+    // 글 수정
+    boardEdit: async function(id, num, title, detail) {
+        const regCheck = {
+            id: id,
+            num: num,
+            title: title,
+            detail: detail
+        }
+        return await axios.post(PLANNET_DOMAIN + "BoardEdit", regCheck, HEADER);
+    },
+
     //userInfo 불러오기
     userInfoLoad: async function(id){
         const object = {

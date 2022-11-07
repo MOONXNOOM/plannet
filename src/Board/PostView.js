@@ -156,10 +156,19 @@ const PostView = () => {
     const getNum = window.localStorage.getItem("boardNo");
     console.log(getNum);
 
+        //날짜 클릭시 해당 번호의 edit로 이동
+        const onClickEdit = (boardNo) => {
+            console.log(boardNo);
+            const link = "/edit/" + boardNo;
+            window.location.assign(link);
+            window.localStorage.setItem("boardNo", boardNo);
+        }
+
     const deleteData = async() => {
         await Api.boardDelete(getNum);
         window.location.replace("/board");
     }
+    
 
     
     useEffect(() => {
@@ -199,7 +208,7 @@ const PostView = () => {
                         </div>
                         <div className="button-area">
                             <Link to='/board'><button>BACK</button></Link>
-                            {getId === e.id ? <><button>EDIT</button><button onClick={deleteData}>DELETE</button></> : null}
+                            {getId === e.id ? <><button onClick={()=> onClickEdit(e.num)}>EDIT</button><button onClick={deleteData}>DELETE</button></> : null}
                         </div>
                     </>))}
             </Section>
