@@ -21,6 +21,7 @@ const StyledInput = styled.input`
 `;
 
 
+
 const PlanItem = ({planItem, planList, setPlanList}) => {
     const [edited, setEdited] = useState(false);
     const [newText, setNewText] = useState(planItem.text);

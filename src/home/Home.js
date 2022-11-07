@@ -6,6 +6,7 @@ import Memo from './Memo';
 import List from './List';
 import Quote from './Quote';
 
+
 const Wrap = styled.div`
     width: 1130px;
     height: 100vh;

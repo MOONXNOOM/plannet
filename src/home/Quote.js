@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Api from "../api/plannetApi";
 
+
 const Quote = () => {
     const getRandom = Math.floor(Math.random() * 30 + 1);
     const [quoteText, setQuoteText] = useState('');

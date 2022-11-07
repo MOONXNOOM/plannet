@@ -5,6 +5,7 @@ import Modal from "./Modal";
 import { useEffect, useState } from "react";
 import Api from "../api/plannetApi";
 
+
 const Box = styled.div`
     width: 280px;
     height: 100vh;

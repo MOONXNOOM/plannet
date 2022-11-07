@@ -223,8 +223,19 @@ function Edit() {
 
     const onClickEdit = async() => {
         await Api.boardEdit(getId, getNum, title, detail);
-        window.location.assign('/board');
+        console.log(getNum);
+        const link = "/postView/" + getNum;
+        window.location.assign(link);
+        window.localStorage.setItem("boardNo", getNum);
     }
+
+    const onClickCancle = () => {
+        console.log(getNum);
+        const link = "/postView/" + getNum;
+        window.location.assign(link);
+        window.localStorage.setItem("boardNo", getNum);
+    }
+
 
     const onChangeTitle = (e) => {
         setTitle(e.target.value);
@@ -266,7 +277,7 @@ function Edit() {
                 </div>
                 <div className="button-area">
                     <button onClick={onClickEdit}>SAVE</button>
-                    <Link to='/board'><button>CANCLE</button></Link>
+                    <button onClick={onClickCancle}>CANCLE</button>
                 </div>
                 <p className="copy">&#169; Plannet.</p>
                 </>))}

@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "../Utill/Nav";
 import Api from '../api/plannetApi'
+// import CommentMain from './CommentMain'
+
+
 
 const Wrap = styled.div`
     width: 1130px;
@@ -200,6 +203,7 @@ const Board = () => {
                         <a href="#" onclick="submit"><i class="bi bi-search"></i></a>
                     </form> 
                 </div>
+                
             </Section>
             <div className="copy">&#169; Plannet.</div>
         </Wrap>

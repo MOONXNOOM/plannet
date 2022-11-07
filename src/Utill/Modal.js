@@ -3,6 +3,7 @@ import '../App';
 import './Modal.css';
 import Api from "../api/plannetApi";
 
+
 const Modal = (props) => {
     const { open, close, header } = props;
     
