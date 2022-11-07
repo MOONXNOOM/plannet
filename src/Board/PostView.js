@@ -95,6 +95,13 @@ const Section = styled.div`
         td:first-child{border-left: none};
         td:nth-child(2){width: 400px; text-align: left; padding-left: 20px;}  
         tr:hover td, tr:hover a{color: #4555AE;}
+        .title-input{font-size:20px; font-weight: 500;}
+        .bi{padding-right:5px;}
+        .bi-heart-fill{margin-left:13px;}
+    }
+    .detail{
+        width: 100%;
+        padding: 30px;
     }
     .util_box{
         .page_list {
@@ -116,9 +123,6 @@ const Section = styled.div`
             width: 200px; height: 35px; padding: 0 10px; border: solid 2px #ddd; 
             background-color: white;
             input{width: 150px; height: 31px; border: 0px; outline: none; margin-right: 10px;}
-        }
-        .title-input {
-            font-size: 20px;
         }
     }
 `;
@@ -146,24 +150,27 @@ const PostView = () => {
             <Nav />
             <Section>
                 <div className="board_list sub_box"> 
-                        <h2>내용보기</h2>
-                        <p>
-                            <span>유저들이 작성한 글에 댓글과 좋아요를 남기며 소통해보세요! <br />커뮤니티 규칙에 맞지 않는 글과 댓글은 무통보 삭제됩니다.</span>
-                        </p>
-                        {boardLoad&&boardLoad.map( e => (
-                        <table>
-                            <th colSpan={5}>게시글 보기</th>
-                            <tr>
-                                <td className="title-input" key={e.num} colSpan={4}>{e.title}</td>
-                            </tr>
-                            <tr>
-                                <td>No.{e.num}</td>
-                                <td>Writer.{e.nickname}</td>
-                                <td><i class="bi bi-eye"></i>{e.views}<i class="bi bi-heart-fill"></i>좋아요</td>
-                                <td>{(e.date).substring(0,10)}</td>
-                            </tr>
-                        </table>))}
-                    </div>
+                    <h2>내용보기</h2>
+                    <p>
+                        <span>유저들이 작성한 글에 댓글과 좋아요를 남기며 소통해보세요! <br />커뮤니티 규칙에 맞지 않는 글과 댓글은 무통보 삭제됩니다.</span>
+                    </p>
+                    {boardLoad&&boardLoad.map( e => (
+                        <>
+                            <table>
+                                <th colSpan={5}>게시글 보기</th>
+                                <tr>
+                                    <td className="title-input" key={e.num} colSpan={4}>{e.title}</td>
+                                </tr>
+                                <tr>
+                                    <td>No.{e.num}</td>
+                                    <td>Writer.{e.nickname}</td>
+                                    <td><i class="bi bi-eye"></i>{e.views}<i class="bi bi-heart-fill"></i>좋아요</td>
+                                    <td>{(e.date).substring(0,10)}</td>
+                                </tr>
+                            </table>
+                            <div className='detail' dangerouslySetInnerHTML={{__html: e.detail}}></div>
+                        </>))}
+                </div>
 {/*
                     <div className='center'>
                         다시 누르면 좋아요 취소되게 할지, 혹은 값 변동 안 되고 대신 '좋아요는 한번만 누를 수 있다' modal 띄우기
