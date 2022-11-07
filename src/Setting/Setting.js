@@ -349,7 +349,7 @@ const Setting = () => {
                     <div className="userImgBox" style={userImgUrl}>
                         <label>
                             <input type="file" accept="image/*" onChange={handleFileInput}/>
-                            <div><i class="bi bi-pencil-fill"></i></div>
+                            <div><i className="bi bi-pencil-fill"></i></div>
                         </label>
                     </div>
                     <div className="userInfo">

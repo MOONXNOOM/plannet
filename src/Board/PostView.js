@@ -218,7 +218,7 @@ const PostView = () => {
                                 <tr>
                                     <td>No.{e.num}</td>
                                     <td>Writer.{e.nickname}</td>
-                                    <td><i class="bi bi-eye"></i>{e.views+1}<i class="bi bi-heart-fill"></i>좋아요</td>
+                                    <td><i className="bi bi-eye"></i>{e.views+1}<i className="bi bi-heart-fill"></i>좋아요</td>
                                     <td>{(e.date).substring(0,10)}</td>
                                 </tr>
                             </table>
