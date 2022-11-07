@@ -70,7 +70,6 @@ const DoLogin = () => {
         try {
             // 로그인을 위한 axios 호출
             const res = await Api.userLogin(inputId, inputPw);
-            console.log(res.data.result);
             
             if(res.data.result === "OK") {
                 window.localStorage.setItem("isLogin", "true");
