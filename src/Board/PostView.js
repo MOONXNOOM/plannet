@@ -151,8 +151,9 @@ const Section = styled.div`
 
 const PostView = () => {
     const getId = window.localStorage.getItem("userId");
-    const getNum = window.localStorage.getItem("boardNo");
     const [boardLoad, setBoardLoad] = useState();
+    const [boardViews,setBoardViews] = useState(0);
+    const getNum = window.localStorage.getItem("boardNo");
     console.log(getNum);
 
     const deleteData = async() => {
