@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import Nav from '../Utill/Nav';
 import Api from '../api/plannetApi'
 import { Link } from "react-router-dom";
+import { AppRunner } from 'aws-sdk';
 
-// 임시파일
 const Wrap = styled.div`
     width: 1130px;
     height: 100vh;
@@ -97,6 +97,34 @@ const Section = styled.div`
         td:first-child{border-left: none};
         td:nth-child(2){width: 400px; text-align: left; padding-left: 20px;}  
         tr:hover td, tr:hover a{color: #4555AE;}
+        .title-input{font-size:20px; font-weight: 500;}
+        .bi{padding-right:5px;}
+        .bi-heart-fill{margin-left:13px;}
+    }
+    .detail{
+        width: 100%;
+        min-height: 500px;
+        padding: 30px;
+        border-bottom: 1px solid #4555AE;
+    }
+    .button-area {
+        text-align: right;
+        button{
+            display :inline-block;
+            font-weight: 600;
+            right: 30px;
+            font-size: 16px;
+            padding: 8px 35px;
+            border-radius: 25px;
+            background-color: #4555AE;
+            color: white;
+            border: none;
+            transition: all .1s ease-in;
+            &:hover{background-color: #4555AE;}
+        }
+        button:nth-child(-n+3){
+            margin-left: 10px;
+        }
     }
     .util_box{
         .page_list {
@@ -118,90 +146,83 @@ const Section = styled.div`
             width: 200px; height: 35px; padding: 0 10px; border: solid 2px #ddd; 
             background-color: white;
             input{width: 150px; height: 31px; border: 0px; outline: none; margin-right: 10px;}
-
         }
     }
 `;
 
-
 const PostView = () => {
-    const [boardDetail, setBoardDetail] = useState([]);
-    const getNum = window.localStorage.getItem("boardNum");
+    const getId = window.localStorage.getItem("userId");
+    const [boardLoad, setBoardLoad] = useState();
+    const [boardViews,setBoardViews] = useState(0);
+    const getNum = window.localStorage.getItem("boardNo");
+    console.log(getNum);
+
+        //날짜 클릭시 해당 번호의 edit로 이동
+        const onClickEdit = (boardNo) => {
+            console.log(boardNo);
+            const link = "/edit/" + boardNo;
+            window.location.assign(link);
+            window.localStorage.setItem("boardNo", boardNo);
+        }
+
+    const deleteData = async() => {
+        await Api.boardDelete(getNum);
+        window.location.replace("/board");
+    }
+    
 
     
     useEffect(() => {
+        const increaseViews = async () => {
+            try {
+                const response = await Api.boardViews(getNum);
+                setBoardViews(response.data);
+                console.log(response.data);
+            }catch (e) {
+                console.log(e);
+            }
+        };
         const boardData = async () => {
             try {
-                const response = await Api.boardBody(getNum);
-                setBoardDetail(response.data[0]);
-                console.log(response.data[0]);
+                const response = await Api.boardLoad(getNum);
+                setBoardLoad(response.data);
+                console.log(response.data);
             } catch (e) {
                 console.log(e);
             }
         };
+        
         boardData();
+        increaseViews();
     }, [getNum]);
     return(
         <Wrap>
             <Nav />
             <Section>
-            <div className="wrap">
-            <div className="board" >
-                <div className="boardmain"> 
-                    <div>
-                        <h2>내용보기</h2>
-                        <hr></hr>
-                        {boardDetail&&boardDetail.map(getNum=>(
-                            <div key={getNum.num}>
-                                <h3>게시글 제목 불러오기 {getNum.title}</h3>
-                            </div>
-                        ))}
-                        <hr></hr>
-                        <div>
-                                <p>
-                                    <span>작성자</span>
-                                    <span>작성자</span>
-                                    <span>작성일</span>
-                                    <span>작성일</span>
-                                    <span>조회수</span>
-                                    <span>조회수</span>
-                                    <span>♥</span>
-                                    <span>좋아요수</span>
-                                </p>
+                {boardLoad&&boardLoad.map( e => (
+                    <>
+                        <div className="board_list sub_box"> 
+                            <h2>내용보기</h2>
+                            <p><span>유저들이 작성한 글에 댓글과 좋아요를 남기며 소통해보세요! <br />커뮤니티 규칙에 맞지 않는 글과 댓글은 무통보 삭제됩니다.</span></p>  
+                            <table>
+                                <th colSpan={5}>게시글 보기</th>
+                                <tr>
+                                    <td className="title-input" key={e.num} colSpan={4}>{e.title}</td>
+                                </tr>
+                                <tr>
+                                    <td>No.{e.num}</td>
+                                    <td>Writer.{e.nickname}</td>
+                                    <td><i class="bi bi-eye"></i>{e.views+1}<i class="bi bi-heart-fill"></i>좋아요</td>
+                                    <td>{(e.date).substring(0,10)}</td>
+                                </tr>
+                            </table>
+                            <div className='detail' dangerouslySetInnerHTML={{__html: e.detail}}></div>
                         </div>
-                    </div>
-                    <hr></hr>
-                    <div style={{background:'gray', height:'500px'}}> 
-                        <div>
-                            본문 내용
+                        <div className="button-area">
+                            <Link to='/board'><button>BACK</button></Link>
+                            {getId === e.id ? <><button onClick={()=> onClickEdit(e.num)}>EDIT</button><button onClick={deleteData}>DELETE</button></> : null}
                         </div>
-                    </div>
-                    <div>첨부파일 l 첨부된 파일</div>
-                    <br></br>
-                    <hr></hr>
-                    <div className='center'>
-                        {/* 다시 누르면 좋아요 취소되게 할지, 혹은 값 변동 안 되고 대신 '좋아요는 한번만 누를 수 있다' modal 띄우기 */}
-                        <button>좋아요 + 좋아요 수 함께 뜨는 버튼</button>
-                        {/* https://ablue-1.tistory.com/21 */}
-                    </div>
-                    <div className='center'>
-                        <button>목록보기</button>
-                        <button>글쓰기</button>
-                        {/* 수정/삭제하려면 비밀번호 확인 modal 뜨게 하기 or 자신의 글만 애초에 수정 버튼이 뜨게 구현 */}
-                        <button>수정</button>
-                        <button>삭제</button>
-                    </div>
-                    <div style={{background:'green', height:'100px'}}>
-                        댓글작성란
-                    </div>
-                    <div style={{background:'gray', height:'300px'}}>
-                        댓글란 - 닉네임, 내용, 작성시간, 댓글에 hover하면 자신의 댓글인 경우 오른쪽 모서리 상단에 x버튼 뜨게:삭제기능
-                        댓글 늘어날 때마다 전체 페이지 스크롤 늘어나게, 아니면 또 페이지 구현 
-                    </div>
-                
-                </div>
-            </div>
-        </div>
+                    </>))}
             </Section>
         </Wrap>
     )

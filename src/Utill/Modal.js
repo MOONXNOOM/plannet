@@ -12,7 +12,7 @@ const Modal = (props) => {
         console.log("Logout 추가");
         window.localStorage.setItem("userId", "");
         window.localStorage.setItem("userPw", "");
-        window.localStorage.setItem("isLogin", "FALSE");
+        window.localStorage.setItem("isLogin", "false");
         window.location.replace("/");
     }
     const onClickWithdraw = async() => {
@@ -20,6 +20,9 @@ const Modal = (props) => {
         window.localStorage.setItem("userId", "");
         window.localStorage.setItem("userPw", "");
         window.location.replace("/");
+    }
+    const onClickGoLogin = () => {
+        window.location.replace("/doLogin");
     }
     return (
         <div className={open ? 'openModal modal' : 'modal'}>
@@ -35,6 +38,7 @@ const Modal = (props) => {
                     <footer>
                         {(header === '안내') ? <button className='yes btn-m' onClick={onClickLogout}>yes</button>: ''}
                         {(header === '탈퇴') ? <button className='yes btn-m' onClick={onClickWithdraw}>yes</button>: ''}
+                        {(header === '로그인') ? <button className='yes btn-m' onClick={onClickGoLogin}>login</button>: ''}
                         <button className='close' onClick={close}>close</button>
                     </footer>
                 </section>

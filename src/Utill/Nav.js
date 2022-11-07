@@ -91,6 +91,7 @@ const Box = styled.div`
         }
         .pes{
             clear: both;
+            p{margin-bottom: 7px;}
             .chartBackground{
                 width: 75%;
                 height: 12px;
@@ -120,8 +121,8 @@ const Box = styled.div`
 
 const Nav = () => {
     const userId = window.localStorage.getItem("userId");
-    const [userSrc, setUserSrc] = useState("https://images.unsplash.com/photo-1666473574427-253b43283677?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80");
-    const useImg = {backgroundImage: "url(" + userSrc + ")"};
+    const [userImgName, setUserImgName] = useState("");
+    const [userImgUrl, setUserImgUrl] = useState({backgroundImage: "url(https://khprojectplannet.s3.ap-northeast-2.amazonaws.com/" + userImgName + ")"});
     const [userNickname, setUserNickname] = useState("");
     const [userEmail, setUserEmail] = useState("");
     const [userPhone, setUserPhone] = useState("");
@@ -139,6 +140,8 @@ const Nav = () => {
                 setUserPhone(response.data[0].phone);
                 setUserSNS(response.data[0].sns);
                 setUserPro(response.data[0].profile);
+                setUserImgName(response.data[0].img);
+                setUserImgUrl({backgroundImage: "url(https://khprojectplannet.s3.ap-northeast-2.amazonaws.com/" + response.data[0].img + ")"});
                 const resNum = await Api.userDo(userId);
                 setNum(resNum.data.pes);
             } catch(e){
@@ -177,7 +180,7 @@ const Nav = () => {
                 <h2>Let's plan it!</h2>
             </div>
             <div className="userinfo">
-                <div className="userImgBox" style={useImg}/>
+                <div className="userImgBox" style={userImgUrl}/>
                 <p className="userName">{userNickname}</p>
                 <p className="userId">&#40;{userId}&#41;</p>
                 <div className="userPro1">{userPro}</div>
@@ -189,7 +192,7 @@ const Nav = () => {
                 </div>
                 <div className="userPro2">
                     <p>Email : {userEmail}</p>
-                    <p>{userPhone? <p>Phone : @{userPhone}</p> : <p>Phone : - </p> }</p>
+                    <p>{userPhone? <p>Phone : {userPhone}</p> : <p>Phone : - </p> }</p>
                     {userSNS? <p>SNS : @{userSNS}</p> : <p>SNS : - </p> }
                 </div>
                 <ul className="menu">

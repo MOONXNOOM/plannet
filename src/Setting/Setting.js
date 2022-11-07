@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Nav from "../Utill/Nav";
 import Api from "../api/plannetApi";
 import Modal from "../Utill/Modal";
+import AWS from "aws-sdk"
 
 const Wrap = styled.div`
     width: 1130px;
@@ -64,6 +65,11 @@ const Section = styled.div`
             &:hover{
                 background-color: #666;
             }
+            &:disabled{
+                background-color: #aaa;
+                color: #eee;
+                cursor: default;
+            }
         }        
     }
     .setting{
@@ -81,6 +87,13 @@ const Section = styled.div`
                     font-weight: 600; 
                     line-height: 18px;
                     margin-bottom: 4px;
+                    span{
+                        color: #666;
+                        font-weight: 400;
+                        float: right;
+                        margin-left: 10px;
+                        line-height: 20px;
+                    }
                 }
                 input, textarea{
                     padding: 0 15px;
@@ -166,23 +179,33 @@ const Section = styled.div`
 
 const Setting = () => {
     const userId = window.localStorage.getItem("userId");
-    const [userSrc, setUserSrc] = useState("https://images.unsplash.com/photo-1666473574427-253b43283677?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80");
-    const useImg = {backgroundImage: "url(" + userSrc + ")"};
+    const [userImgName, setUserImgName] = useState("");
+    const [userImgUrl, setUserImgUrl] = useState({backgroundImage: "url(https://khprojectplannet.s3.ap-northeast-2.amazonaws.com/" + userImgName + ")"});
     const [userNickname, setUserNickname] = useState("");
     const [userEmail, setUserEmail] = useState("");
     const [userPhone, setUserPhone] = useState("");
     const [userSNS, setUserSNS] = useState("");
     const [userPro, setUserPro] = useState("");
 
+    const [changeEmail, setChangeEmail] = useState("");
+    const [changePhone, setChangePhone] = useState("");
+    
+    const [emailMessage, setEmailMessage] = useState("");
+    const [telMessage, setTelMessage] = useState("");
+
     useEffect(() => {
         const userInfoLoad = async() => {
             try{
                 const response = await Api.userInfoLoad(userId);
                 setUserNickname(response.data[0].nickname);
+                setChangeEmail(response.data[0].email);
                 setUserEmail(response.data[0].email);
+                setChangePhone(response.data[0].phone);
                 setUserPhone(response.data[0].phone);
                 setUserSNS(response.data[0].sns);
                 setUserPro(response.data[0].profile);
+                setUserImgName(response.data[0].img);
+                setUserImgUrl({backgroundImage: "url(https://khprojectplannet.s3.ap-northeast-2.amazonaws.com/" + response.data[0].img + ")"});
             } catch(e){
                 console.log(e);
             }
@@ -198,11 +221,8 @@ const Setting = () => {
     const onChangeNickname = (e) => {
         setUserNickname(e.target.value);
     }
-    const onChangeEmail = (e) => {
-        setUserEmail(e.target.value);
-    }
     const onChangePhone = (e) => {
-        setUserPhone(e.target.value);
+        setChangePhone(e.target.value);
     }
     const onChangeSNS = (e) => {
         setUserSNS(e.target.value);
@@ -222,6 +242,103 @@ const Setting = () => {
         setModalOpen(true);
         setCommnet("탈퇴 하시겠습니까?");
     }
+
+    const [isEmail, setIsEmail] = useState(true);
+    const [isTel, setIsTel] = useState(true);
+
+
+    // 전화번호/이메일 중복확인
+    const onBlurTelCheck = async() => {
+        const memberCheck = await Api.memberRegCheck(changePhone, "TYPE_TEL");
+        if (memberCheck.data.result === "OK" ) {
+            console.log(memberCheck.data.result);
+            setTelMessage("사용가능한 전화번호입니다.");
+            setIsTel(true)
+        } else if(memberCheck.data.result === "NOK" && userPhone ===  changePhone){
+            setTelMessage("기존 전화번호입니다.");
+            setIsTel(true);
+        } else {
+            setTelMessage("중복된 전화번호입니다.");
+            setIsTel(false)
+        } 
+    }
+
+    const onChangeEmail = (e) => {
+        const emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+        const emailCurrent = e.target.value ;
+        setChangeEmail(emailCurrent);
+            if(!emailRegex.test(emailCurrent)){
+                setEmailMessage('이메일의 형식이 올바르지 않습니다.')
+                setIsEmail(false);
+            } else {
+                setEmailMessage('이메일의 형식이 올바르게 입력되었습니다.')
+                setIsEmail(true);
+            }
+    }
+
+    const onBlurEmailCheck = async() => {
+        // 가입 여부 우선 확인
+        const memberCheck = await Api.memberRegCheck(changeEmail, "TYPE_EMAIL");
+        if (memberCheck.data.result === "OK" && isEmail) {
+            setEmailMessage("사용가능한 Email입니다.");
+            setIsEmail(true);
+        } else if(memberCheck.data.result === "OK" && !isEmail){
+            setEmailMessage("이메일의 형식이 올바르지 않습니다.");
+            setIsEmail(false);
+        } else if(memberCheck.data.result === "NOK" && userEmail ===  changeEmail){
+            setEmailMessage("기존 Email입니다.");
+            setIsEmail(true);
+        } else {
+            setEmailMessage("이미 사용하고 있는 Email입니다.");
+            setIsEmail(false);
+        } 
+    }
+    
+    //이미지 저장
+    const bucket = "khprojectplannet";
+
+    AWS.config.update({
+        region: "ap-northeast-2",
+        credentials: new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: "cognito인증키"
+        }),
+    })
+
+    const handleFileInput = async(e) => {
+        // input 태그를 통해 선택한 파일 객체
+        const file = e.target.files[0];
+        const fileName = userId + e.target.files[0].name;
+        
+        // S3 SDK에 내장된 업로드 함수
+        const upload = new AWS.S3.ManagedUpload({
+            params: {
+                Bucket: bucket, // 업로드할 대상 버킷명
+                Key: fileName, // 업로드할 파일명
+                Body: file, // 업로드할 파일 객체
+            },
+        })
+        
+        const promise = upload.promise()
+        
+        // 이미지 업로드
+        promise.then(
+            function (data) {
+                alert("이미지가 변경되었습니다.")
+            },
+            function (err) {
+                return alert("오류가 발생했습니다: ", err.message)
+            }
+        )
+        setUserImgName(fileName);
+
+        //서버에 이미지 이름 저장
+        await Api.userImgSave(userId, fileName);
+        
+        //적용한 이미지 미리보기
+        const fileUrl = URL.createObjectURL(file);
+        setUserImgUrl({backgroundImage: "url(" + fileUrl + ")"});
+    }
+
     
     return (
         <Wrap>
@@ -229,9 +346,9 @@ const Setting = () => {
             <Section>
                 <div className="setting">
                     <h2>Setting</h2>
-                    <div className="userImgBox" style={useImg}>
+                    <div className="userImgBox" style={userImgUrl}>
                         <label>
-                            <input type="file" accept="image/*"/>
+                            <input type="file" accept="image/*" onChange={handleFileInput}/>
                             <div><i class="bi bi-pencil-fill"></i></div>
                         </label>
                     </div>
@@ -241,12 +358,12 @@ const Setting = () => {
                             <input onChange={onChangeNickname} value={userNickname} placeholder="닉네임"/>
                         </div>
                         <div className="session">
-                            <p>이메일</p>
-                            <input onChange={onChangeEmail} value={userEmail} placeholder="이메일"/>
+                            <p>이메일 {changeEmail && <span>{emailMessage}</span>}</p>
+                            <input onChange={onChangeEmail} value={changeEmail} onBlur={onBlurEmailCheck} placeholder="이메일"/>
                         </div>
                         <div className="session">
-                            <p>전화번호</p>
-                            <input onChange={onChangePhone} value={userPhone} placeholder="전화번호"/>
+                            <p>전화번호 {changePhone && <span>{telMessage}</span>}</p>
+                            <input onChange={onChangePhone} onBlur={onBlurTelCheck} value={changePhone} placeholder="전화번호"/>
                         </div>
                         <div className="session">
                             <p>SNS</p>
@@ -261,7 +378,7 @@ const Setting = () => {
                     </div>
                 </div>
                 <div className="btnbox">
-                    <button onClick={onClickSave} className="save">SAVE</button>
+                    <button onClick={onClickSave} className="save" disabled={!(isEmail && isTel)}>SAVE</button>
                 </div>
             </Section>
             <div className="copy">&#169; Plannet.</div>

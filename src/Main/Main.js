@@ -3,6 +3,7 @@ import {ReactComponent as LogoImg} from "../Images/planet-001.svg";
 import "../App";
 import { Link } from "react-router-dom";
 import "./Main.css";
+import { useEffect } from "react";
 
 const Container = styled.div`
     width: 100%;
@@ -91,6 +92,7 @@ const Explain = styled.div`
 `;
 
 const Main = () => {
+    
     return(
         <div className="ex">
             <Container>

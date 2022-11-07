@@ -133,13 +133,15 @@ const Board = () => {
     const numPages = Math.ceil(boardList.length / limit); // 필요한 페이지 개수
 
     const [boardNo, setBoardNo] = useState();
+   
     //날짜 클릭시 해당 번호의 postView로 이동
     const onClickBoard = (boardNo) => {
         console.log(boardNo);
         const link = "/postView/" + boardNo;
         window.location.assign(link);
+        window.localStorage.setItem("boardNo",boardNo);
+        
     }
-    
     useEffect(() => {
         const boardData = async () => {
             try {
@@ -153,6 +155,7 @@ const Board = () => {
         boardData();
     }, []);
 
+    
     return (
         <Wrap>
             <Nav />
@@ -171,11 +174,11 @@ const Board = () => {
                             <th>Views</th>
                             <th>Date</th>
                         </tr>
-                        {boardList.slice(offset, offset + limit).map(({num, title, id, views, date}) => (
+                        {boardList.slice(offset, offset + limit).map(({num, title, nickname, views, date}) => (
                             <tr key={num}>
                                 <td>{num}</td>
                                 <td onChange={setBoardNo} onClick={()=> onClickBoard(num)}>{title}</td>
-                                <td>{id}</td>
+                                <td>{nickname}</td>
                                 <td>{views}</td>
                                 <td>{(date).substring(0,10)}</td>
                             </tr>     

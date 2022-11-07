@@ -3,7 +3,7 @@ import Nav from "../Utill/Nav";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Api from "../api/plannetApi";
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import { Link } from "react-router-dom";
 
 const Wrap = styled.div`
@@ -12,7 +12,6 @@ const Wrap = styled.div`
     background-color: white;
     margin: 0 auto;
 `;
-
 const StyledInput = styled.input`
         appearance: none;
         border: 2px solid #bbb;
@@ -32,8 +31,6 @@ const StyledInput = styled.input`
         background-color: #4555AE;
     }
 `;
-
-
 const Section = styled.div`
     width: 850px;
     height: 100vh;
@@ -170,7 +167,6 @@ const Section = styled.div`
         button{
             display :inline-block;
             font-weight: 600;
-            /* position: absolute;  */
             right: 30px;
             font-size: 16px;
             padding: 8px 35px;
@@ -191,14 +187,33 @@ const Section = styled.div`
     .ck-editor__main {padding: 0;}
 `;
 
-function Create() {
+function Edit() {
     const getId = window.localStorage.getItem("userId");
     const [title, setTitle] = useState();
     const [detail, setDetail] = useState();
     const [isChecked, setIsChecked] = useState(false);
+    const [boardLoad, setBoardLoad] = useState();
+    const getNum = window.localStorage.getItem("boardNo");
 
-    const onClickSave = async() => {
-        await Api.boardCreate(getId, title, detail, isChecked);
+    useEffect(() => {
+        const boardData = async () => {
+            try {
+                const response = await Api.boardLoad(getNum);
+                setBoardLoad(response.data);
+                setTitle(response.data[0].title);
+                setDetail(response.data);
+                console.log(response.data);
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        boardData();
+    }, []);
+
+    console.log(boardLoad);
+
+    const onClickEdit = async() => {
+        await Api.boardEdit(getId, getNum, title, detail);
         window.location.assign('/board');
     }
 
@@ -210,11 +225,14 @@ function Create() {
         setIsChecked(e.target.checked);
         console.log(isChecked);
       };
+      
 
     return (
         <Wrap>
             <Nav></Nav>
             <Section>
+            {boardLoad&&boardLoad.map( e => (
+                    <>
                 <div className="board_list sub_box">
                     <h2>자유게시판</h2>
                     <p>
@@ -225,26 +243,27 @@ function Create() {
                             <th colSpan={2}>게시물 작성</th>
                         </tr>
                         <tr>
-                            <td><input className="title-input" type='text' placeholder='제목을 입력하세요.' value={title} onChange={onChangeTitle} name='title' /></td>
-                            <td><StyledInput type="checkbox" checked={isChecked} onChange={handleChecked}/>익명</td>
+                            <td><input className="title-input" type='text' placeholder='제목을 입력하세요.' defaultValue={title} value={title} onChange={onChangeTitle} name='title' /></td>
+                            <td><StyledInput type="checkbox" checked={e.isChecked} onChange={handleChecked}/>익명</td>
                         </tr>
                     </table>           
                 </div>
                 <div className='form-wrapper'>
-                    <CKEditor editor={ClassicEditor} data={detail} onChange={(event, editor) => {
+                    <CKEditor editor={ClassicEditor} data={e.detail} onChange={(event, editor) => {
                             const data = editor.getData();
                             console.log({event, editor, data});
                             setDetail(data);
                     }}/>
                 </div>
                 <div className="button-area">
-                    <button onClick={onClickSave}>SAVE</button>
+                    <button onClick={onClickEdit}>SAVE</button>
                     <Link to='/board'><button>CANCLE</button></Link>
                 </div>
                 <p className="copy">&#169; Plannet.</p>
+                </>))}
             </Section>
         </Wrap>
     )
 };
 
-export default Create;
+export default Edit;
