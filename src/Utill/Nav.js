@@ -192,7 +192,7 @@ const Nav = () => {
                 </div>
                 <div className="userPro2">
                     <p>Email : {userEmail}</p>
-                    <p>{userPhone? <p>Phone : @{userPhone}</p> : <p>Phone : - </p> }</p>
+                    <p>{userPhone? <p>Phone : {userPhone}</p> : <p>Phone : - </p> }</p>
                     {userSNS? <p>SNS : @{userSNS}</p> : <p>SNS : - </p> }
                 </div>
                 <ul className="menu">
