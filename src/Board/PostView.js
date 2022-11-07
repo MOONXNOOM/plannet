@@ -5,6 +5,7 @@ import Api from '../api/plannetApi'
 import { Link } from "react-router-dom";
 // import { AppRunner } from 'aws-sdk';
 
+
 const Wrap = styled.div`
     width: 1130px;
     height: 100vh;

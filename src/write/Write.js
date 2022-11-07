@@ -5,6 +5,7 @@ import PlanList from "./PlanList";
 import Api from "../api/plannetApi";
 import { useParams } from "react-router-dom";
 
+
 const Wrap = styled.div`
     width: 1130px;
     height: 100vh;
