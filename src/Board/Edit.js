@@ -6,7 +6,6 @@ import Api from "../api/plannetApi";
 import {useState, useEffect} from 'react';
 import { Link } from "react-router-dom";
 
-
 const Wrap = styled.div`
     width: 1130px;
     height: 100vh;
@@ -221,7 +220,7 @@ function Edit() {
         window.localStorage.setItem("boardNo", getNum);
     }
 
-    const onClickCancle = (getNum) => {
+    const onClickCancle = () => {
         console.log(getNum);
         const link = "/postView/" + getNum;
         window.location.assign(link);
