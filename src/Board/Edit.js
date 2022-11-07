@@ -220,7 +220,7 @@ function Edit() {
         window.localStorage.setItem("boardNo", getNum);
     }
 
-    const onClickCancle = () => {
+    const onClickCancle = (getNum) => {
         console.log(getNum);
         const link = "/postView/" + getNum;
         window.location.assign(link);
