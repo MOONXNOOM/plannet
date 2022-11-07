@@ -6,9 +6,10 @@ import styled from "styled-components";
 import "./DoLogin.scss"
 import "../App";
 import Api from "../api/plannetApi";
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Modal from '../Utill/Modal';
 import { Link } from "react-router-dom";
+
 
 const ContainerLogin = styled.div`
     width: 100%;
@@ -37,99 +38,64 @@ const DoLogin = () => {
     const [inputPw, setInputPw] = useState("");
     
     // 오류 메시지
-    const [idMessage, setIdMessage] = useState("");
-    const [pwMessage, setPwMessage] = useState("");
     const [comment, setCommnet] = useState("");
 
      // 팝업
     const [modalOpen, setModalOpen] = useState(false);
-    const openModal = () => {
-         setModalOpen(true);
-    };
+
     const closeModal = () => {
         setModalOpen(false);
     };
 
     // 자동 로그인
-    const [isAuto, setIsAuto] = useState(true);
+    // const [isAuto, setIsAuto] = useState(true);
+    // const autoSign = () => {
+    //     setIsAuto(isAuto => !isAuto);
+    // }
 
-    useEffect(() => {
-    });
-
-    const autoSign = () => {
-        setIsAuto(isAuto => !isAuto);
-        console.log(isAuto)
-    }
-
-    // 유효성 검사
-    const [isId, setIsId] = useState("");
-    const [isPw, setIsPw] = useState("");
-
-    // ID 체크
     const onChangId = (e) => {
         setInputId(e.target.value)
-        if (e.target.value.length < 5 || e.target.value.length > 12) {
-            setIdMessage("5자리 이상 12자리 미만으로 입력해 주세요.");
-            setIsId(false);    
-        } else {
-            setIdMessage("올바른 형식 입니다.");
-            setIsId(true);
-        }
     }
 
-    // PW 체크
     const onChangePw = (e) => {
-        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
-        const passwordCurrent = e.target.value ;
-        setInputPw(passwordCurrent)
-        if (!passwordRegex.test(passwordCurrent)) {
-            setPwMessage('숫자 + 영문자 + 특수문자 조합으로 8자리 이상 입력해주세요!')
-            setIsPw(false)
-        } else {
-            setPwMessage('안전한 비밀번호에요 : )')
-            setIsPw(true);
-        }        
+        setInputPw(e.target.value)       
     }
 
     const onClickLink = () => {
         setModalOpen(true);
         setCommnet("서비스 준비중 입니다 ...");
-        console.log("서비스 준비중...");
     }
-
-    // const confirmModal = async() => {
-    //     setModalOpen(false);
-    //     const memberReg = await Api.memberDelete(localId);
-    //     console.log(memberReg.data.result);
-    //     if(memberReg.data.result === "OK") {
-    //         window.location.replace("/");
-    // }
 
     const onClickLogin = async() => {
         try {
             // 로그인을 위한 axios 호출
             const res = await Api.userLogin(inputId, inputPw);
-            console.log(res.data.result);
-            setCommnet("아이디 또는 비밀번호가 정확하지 않습니다.");
-           
+            
             if(res.data.result === "OK") {
                 window.localStorage.setItem("isLogin", "true");
                 window.localStorage.setItem("userId", inputId);
                 window.localStorage.setItem("userPw", inputPw);
                 window.location.replace("/home");
             } else {
+                setCommnet("아이디 또는 비밀번호가 정확하지 않습니다.");
                 setModalOpen(true);
             }
         } catch (e) {
             setModalOpen(true);
-            console.log("로그인 에러...");
+            console.log("e");
+        }
+    }
+
+    const onKeyPressLogin = (e) => {
+        if(e.key === 'Enter'){
+            onClickLogin();
         }
     }
 
     return (
         <div>
             <ContainerLogin>
-                <Logo><LogoImg width="90px" viewBox="30 150 430 220"/><Link to="/main" className="logo">Plannet</Link></Logo>
+                <Logo><LogoImg width="90px" viewBox="30 150 430 220"/><Link to="/" className="logo">Plannet</Link></Logo>
                 <div className="login">
                     <button className="login-btn1" onClick={onClickLink}>
                         <img src={kakaoimg} alt="카카오로고" className="logImg"/>
@@ -147,7 +113,7 @@ const DoLogin = () => {
                 <p className="space-or">또는</p>
                 <div className="login2">
                     <input type="text" id="id" name="uid" placeholder="아이디" required="" value ={inputId} onChange={onChangId}/>
-                    <input type="password" id="pwd" name="upw" placeholder="비밀번호" required="" value ={inputPw} onChange={onChangePw}/>
+                    <input type="password" id="pwd" name="upw" placeholder="비밀번호" required="" value ={inputPw} onChange={onChangePw}  onKeyPress={onKeyPressLogin}/>
                     <button className="doLogin" onClick={onClickLogin}>로그인하기</button>
                     <Modal open={modalOpen} close={closeModal} header="오류">아이디 및 패스워드를 재확인해 주세요.</Modal>
                 </div>

@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "../Utill/Nav";
 import Api from '../api/plannetApi'
+// import CommentMain from './CommentMain'
+
+
 
 const Wrap = styled.div`
     width: 1130px;
@@ -131,16 +134,15 @@ const Board = () => {
     const numPages = Math.ceil(boardList.length / limit); // 필요한 페이지 개수
 
     const [boardNo, setBoardNo] = useState();
+   
     //날짜 클릭시 해당 번호의 postView로 이동
     const onClickBoard = (boardNo) => {
         console.log(boardNo);
         const link = "/postView/" + boardNo;
         window.location.assign(link);
         window.localStorage.setItem("boardNo",boardNo);
-
         
     }
-    
     useEffect(() => {
         const boardData = async () => {
             try {
@@ -154,6 +156,7 @@ const Board = () => {
         boardData();
     }, []);
 
+    
     return (
         <Wrap>
             <Nav />
@@ -197,9 +200,10 @@ const Board = () => {
                     </ul> 
                     <form className="search" id="search" name="search" method="post">
                         <input name="product_search" title="검색" placeholder="검색어 입력"/>
-                        <a href="#" onclick="submit"><i class="bi bi-search"></i></a>
+                        <a href="#" onclick="submit"><i className="bi bi-search"></i></a>
                     </form> 
                 </div>
+                
             </Section>
             <div className="copy">&#169; Plannet.</div>
         </Wrap>

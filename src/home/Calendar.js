@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import './Calendar.css';
 import Api from "../api/plannetApi";
 
+
 const CalEx = () => {
 
   const [value, setValue] = useState(new Date());
@@ -20,7 +21,6 @@ const CalEx = () => {
       const planLoad = async() => {
           try{
               const response = await Api.planMark(getId);
-              console.log(response.data);
               setEndMark(response.data.planMark[0]);
               setDoMark(response.data.planMark[1]);
           } catch(e){

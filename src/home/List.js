@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import Api from "../api/plannetApi";
 
+
 const ListBox = styled.div`
     width: 100%;
     div:first-child p{color: rgb(206, 36, 36);}

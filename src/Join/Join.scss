@@ -1,3 +1,4 @@
+
 .session{
     margin-top: 8px;
     p{
@@ -56,4 +57,30 @@
         line-height: 24px;
     }
 
+}
+
+// find css
+.findBtn{
+    width: 50%;
+    float: left;
+    line-height: 40px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 400;
+    border-bottom: 3px solid #b8b9f1;
+    border-radius: 5px 5px 0 0;
+    margin: 20px 0;
+    cursor: pointer;
+    transition: all .1s ease-in;
+}
+.findActive {
+    background-color: #f9f9f9;
+    border-bottom: 3px solid #4555AE;
+    font-weight: 800;
+}
+div.session{
+    p{margin-top: 8px;}
+}
+.newPwd{
+    letter-spacing: -0.5px;
 }

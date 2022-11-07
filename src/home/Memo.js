@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Api from "../api/plannetApi";
 
+
 const Memo = () => {
     const getId = window.localStorage.getItem("userId");
     const [memoText, setMemoText] = useState('');

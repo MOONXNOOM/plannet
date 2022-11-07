@@ -21,6 +21,7 @@ const StyledInput = styled.input`
 `;
 
 
+
 const PlanItem = ({planItem, planList, setPlanList}) => {
     const [edited, setEdited] = useState(false);
     const [newText, setNewText] = useState(planItem.text);
@@ -91,7 +92,7 @@ const PlanItem = ({planItem, planList, setPlanList}) => {
                     <span className={testStyle} onClick={onClickEdit}>{planItem.text}</span>
                 )
             }
-            <button onClick={onClickRemove}><i class="bi bi-trash3-fill" /></button>
+            <button onClick={onClickRemove}><i className="bi bi-trash3-fill" /></button>
         </li>    
     );
 }

@@ -1,3 +1,4 @@
+
 import axios from "axios";
 const HEADER = 'application/json';
 const PLANNET_DOMAIN = "http://localhost:8090/Plannet_servlet/";
@@ -40,21 +41,22 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "MemberDelete", regCheck, HEADER);
     },
-    // 회원 아이디 찾기
-    memberFindId: async function(name, tel){
+    // 회원 아이디, 비밀번호 찾기
+    memberFind: async function(uni, email, type){
         const reg = {
-            name : name,
-            tel : tel
+            uni : uni,
+            email : email,
+            type : type
         }
-        return await axios.post(PLANNET_DOMAIN + "MemberFindIdServlet", reg, HEADER);
+        return await axios.post(PLANNET_DOMAIN + "MemberFind", reg, HEADER);
     },
-    // 회원 비밀번호 찾기
-    memberFindPwd: async function(id, tel){
+    // 새 비밀번호 저장
+    memberNewPwd: async function(id, pwd){
         const reg = {
             id : id,
-            tel : tel
+            pwd : pwd
         }
-        return await axios.post(PLANNET_DOMAIN + "MemberFindPwdServlet", reg, HEADER);
+        return await axios.post(PLANNET_DOMAIN + "MemberNewPwd", reg, HEADER);
     },
     // 회원 메모 조회
     memberMemo: async function(id) {
@@ -113,7 +115,13 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "BoardCreate", object, HEADER);
     },
-    
+    //조회수 
+    boardViews:async function(num){
+        const object = {
+            num: num
+        }
+        return await axios.post(PLANNET_DOMAIN+ "BoardViews", object, HEADER);
+    },
     // 게시판 내용보기
     boardLoad: async function(num){
         const object = {
@@ -121,6 +129,26 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "BoardLoad", object, HEADER);
     },
+
+    // 글 삭제
+    boardDelete: async function(num) {
+        const regCheck = {
+            num: num
+        }
+        return await axios.post(PLANNET_DOMAIN + "BoardDelete", regCheck, HEADER);
+    },
+
+    // 글 수정
+    boardEdit: async function(id, num, title, detail) {
+        const regCheck = {
+            id: id,
+            num: num,
+            title: title,
+            detail: detail
+        }
+        return await axios.post(PLANNET_DOMAIN + "BoardEdit", regCheck, HEADER);
+    },
+
     //userInfo 불러오기
     userInfoLoad: async function(id){
         const object = {
@@ -139,6 +167,13 @@ const plannetApi = {
             profile: profile
         }
         return await axios.post(PLANNET_DOMAIN + "UserInfoSave", object, HEADER);
+    },
+    userImgSave: async function(id, imgName) {
+        const object = {
+            id: id,
+            imgName: imgName
+        }
+        return await axios.post(PLANNET_DOMAIN + "UserImgSave", object, HEADER);
     },
     //달성률
     userDo: async function(id) {
@@ -164,6 +199,7 @@ const plannetApi = {
 
 
 }
+
 
 export default plannetApi;
 

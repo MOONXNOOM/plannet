@@ -5,14 +5,14 @@ import "../App";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Api from '../api/plannetApi';
-import { useEffect } from "react";
+
 
 // 구현해야 할 것
-// 1. 닉네임을 적지 않았을 때 자동으로 DB에 이름이 닉네임으로 동일하게 전송되도록
+// 1. 닉네임을 적지 않았을 때 자동으로 DB에 이름이 닉네임으로 동일하게 전송되도록 - 수정완
 // 2. 이메일 오류 유효성 검사 - 구현 완료
 // 3. 전반적인 디자인 수정 - 수정완
 // 4. 다 채우지 않았을 때 MODAL 띄우거나 혹은 아예 버튼을 DISABLE 속성을 넣어두기-수정완
-// 5. 전화번호 정규식 추가
+// 5. 전화번호 정규식 추가-수정완
 
 const ContainerJoin = styled.div`
     height: 100vh;
@@ -57,17 +57,6 @@ const Join = () => {
     const [isName, setIsName] = useState(false);
     const [isEmail, setIsEmail] = useState(false);
     const [isTel, setIsTel] = useState(true);
-
-    const [modalOpen, setModalOpen] = useState(false);
-    const [modalClose, setModalClose] =useState(false);
-    const [modalText, setModelText] = useState("중복된 아이디 입니다.");
-    // 팝업
-    const openModal = () => {
-        setModalOpen(true);
-    };
-    const closeModal = () => {
-        setModalOpen(false);
-    };
  
     // ID 길이 체크
     const onChangId = (e) => {
@@ -107,7 +96,11 @@ const Join = () => {
         } else {
             setPwMessage('안전한 비밀번호에요 :)')
             setIsPw(true);
-        }        
+        }
+        if (passwordCurrent !== inputConPw) {
+            setConPwMessage('비밀번호가 일치하지 않습니다.')
+            setIsConPw(false)   
+        }
     }
 
     // 비밀번호 확인 체크
@@ -161,7 +154,7 @@ const Join = () => {
     }
 
     const onChangeTel = (e) => {
-       setInputTel(e.target.value);
+       setInputTel(e.target.value.replace(/[^0-9]/g, '').replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`));
     }
 
     const onBlurTelCheck = async() => {
@@ -177,34 +170,28 @@ const Join = () => {
     //  onChangeBirth
     // const onChangeBirth = (e) => {
     //     const a = setInputBirth(e.target.value);
-    //     console.log(a);
     // }
 
     // ENTER 키를 눌렀을 때 회원가입 전송
-    function f_enter(){
-        if(window.event.keyCode === 13){
+    const onKeyDownJoin = (e) => {
+        if(e.key === 'Enter'){
             onClickJoin();
         }
     }
 
     const onClickJoin = async() => {
-        console.log("Click 회원가입");
         const memberReg = await Api.memberReg(inputId, inputPw, inputName, inputNickname, inputEmail, inputTel);
-        console.log(memberReg.data.result);
         if(memberReg.data.result === "OK") {
             window.localStorage.setItem("userId", inputId);
             window.localStorage.setItem("isLogin", "true");
             window.location.replace("/Home");
-        } else {
-            setModalOpen(true);
-            setModelText("회원 가입에 실패 했습니다. 중복체크나 공란을 확인하세요.");
         }
     }
 
     return(
         <>
             <ContainerJoin>
-                <Logo><LogoImg width="90px" viewBox="30 150 430 220"/><Link to="/main" className="logo">Plannet</Link></Logo>
+                <Logo><LogoImg width="90px" viewBox="30 150 430 220"/><Link to="/" className="logo">Plannet</Link></Logo>
                 <div className="session">
                     <p>
                         아이디*
@@ -246,7 +233,7 @@ const Join = () => {
                         전화번호
                         {inputTel.length > 0 && <span>{telMessage}</span>}
                     </p>
-                    <input type='tel' placeholder="휴대폰번호('-' 제외)" value ={inputTel} onChange={onChangeTel} onBlur={onBlurTelCheck} onKeyUp={f_enter}/>
+                    <input type='tel' placeholder="휴대폰번호('-' 제외)" value ={inputTel} onChange={onChangeTel} onBlur={onBlurTelCheck} onKeyDown={onKeyDownJoin}/>
                 </div>
                 {/* <div className="session">
                     <p className="joinTitle">생년월일</p>

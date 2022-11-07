@@ -3,9 +3,8 @@ import Nav from "../Utill/Nav";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Api from "../api/plannetApi";
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import { Link } from "react-router-dom";
-
 
 const Wrap = styled.div`
     width: 1130px;
@@ -13,7 +12,6 @@ const Wrap = styled.div`
     background-color: white;
     margin: 0 auto;
 `;
-
 const StyledInput = styled.input`
         appearance: none;
         border: 2px solid #bbb;
@@ -33,8 +31,6 @@ const StyledInput = styled.input`
         background-color: #4555AE;
     }
 `;
-
-
 const Section = styled.div`
     width: 850px;
     height: calc(100vh - 40px);
@@ -101,7 +97,7 @@ const Section = styled.div`
             transition: all .1s ease-in;
         }
     }
-    table{
+    .postInfo{
         border-collapse: collapse; 
         width: 100%;
         background-color: #4555AE;
@@ -151,7 +147,7 @@ const Section = styled.div`
     .title-input {
         font-size: 20px;
         width: 650px;
-        height: 40px;
+        height: 30px;
         outline: none;
         display: block;
         margin-bottom: 30px;
@@ -171,7 +167,6 @@ const Section = styled.div`
         button{
             display :inline-block;
             font-weight: 600;
-            /* position: absolute;  */
             right: 30px;
             font-size: 16px;
             padding: 8px 35px;
@@ -186,22 +181,61 @@ const Section = styled.div`
             margin-right: 10px;
         }
     }
+    
     .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
         height: 500px; 
     }
-    .ck-editor__main {padding: 0;}
+    .ck-editor__main {padding: 0;
+        .table{width: 100%;}
+        table, tr, td{
+            border-collapse: collapse;
+            padding: 5px;
+            border: 1px solid #ddd;
+            background: none;
+        }
+    }
 `;
 
-function Create() {
+function Edit() {
     const getId = window.localStorage.getItem("userId");
     const [title, setTitle] = useState();
     const [detail, setDetail] = useState();
     const [isChecked, setIsChecked] = useState(false);
+    const [boardLoad, setBoardLoad] = useState();
+    const getNum = window.localStorage.getItem("boardNo");
 
-    const onClickSave = async() => {
-        await Api.boardCreate(getId, title, detail, isChecked);
-        window.location.assign('/board');
+    useEffect(() => {
+        const boardData = async () => {
+            try {
+                const response = await Api.boardLoad(getNum);
+                setBoardLoad(response.data);
+                setTitle(response.data[0].title);
+                setDetail(response.data);
+                console.log(response.data);
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        boardData();
+    }, []);
+
+    console.log(boardLoad);
+
+    const onClickEdit = async() => {
+        await Api.boardEdit(getId, getNum, title, detail);
+        console.log(getNum);
+        const link = "/postView/" + getNum;
+        window.location.assign(link);
+        window.localStorage.setItem("boardNo", getNum);
     }
+
+    const onClickCancle = () => {
+        console.log(getNum);
+        const link = "/postView/" + getNum;
+        window.location.assign(link);
+        window.localStorage.setItem("boardNo", getNum);
+    }
+
 
     const onChangeTitle = (e) => {
         setTitle(e.target.value);
@@ -211,41 +245,45 @@ function Create() {
         setIsChecked(e.target.checked);
         console.log(isChecked);
       };
+      
 
     return (
         <Wrap>
             <Nav></Nav>
             <Section>
+            {boardLoad&&boardLoad.map( e => (
+                    <>
                 <div className="board_list sub_box">
                     <h2>자유게시판</h2>
                     <p>
                         <span>작성 시 유의해 주세요! 비방, 광고, 불건전한 내용의 글은 사전 동의 없이 삭제될 수 있습니다.</span>
                     </p>    
-                    <table>
+                    <table className="postInfo">
                         <tr>
-                            <th colSpan={2}>게시물 작성</th>
+                            <th colSpan={2}>게시물 수정</th>
                         </tr>
                         <tr>
-                            <td><input className="title-input" type='text' placeholder='제목을 입력하세요.' value={title} onChange={onChangeTitle} name='title' /></td>
-                            <td><StyledInput type="checkbox" checked={isChecked} onChange={handleChecked}/>익명</td>
+                            <td><input className="title-input" type='text' placeholder='제목을 입력하세요.' defaultValue={title} value={title} onChange={onChangeTitle} name='title' /></td>
+                            <td><StyledInput type="checkbox" checked={e.isChecked} onChange={handleChecked}/>익명</td>
                         </tr>
                     </table>           
                 </div>
                 <div className='form-wrapper'>
-                    <CKEditor editor={ClassicEditor} data={detail} onChange={(event, editor) => {
+                    <CKEditor editor={ClassicEditor} data={e.detail} onChange={(event, editor) => {
                             const data = editor.getData();
                             console.log({event, editor, data});
                             setDetail(data);
                     }}/>
                 </div>
                 <div className="button-area">
-                    <button onClick={onClickSave}>SAVE</button>
-                    <Link to='/board'><button>CANCLE</button></Link>
+                    <button onClick={onClickEdit}>SAVE</button>
+                    <button onClick={onClickCancle}>CANCLE</button>
                 </div>
+                </>))}
             </Section>
             <div className="copy">&#169; Plannet.</div>
         </Wrap>
     )
 };
 
-export default Create;
+export default Edit;

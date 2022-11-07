@@ -12,6 +12,7 @@ import Setting from './Setting/Setting';
 import PostView from './Board/PostView';
 import PublicRoute from './Lib/PublicRoute';
 import PrivateRoute from './Lib/PrivateRoute';
+import Edit from './Board/Edit';
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
         <Route path="/board" element={<PrivateRoute><Board /></PrivateRoute>}/>
         <Route exact path='/postView/:no' element={<PrivateRoute><PostView /></PrivateRoute>}/>
         <Route path="/create" element={<PrivateRoute><Create /></PrivateRoute>}/>
+        <Route path="/write/:date" element={<PrivateRoute><Write /></PrivateRoute>}/>
+        <Route path="/edit/:no" element={<PrivateRoute><Edit /></PrivateRoute>}/>
 
         {/* <Route path="/" element={<Main />}/>
         <Route path="/doLogin" element={<DoLogin />}/>
