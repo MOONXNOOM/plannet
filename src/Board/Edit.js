@@ -193,7 +193,6 @@ function Edit() {
     const [detail, setDetail] = useState();
     const [isChecked, setIsChecked] = useState(false);
     const [boardLoad, setBoardLoad] = useState();
-    const [boardViews,setBoardViews] = useState(0);
     const getNum = window.localStorage.getItem("boardNo");
 
     useEffect(() => {
@@ -201,6 +200,8 @@ function Edit() {
             try {
                 const response = await Api.boardLoad(getNum);
                 setBoardLoad(response.data);
+                setTitle(response.data[0].title);
+                setDetail(response.data);
                 console.log(response.data);
             } catch (e) {
                 console.log(e);
@@ -208,6 +209,8 @@ function Edit() {
         };
         boardData();
     }, []);
+
+    console.log(boardLoad);
 
     const onClickEdit = async() => {
         await Api.boardEdit(getId, getNum, title, detail);
@@ -240,7 +243,7 @@ function Edit() {
                             <th colSpan={2}>게시물 작성</th>
                         </tr>
                         <tr>
-                            <td><input className="title-input" type='text' placeholder='제목을 입력하세요.' defaultValue={e.title} value={title} onChange={onChangeTitle} name='title' /></td>
+                            <td><input className="title-input" type='text' placeholder='제목을 입력하세요.' defaultValue={title} value={title} onChange={onChangeTitle} name='title' /></td>
                             <td><StyledInput type="checkbox" checked={e.isChecked} onChange={handleChecked}/>익명</td>
                         </tr>
                     </table>           
