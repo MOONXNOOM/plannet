@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Nav from '../Utill/Nav';
 import Api from '../api/plannetApi'
 import { Link } from "react-router-dom";
+import { AppRunner } from 'aws-sdk';
 
 const Wrap = styled.div`
     width: 1130px;
@@ -172,6 +173,15 @@ const PostView = () => {
 
     
     useEffect(() => {
+        const increaseViews = async () => {
+            try {
+                const response = await Api.boardViews(getNum);
+                setBoardViews(response.data);
+                console.log(response.data);
+            }catch (e) {
+                console.log(e);
+            }
+        };
         const boardData = async () => {
             try {
                 const response = await Api.boardLoad(getNum);
@@ -181,8 +191,10 @@ const PostView = () => {
                 console.log(e);
             }
         };
+        
         boardData();
-    }, []);
+        increaseViews();
+    }, [getNum]);
     return(
         <Wrap>
             <Nav />
@@ -200,7 +212,7 @@ const PostView = () => {
                                 <tr>
                                     <td>No.{e.num}</td>
                                     <td>Writer.{e.nickname}</td>
-                                    <td><i class="bi bi-eye"></i>{e.views}<i class="bi bi-heart-fill"></i>좋아요</td>
+                                    <td><i class="bi bi-eye"></i>{e.views+1}<i class="bi bi-heart-fill"></i>좋아요</td>
                                     <td>{(e.date).substring(0,10)}</td>
                                 </tr>
                             </table>
