@@ -85,18 +85,17 @@ const Section = styled.div`
             transition: all .1s ease-in;
         }
     }
-    table{
+    .postInfo{
         border-collapse: collapse; 
         width:100%;
         background-color: #4555AE;
-        border-bottom: solid 1px #4555AE;
+        border-bottom: solid 1px #bbb;
         text-align: center;
-        tr:nth-child(2n) td{background-color: #f9f9f9;}
+        tr:first-child td{border-top: solid 1px #4555AE; background-color: #f9f9f9;}
         th{padding: 10px; color: white;}
         td{padding: 10px; background-color: white; border-left: solid 1px #bbb; border-top: solid 1px #ddd;}
         td:first-child{border-left: none};
         td:nth-child(2){width: 400px; text-align: left; padding-left: 20px;}  
-        tr:hover td, tr:hover a{color: #4555AE;}
         .title-input{font-size:20px; font-weight: 500;}
         .bi{padding-right:5px;}
         .bi-heart-fill{margin-left:13px;}
@@ -106,6 +105,13 @@ const Section = styled.div`
         min-height: 500px;
         padding: 30px;
         border-bottom: 1px solid #4555AE;
+        table{width: 100%; margin: 10px 0;}
+        table, tr, td{
+            border-collapse: collapse;
+            padding: 5px;
+            border: 1px solid #ddd;
+            background: none;
+        }
     }
     .button-area {
         text-align: right;
@@ -202,10 +208,9 @@ const PostView = () => {
                 {boardLoad&&boardLoad.map( e => (
                     <>
                         <div className="board_list sub_box"> 
-                            <h2>내용보기</h2>
+                            <h2>자유게시판</h2>
                             <p><span>유저들이 작성한 글에 댓글과 좋아요를 남기며 소통해보세요! <br />커뮤니티 규칙에 맞지 않는 글과 댓글은 무통보 삭제됩니다.</span></p>  
-                            <table>
-                                <th colSpan={5}>게시글 보기</th>
+                            <table className='postInfo'>
                                 <tr>
                                     <td className="title-input" key={e.num} colSpan={4}>{e.title}</td>
                                 </tr>
