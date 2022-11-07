@@ -126,10 +126,16 @@ const DoLogin = () => {
         }
     }
 
+    const onKeyPressLogin = (e) => {
+        if(e.key === 'Enter'){
+            onClickLogin();
+        }
+    }
+
     return (
         <div>
             <ContainerLogin>
-                <Logo><LogoImg width="90px" viewBox="30 150 430 220"/><Link to="/main" className="logo">Plannet</Link></Logo>
+                <Logo><LogoImg width="90px" viewBox="30 150 430 220"/><Link to="/" className="logo">Plannet</Link></Logo>
                 <div className="login">
                     <button className="login-btn1" onClick={onClickLink}>
                         <img src={kakaoimg} alt="카카오로고" className="logImg"/>
@@ -147,7 +153,7 @@ const DoLogin = () => {
                 <p className="space-or">또는</p>
                 <div className="login2">
                     <input type="text" id="id" name="uid" placeholder="아이디" required="" value ={inputId} onChange={onChangId}/>
-                    <input type="password" id="pwd" name="upw" placeholder="비밀번호" required="" value ={inputPw} onChange={onChangePw}/>
+                    <input type="password" id="pwd" name="upw" placeholder="비밀번호" required="" value ={inputPw} onChange={onChangePw}  onKeyPress={onKeyPressLogin}/>
                     <button className="doLogin" onClick={onClickLogin}>로그인하기</button>
                     <Modal open={modalOpen} close={closeModal} header="오류">아이디 및 패스워드를 재확인해 주세요.</Modal>
                 </div>

@@ -40,21 +40,22 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "MemberDelete", regCheck, HEADER);
     },
-    // 회원 아이디 찾기
-    memberFindId: async function(name, tel){
+    // 회원 아이디, 비밀번호 찾기
+    memberFind: async function(uni, email, type){
         const reg = {
-            name : name,
-            tel : tel
+            uni : uni,
+            email : email,
+            type : type
         }
-        return await axios.post(PLANNET_DOMAIN + "MemberFindIdServlet", reg, HEADER);
+        return await axios.post(PLANNET_DOMAIN + "MemberFind", reg, HEADER);
     },
-    // 회원 비밀번호 찾기
-    memberFindPwd: async function(id, tel){
+    // 새 비밀번호 저장
+    memberNewPwd: async function(id, pwd){
         const reg = {
             id : id,
-            tel : tel
+            pwd : pwd
         }
-        return await axios.post(PLANNET_DOMAIN + "MemberFindPwdServlet", reg, HEADER);
+        return await axios.post(PLANNET_DOMAIN + "MemberNewPwd", reg, HEADER);
     },
     // 회원 메모 조회
     memberMemo: async function(id) {
