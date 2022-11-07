@@ -6,7 +6,7 @@ import styled from "styled-components";
 import "./DoLogin.scss"
 import "../App";
 import Api from "../api/plannetApi";
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Modal from '../Utill/Modal';
 import { Link } from "react-router-dom";
 
@@ -37,58 +37,28 @@ const DoLogin = () => {
     const [inputPw, setInputPw] = useState("");
     
     // 오류 메시지
-    const [idMessage, setIdMessage] = useState("");
-    const [pwMessage, setPwMessage] = useState("");
     const [comment, setCommnet] = useState("");
 
      // 팝업
     const [modalOpen, setModalOpen] = useState(false);
-    const openModal = () => {
-         setModalOpen(true);
-    };
+
     const closeModal = () => {
         setModalOpen(false);
     };
 
     // 자동 로그인
-    const [isAuto, setIsAuto] = useState(true);
+    // const [isAuto, setIsAuto] = useState(true);
+    // const autoSign = () => {
+    //     setIsAuto(isAuto => !isAuto);
+    //     console.log(isAuto)
+    // }
 
-    useEffect(() => {
-    });
-
-    const autoSign = () => {
-        setIsAuto(isAuto => !isAuto);
-        console.log(isAuto)
-    }
-
-    // 유효성 검사
-    const [isId, setIsId] = useState("");
-    const [isPw, setIsPw] = useState("");
-
-    // ID 체크
     const onChangId = (e) => {
         setInputId(e.target.value)
-        if (e.target.value.length < 5 || e.target.value.length > 12) {
-            setIdMessage("5자리 이상 12자리 미만으로 입력해 주세요.");
-            setIsId(false);    
-        } else {
-            setIdMessage("올바른 형식 입니다.");
-            setIsId(true);
-        }
     }
 
-    // PW 체크
     const onChangePw = (e) => {
-        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/
-        const passwordCurrent = e.target.value ;
-        setInputPw(passwordCurrent)
-        if (!passwordRegex.test(passwordCurrent)) {
-            setPwMessage('숫자 + 영문자 + 특수문자 조합으로 8자리 이상 입력해주세요!')
-            setIsPw(false)
-        } else {
-            setPwMessage('안전한 비밀번호에요 : )')
-            setIsPw(true);
-        }        
+        setInputPw(e.target.value)       
     }
 
     const onClickLink = () => {
@@ -110,14 +80,14 @@ const DoLogin = () => {
             // 로그인을 위한 axios 호출
             const res = await Api.userLogin(inputId, inputPw);
             console.log(res.data.result);
-            setCommnet("아이디 또는 비밀번호가 정확하지 않습니다.");
-           
+            
             if(res.data.result === "OK") {
                 window.localStorage.setItem("isLogin", "true");
                 window.localStorage.setItem("userId", inputId);
                 window.localStorage.setItem("userPw", inputPw);
                 window.location.replace("/home");
             } else {
+                setCommnet("아이디 또는 비밀번호가 정확하지 않습니다.");
                 setModalOpen(true);
             }
         } catch (e) {

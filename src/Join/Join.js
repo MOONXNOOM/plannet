@@ -173,8 +173,8 @@ const Join = () => {
     // }
 
     // ENTER 키를 눌렀을 때 회원가입 전송
-    function f_enter(){
-        if(window.event.keyCode === 13){
+    const onKeyDownJoin = (e) => {
+        if(e.key === 'Enter'){
             onClickJoin();
         }
     }
@@ -235,7 +235,7 @@ const Join = () => {
                         전화번호
                         {inputTel.length > 0 && <span>{telMessage}</span>}
                     </p>
-                    <input type='tel' placeholder="휴대폰번호('-' 제외)" value ={inputTel} onChange={onChangeTel} onBlur={onBlurTelCheck} onKeyUp={f_enter}/>
+                    <input type='tel' placeholder="휴대폰번호('-' 제외)" value ={inputTel} onChange={onChangeTel} onBlur={onBlurTelCheck} onKeyDown={onKeyDownJoin}/>
                 </div>
                 {/* <div className="session">
                     <p className="joinTitle">생년월일</p>
