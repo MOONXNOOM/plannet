@@ -5,6 +5,7 @@ import Api from "../api/plannetApi";
 import Modal from "../Utill/Modal";
 import AWS from "aws-sdk"
 
+
 const Wrap = styled.div`
     width: 1130px;
     height: 100vh;

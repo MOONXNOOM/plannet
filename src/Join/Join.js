@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Api from '../api/plannetApi';
 
+
 // 구현해야 할 것
 // 1. 닉네임을 적지 않았을 때 자동으로 DB에 이름이 닉네임으로 동일하게 전송되도록 - 수정완
 // 2. 이메일 오류 유효성 검사 - 구현 완료

@@ -7,6 +7,7 @@ import Api from "../api/plannetApi";
 import "./Join.scss"
 import Modal from "../Utill/Modal";
 
+
 const ContainerJoin = styled.div`
     height: 100vh;
     display:flex ;

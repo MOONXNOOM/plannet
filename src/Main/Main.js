@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import "./Main.css";
 import { useEffect } from "react";
 
+
 const Container = styled.div`
     width: 100%;
     height: 100vh;

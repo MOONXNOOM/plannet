@@ -6,6 +6,7 @@ import Api from "../api/plannetApi";
 import {useState} from 'react';
 import { Link } from "react-router-dom";
 
+
 const Wrap = styled.div`
     width: 1130px;
     height: 100vh;
