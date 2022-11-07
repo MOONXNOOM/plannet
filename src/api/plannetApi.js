@@ -121,6 +121,15 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "BoardLoad", object, HEADER);
     },
+
+    // 글 삭제
+    boardDelete: async function(num) {
+        const regCheck = {
+            num: num
+        }
+        return await axios.post(PLANNET_DOMAIN + "BoardDelete", regCheck, HEADER);
+    },
+
     //userInfo 불러오기
     userInfoLoad: async function(id){
         const object = {

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import Nav from '../Utill/Nav';
 import Api from '../api/plannetApi'
+import { Link } from "react-router-dom";
 
 const Wrap = styled.div`
     width: 1130px;
@@ -101,7 +102,28 @@ const Section = styled.div`
     }
     .detail{
         width: 100%;
+        min-height: 500px;
         padding: 30px;
+        border-bottom: 1px solid #4555AE;
+    }
+    .button-area {
+        text-align: right;
+        button{
+            display :inline-block;
+            font-weight: 600;
+            right: 30px;
+            font-size: 16px;
+            padding: 8px 35px;
+            border-radius: 25px;
+            background-color: #4555AE;
+            color: white;
+            border: none;
+            transition: all .1s ease-in;
+            &:hover{background-color: #4555AE;}
+        }
+        button:nth-child(-n+3){
+            margin-left: 10px;
+        }
     }
     .util_box{
         .page_list {
@@ -128,9 +150,15 @@ const Section = styled.div`
 `;
 
 const PostView = () => {
-    const [boardLoad, setBoardLoad] = useState();
+    const getId = window.localStorage.getItem("userId");
     const getNum = window.localStorage.getItem("boardNo");
+    const [boardLoad, setBoardLoad] = useState();
     console.log(getNum);
+
+    const deleteData = async() => {
+        await Api.boardDelete(getNum);
+        window.location.replace("/board");
+    }
 
     
     useEffect(() => {
@@ -149,13 +177,11 @@ const PostView = () => {
         <Wrap>
             <Nav />
             <Section>
-                <div className="board_list sub_box"> 
-                    <h2>내용보기</h2>
-                    <p>
-                        <span>유저들이 작성한 글에 댓글과 좋아요를 남기며 소통해보세요! <br />커뮤니티 규칙에 맞지 않는 글과 댓글은 무통보 삭제됩니다.</span>
-                    </p>
-                    {boardLoad&&boardLoad.map( e => (
-                        <>
+                {boardLoad&&boardLoad.map( e => (
+                    <>
+                        <div className="board_list sub_box"> 
+                            <h2>내용보기</h2>
+                            <p><span>유저들이 작성한 글에 댓글과 좋아요를 남기며 소통해보세요! <br />커뮤니티 규칙에 맞지 않는 글과 댓글은 무통보 삭제됩니다.</span></p>  
                             <table>
                                 <th colSpan={5}>게시글 보기</th>
                                 <tr>
@@ -169,26 +195,12 @@ const PostView = () => {
                                 </tr>
                             </table>
                             <div className='detail' dangerouslySetInnerHTML={{__html: e.detail}}></div>
-                        </>))}
-                </div>
-{/*
-                    <div className='center'>
-                        다시 누르면 좋아요 취소되게 할지, 혹은 값 변동 안 되고 대신 '좋아요는 한번만 누를 수 있다' modal 띄우기
-                        <button>좋아요 + 좋아요 수 함께 뜨는 버튼</button>
-                        https://ablue-1.tistory.com/21
-                    </div>
-                    <div className='center'>
-                        {/* * 수정/삭제하려면 비밀번호 확인 modal 뜨게 하기 or 자신의 글만 애초에 수정 버튼이 뜨게 구현 */}
-                        {/* <button>수정</button>
-                        <button>삭제</button>
-                    </div>
-                    <div style={{background:'green', height:'100px'}}>
-                        댓글작성란
-                    </div>
-                    <div style={{background:'gray', height:'300px'}}>
-                        댓글란 - 닉네임, 내용, 작성시간, 댓글에 hover하면 자신의 댓글인 경우 오른쪽 모서리 상단에 x버튼 뜨게:삭제기능
-                        댓글 늘어날 때마다 전체 페이지 스크롤 늘어나게, 아니면 또 페이지 구현 
-                    </div> */}
+                        </div>
+                        <div className="button-area">
+                            <Link to='/board'><button>BACK</button></Link>
+                            {getId === e.id ? <><button>EDIT</button><button onClick={deleteData}>DELETE</button></> : null}
+                        </div>
+                    </>))}
             </Section>
         </Wrap>
     )
