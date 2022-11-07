@@ -113,7 +113,14 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "BoardCreate", object, HEADER);
     },
-    
+    //조회수 
+    boardViews:async function(num,views){
+        const object = {
+            num: num,
+            views:views
+        }
+        return await axios.post(PLANNET_DOMAIN+ "BoardViews", object, HEADER);
+    },
     // 게시판 내용보기
     boardLoad: async function(num){
         const object = {
