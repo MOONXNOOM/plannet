@@ -191,6 +191,7 @@ const PostView = () => {
                 console.log(e);
             }
         };
+        
         boardData();
         increaseViews();
     }, [getNum]);
