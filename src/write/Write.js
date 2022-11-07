@@ -233,7 +233,6 @@ const Write = () => {
             deleted: false
         });
         setPlanList(nextPlanList);
-        console.log(planList);
     }
 
     useEffect(() => {
@@ -248,7 +247,6 @@ const Write = () => {
         }
         writeLoad();
     },[getId, date]);
-    console.log(planList);
     const onClickSave = async() => {
         await Api.writeSave(getId, date, planList, diary);
         window.location.replace('/home');

@@ -252,7 +252,6 @@ const Setting = () => {
     const onBlurTelCheck = async() => {
         const memberCheck = await Api.memberRegCheck(changePhone, "TYPE_TEL");
         if (memberCheck.data.result === "OK" ) {
-            console.log(memberCheck.data.result);
             setTelMessage("사용가능한 전화번호입니다.");
             setIsTel(true)
         } else if(memberCheck.data.result === "NOK" && userPhone ===  changePhone){

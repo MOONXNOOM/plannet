@@ -170,7 +170,6 @@ const Join = () => {
     //  onChangeBirth
     // const onChangeBirth = (e) => {
     //     const a = setInputBirth(e.target.value);
-    //     console.log(a);
     // }
 
     // ENTER 키를 눌렀을 때 회원가입 전송
@@ -181,9 +180,7 @@ const Join = () => {
     }
 
     const onClickJoin = async() => {
-        console.log("Click 회원가입");
         const memberReg = await Api.memberReg(inputId, inputPw, inputName, inputNickname, inputEmail, inputTel);
-        console.log(memberReg.data.result);
         if(memberReg.data.result === "OK") {
             window.localStorage.setItem("userId", inputId);
             window.localStorage.setItem("isLogin", "true");

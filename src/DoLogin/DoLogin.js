@@ -51,7 +51,6 @@ const DoLogin = () => {
     // const [isAuto, setIsAuto] = useState(true);
     // const autoSign = () => {
     //     setIsAuto(isAuto => !isAuto);
-    //     console.log(isAuto)
     // }
 
     const onChangId = (e) => {
@@ -65,16 +64,7 @@ const DoLogin = () => {
     const onClickLink = () => {
         setModalOpen(true);
         setCommnet("서비스 준비중 입니다 ...");
-        console.log("서비스 준비중...");
     }
-
-    // const confirmModal = async() => {
-    //     setModalOpen(false);
-    //     const memberReg = await Api.memberDelete(localId);
-    //     console.log(memberReg.data.result);
-    //     if(memberReg.data.result === "OK") {
-    //         window.location.replace("/");
-    // }
 
     const onClickLogin = async() => {
         try {
@@ -93,7 +83,7 @@ const DoLogin = () => {
             }
         } catch (e) {
             setModalOpen(true);
-            console.log("로그인 에러...");
+            console.log("e");
         }
     }
 
