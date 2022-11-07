@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Comment.css'
-import LikeButton from './LikeButton'
 
 class CommentList extends Component {
 
