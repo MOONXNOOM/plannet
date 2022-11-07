@@ -33,7 +33,7 @@ const StyledInput = styled.input`
 `;
 const Section = styled.div`
     width: 850px;
-    height: 100vh;
+    height: calc(100vh - 40px);
     float: left;
     position: relative;
     overflow-y: scroll;
@@ -279,9 +279,9 @@ function Edit() {
                     <button onClick={onClickEdit}>SAVE</button>
                     <button onClick={onClickCancle}>CANCLE</button>
                 </div>
-                <p className="copy">&#169; Plannet.</p>
                 </>))}
             </Section>
+            <div className="copy">&#169; Plannet.</div>
         </Wrap>
     )
 };

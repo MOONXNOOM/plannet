@@ -230,6 +230,7 @@ const PostView = () => {
                         </div>
                     </>))}
             </Section>
+            <div className="copy">&#169; Plannet.</div>
         </Wrap>
     )
 };
