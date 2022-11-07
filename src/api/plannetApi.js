@@ -140,6 +140,13 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "UserInfoSave", object, HEADER);
     },
+    userImgSave: async function(id, imgName) {
+        const object = {
+            id: id,
+            imgName: imgName
+        }
+        return await axios.post(PLANNET_DOMAIN + "UserImgSave", object, HEADER);
+    },
     //달성률
     userDo: async function(id) {
         const object = {
