@@ -153,6 +153,7 @@ const Board = () => {
         boardData();
     }, []);
 
+    
     return (
         <Wrap>
             <Nav />
