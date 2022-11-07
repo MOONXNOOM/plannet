@@ -131,15 +131,15 @@ const Board = () => {
     const numPages = Math.ceil(boardList.length / limit); // 필요한 페이지 개수
 
     const [boardNo, setBoardNo] = useState();
-
+   
     //날짜 클릭시 해당 번호의 postView로 이동
     const onClickBoard = (boardNo) => {
         console.log(boardNo);
         const link = "/postView/" + boardNo;
         window.location.assign(link);
         window.localStorage.setItem("boardNo",boardNo);
+        
     }
-    
     useEffect(() => {
         const boardData = async () => {
             try {

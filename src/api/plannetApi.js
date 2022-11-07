@@ -114,10 +114,9 @@ const plannetApi = {
         return await axios.post(PLANNET_DOMAIN + "BoardCreate", object, HEADER);
     },
     //조회수 
-    boardViews:async function(num,views){
+    boardViews:async function(num){
         const object = {
-            num: num,
-            views:views
+            num: num
         }
         return await axios.post(PLANNET_DOMAIN+ "BoardViews", object, HEADER);
     },
