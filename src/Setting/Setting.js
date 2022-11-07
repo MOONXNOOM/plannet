@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Nav from "../Utill/Nav";
 import Api from "../api/plannetApi";
 import Modal from "../Utill/Modal";
+import AWS from "aws-sdk"
 
 const Wrap = styled.div`
     width: 1130px;
@@ -178,8 +179,8 @@ const Section = styled.div`
 
 const Setting = () => {
     const userId = window.localStorage.getItem("userId");
-    const [userSrc, setUserSrc] = useState("https://images.unsplash.com/photo-1666473574427-253b43283677?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80");
-    const useImg = {backgroundImage: "url(" + userSrc + ")"};
+    const [userImgName, setUserImgName] = useState("");
+    const [userImgUrl, setUserImgUrl] = useState({backgroundImage: "url(https://khprojectplannet.s3.ap-northeast-2.amazonaws.com/" + userImgName + ")"});
     const [userNickname, setUserNickname] = useState("");
     const [userEmail, setUserEmail] = useState("");
     const [userPhone, setUserPhone] = useState("");
@@ -203,6 +204,8 @@ const Setting = () => {
                 setUserPhone(response.data[0].phone);
                 setUserSNS(response.data[0].sns);
                 setUserPro(response.data[0].profile);
+                setUserImgName(response.data[0].img);
+                setUserImgUrl({backgroundImage: "url(https://khprojectplannet.s3.ap-northeast-2.amazonaws.com/" + response.data[0].img + ")"});
             } catch(e){
                 console.log(e);
             }
@@ -290,7 +293,51 @@ const Setting = () => {
             setIsEmail(false);
         } 
     }
+    
+    //이미지 저장
+    const bucket = "khprojectplannet";
 
+    AWS.config.update({
+        region: "ap-northeast-2",
+        credentials: new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: "cognito인증키"
+        }),
+    })
+
+    const handleFileInput = async(e) => {
+        // input 태그를 통해 선택한 파일 객체
+        const file = e.target.files[0];
+        const fileName = userId + e.target.files[0].name;
+        
+        // S3 SDK에 내장된 업로드 함수
+        const upload = new AWS.S3.ManagedUpload({
+            params: {
+                Bucket: bucket, // 업로드할 대상 버킷명
+                Key: fileName, // 업로드할 파일명
+                Body: file, // 업로드할 파일 객체
+            },
+        })
+        
+        const promise = upload.promise()
+        
+        // 이미지 업로드
+        promise.then(
+            function (data) {
+                alert("이미지가 변경되었습니다.")
+            },
+            function (err) {
+                return alert("오류가 발생했습니다: ", err.message)
+            }
+        )
+        setUserImgName(fileName);
+
+        //서버에 이미지 이름 저장
+        await Api.userImgSave(userId, fileName);
+        
+        //적용한 이미지 미리보기
+        const fileUrl = URL.createObjectURL(file);
+        setUserImgUrl({backgroundImage: "url(" + fileUrl + ")"});
+    }
 
     
     return (
@@ -299,9 +346,9 @@ const Setting = () => {
             <Section>
                 <div className="setting">
                     <h2>Setting</h2>
-                    <div className="userImgBox" style={useImg}>
+                    <div className="userImgBox" style={userImgUrl}>
                         <label>
-                            <input type="file" accept="image/*"/>
+                            <input type="file" accept="image/*" onChange={handleFileInput}/>
                             <div><i class="bi bi-pencil-fill"></i></div>
                         </label>
                     </div>

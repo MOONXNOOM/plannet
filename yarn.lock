@@ -3604,6 +3604,22 @@
   "resolved" "https://registry.npmjs.org/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz"
   "version" "1.0.5"
 
+"aws-sdk@^2.1248.0":
+  "integrity" "sha512-PxSweXAmKZyhHoPOPphz2XN9/3SDdNs/HBrLn7YF6c+AnZz8VPxCPYRFbFGUTLfQmdz5Cog82tDzwgFd4KGzFQ=="
+  "resolved" "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.1248.0.tgz"
+  "version" "2.1248.0"
+  dependencies:
+    "buffer" "4.9.2"
+    "events" "1.1.1"
+    "ieee754" "1.1.13"
+    "jmespath" "0.16.0"
+    "querystring" "0.2.0"
+    "sax" "1.2.1"
+    "url" "0.10.3"
+    "util" "^0.12.4"
+    "uuid" "8.0.0"
+    "xml2js" "0.4.19"
+
 "aws-sign2@~0.7.0":
   "integrity" "sha512-08kcGqnYf/YmjoRhfxyu+CLxBjUtHLXLXX/vUfx9l2LYzG3c1m61nrpyFUZI6zeS+Li/wWMMidD9KgrqtGq3mA=="
   "resolved" "https://registry.npmjs.org/aws-sign2/-/aws-sign2-0.7.0.tgz"
