@@ -4,11 +4,8 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
-<<<<<<< HEAD
     "@ckeditor/ckeditor5-build-classic": "^35.2.1",
-=======
     "@ckeditor/ckeditor5-build-classic": "^35.3.0",
->>>>>>> ba6f6565d5b9d073939f0906a32730c7b5b8061c
     "@ckeditor/ckeditor5-react": "^5.0.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "../Utill/Nav";
 import Api from '../api/plannetApi'
-import CommentMain from './CommentMain'
+// import CommentMain from './CommentMain'
 
 
 const Wrap = styled.div`
@@ -202,7 +202,7 @@ const Board = () => {
                         <a href="#" onclick="submit"><i class="bi bi-search"></i></a>
                     </form> 
                 </div>
-                <CommentMain/>
+                
             </Section>
             <div className="copy">&#169; Plannet.</div>
         </Wrap>
