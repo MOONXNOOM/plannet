@@ -4,6 +4,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Api from "../api/plannetApi";
 import {useState} from 'react';
+import { Link } from "react-router-dom";
 
 const Wrap = styled.div`
     width: 1130px;
@@ -164,20 +165,24 @@ const Section = styled.div`
         width: 80%;
         min-height: 500px;
     }
-    .submit-button {
-        font-weight: 600;
-        display: block;
-        position: absolute; 
-        right: 30px;
-        font-size: 16px;
-        padding: 8px 35px;
-        border-radius: 25px;
-        background-color: #4555AE;
-        color: white;
-        border: none;
-        transition: all .1s ease-in;
-        &:hover{
+    .button-area {
+        text-align: right;
+        button{
+            display :inline-block;
+            font-weight: 600;
+            /* position: absolute;  */
+            right: 30px;
+            font-size: 16px;
+            padding: 8px 35px;
+            border-radius: 25px;
             background-color: #4555AE;
+            color: white;
+            border: none;
+            transition: all .1s ease-in;
+            &:hover{background-color: #4555AE;}
+        }
+        button:nth-child(1){
+            margin-right: 10px;
         }
     }
     .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
@@ -230,10 +235,12 @@ function Create() {
                             const data = editor.getData();
                             console.log({event, editor, data});
                             setDetail(data);
-                        }}/>
+                    }}/>
                 </div>
-                <button className="submit-button" onClick={onClickSave}>SAVE</button>
-                {/* <button className="submit-button">CANCLE</button> */}
+                <div className="button-area">
+                    <button onClick={onClickSave}>SAVE</button>
+                    <Link to='/board'><button>CANCLE</button></Link>
+                </div>
                 <p className="copy">&#169; Plannet.</p>
             </Section>
         </Wrap>
