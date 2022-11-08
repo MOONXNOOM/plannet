@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Api from "../api/plannetApi";
-
 
 const Quote = () => {
     const getRandom = Math.floor(Math.random() * 30 + 1);

@@ -1,14 +1,12 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Api from "../api/plannetApi";
 
-
 const ListBox = styled.div`
     width: 100%;
-    div:first-child p{color: rgb(206, 36, 36);}
-    div:last-child p{color: #3249ce;}
-    div{
+    div:first-child p {color: rgb(206, 36, 36);}
+    div:last-child p {color: #3249ce;}
+    div {
         display: block;
         width: calc((100% - 30px) / 7);
         height: 230px;
@@ -17,7 +15,7 @@ const ListBox = styled.div`
         float: left;
         margin-right: 5px;
         padding: 5px;
-        &>p{
+        &>p {
             width: 100%;
             font-size: 15px;
             line-height: 26px;
@@ -26,8 +24,7 @@ const ListBox = styled.div`
             margin-bottom: 7px;
             border-bottom: 2px solid #eee;
         }
-        ul{
-            
+        ul {
             height: 180px;
             overflow: hidden;
             overflow-y: scroll;
@@ -48,7 +45,7 @@ const ListBox = styled.div`
                 background: none;
                 /*스크롤바 뒷 배경 색상*/
             }
-            li{
+            li {
                 padding: 3px 8px;
                 color: #4555ae;
                 white-space:nowrap;
@@ -63,20 +60,17 @@ const ListBox = styled.div`
                 &.chkPlan{
                     text-decoration: line-through;
                     color: #bbb;
-                    span{
-                        color: #bbb;
-                    }
+                    span{color: #bbb;}
                 }
             }
-            p.noPlan{
+            p.noPlan {
                 color: #d9d9d9;
                 text-align: center;
                 line-height: 160px;
                 margin-left: 8px;
             }
         }
-        
-        &:last-child{
+        &:last-child {
             margin-right: 0;
         }
     }
@@ -93,8 +87,8 @@ const List = () => {
 
     const getId = window.localStorage.getItem("userId");
     useEffect(() => {
-      const planLoad = async() => {
-          try{
+        const planLoad = async() => {
+            try{
                 const response = await Api.weekList(getId);
                 setSunList(response.data.weekPlan.sun);
                 setMonList(response.data.weekPlan.mon);
@@ -103,12 +97,13 @@ const List = () => {
                 setThuList(response.data.weekPlan.thu);
                 setFriList(response.data.weekPlan.fri);
                 setSatList(response.data.weekPlan.sat);
-          } catch(e){
-              console.log(e);
-          }
-      }
-      planLoad();
-  },[getId]);
+            } catch(e){
+            console.log(e);
+            }
+        }
+        planLoad();
+    },[getId]);
+
     return(
         <ListBox>
             <div>
@@ -192,4 +187,5 @@ const List = () => {
         </ListBox>
     );
 }
+
 export default List;

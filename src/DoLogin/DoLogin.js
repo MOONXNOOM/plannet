@@ -1,6 +1,6 @@
-import styled from "styled-components";
 import React, {useState} from 'react';
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 import {ReactComponent as LogoImg} from "../Images/planet-001.svg";
 import kakaoimg from "../Images/kakaotalk_logo2.png";
 import naverimg from "../Images/btnG_아이콘사각.png";
