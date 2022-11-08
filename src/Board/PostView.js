@@ -164,13 +164,13 @@ const PostView = () => {
     const getNum = window.localStorage.getItem("boardNo");
     console.log(getNum);
 
-        //날짜 클릭시 해당 번호의 edit로 이동
-        const onClickEdit = (boardNo) => {
-            console.log(boardNo);
-            const link = "/edit/" + boardNo;
-            window.location.assign(link);
-            window.localStorage.setItem("boardNo", boardNo);
-        }
+    //날짜 클릭시 해당 번호의 edit로 이동
+    const onClickEdit = (boardNo) => {
+        console.log(boardNo);
+        const link = "/edit/" + boardNo;
+        window.location.assign(link);
+        window.localStorage.setItem("boardNo", boardNo);
+    }
 
     const deleteData = async() => {
         await Api.boardDelete(getNum);
