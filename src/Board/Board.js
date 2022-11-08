@@ -59,32 +59,18 @@ const Section = styled.div`
             margin-bottom: 15px;
         }
         button{
-            float:right;
+            cursor: pointer;
             font-weight: 600;
-            display: block;
+            float: right;
             font-size: 16px;
             padding: 8px 35px;
             border-radius: 25px;
-            background-color: #4555AE;
+            background-color: #333;
             color: white;
             border: none;
-            &:hover{background-color: #666;}
-        }
-    }
-    button{
-        border: none;
-        padding-right: 20px; 
-        background: none;
-        font-size: 16px; 
-        color: #bbb;
-        font-weight: 700;
-        transition: all .1s ease-in;
-        &:hover, &:hover i{color: #888;}
-        i{
-            font-size: 16px; 
-            line-height: 48px; 
-            color: #bbb;
             transition: all .1s ease-in;
+            &:hover{background-color: #666;
+                color: #888;}
         }
     }
     table{
@@ -94,18 +80,30 @@ const Section = styled.div`
         border-bottom: solid 1px #4555AE;
         text-align: center;
         tr:nth-child(2n) td{background-color: #f9f9f9;}
-        th{padding: 10px; color: white;}
+        th{
+            padding: 10px; 
+            color: white;}
         td{padding: 10px; background-color: white; border-left: solid 1px #bbb; border-top: solid 1px #ddd;}
         td:first-child{border-left: none};
         td:nth-child(2){width: 400px; text-align: left; padding-left: 20px;}  
-        tr:hover td, tr:hover a{color: #4555AE;}
+        tr:hover td, tr:hover a{color: #4555AE; background-color: #efefef; cursor: pointer;}
     }
     .util_box{
         .page_list {
-            width: 500px; float:left;
-            li{list-style-type: none; display: inline; padding: 0px 5px;
+            width: 500px; 
+            float:left;
+            li{
+                list-style-type: none;
+                display: inline; 
+                padding: 0px 5px;
+                cursor: pointer;
                 span{
-                    display: inline-block; text-decoration: none; padding: 5px 10px; color:#000;
+                    width: 25px;
+                    text-align: center;
+                    line-height: 25px;
+                    display: inline-block; 
+                    text-decoration: none; 
+                    color:#000;
                     border-radius: 5px;
                     -webkit-transition: background-color 0.3s;
                     transition: background-color 0.3s;
@@ -134,13 +132,14 @@ const Board = () => {
     const numPages = Math.ceil(boardList.length / limit); // 필요한 페이지 개수
 
     const [boardNo, setBoardNo] = useState();
-    
+
     //날짜 클릭시 해당 번호의 postView로 이동
-    const onClickBoard = (boardNo) => {
+    const onClickBoard = (boardNo, writerId) => {
         console.log(boardNo);
         const link = "/postView/" + boardNo;
         window.location.assign(link);
         window.localStorage.setItem("boardNo",boardNo);
+        window.localStorage.setItem("writerId",writerId);
         
     }
     useEffect(() => {
@@ -175,10 +174,10 @@ const Board = () => {
                             <th>Views</th>
                             <th>Date</th>
                         </tr>
-                        {boardList.slice(offset, offset + limit).map(({num, title, nickname, views, date}) => (
+                        {boardList.slice(offset, offset + limit).map(({num, title, nickname, views, date, id}) => (
                             <tr key={num}>
                                 <td>{num}</td>
-                                <td onChange={setBoardNo} onClick={()=> onClickBoard(num)}>{title}</td>
+                                <td onChange={setBoardNo} onClick={()=> onClickBoard(num, id)}>{title}</td>
                                 <td>{nickname}</td>
                                 <td>{views}</td>
                                 <td>{(date).substring(0,10)}</td>

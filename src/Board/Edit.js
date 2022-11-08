@@ -166,16 +166,18 @@ const Section = styled.div`
         text-align: right;
         button{
             display :inline-block;
-            font-weight: 600;
             right: 30px;
-            font-size: 16px;
+            cursor: pointer;
             padding: 8px 35px;
             border-radius: 25px;
-            background-color: #4555AE;
-            color: white;
             border: none;
+            color: white;
+            background-color: #333;
             transition: all .1s ease-in;
-            &:hover{background-color: #4555AE;}
+            font-weight: 600;
+            font-size: 16px;
+            &:hover{background-color: #666;
+                color: #888;}
         }
         button:nth-child(1){
             margin-right: 10px;

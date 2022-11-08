@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Nav from '../Utill/Nav';
 import Api from '../api/plannetApi'
 import { Link } from "react-router-dom";
+import Modal from '../Utill/Modal';
 // import { AppRunner } from 'aws-sdk';
 
 
@@ -57,18 +58,6 @@ const Section = styled.div`
             margin-top: 10px;
             margin-bottom: 15px;
         }
-        button{
-            float:right;
-            font-weight: 600;
-            display: block;
-            font-size: 16px;
-            padding: 8px 35px;
-            border-radius: 25px;
-            background-color: #4555AE;
-            color: white;
-            border: none;
-            &:hover{background-color: #666;}
-        }
     }
     button{
         border: none;
@@ -94,8 +83,8 @@ const Section = styled.div`
         text-align: center;
         tr:first-child td{border-top: solid 1px #4555AE; background-color: #f9f9f9;}
         th{padding: 10px; color: white;}
-        td{padding: 10px; background-color: white; border-left: solid 1px #bbb; border-top: solid 1px #ddd;}
-        td:first-child{border-left: none};
+        td{padding: 10px; width: 150px; background-color: white; border-left: solid 1px #bbb; border-top: solid 1px #ddd;}
+        td:first-child{border-left: none;}
         td:nth-child(2){width: 400px; text-align: left; padding-left: 20px;}  
         .title-input{font-size:20px; font-weight: 500;}
         .bi{padding-right:5px;}
@@ -116,22 +105,24 @@ const Section = styled.div`
     }
     .button-area {
         text-align: right;
-        button{
-            display :inline-block;
+        .btn{
+            cursor: pointer;
             font-weight: 600;
-            right: 30px;
+            float: right;
             font-size: 16px;
             padding: 8px 35px;
             border-radius: 25px;
-            background-color: #4555AE;
+            background-color: #333;
             color: white;
             border: none;
             transition: all .1s ease-in;
-            &:hover{background-color: #4555AE;}
+            &:hover{background-color: #666;
+                color: #888;}
         }
-        button:nth-child(-n+3){
+        .left-space{
             margin-left: 10px;
         }
+        .bi{color: red;}
     }
     .util_box{
         .page_list {
@@ -163,19 +154,28 @@ const PostView = () => {
     const [boardViews,setBoardViews] = useState(0);
     const [comment,setComment] = useState('');
     const getNum = window.localStorage.getItem("boardNo");
-    console.log(getNum);
+    const getWriterId = window.localStorage.getItem("writerId");
+    const [likeCnt, setLikeCnt] = useState();
+    const [likeChecked, setLikeChecked] = useState(false);
 
+    // 로그아웃 팝업
+    const [comment, setCommnet] = useState("");
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalOption, setModalOption] = useState('');
+    const closeModal = () => {
+        setModalOpen(false);
+    };
     //날짜 클릭시 해당 번호의 edit로 이동
-    const onClickEdit = (boardNo) => {
-        console.log(boardNo);
-        const link = "/edit/" + boardNo;
-        window.location.assign(link);
-        window.localStorage.setItem("boardNo", boardNo);
+    const onClickEdit = () => {
+        setModalOpen(true);
+        setModalOption('수정');
+        setCommnet("수정하시겠습니까?");
     }
 
-    const deleteData = async() => {
-        await Api.boardDelete(getNum);
-        window.location.replace("/board");
+    const deleteData = () => {
+        setModalOpen(true);
+        setModalOption('삭제');
+        setCommnet("삭제하시겠습니까?");
     }
     
     const onChangeComment = (e) => {
@@ -201,21 +201,48 @@ const PostView = () => {
             try {
                 const response = await Api.boardLoad(getNum);
                 setBoardLoad(response.data);
-                console.log(response.data);
             } catch (e) {
                 console.log(e);
             }
         };
-        
+        const likeCnt = async() => {
+            try{
+                const response = await Api.likeCnt(getId, getNum);
+                setLikeCnt(response.data.likeCnt);
+                console.log(response.data.likeCnt);
+            } catch(e){
+                console.log(e);
+            }
+        }
+        const HandleLikeChecked = async() => {
+            try{
+                const response = await Api.likeChecked(getId, getNum);
+                setLikeChecked(response.data.likeChecked);
+                console.log(response.data.likeChecked);
+            }catch(e){
+                console.log(e);
+            }
+        }
+        if(getWriterId !== getId) increaseViews();
         boardData();
-        increaseViews();
+        likeCnt();
+        HandleLikeChecked();
     }, [getNum]);
+
+    const onClickLike = () => {
+        setLikeChecked(!likeChecked);
+        if (likeChecked) setLikeCnt(likeCnt+1);
+        else (setLikeCnt(likeCnt-1));
+        console.log(likeChecked);
+    }
+
     return(
         <Wrap>
             <Nav />
             <Section>
+            <Modal open={modalOpen} close={closeModal} header="글수정삭제" boardNo={getNum} option={modalOption}>{comment}</Modal>
                 {boardLoad&&boardLoad.map( e => (
-                    <>
+                    <> <p>{likeChecked}</p>
                         <div className="board_list sub_box"> 
                             <h2>자유게시판</h2>
                             <p><span>유저들이 작성한 글에 댓글과 좋아요를 남기며 소통해보세요! <br />커뮤니티 규칙에 맞지 않는 글과 댓글은 무통보 삭제됩니다.</span></p>  
@@ -225,16 +252,17 @@ const PostView = () => {
                                 </tr>
                                 <tr>
                                     <td>No.{e.num}</td>
-                                    <td>Writer.{e.nickname}</td>
-                                    <td><i className="bi bi-eye"></i>{e.views+1}<i className="bi bi-heart-fill"></i>좋아요</td>
+                                    <td>Writer. {e.nickname}</td>
+                                    <td><i class="bi bi-eye"></i>{e.views}<i class="bi bi-heart-fill"></i>{likeCnt}</td>
                                     <td>{(e.date).substring(0,10)}</td>
                                 </tr>
                             </table>
                             <div className='detail' dangerouslySetInnerHTML={{__html: e.detail}}></div>
                         </div>
                         <div className="button-area">
-                            <Link to='/board'><button>BACK</button></Link>
-                            {getId === e.id ? <><button onClick={()=> onClickEdit(e.num)}>EDIT</button><button onClick={deleteData}>DELETE</button></> : null}
+                            <button onClick={onClickLike}>{likeChecked === true ? <i className="bi bi-heart"></i> : <i className="bi bi-heart-fill"></i>}</button>
+                            <Link to='/board'><button className='btn left-space'>BACK</button></Link>
+                            {getId === e.id ? <><button className='btn left-space' onClick={onClickEdit}>EDIT</button><button className='btn left-space' onClick={deleteData}>DELETE</button></> : null}
                         </div>
                     </>))}
                     <div>
@@ -248,5 +276,4 @@ const PostView = () => {
         </Wrap>
     )
 };
-
 export default PostView;

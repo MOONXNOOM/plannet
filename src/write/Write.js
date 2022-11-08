@@ -57,11 +57,9 @@ const Section = styled.div`
             cursor: pointer;
         }
         button.save{
+            cursor: pointer;
             font-weight: 600;
-            display: block;
-            position: absolute;
-            top: 0;
-            right: 30px;
+            float: right;
             font-size: 16px;
             padding: 8px 35px;
             border-radius: 25px;
@@ -69,10 +67,9 @@ const Section = styled.div`
             color: white;
             border: none;
             transition: all .1s ease-in;
-            &:hover{
-                background-color: #666;
-            }
-        }        
+            &:hover{background-color: #666;
+                color: #888;}
+        }       
     }
     .btnbox:last-of-type{
         height: 50px;
