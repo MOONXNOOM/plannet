@@ -152,12 +152,11 @@ const PostView = () => {
     const getId = window.localStorage.getItem("userId");
     const [boardLoad, setBoardLoad] = useState();
     const [boardViews,setBoardViews] = useState(0);
-    const [comments,setComments] = useState('');
     const getNum = window.localStorage.getItem("boardNo");
     const getWriterId = window.localStorage.getItem("writerId");
     const [likeCnt, setLikeCnt] = useState();
     const [likeChecked, setLikeChecked] = useState(false);
-    
+    const [comments,setComments] = useState('');
     const [commentsList, setCommentsList] = useState([]);
     const [limit, setLimit] = useState(15);  // 페이지당 게시물 수 (현재는 15개 고정)
     const [page, setPage] = useState(1); // 현재 페이지 번호
@@ -183,10 +182,11 @@ const PostView = () => {
         setModalOption('삭제');
         setCommnet("삭제하시겠습니까?");
     }
-    
+
     const onChangeComments = (e) => {
         setComments(e.target.value);
         console.log(e.target.value);
+        
     }
     const onClickSaveComments = async() => {
         await Api.commentCreate(getId,comment,getNum);
@@ -227,12 +227,23 @@ const PostView = () => {
                 console.log(response.data.likeChecked);
             }catch(e){
                 console.log(e);
-            }
+            } 
+        }
+        const CommentLoad = async() => {
+            try{
+                const response = await Api.commentLoad();
+                window.localStorage.setItem("commentNum",response.data.value[1]);
+                setCommentsList(response.data);
+                console.log(response.data);
+            }catch(e){
+                console.log(e);
+            } 
         }
         if(getWriterId !== getId) increaseViews();
         boardData();
         likeCnt();
         HandleLikeChecked();
+        CommentLoad();
     }, [getNum]);
 
     const onClickLike = () => {
