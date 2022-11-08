@@ -1,13 +1,13 @@
 
-.session{
+.session {
     margin-top: 8px;
-    p{
+    p {
         font-size: 18px;
         font-weight: 600; 
         line-height: 24px;
         margin-bottom: 2px;
     }
-    input{
+    input {
         padding: 0 15px;
         border-radius: 5px;
         width: 350px;
@@ -17,18 +17,18 @@
         border: none;
         font-weight: 500;
         outline: none;
-        &:focus{
+        &:focus {
             background-color: #b8b9f1;
             color: #222;
         }
-        &:focus::placeholder{
+        &:focus::placeholder {
             color: #888;
         }
-        &::placeholder{
+        &::placeholder {
             color: #bbb;
         }
     }
-    button{
+    button {
         border-radius: 5px;
         margin: 15px 0 15px 0;
         width: 350px;
@@ -39,28 +39,26 @@
         cursor: pointer;
         font-weight: 500;
         font-size: 18px;
-        &:hover{
+        &:hover {
             background-color: rgb(55, 67, 134);
             color: #eee;
         }
-        &:disabled{
+        &:disabled {
             background-color: #aaa;
             color: #eee;
             cursor: default;
         }
     }
-    span{
+    span {
         color: #666;
         font-weight: 400;
         float: right;
         margin-left: 10px;
         line-height: 24px;
     }
-
 }
-
 // find css
-.findBtn{
+.findBtn {
     width: 50%;
     float: left;
     line-height: 40px;
@@ -78,9 +76,9 @@
     border-bottom: 3px solid #4555AE;
     font-weight: 800;
 }
-div.session{
+div.session {
     p{margin-top: 8px;}
 }
-.newPwd{
+.newPwd {
     letter-spacing: -0.5px;
 }
