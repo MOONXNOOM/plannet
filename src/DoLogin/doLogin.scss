@@ -1,116 +1,112 @@
-
-.login-logo{
+.login-logo {
     display: flex;
     flex-direction:row ;
- }
-
-.login{
-  button{
-    width: 350px;
-    height: 40px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    border: none;
-    font-weight: 500;
-  }
-  .login-btn1{
-    background-color: rgb(252,229,30);
-    color: rgb(59,29,20);
-  }
-  .login-btn2{
-    background-color: white;
-    border: 2px solid #e9ecef;
-    color: rgb(59, 59, 59);
-  }
-  .login-btn3{
-    background-color: rgb(3,199,90);
-    color: white;
-  }
-  .logImg{width: 24px;}
 }
-.space-or{
-  display: flex;
-  font-weight: bold;
-  height: 30px;
-  text-align: center;
-  font-size: 18px;
-  color: rgba(0,0,0,0.50);
-  justify-content: center;
-  align-items: center;
+.login {
+	button {
+		width: 350px;
+		height: 40px;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		margin: 10px;
+		font-size: 16px;
+		cursor: pointer;
+		border-radius: 5px;
+		border: none;
+		font-weight: 500;
+  	}
+  	.login-btn1 {
+		background-color: rgb(252,229,30);
+		color: rgb(59,29,20);
+	}
+	.login-btn2 {
+		background-color: white;
+		border: 2px solid #e9ecef;
+		color: rgb(59, 59, 59);
+	}
+	.login-btn3 {
+		background-color: rgb(3,199,90);
+		color: white;
+	}
+	.logImg {width: 24px;}
 }
-
-.login2{
-  display: flex;
-  flex-direction:column ;
-  input {
-    cursor: pointer;
-    width: 350px;
-    height: 40px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin: 5px 0;
-    padding: 0 15px;
-    border:none;
-    color: #333;
-    background: #e8f0fe;
-    font-weight: 500;
-    font-size: 14px;
-    outline: none;
-    border-radius: 5px;
-    &:focus{
-      background-color: #b8b9f1;
-      color: #222;
-    }
-    &:focus::placeholder{
-        color: #888;
-    }
-    &::placeholder{
-        color: #bbb;
-    }
-  }
-  .doLogin {
-    margin: 5px 0 5px 0;
-    width: 350px;
-    height: 45px;
-    border:none;
-    background: rgb(69, 85, 174);
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 18px;
-    &:hover{
-      background-color: rgb(55, 67, 134);
-      color: #eee;
-    }
-  }
+.space-or {
+	display: flex;
+	font-weight: bold;
+	height: 30px;
+	text-align: center;
+	font-size: 18px;
+	color: rgba(0,0,0,0.50);
+	justify-content: center;
+	align-items: center;
 }
-
+.login2 {
+	display: flex;
+	flex-direction:column ;
+	input {
+		cursor: pointer;
+		width: 350px;
+		height: 40px;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		margin: 5px 0;
+		padding: 0 15px;
+		border:none;
+		color: #333;
+		background: #e8f0fe;
+		font-weight: 500;
+		font-size: 14px;
+		outline: none;
+		border-radius: 5px;
+		&:focus{
+		background-color: #b8b9f1;
+		color: #222;
+		}
+		&:focus::placeholder{
+			color: #888;
+		}
+		&::placeholder{
+			color: #bbb;
+		}
+	}
+	.doLogin {
+		margin: 5px 0 5px 0;
+		width: 350px;
+		height: 45px;
+		border:none;
+		background: rgb(69, 85, 174);
+		border-radius: 5px;
+		color: white;
+		cursor: pointer;
+		font-weight: 500;
+		font-size: 18px;
+		&:hover{
+		background-color: rgb(55, 67, 134);
+		color: #eee;
+		}
+	}
+}
 .else{
-  margin-top: 20px;
-  .join{
-    border: none;
-    background: white;
-    text-decoration: underline;
-    cursor: pointer;
-    margin-right: 30px;
-    font-size: 18px;
-    color: rgba(0,0,0,0.50);
-  }
-  .find{
-    border: none;
-    background: white;
-    text-decoration: underline;
-    cursor: pointer;
-    font-size: 18px;
-    color: rgba(0,0,0,0.50);
-  }
+	margin-top: 20px;
+	.join {
+		border: none;
+		background: white;
+		text-decoration: underline;
+		cursor: pointer;
+		margin-right: 30px;
+		font-size: 18px;
+		color: rgba(0,0,0,0.50);
+	}
+	.find {
+		border: none;
+		background: white;
+		text-decoration: underline;
+		cursor: pointer;
+		font-size: 18px;
+		color: rgba(0,0,0,0.50);
+	}
 }

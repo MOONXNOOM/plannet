@@ -152,6 +152,7 @@ const PostView = () => {
     const getId = window.localStorage.getItem("userId");
     const [boardLoad, setBoardLoad] = useState();
     const [boardViews,setBoardViews] = useState(0);
+    const [comments,setComments] = useState('');
     const getNum = window.localStorage.getItem("boardNo");
     const getWriterId = window.localStorage.getItem("writerId");
     const [likeCnt, setLikeCnt] = useState();
@@ -176,6 +177,16 @@ const PostView = () => {
         setModalOption('삭제');
         setCommnet("삭제하시겠습니까?");
     }
+    
+    const onChangeComments = (e) => {
+        setComments(e.target.value);
+        console.log(e.target.value);
+    }
+    const onClickSaveComments = async() => {
+        await Api.commentCreate(getId,comment,getNum);
+        console.log("댓글 저장 성공");
+    } 
+    
     useEffect(() => {
         const increaseViews = async () => {
             try {
@@ -254,6 +265,12 @@ const PostView = () => {
                             {getId === e.id ? <><button className='btn left-space' onClick={onClickEdit}>EDIT</button><button className='btn left-space' onClick={deleteData}>DELETE</button></> : null}
                         </div>
                     </>))}
+                    <div>
+                        <ul>
+                            <li></li>
+                        </ul>
+                    </div>
+                    <input type='text' placeholder='댓글을 100자 이내로 입력하세요' value={comments} onChange={onChangeComments} name='comments'></input><button onClick={onClickSaveComments}>SAVE</button>
             </Section>
             <div className="copy">&#169; Plannet.</div>
         </Wrap>
