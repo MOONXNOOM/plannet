@@ -3,7 +3,7 @@
     width: 521px;
     border: none;
 }
-.react-calendar__month-view__days__day abbr{
+.react-calendar__month-view__days__day abbr {
     display: block;
     margin-top: -15px;
 }
@@ -30,7 +30,7 @@
 .react-calendar__month-view__days__day--neighboringMonth abbr {
     color: rgb(221, 215, 215)!important;
 }
-.react-calendar__navigation{
+.react-calendar__navigation {
     margin-top: 1px;
     margin-bottom: 0;
     background-color: #f9f9f9;
@@ -43,7 +43,7 @@
 .react-calendar__tile.react-calendar__month-view__days__day, 
 .react-calendar__year-view__months__month, 
 .react-calendar__navigation__label, 
-.react-calendar__navigation__arrow{
+.react-calendar__navigation__arrow {
     border-radius: 5px;
 }
 .react-calendar__month-view__weekdays abbr {
@@ -52,35 +52,35 @@
     text-decoration: none;
     line-height: 22px;
 }
-.react-calendar__month-view__weekdays__weekday{
+.react-calendar__month-view__weekdays__weekday {
     background-color: #f9f9f9;
     padding: .8em;
 }
 .react-calendar__tile--range, 
-.react-calendar__tile--rangeStart{
+.react-calendar__tile--rangeStart {
     background-color: #f9f9f9 !important;
 }
-.react-calendar__tile--now{
+.react-calendar__tile--now {
     background-color: #4555AE !important;
 }
-.react-calendar__tile--now:enabled:hover{
+.react-calendar__tile--now:enabled:hover {
     background-color: #384696 !important;
 }
 .react-calendar__tile--range:enabled:hover abbr, 
-.react-calendar__tile--rangeStart:enabled:hover abbr{
+.react-calendar__tile--rangeStart:enabled:hover abbr {
     color: #333;
 }
 .react-calendar__tile--active:enabled:hover abbr, 
 .react-calendar__tile--active:enabled:focus abbr,
 .react-calendar__tile--hasActive abbr,
-.react-calendar__tile--now abbr{
+.react-calendar__tile--now abbr {
     color: white;
     font-weight: 500;
 }
-.react-calendar__viewContainer{
+.react-calendar__viewContainer {
     background-color: #f9f9f9;
 }
-.react-calendar__navigation button:disabled{background-color: #f9f9f9;}
+.react-calendar__navigation button:disabled {background-color: #f9f9f9;}
 .dotEnd {
     height: 8px;
     width: 8px;
@@ -88,16 +88,16 @@
     border-radius: 50%;
     display: flex;
     margin-left: 1px;
- }
- .dotDo {
+}
+.dotDo {
     height: 8px;
     width: 8px;
     background-color: #ffca3a;
     border-radius: 50%;
     display: flex;
     margin-left: 1px;
- }
-.dotBox{
+}
+.dotBox {
     display: flex;
     justify-content: center;
     align-items: center;

@@ -7,40 +7,36 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css");
 
 /* 초기화코드 */
-*{
-  font-size: 14px;
-  margin:0; 
-  padding:0; 
-  box-sizing: border-box; 
-  color:#333;
-  font-family: "Pretendard Variable", Pretendard, 
-  -apple-system, BlinkMacSystemFont, system-ui, Roboto, 
-  "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", 
-  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-  /* -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
+* {
+	font-size: 14px;
+  	margin:0; 
+  	padding:0; 
+  	box-sizing: border-box; 
+  	color:#333;
+  	font-family: "Pretendard Variable", Pretendard, 
+  	-apple-system, BlinkMacSystemFont, system-ui, Roboto, 
+  	"Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", 
+  	"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  	/* -webkit-font-smoothing: antialiased;
+  	-moz-osx-font-smoothing: grayscale; */
 }
 
-html{overflow: hidden;
-  background:
-    linear-gradient(60deg, rgb(111, 177, 252), rgba(255,0,0,0)),
-    linear-gradient(180deg, rgb(0, 82, 212), rgba(0,255,0,0)),
-    linear-gradient(270deg, rgb(69, 85, 174), rgba(0,0,255,0));
+html {overflow: hidden;
+	background:
+    	linear-gradient(60deg, rgb(111, 177, 252), rgba(255,0,0,0)),
+    	linear-gradient(180deg, rgb(0, 82, 212), rgba(0,255,0,0)),
+    	linear-gradient(270deg, rgb(69, 85, 174), rgba(0,0,255,0));
 }
-/* h1{display:none;} */
-img{border: 0;}
-ul, li{list-style: none;}
-a{text-decoration: none;}
+img {border: 0;}
+ul, li {list-style: none;}
+a {text-decoration: none;}
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+code {font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;}
 
-.copy{
-  width: 830px;
-  text-align: center;
-  color: #dfdfdf;
-  line-height: 40px;
-  float: left;
+.copy {
+	width: 830px;
+	text-align: center;
+	color: #dfdfdf;
+	line-height: 40px;
+	float: left;
 }

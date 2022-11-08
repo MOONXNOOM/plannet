@@ -1,15 +1,14 @@
+import styled from "styled-components";
+import React, {useState} from 'react';
+import { Link } from "react-router-dom";
 import {ReactComponent as LogoImg} from "../Images/planet-001.svg";
 import kakaoimg from "../Images/kakaotalk_logo2.png";
 import naverimg from "../Images/btnG_아이콘사각.png";
 import googleimg1 from "../Images/google-logo.png";
-import styled from "styled-components";
+import Api from "../api/plannetApi";
+import Modal from '../Utill/Modal';
 import "./DoLogin.scss"
 import "../App";
-import Api from "../api/plannetApi";
-import React, {useState} from 'react';
-import Modal from '../Utill/Modal';
-import { Link } from "react-router-dom";
-
 
 const ContainerLogin = styled.div`
     width: 100%;
@@ -47,12 +46,6 @@ const DoLogin = () => {
         setModalOpen(false);
     };
 
-    // 자동 로그인
-    // const [isAuto, setIsAuto] = useState(true);
-    // const autoSign = () => {
-    //     setIsAuto(isAuto => !isAuto);
-    // }
-
     const onChangId = (e) => {
         setInputId(e.target.value)
     }
@@ -86,6 +79,7 @@ const DoLogin = () => {
         }
     }
 
+    // 로그인 할 때 아이디, 비밀번호 입력 후 엔터 키를 눌렀을 때 로그인 인식
     const onKeyPressLogin = (e) => {
         if(e.key === 'Enter'){
             onClickLogin();
@@ -113,7 +107,7 @@ const DoLogin = () => {
                 <p className="space-or">또는</p>
                 <div className="login2">
                     <input type="text" id="id" name="uid" placeholder="아이디" required="" value ={inputId} onChange={onChangId}/>
-                    <input type="password" id="pwd" name="upw" placeholder="비밀번호" required="" value ={inputPw} onChange={onChangePw}  onKeyPress={onKeyPressLogin}/>
+                    <input type="password" id="pwd" name="upw" placeholder="비밀번호" required="" value ={inputPw} onChange={onChangePw} onKeyPress={onKeyPressLogin}/>
                     <button className="doLogin" onClick={onClickLogin}>로그인하기</button>
                     <Modal open={modalOpen} close={closeModal} header="오류">아이디 및 패스워드를 재확인해 주세요.</Modal>
                 </div>

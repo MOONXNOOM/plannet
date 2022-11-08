@@ -198,6 +198,7 @@ function Create() {
     const [title, setTitle] = useState();
     const [detail, setDetail] = useState();
     const [isChecked, setIsChecked] = useState(false);
+    const [lengthCheck, setLengthCheck] = useState(false);
 
     const onClickSave = async() => {
         await Api.boardCreate(getId, title, detail, isChecked);
@@ -237,10 +238,24 @@ function Create() {
                             const data = editor.getData();
                             console.log({event, editor, data});
                             setDetail(data);
+                            const getByteLengthOfUtf8String = (s) => {
+                                if(s != undefined && s != "") {
+                                    let b, i, c;
+                                    for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?3:c>>7?2:1);
+                                    return b;
+                                } else {
+                                    return 0;
+                                }
+                            }
+                            const length = getByteLengthOfUtf8String(data);
+                            if(length > 11000){
+                                setLengthCheck(true);
+                                alert("내용이 너무 깁니다.");
+                            } else setLengthCheck(false);
                     }}/>
                 </div>
                 <div className="button-area">
-                    <button onClick={onClickSave}>SAVE</button>
+                    <button onClick={onClickSave} disabled={lengthCheck}>SAVE</button>
                     <Link to='/board'><button>CANCLE</button></Link>
                 </div>
             </Section>
