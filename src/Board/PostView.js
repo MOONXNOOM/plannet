@@ -157,7 +157,13 @@ const PostView = () => {
     const getWriterId = window.localStorage.getItem("writerId");
     const [likeCnt, setLikeCnt] = useState();
     const [likeChecked, setLikeChecked] = useState(false);
-
+    
+    const [commentsList, setCommentsList] = useState([]);
+    const [limit, setLimit] = useState(15);  // 페이지당 게시물 수 (현재는 15개 고정)
+    const [page, setPage] = useState(1); // 현재 페이지 번호
+    const offset = (page - 1) * limit; // 게시물 위치 계산
+    const numPages = Math.ceil(commentsList.length / limit); // 필요한 페이지 개수
+    
     // 로그아웃 팝업
     const [comment, setCommnet] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
@@ -266,8 +272,31 @@ const PostView = () => {
                         </div>
                     </>))}
                     <div>
-                        <ul>
-                            <li></li>
+                        <p>댓글</p>
+                        <table>
+                            <tr>
+                                <th>Comment.No</th>
+                                <th>Writer</th>
+                                <th>Comment</th>
+                                <th>Date</th>
+                                {commentsList.slice(offset, offset+limit).map(({commentNo,id,comment,date})=>(
+                                    <tr key={commentNo}>
+                                        <td>{commentNo}</td>
+                                        <td>{id}</td>
+                                        <td>{comment}</td>
+                                        <td>{date}</td>
+                                    </tr>
+                                ))}
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <ul className="page_list">
+                            <li><span onclick = {()=> setPage(page - 1)} disabled = {page === 1}>«</span></li>
+                            {Array(numPages).fill().map((_, i) => (
+                            <li><span key={i + 1} onClick={() => setPage(i + 1)} aria-current={page === i + 1 ? "page" : null}>{i + 1}</span></li>
+                            ))}
+                            <li><span onclick = {()=> setPage(page + 1)} disabled = {page === numPages}>»</span></li>
                         </ul>
                     </div>
                     <input type='text' placeholder='댓글을 100자 이내로 입력하세요' value={comments} onChange={onChangeComments} name='comments'></input><button onClick={onClickSaveComments}>SAVE</button>

@@ -176,8 +176,10 @@ const Section = styled.div`
             transition: all .1s ease-in;
             font-weight: 600;
             font-size: 16px;
-            &:hover{background-color: #666;
-                color: #888;}
+            &:hover, &:disabled{
+                background-color: #666;
+                color: #888;
+            }
         }
         button:nth-child(1){
             margin-right: 10px;
@@ -204,6 +206,7 @@ function Edit() {
     const [detail, setDetail] = useState();
     const [isChecked, setIsChecked] = useState(false);
     const [boardLoad, setBoardLoad] = useState();
+    const [lengthCheck, setLengthCheck] = useState(false);
     const getNum = window.localStorage.getItem("boardNo");
 
     useEffect(() => {
@@ -238,14 +241,13 @@ function Edit() {
         window.localStorage.setItem("boardNo", getNum);
     }
 
-
     const onChangeTitle = (e) => {
         setTitle(e.target.value);
     }
 
     const handleChecked = (e) => {
         setIsChecked(e.target.checked);
-        console.log(isChecked);
+        
       };
       
 
@@ -275,10 +277,24 @@ function Edit() {
                             const data = editor.getData();
                             console.log({event, editor, data});
                             setDetail(data);
+                            const getByteLengthOfUtf8String = (s) => {
+                                if(s != undefined && s != "") {
+                                    let b, i, c;
+                                    for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?3:c>>7?2:1);
+                                    return b;
+                                } else {
+                                    return 0;
+                                }
+                            }
+                            const length = getByteLengthOfUtf8String(data);
+                            if(length > 11000){
+                                setLengthCheck(true);
+                                alert("내용이 너무 깁니다.");
+                            } else setLengthCheck(false);
                     }}/>
                 </div>
                 <div className="button-area">
-                    <button onClick={onClickEdit}>SAVE</button>
+                    <button onClick={onClickEdit} disabled={lengthCheck}>SAVE</button>
                     <button onClick={onClickCancle}>CANCLE</button>
                 </div>
                 </>))}
