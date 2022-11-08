@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 
 const StyledInput = styled.input`
@@ -20,8 +20,6 @@ const StyledInput = styled.input`
     }
 `;
 
-
-
 const PlanItem = ({planItem, planList, setPlanList}) => {
     const [edited, setEdited] = useState(false);
     const [newText, setNewText] = useState(planItem.text);
@@ -33,7 +31,6 @@ const PlanItem = ({planItem, planList, setPlanList}) => {
         }));
         setPlanList(nextPlanList);
     }
-
     const onClickEdit = () => {
         if(planItem.checked === true){
             setEdited(false);
@@ -41,7 +38,6 @@ const PlanItem = ({planItem, planList, setPlanList}) => {
             setEdited(true);
         }
     }
-
     const onBlurSubmit = (e) => {
         if(newText.length > 0){
             const nextPlanList = planList.map((item) => ({
@@ -52,15 +48,12 @@ const PlanItem = ({planItem, planList, setPlanList}) => {
             setEdited(false);
         }
     }
-
     const onFocusInput = (e) => {
-        e.target.value === "일정을 입력해주세요." ? (e.target.value = ""):(e.target.value = newText)
+        e.target.value === "일정을 입력해주세요." ? (e.target.value = "") : (e.target.value = newText)
     }
-
     const onChangeEditInput = (e) => {
         setNewText(e.target.value);
     }
-
     const onClickRemove = (e) => {
         const nextPlanList = planList.map((item) => ({
             ...item,
@@ -71,9 +64,7 @@ const PlanItem = ({planItem, planList, setPlanList}) => {
 
     const editInputRef = useRef(null);
     useEffect(() => {
-        if(edited) {
-            editInputRef.current.focus();
-        }
+        if(edited) {editInputRef.current.focus();}
     }, [edited]);
 
     const testStyle = `
@@ -81,19 +72,16 @@ const PlanItem = ({planItem, planList, setPlanList}) => {
         ${planItem.text === "일정을 입력해주세요." ? 'firstPlanColor' : ''}
     `;
 
-
     return(
         <li>
             <StyledInput type="checkbox" checked={planItem.checked} onChange={onChangeCheckbox}/>
             {edited ? 
-                (
-                    <input type="text" value={newText} ref={editInputRef} onFocus={onFocusInput} onChange={onChangeEditInput} onBlur={onBlurSubmit}/>
-                ) : (
-                    <span className={testStyle} onClick={onClickEdit}>{planItem.text}</span>
-                )
+                (<input type="text" value={newText} ref={editInputRef} onFocus={onFocusInput} onChange={onChangeEditInput} onBlur={onBlurSubmit}/>) 
+                : (<span className={testStyle} onClick={onClickEdit}>{planItem.text}</span>)
             }
             <button onClick={onClickRemove}><i className="bi bi-trash3-fill" /></button>
         </li>    
     );
 }
+
 export default PlanItem;
