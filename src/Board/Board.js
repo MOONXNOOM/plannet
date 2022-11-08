@@ -134,7 +134,7 @@ const Board = () => {
     const numPages = Math.ceil(boardList.length / limit); // 필요한 페이지 개수
 
     const [boardNo, setBoardNo] = useState();
-   
+    
     //날짜 클릭시 해당 번호의 postView로 이동
     const onClickBoard = (boardNo) => {
         console.log(boardNo);
@@ -190,9 +190,9 @@ const Board = () => {
                     <ul className="page_list">
                         <li><span onclick = {()=> setPage(page - 1)} disabled = {page === 1}>«</span></li>
                         {/*Array(numPages) :  페이지 수만큼의 size를 가지고 있는 배열을 생성하고 
-                          .fill() : undefine으로 모든 칸 할당
-                          .map(arr, i) : arr은 현재값, i는 인덱스로 각 자리 인덱스에 해당하는 값 할당 
-                          Array(numPages).fill()의 값을 map()을 통해 하나씩 불러와 i로 return*/}
+                        .fill() : undefine으로 모든 칸 할당
+                        .map(arr, i) : arr은 현재값, i는 인덱스로 각 자리 인덱스에 해당하는 값 할당 
+                        Array(numPages).fill()의 값을 map()을 통해 하나씩 불러와 i로 return*/}
                         {Array(numPages).fill().map((_, i) => (
                         <li><span key={i + 1} onClick={() => setPage(i + 1)} aria-current={page === i + 1 ? "page" : null}>{i + 1}</span></li>
                         ))}

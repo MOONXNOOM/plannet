@@ -196,7 +196,13 @@ const plannetApi = {
         }
         return await axios.post(PLANNET_DOMAIN + "WeekList", object, HEADER);
     },
-
+    //댓글 작성
+    commentCreate: async function(comment_no){
+        const object = {
+            comment_no:comment_no
+        }
+        return await axios.post(PLANNET_DOMAIN + "CommentCreate", object, HEADER);
+    }
 
 }
 
