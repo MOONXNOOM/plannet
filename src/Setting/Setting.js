@@ -252,7 +252,6 @@ const Setting = () => {
     const onBlurTelCheck = async() => {
         const memberCheck = await Api.memberRegCheck(changePhone, "TYPE_TEL");
         if (memberCheck.data.result === "OK" ) {
-            console.log(memberCheck.data.result);
             setTelMessage("사용가능한 전화번호입니다.");
             setIsTel(true)
         } else if(memberCheck.data.result === "NOK" && userPhone ===  changePhone){
@@ -350,7 +349,7 @@ const Setting = () => {
                     <div className="userImgBox" style={userImgUrl}>
                         <label>
                             <input type="file" accept="image/*" onChange={handleFileInput}/>
-                            <div><i class="bi bi-pencil-fill"></i></div>
+                            <div><i className="bi bi-pencil-fill"></i></div>
                         </label>
                     </div>
                     <div className="userInfo">

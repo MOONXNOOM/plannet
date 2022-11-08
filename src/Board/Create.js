@@ -37,7 +37,7 @@ const StyledInput = styled.input`
 
 const Section = styled.div`
     width: 850px;
-    height: 100vh;
+    height: calc(100vh - 40px);
     float: left;
     position: relative;
     overflow-y: scroll;
@@ -242,8 +242,8 @@ function Create() {
                     <button onClick={onClickSave}>SAVE</button>
                     <Link to='/board'><button>CANCLE</button></Link>
                 </div>
-                <p className="copy">&#169; Plannet.</p>
             </Section>
+            <div className="copy">&#169; Plannet.</div>
         </Wrap>
     )
 };

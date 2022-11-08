@@ -10,8 +10,6 @@ const Quote = () => {
         const quote = async() => {
             try{
                 const response = await Api.quoteRandom(String(getRandom));
-                console.log(getRandom);
-                console.log(getRandom + "번 명언: " + response.data.quote);
                 setQuoteText(response.data.quote);
             } catch(e){
                 console.log(e);

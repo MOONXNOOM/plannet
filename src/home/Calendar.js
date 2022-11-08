@@ -21,7 +21,6 @@ const CalEx = () => {
       const planLoad = async() => {
           try{
               const response = await Api.planMark(getId);
-              console.log(response.data);
               setEndMark(response.data.planMark[0]);
               setDoMark(response.data.planMark[1]);
           } catch(e){

@@ -10,7 +10,6 @@ const Modal = (props) => {
     const getId = window.localStorage.getItem("userId");
 
     const onClickLogout = () => {
-        console.log("Logout 추가");
         window.localStorage.setItem("userId", "");
         window.localStorage.setItem("userPw", "");
         window.localStorage.setItem("isLogin", "false");

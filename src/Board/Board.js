@@ -200,7 +200,7 @@ const Board = () => {
                     </ul> 
                     <form className="search" id="search" name="search" method="post">
                         <input name="product_search" title="검색" placeholder="검색어 입력"/>
-                        <a href="#" onclick="submit"><i class="bi bi-search"></i></a>
+                        <a href="#" onclick="submit"><i className="bi bi-search"></i></a>
                     </form> 
                 </div>
                 

@@ -33,7 +33,7 @@ const StyledInput = styled.input`
 `;
 const Section = styled.div`
     width: 850px;
-    height: 100vh;
+    height: calc(100vh - 40px);
     float: left;
     position: relative;
     overflow-y: scroll;
@@ -97,7 +97,7 @@ const Section = styled.div`
             transition: all .1s ease-in;
         }
     }
-    table{
+    .postInfo{
         border-collapse: collapse; 
         width: 100%;
         background-color: #4555AE;
@@ -147,7 +147,7 @@ const Section = styled.div`
     .title-input {
         font-size: 20px;
         width: 650px;
-        height: 40px;
+        height: 30px;
         outline: none;
         display: block;
         margin-bottom: 30px;
@@ -181,10 +181,19 @@ const Section = styled.div`
             margin-right: 10px;
         }
     }
+    
     .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
         height: 500px; 
     }
-    .ck-editor__main {padding: 0;}
+    .ck-editor__main {padding: 0;
+        .table{width: 100%;}
+        table, tr, td{
+            border-collapse: collapse;
+            padding: 5px;
+            border: 1px solid #ddd;
+            background: none;
+        }
+    }
 `;
 
 function Edit() {
@@ -249,9 +258,9 @@ function Edit() {
                     <p>
                         <span>작성 시 유의해 주세요! 비방, 광고, 불건전한 내용의 글은 사전 동의 없이 삭제될 수 있습니다.</span>
                     </p>    
-                    <table>
+                    <table className="postInfo">
                         <tr>
-                            <th colSpan={2}>게시물 작성</th>
+                            <th colSpan={2}>게시물 수정</th>
                         </tr>
                         <tr>
                             <td><input className="title-input" type='text' placeholder='제목을 입력하세요.' defaultValue={title} value={title} onChange={onChangeTitle} name='title' /></td>
@@ -270,9 +279,9 @@ function Edit() {
                     <button onClick={onClickEdit}>SAVE</button>
                     <button onClick={onClickCancle}>CANCLE</button>
                 </div>
-                <p className="copy">&#169; Plannet.</p>
                 </>))}
             </Section>
+            <div className="copy">&#169; Plannet.</div>
         </Wrap>
     )
 };

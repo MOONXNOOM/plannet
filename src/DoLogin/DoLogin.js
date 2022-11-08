@@ -51,7 +51,6 @@ const DoLogin = () => {
     // const [isAuto, setIsAuto] = useState(true);
     // const autoSign = () => {
     //     setIsAuto(isAuto => !isAuto);
-    //     console.log(isAuto)
     // }
 
     const onChangId = (e) => {
@@ -65,22 +64,12 @@ const DoLogin = () => {
     const onClickLink = () => {
         setModalOpen(true);
         setCommnet("서비스 준비중 입니다 ...");
-        console.log("서비스 준비중...");
     }
-
-    // const confirmModal = async() => {
-    //     setModalOpen(false);
-    //     const memberReg = await Api.memberDelete(localId);
-    //     console.log(memberReg.data.result);
-    //     if(memberReg.data.result === "OK") {
-    //         window.location.replace("/");
-    // }
 
     const onClickLogin = async() => {
         try {
             // 로그인을 위한 axios 호출
             const res = await Api.userLogin(inputId, inputPw);
-            console.log(res.data.result);
             
             if(res.data.result === "OK") {
                 window.localStorage.setItem("isLogin", "true");
@@ -93,7 +82,7 @@ const DoLogin = () => {
             }
         } catch (e) {
             setModalOpen(true);
-            console.log("로그인 에러...");
+            console.log("e");
         }
     }
 
