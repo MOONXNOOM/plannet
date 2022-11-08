@@ -1,12 +1,11 @@
-import { useState } from "react"
-import styled from "styled-components";
-import {ReactComponent as LogoImg} from "../Images/planet-001.svg";
-import "../App";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { ReactComponent as LogoImg } from "../Images/planet-001.svg";
 import Api from "../api/plannetApi";
-import "./Join.scss"
 import Modal from "../Utill/Modal";
-
+import "./Join.scss"
+import "../App";
 
 const ContainerJoin = styled.div`
     height: 100vh;
@@ -18,7 +17,7 @@ const ContainerJoin = styled.div`
 `;
 const Logo = styled.div`
     margin-top: -30px;
-    a{
+    a {
         font-family: 'Comfortaa', cursive;
         font-size: 67px;
         font-weight: bold;
@@ -40,7 +39,7 @@ const Find = () =>{
     // 아이디와 이메일이 맞으면 새로운 비밀번호를 지정할 수 있는 html을 불러옴
     const [isNewPwd, setIsNewPwd] = useState(false); 
 
-     //새로 설정한 비밀번호가 정규식이 맞는 지/비밀번호와 비밀번호 확인이 동일한지 검사
+    //새로 설정한 비밀번호가 정규식이 맞는 지/비밀번호와 비밀번호 확인이 동일한지 검사
     const [isnewPwdCheck, setIsNewPwdCheck] = useState(false);
     const [isnewPwdConCheck, setIsNewPwdConCheck] = useState(false);
 
@@ -55,6 +54,7 @@ const Find = () =>{
     const onChangeName = (e) => {
         setFindInName(e.target.value);
     }
+
     const onChangeId = (e) => {
         setFindInId(e.target.value);
     }
@@ -113,7 +113,6 @@ const Find = () =>{
         setIsFindId(false);
         setIsFindPwd(true);
     }
-    
 
     // 찾기 팝업
     const [comment, setComment] = useState("");
@@ -228,4 +227,5 @@ const Find = () =>{
         </ContainerJoin>
     );
 }
+
 export default Find;

@@ -1,15 +1,16 @@
+import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css'; // css import
 import moment from "moment";
-import React, { useEffect, useState } from 'react';
+import 'react-calendar/dist/Calendar.css'; // css import
 import './Calendar.css';
 import Api from "../api/plannetApi";
 
-
 const CalEx = () => {
-
     const [value, setValue] = useState(new Date());
-      //날짜 클릭시 해당날짜의 write로 이동
+    const [doMark, setDoMark] = useState([]);
+    const [endMark, setEndMark] = useState([]);
+
+    //날짜 클릭시 해당날짜의 write로 이동
     const dayIn = (value) => {
         const selectDate = moment(value).format('YYYY-MM-DD');
         const link = "/write/" + selectDate;
@@ -30,8 +31,6 @@ const CalEx = () => {
     planLoad();
     },[getId]);
 
-    const [doMark, setDoMark] = useState([]);
-    const [endMark, setEndMark] = useState([]);
     return(
         <div>
             <Calendar 
@@ -64,4 +63,5 @@ const CalEx = () => {
         </div>
     );
 }
+
 export default CalEx;

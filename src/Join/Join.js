@@ -1,18 +1,10 @@
-import "./Join.scss"
 import React, { useState } from 'react';
-import {ReactComponent as LogoImg} from "../Images/planet-001.svg";
-import "../App";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { ReactComponent as LogoImg } from "../Images/planet-001.svg";
 import Api from '../api/plannetApi';
-
-
-// 구현해야 할 것
-// 1. 닉네임을 적지 않았을 때 자동으로 DB에 이름이 닉네임으로 동일하게 전송되도록 - 수정완
-// 2. 이메일 오류 유효성 검사 - 구현 완료
-// 3. 전반적인 디자인 수정 - 수정완
-// 4. 다 채우지 않았을 때 MODAL 띄우거나 혹은 아예 버튼을 DISABLE 속성을 넣어두기-수정완
-// 5. 전화번호 정규식 추가-수정완
+import "./Join.scss"
+import "../App";
 
 const ContainerJoin = styled.div`
     height: 100vh;
@@ -24,7 +16,7 @@ const ContainerJoin = styled.div`
 `;
 const Logo = styled.div`
     margin-top: -30px;
-    a{
+    a {
         font-family: 'Comfortaa', cursive;
         font-size: 67px;
         font-weight: bold;
@@ -41,7 +33,6 @@ const Join = () => {
     const [inputNickname, setInputNickname] = useState("");
     const [inputEmail, setInputEmail] = useState("");
     const [inputTel, setInputTel] = useState("");
-    // const [inputBirth,setInputBirth] = useState("2000-01-01");
  
     // 오류 메시지
     const [idMessage, setIdMessage] = useState("");
@@ -111,7 +102,7 @@ const Join = () => {
             setConPwMessage('비밀번호가 일치하지 않습니다.')
             setIsConPw(false)
         } else {
-            setConPwMessage('비밀번호가 일치 합니다. :)')
+            setConPwMessage('비밀번호가 일치 합니다.')
             setIsConPw(true);
         }      
     }
@@ -167,10 +158,6 @@ const Join = () => {
             setIsTel(false)
         } 
     }
-    //  onChangeBirth
-    // const onChangeBirth = (e) => {
-    //     const a = setInputBirth(e.target.value);
-    // }
 
     // ENTER 키를 눌렀을 때 회원가입 전송
     const onKeyDownJoin = (e) => {
@@ -235,10 +222,6 @@ const Join = () => {
                     </p>
                     <input type='tel' placeholder="휴대폰번호('-' 제외)" value ={inputTel} onChange={onChangeTel} onBlur={onBlurTelCheck} onKeyDown={onKeyDownJoin}/>
                 </div>
-                {/* <div className="session">
-                    <p className="joinTitle">생년월일</p>
-                    <input className="inputJoin" type={'date'} value={inputBirth} onChange={onChangeBirth}/>
-                </div>  */}
                 <div className="session">
                     <button onClick={onClickJoin} disabled={!(isId && isPw && isConPw && isName && isEmail && isTel)}>가입하기</button>
                 </div>

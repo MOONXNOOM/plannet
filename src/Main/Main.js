@@ -1,10 +1,8 @@
 import styled from "styled-components";
-import {ReactComponent as LogoImg} from "../Images/planet-001.svg";
-import "../App";
 import { Link } from "react-router-dom";
+import { ReactComponent as LogoImg } from "../Images/planet-001.svg";
 import "./Main.css";
-import { useEffect } from "react";
-
+import "../App";
 
 const Container = styled.div`
     width: 100%;
@@ -24,7 +22,7 @@ const LeftMain = styled.div`
     margin: 0 auto;
     position: relative;
     overflow: hidden;
-    div.wrap{
+    div.wrap {
         width: 350px;
         height: 300px;
         display: flex;
@@ -47,7 +45,6 @@ const Logo = styled.div`
 const SubLogo = styled.div`
     font-family: 'Montserrat Alternates', sans-serif;
     font-size: 30px;
-    /* font-weight: 600; */
     color: #4555AE;
 `;
 const RightMain = styled.div`
@@ -63,10 +60,10 @@ const RightMain = styled.div`
     flex-direction: column;
     color: white;
     font-weight: bold;
-    h1, h2, div, a{
+    h1, h2, div, a {
         margin-left: 70px;
     }
-    div{margin-bottom: 20px}
+    div {margin-bottom: 20px}
 `;
 const Title = styled.h1`
     font-size: 28px;
@@ -93,7 +90,6 @@ const Explain = styled.div`
 `;
 
 const Main = () => {
-    
     return(
         <div className="ex">
             <Container>
@@ -111,7 +107,7 @@ const Main = () => {
                             <br/> 하루의 끝에서 오늘을 되돌아보며 정리할 수 있는 플래너. 
                             <br/> Plannet은 하루의 시작부터 마무리까지 
                             <br/> 일정을 계획해 성취하도록 돕습니다.
-                            <br/> 오늘 느낌 강점을 소소하게 적어보세요.
+                            <br/> 오늘 느낀 감정을 소소하게 적어보세요.
                             <br/> 내일의 일정 또한 완벽하게 작성 할 수 있을 것입니다.
                         </Explain>
                     <Link to="/doLogin" className="doLogin">로그인하기</Link>
@@ -121,4 +117,5 @@ const Main = () => {
         </div>
     );
 }
+
 export default Main;      

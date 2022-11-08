@@ -5,8 +5,6 @@ import Nav from "../Utill/Nav";
 import Api from '../api/plannetApi'
 // import CommentMain from './CommentMain'
 
-
-
 const Wrap = styled.div`
     width: 1130px;
     height: 100vh;
