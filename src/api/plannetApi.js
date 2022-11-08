@@ -149,6 +149,24 @@ const plannetApi = {
         return await axios.post(PLANNET_DOMAIN + "BoardEdit", regCheck, HEADER);
     },
 
+    // 좋아요 수 불러오기
+    likeCnt: async function(id, num) {
+        const object = {
+            id: id,
+            num: num
+        }   
+        return await axios.post(PLANNET_DOMAIN + "LikeCnt", object, HEADER);
+    },
+
+    // 좋아요 체크
+    likeChecked: async function(id, num) {
+        const object = {
+            id: id,
+            num: num
+        }   
+        return await axios.post(PLANNET_DOMAIN + "LikeChecked", object, HEADER);
+    },
+
     //userInfo 불러오기
     userInfoLoad: async function(id){
         const object = {

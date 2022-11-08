@@ -94,8 +94,8 @@ const Section = styled.div`
         text-align: center;
         tr:nth-child(2n) td{background-color: #f9f9f9;}
         th{padding: 10px; color: white;}
-        td{padding: 10px; background-color: white; border-left: solid 1px #bbb; border-top: solid 1px #ddd;}
-        td:first-child{border-left: none};
+        td{padding: 10px; width: 150px; background-color: white; border-left: solid 1px #bbb; border-top: solid 1px #ddd;}
+        td:first-child{border-left: none;}
         td:nth-child(2){width: 400px; text-align: left; padding-left: 20px;}  
         tr:hover td, tr:hover a{color: #4555AE;}
         .title-input{font-size:20px; font-weight: 500;}
@@ -110,7 +110,7 @@ const Section = styled.div`
     }
     .button-area {
         text-align: right;
-        button{
+        .btn{
             display :inline-block;
             font-weight: 600;
             right: 30px;
@@ -123,9 +123,10 @@ const Section = styled.div`
             transition: all .1s ease-in;
             &:hover{background-color: #4555AE;}
         }
-        button:nth-child(-n+3){
+        .left-space{
             margin-left: 10px;
         }
+        .bi{color: red;}
     }
     .util_box{
         .page_list {
@@ -156,22 +157,21 @@ const PostView = () => {
     const [boardLoad, setBoardLoad] = useState();
     const [boardViews,setBoardViews] = useState(0);
     const getNum = window.localStorage.getItem("boardNo");
-    console.log(getNum);
+    const [likeCnt, setLikeCnt] = useState();
+    const [likeChecked, setLikeChecked] = useState(false);
 
-        //날짜 클릭시 해당 번호의 edit로 이동
-        const onClickEdit = (boardNo) => {
-            console.log(boardNo);
-            const link = "/edit/" + boardNo;
-            window.location.assign(link);
-            window.localStorage.setItem("boardNo", boardNo);
-        }
+    //날짜 클릭시 해당 번호의 edit로 이동
+    const onClickEdit = (boardNo) => {
+        console.log(boardNo);
+        const link = "/edit/" + boardNo;
+        window.location.assign(link);
+        window.localStorage.setItem("boardNo", boardNo);
+    }
 
     const deleteData = async() => {
         await Api.boardDelete(getNum);
         window.location.replace("/board");
     }
-    
-
     
     useEffect(() => {
         const increaseViews = async () => {
@@ -192,16 +192,43 @@ const PostView = () => {
                 console.log(e);
             }
         };
-        
+        const likeCnt = async() => {
+            try{
+                const response = await Api.likeCnt(getId, getNum);
+                setLikeCnt(response.data.likeCnt);
+                console.log(response.data.likeCnt);
+            } catch(e){
+                console.log(e);
+            }
+        }
+        const HandleLikeChecked = async() => {
+            try{
+                const response = await Api.likeChecked(getId, getNum);
+                setLikeChecked(response.data.likeChecked);
+                console.log(response.data.likeChecked);
+            }catch(e){
+                console.log(e);
+            }
+        }
+        likeCnt();
         boardData();
         increaseViews();
+        HandleLikeChecked();
     }, [getNum]);
+
+    const onClickLike = () => {
+        setLikeChecked(!likeChecked);
+        if (likeChecked) setLikeCnt(likeCnt+1);
+        else (setLikeCnt(likeCnt-1));
+        console.log(likeChecked);
+    }
+
     return(
         <Wrap>
             <Nav />
             <Section>
                 {boardLoad&&boardLoad.map( e => (
-                    <>
+                    <> <p>{likeChecked}</p>
                         <div className="board_list sub_box"> 
                             <h2>내용보기</h2>
                             <p><span>유저들이 작성한 글에 댓글과 좋아요를 남기며 소통해보세요! <br />커뮤니티 규칙에 맞지 않는 글과 댓글은 무통보 삭제됩니다.</span></p>  
@@ -212,21 +239,21 @@ const PostView = () => {
                                 </tr>
                                 <tr>
                                     <td>No.{e.num}</td>
-                                    <td>Writer.{e.nickname}</td>
-                                    <td><i class="bi bi-eye"></i>{e.views+1}<i class="bi bi-heart-fill"></i>좋아요</td>
+                                    <td>Writer. {e.nickname}</td>
+                                    <td><i class="bi bi-eye"></i>{e.views+1}<i class="bi bi-heart-fill"></i>{likeCnt}</td>
                                     <td>{(e.date).substring(0,10)}</td>
                                 </tr>
                             </table>
                             <div className='detail' dangerouslySetInnerHTML={{__html: e.detail}}></div>
                         </div>
                         <div className="button-area">
-                            <Link to='/board'><button>BACK</button></Link>
-                            {getId === e.id ? <><button onClick={()=> onClickEdit(e.num)}>EDIT</button><button onClick={deleteData}>DELETE</button></> : null}
+                            <button onClick={onClickLike}>{likeChecked === true ? <i className="bi bi-heart"></i> : <i className="bi bi-heart-fill"></i>}</button>
+                            <Link to='/board'><button className='btn'>BACK</button></Link>
+                            {getId === e.id ? <><button className='btn left-space' onClick={()=> onClickEdit(getId, getNum)}>EDIT</button><button className='btn left-space' onClick={deleteData}>DELETE</button></> : null}
                         </div>
                     </>))}
             </Section>
         </Wrap>
     )
 };
-
 export default PostView;
