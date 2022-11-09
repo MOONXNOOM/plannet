@@ -230,7 +230,6 @@ function Edit() {
 
     // 취소 버튼 클릭 시 게시물 번호에 해당하는 postView 페이지로 이동
     const onClickCancle = () => {
-        console.log(getNum);
         const link = "/postView/" + getNum;
         window.location.assign(link);
         window.localStorage.setItem("boardNo", getNum);
