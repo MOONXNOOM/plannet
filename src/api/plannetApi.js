@@ -165,16 +165,15 @@ const plannetApi = {
     boardCommentCreate: async function(bnum, id, detail){
         const object = {
             bnum: bnum,
-            
             id: id,
             detail: detail
         };
         return await axios.post(PLANNET_DOMAIN + "BoardCommentCreate", object, HEADER);
     },
-    // 해당 게시물에 댓글 작성
-    boardCommentLoad: async function(comment_no){
+    // 해당 게시물에 작성된 댓글
+    boardCommentLoad: async function(num){
         const object = {
-            num:comment_no
+            num:num
         };
         return await axios.post(PLANNET_DOMAIN + "BoardCommentLoad", object, HEADER);
     },
