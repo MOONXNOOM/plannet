@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Modal from '../Utill/Modal';
 import Api from '../api/plannetApi'
 import Nav from '../Utill/Nav';
+import moment from 'moment';
 
 const Wrap = styled.div`
     width: 1130px;
@@ -156,53 +157,22 @@ const Section = styled.div`
         table, tr, td{
             border-collapse: collapse;
             padding: 5px;
-            border: 1px solid #ddd;
+            border: 1px solid white;
             background: none;
+            border-bottom: 1px solid #ddd;
         }
-    }
-    .button-area2 {
-        text-align: right;
-        .comment_btn{
-            cursor: pointer;
-            font-weight: 600;
-            float: right;
-            font-size: 16px;
-            padding: 8px 35px;
-            border-radius: 25px;
-            background-color: #333;
-            color: white;
-            border: none;
-            transition: all .1s ease-in;
-            &:hover{background-color: #666;
-                color: #888;}
+        th {
+            text-align: left;
+            font-size: 20px;
         }
-        .comment_text {
-            position: relative;
-            font-weight: 600;
-            font-size: 16px;
-            right: 10px;
-            padding: 8px 35px;
-            border-radius: 25px;
-            background-color: #333;
-            color: white;
-            border: none;
+        .th_3 {
+            width: 100px;
         }
-    }
-    h3 {
-        font-size: 28px;
-        font-weight: 900;
-        width: 100%;
-        padding: 10px 30px;
-    }
-    .comment_box {
-        width: 100%;
-        min-height: 300px;
-        table{width: 100%; margin: 10px 0;}
-        table, tr, td{
-            border-collapse: collapse;
-            padding: 5px;
-            border: 1px solid #ddd;
-            background: none;
+        tr td:first-child {
+            width: 100px;
+        }
+        tr td:nth-child(2) {
+            padding: 5px 15px;
         }
     }
     .button-area2 {
@@ -278,8 +248,15 @@ const PostView = () => {
         setComments(e.target.value);
     }
     // 댓글 수정
+    let today = new Date();
     const onClickSaveComments = async() => {
-        await Api.commentCreate(getId,comment,getNum);
+        await Api.boardCommentCreate(getNum, getId, comments);
+        const nextPlanList = commentsList.concat({
+            date: moment().format('YYYY-MM-DD HH:mm'),
+            detail: comments,
+            id: getId,
+        });
+        setCommentsList(nextPlanList);
     } 
     
     useEffect(() => {
@@ -299,8 +276,8 @@ const PostView = () => {
                 setLikeCnt(response2.data.likeCnt);
                 const response3 = await Api.likeChecked(getId, getNum);
                 setLikeChecked(response3.data.likeChecked);
-                const response4 = await Api.commentLoad();
-                window.localStorage.setItem("commentNum",response4.data.value[1]);
+                const response4 = await Api.boardCommentLoad(getNum);
+                // window.localStorage.setItem("commentNum",response4.data.value[1]);
                 setCommentsList(response4.data);
             } catch (e) {
                 console.log(e);
@@ -309,6 +286,7 @@ const PostView = () => {
         if(getWriterId !== getId) increaseViews();
         boardDataUtil();
     }, [getNum]);
+    console.log(commentsList);
 
     return(
         <Wrap>
@@ -343,29 +321,27 @@ const PostView = () => {
                         <div className='comment_box'>
                         <table>
                             <tr>
-                                <th>Comment.No</th>
                                 <th>Writer</th>
                                 <th>Comment</th>
-                                <th>Date</th>
-                                {commentsList.slice(offset, offset+limit).map(({commentNo,id,comment,date})=>(
-                                    <tr key={commentNo}>
-                                        <td>{commentNo}</td>
-                                        <td>{id}</td>
-                                        <td>{comment}</td>
-                                        <td>{date}</td>
-                                    </tr>
-                                ))}
+                                <th className='th_3'>Date</th>
                             </tr>
+                            {commentsList.slice(offset, offset+limit).map(({no, id, nickname, detail, date})=>(
+                                <tr key={no}>
+                                    <td>{id}</td>
+                                    <td>{detail}</td>
+                                    <td>{date}</td>
+                                </tr>
+                            ))}
                         </table>
-                    <div>
-                        {/* <ul className="page_list">
+                    {/* <div>
+                        <ul className="page_list">
                             <li><span onclick = {()=> setPage(page - 1)} disabled = {page === 1}>«</span></li>
                             {Array(numPages).fill().map((_, i) => (
                             <li><span key={i + 1} onClick={() => setPage(i + 1)} aria-current={page === i + 1 ? "page" : null}>{i + 1}</span></li>
                             ))}
                             <li><span onclick = {()=> setPage(page + 1)} disabled = {page === numPages}>»</span></li>
-                        </ul> */}
-                    </div>
+                        </ul>
+                    </div> */}
                     </div>
                     <div className="button-area2">
                     <input type='text' className='comment_text' placeholder='댓글 달기...' value={comments} onChange={onChangeComments} name='comments' size='60'></input>

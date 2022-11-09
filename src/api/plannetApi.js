@@ -162,18 +162,20 @@ const plannetApi = {
         return await axios.post(PLANNET_DOMAIN + "LikeChecked", object, HEADER);
     },
     // 해당 게시물에 댓글 작성
-    commentCreate: async function(comment_no){
+    boardCommentCreate: async function(bnum, id, detail){
         const object = {
-            comment_no:comment_no
+            bnum: bnum,
+            id: id,
+            detail: detail
         };
-        return await axios.post(PLANNET_DOMAIN + "CommentCreate", object, HEADER);
+        return await axios.post(PLANNET_DOMAIN + "BoardCommentCreate", object, HEADER);
     },
     // 해당 게시물에 댓글 작성
-    commentLoad: async function(comment_no){
+    boardCommentLoad: async function(comment_no){
         const object = {
-            comment_no:comment_no
+            num:comment_no
         };
-        return await axios.post(PLANNET_DOMAIN + "CommentLoad", object, HEADER);
+        return await axios.post(PLANNET_DOMAIN + "BoardCommentLoad", object, HEADER);
     },
     // userInfo 불러오기
     userInfoLoad: async function(id){
