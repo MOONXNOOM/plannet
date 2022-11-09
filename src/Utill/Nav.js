@@ -148,8 +148,6 @@ const Nav = () => {
         userInfoLoad();
     },[userId]);
 
-    console.log(userInfo);
-
     // 로그아웃 팝업
     const [comment, setCommnet] = useState("");
     const [modalOpen, setModalOpen] = useState(false);

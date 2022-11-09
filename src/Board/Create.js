@@ -205,7 +205,6 @@ function Create() {
 
     const handleChecked = (e) => {
         setIsChecked(e.target.checked);
-        console.log(isChecked);
       };
 
     return (
@@ -230,7 +229,6 @@ function Create() {
                 <div className='form-wrapper'>
                     <CKEditor editor={ClassicEditor} data={detail} onChange={(event, editor) => {
                         const data = editor.getData();
-                        console.log({event, editor, data});
                         setDetail(data);
                         const getByteLengthOfUtf8String = (s) => {
                             if(s != undefined && s != "") {
