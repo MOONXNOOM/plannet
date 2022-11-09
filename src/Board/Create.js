@@ -1,11 +1,10 @@
+import { useState } from 'react';
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Nav from "../Utill/Nav";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Api from "../api/plannetApi";
-import {useState} from 'react';
-import { Link } from "react-router-dom";
-
+import Nav from "../Utill/Nav";
 
 const Wrap = styled.div`
     width: 1130px;
@@ -13,7 +12,6 @@ const Wrap = styled.div`
     background-color: white;
     margin: 0 auto;
 `;
-
 const StyledInput = styled.input`
         appearance: none;
         border: 2px solid #bbb;
@@ -23,7 +21,6 @@ const StyledInput = styled.input`
         margin-right: 8px;
         transition: all .03s ease-in;
         vertical-align: middle;
-
     &:checked {
         border-color: transparent;
         background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
@@ -33,8 +30,6 @@ const StyledInput = styled.input`
         background-color: #4555AE;
     }
 `;
-
-
 const Section = styled.div`
     width: 850px;
     height: calc(100vh - 40px);
@@ -57,22 +52,22 @@ const Section = styled.div`
         background: none;
         /*스크롤바 뒷 배경 색상*/
     }
-    div{
+    div {
         width: 100%;
         padding: 10px 30px;
     }
-    .sub_box{
-        h2{
+    .sub_box {
+        h2 {
             font-size: 28px;
             margin-top: 35px;
             font-weight: 900;
         }
-        span{
+        span {
             float: left;
             margin-top: 10px;
             margin-bottom: 15px;
         }
-        button{
+        button {
             float:right;
             font-weight: 600;
             display: block;
@@ -85,7 +80,7 @@ const Section = styled.div`
             &:hover{background-color: #666;}
         }
     }
-    button{
+    button {
         border: none;
         padding-right: 20px; 
         background: none;
@@ -93,28 +88,28 @@ const Section = styled.div`
         color: #bbb;
         font-weight: 700;
         transition: all .1s ease-in;
-        &:hover, &:hover i{color: #888;}
-        i{
+        &:hover, &:hover i {color: #888;}
+        i {
             font-size: 16px; 
             line-height: 48px; 
             color: #bbb;
             transition: all .1s ease-in;
         }
     }
-    table{
+    table {
         border-collapse: collapse; 
         width: 100%;
         background-color: #4555AE;
         border-bottom: solid 1px #4555AE;
         text-align: center;
-        tr:nth-child(2n) td{background-color: #f9f9f9;}
-        th{padding: 10px; color: white;}
-        td{padding: 10px; background-color: white; border-left: solid 1px #bbb; border-top: solid 1px #ddd;}
-        td:first-child{border-left: none};
-        td:nth-child(2){width: 400px; text-align: left; padding-left: 20px;}  
-        tr:hover td, tr:hover a{color: #4555AE;}
+        tr:nth-child(2n) td {background-color: #f9f9f9;}
+        th {padding: 10px; color: white;}
+        td {padding: 10px; background-color: white; border-left: solid 1px #bbb; border-top: solid 1px #ddd;}
+        td:first-child {border-left: none};
+        td:nth-child(2) {width: 400px; text-align: left; padding-left: 20px;}  
+        tr:hover td, tr:hover a {color: #4555AE;}
     }
-    .copy{
+    .copy {
         width: 850px;
         position: absolute;
         bottom: 0;
@@ -122,26 +117,26 @@ const Section = styled.div`
         color: #dfdfdf;
         line-height: 50px;
     }
-    .util_box{
+    .util_box {
         .page_list {
             width: 500px; float:left;
-            li{list-style-type: none; display: inline; padding: 0px 5px;
-                a{
+            li {list-style-type: none; display: inline; padding: 0px 5px;
+                a {
                     display: inline-block; text-decoration: none; padding: 5px 10px; color:#000;
                     border-radius: 5px;
                     -webkit-transition: background-color 0.3s;
                     transition: background-color 0.3s;
                     &:active {background-color: #4caf50; color: #fff;}
-                    &:hover{color:#0d3c01; font-weight: bold;}
+                    &:hover {color:#0d3c01; font-weight: bold;}
                     &:hover:not(.active) {background-color: #4555AE; color:white;}
                 }
             } 
         }
-        .search{
+        .search {
             float: right;
             width: 200px; height: 35px; padding: 0 10px; border: solid 2px #ddd; 
             background-color: white;
-            input{width: 150px; height: 31px; border: 0px; outline: none; margin-right: 10px;}
+            input {width: 150px; height: 31px; border: 0px; outline: none; margin-right: 10px;}
         }
     }
     .form-wrapper {
@@ -159,16 +154,15 @@ const Section = styled.div`
         margin: 0 auto;
         border: none;
         background: none;
-        &:focus{border: none; background:none;}
+        &:focus {border: none; background:none;}
     }
-
     .text-area {
         width: 80%;
         min-height: 500px;
     }
     .button-area {
         text-align: right;
-        button{
+        button {
             display :inline-block;
             right: 30px;
             cursor: pointer;
@@ -180,10 +174,10 @@ const Section = styled.div`
             transition: all .1s ease-in;
             font-weight: 600;
             font-size: 16px;
-            &:hover{background-color: #666;
+            &:hover {background-color: #666;
                 color: #888;}
         }
-        button:nth-child(1){
+        button:nth-child(1) {
             margin-right: 10px;
         }
     }
@@ -235,23 +229,23 @@ function Create() {
                 </div>
                 <div className='form-wrapper'>
                     <CKEditor editor={ClassicEditor} data={detail} onChange={(event, editor) => {
-                            const data = editor.getData();
-                            console.log({event, editor, data});
-                            setDetail(data);
-                            const getByteLengthOfUtf8String = (s) => {
-                                if(s != undefined && s != "") {
-                                    let b, i, c;
-                                    for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?3:c>>7?2:1);
-                                    return b;
-                                } else {
-                                    return 0;
-                                }
+                        const data = editor.getData();
+                        console.log({event, editor, data});
+                        setDetail(data);
+                        const getByteLengthOfUtf8String = (s) => {
+                            if(s != undefined && s != "") {
+                                let b, i, c;
+                                for(b=i=0; c=s.charCodeAt(i++); b += c >> 11 ? 3 : c >> 7 ? 2 : 1); // Str Get BYTE 기능 (BYTE 체크)
+                                return b;
+                            } else {
+                                return 0;
                             }
-                            const length = getByteLengthOfUtf8String(data);
-                            if(length > 11000){
-                                setLengthCheck(true);
-                                alert("내용이 너무 깁니다.");
-                            } else setLengthCheck(false);
+                        }
+                        const length = getByteLengthOfUtf8String(data);
+                        if(length > 11000){
+                            setLengthCheck(true);
+                            alert("내용이 너무 깁니다.");
+                        } else setLengthCheck(false);
                     }}/>
                 </div>
                 <div className="button-area">

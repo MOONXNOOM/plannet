@@ -19,6 +19,7 @@ const Modal = (props) => {
         await Api.memberDelete(getId);
         window.localStorage.setItem("userId", "");
         window.localStorage.setItem("userPw", "");
+        window.localStorage.setItem("isLogin", "false");
         window.location.replace("/");
     }
     const onClickGoLogin = () => {

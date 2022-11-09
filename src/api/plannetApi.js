@@ -168,6 +168,13 @@ const plannetApi = {
         };
         return await axios.post(PLANNET_DOMAIN + "CommentCreate", object, HEADER);
     },
+    // 해당 게시물에 댓글 작성
+    commentLoad: async function(comment_no){
+        const object = {
+            comment_no:comment_no
+        };
+        return await axios.post(PLANNET_DOMAIN + "CommentLoad", object, HEADER);
+    },
     // userInfo 불러오기
     userInfoLoad: async function(id){
         const object = {

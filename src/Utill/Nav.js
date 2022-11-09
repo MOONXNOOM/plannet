@@ -62,10 +62,6 @@ const Box = styled.div`
                 /*스크롤바 뒷 배경 색상*/
             }
         }
-        .userPro2{
-            p{font-size: 11px;
-            color: #888;}
-        }
         .userImgBox{
             height: 20vh;
             aspect-ratio: auto 1 / 1;
@@ -73,6 +69,10 @@ const Box = styled.div`
             overflow: hidden;
             margin: 0 auto;
             background-size: cover;
+        };
+        .userPro2{
+            p{font-size: 11px;
+            color: #888;}
         }
         .menu{
             width: 208px;
@@ -122,13 +122,14 @@ const Box = styled.div`
 
 const Nav = () => {
     const userId = window.localStorage.getItem("userId");
-    const [userImgName, setUserImgName] = useState("");
-    const [userImgUrl, setUserImgUrl] = useState({backgroundImage: "url(https://khprojectplannet.s3.ap-northeast-2.amazonaws.com/" + userImgName + ")"});
-    const [userNickname, setUserNickname] = useState("");
-    const [userEmail, setUserEmail] = useState("");
-    const [userPhone, setUserPhone] = useState("");
-    const [userSNS, setUserSNS] = useState("");
-    const [userPro, setUserPro] = useState("");
+    const [userInfo, setUserInfo] = useState("");
+    // const [userImgUrl, setUserImgUrl] = useState('');
+    // const [userNickname, setUserNickname] = useState("");
+    // const [userEmail, setUserEmail] = useState("");
+    // const [userPhone, setUserPhone] = useState("");
+    // const [userSNS, setUserSNS] = useState("");
+    // const [userPro, setUserPro] = useState("");
+
     const [num, setNum] = useState('0');
     const pes = {width: num+'%'};
 
@@ -136,13 +137,8 @@ const Nav = () => {
         const userInfoLoad = async() => {
             try{
                 const response = await Api.userInfoLoad(userId);
-                setUserNickname(response.data[0].nickname);
-                setUserEmail(response.data[0].email);
-                setUserPhone(response.data[0].phone);
-                setUserSNS(response.data[0].sns);
-                setUserPro(response.data[0].profile);
-                setUserImgName(response.data[0].img);
-                setUserImgUrl({backgroundImage: "url(https://khprojectplannet.s3.ap-northeast-2.amazonaws.com/" + response.data[0].img + ")"});
+                setUserInfo(response.data[0]);
+                // setUserImgUrl({backgroundImage: "url(https://khprojectplannet.s3.ap-northeast-2.amazonaws.com/" + response.data[0].img + ")"});
                 const resNum = await Api.userDo(userId);
                 setNum(resNum.data.pes);
             } catch(e){
@@ -151,6 +147,8 @@ const Nav = () => {
         }
         userInfoLoad();
     },[userId]);
+
+    console.log(userInfo);
 
     // 로그아웃 팝업
     const [comment, setCommnet] = useState("");
@@ -181,10 +179,10 @@ const Nav = () => {
                 <h2>Let's plan it!</h2>
             </div>
             <div className="userinfo">
-                <div className="userImgBox" style={userImgUrl}/>
-                <p className="userName">{userNickname}</p>
+                <div className="userImgBox" style={{backgroundImage: "url('https://khprojectplannet.s3.ap-northeast-2.amazonaws.com/"+ userInfo.img +"')"}}/>
+                <p className="userName">{userInfo.nickname}</p>
                 <p className="userId">&#40;{userId}&#41;</p>
-                <div className="userPro1">{userPro}</div>
+                <div className="userPro1">{userInfo.profile}</div>
                 <div className="pes">
                     <p>달성률</p>
                     <div className="chartBackground">
@@ -192,9 +190,9 @@ const Nav = () => {
                     </div>
                 </div>
                 <div className="userPro2">
-                    <p>Email : {userEmail}</p>
-                    <p>{userPhone? <p>Phone : {userPhone}</p> : <p>Phone : - </p> }</p>
-                    {userSNS? <p>SNS : @{userSNS}</p> : <p>SNS : - </p> }
+                    <p>Email : {userInfo.email}</p>
+                    <p>{userInfo.phone? <p>Phone : {userInfo.phone}</p> : <p>Phone : - </p> }</p>
+                    {userInfo.sns? <p>SNS : @{userInfo.sns}</p> : <p>SNS : - </p> }
                 </div>
                 <ul className="menu">
                     <li><Link to="/home">마이페이지</Link></li>

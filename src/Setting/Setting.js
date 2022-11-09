@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Nav from "../Utill/Nav";
 import Api from "../api/plannetApi";
 import Modal from "../Utill/Modal";
 import AWS from "aws-sdk"
-
 
 const Wrap = styled.div`
     width: 1130px;
@@ -34,23 +33,22 @@ const Section = styled.div`
         background: none;
         /*스크롤바 뒷 배경 색상*/
     }
-    div{
+    div {
         width: 100%;
         padding: 10px 30px;
     }
-    h2{
+    h2 {
       font-size: 28px;
       font-weight: 900;
       margin-top: 35px;
       margin-bottom: 10px;
     }
-
-    .btnbox{
+    .btnbox {
         height: 90px;
         line-height: 70px;
         position: relative;
         height: 50px;
-        button.save{
+        button.save {
             font-weight: 600;
             display: block;
             position: absolute;
@@ -63,32 +61,32 @@ const Section = styled.div`
             color: white;
             border: none;
             transition: all .1s ease-in;
-            &:hover{
+            &:hover {
                 background-color: #666;
             }
-            &:disabled{
+            &:disabled {
                 background-color: #aaa;
                 color: #eee;
                 cursor: default;
             }
         }        
     }
-    .setting{
-        .userInfo{
+    .setting {
+        .userInfo {
             display:flex ;
             justify-content:center;
             align-items: center;
             flex-direction: column;
-            .session{
+            .session {
                 width: 410px;
                 padding: 5px 30px;
                 margin-top: 0;
-                p{
+                p {
                     font-size: 18px;
                     font-weight: 600; 
                     line-height: 18px;
                     margin-bottom: 4px;
-                    span{
+                    span {
                         color: #666;
                         font-weight: 400;
                         float: right;
@@ -96,7 +94,7 @@ const Section = styled.div`
                         line-height: 20px;
                     }
                 }
-                input, textarea{
+                input, textarea {
                     padding: 0 15px;
                     border-radius: 5px;
                     width: 350px;
@@ -106,18 +104,18 @@ const Section = styled.div`
                     border: none;
                     font-weight: 500;
                     outline: none;
-                    &:focus{
+                    &:focus {
                         background-color: #b8b9f1;
                         color: #222;
                     }
-                    &:focus::placeholder{
+                    &:focus::placeholder {
                         color: #888;
                     }
-                    &::placeholder{
+                    &::placeholder {
                         color: #bbb;
                     }
                 }
-                textarea{
+                textarea {
                     padding: 10px 15px;
                     height: 100px;
                     resize: none;
@@ -140,7 +138,7 @@ const Section = styled.div`
                 }
             }
         }
-        .userImgBox{
+        .userImgBox {
             width: 180px;
             height: 180px;
             aspect-ratio: auto 1 / 1;
@@ -149,8 +147,8 @@ const Section = styled.div`
             background-size: cover;
             margin: 0 auto;
             position: relative;
-            input{display:none;}
-            div{
+            input {display:none;}
+            div {
                 position: absolute;
                 left: 0;
                 top: 0;
@@ -160,7 +158,7 @@ const Section = styled.div`
                 background-color: rgba(0, 0, 0, .15);
                 cursor: pointer;
                 text-align: center;
-                i{
+                i {
                     font-size: 50px;
                     line-height: 160px;
                     color: rgba(255, 255, 255, .6);
@@ -168,15 +166,13 @@ const Section = styled.div`
             }
         }
     }
-    .withdrawal{
+    .withdrawal {
         cursor: pointer;
         text-align: left;
         text-decoration: underline;
         color: #ccc;
     }
-    
 `;
-
 
 const Setting = () => {
     const userId = window.localStorage.getItem("userId");
@@ -232,7 +228,6 @@ const Setting = () => {
         setUserPro(e.target.value);
     }
 
-
     //회원탈퇴 팝업
     const [comment, setCommnet] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
@@ -246,7 +241,6 @@ const Setting = () => {
 
     const [isEmail, setIsEmail] = useState(true);
     const [isTel, setIsTel] = useState(true);
-
 
     // 전화번호/이메일 중복확인
     const onBlurTelCheck = async() => {
@@ -319,7 +313,6 @@ const Setting = () => {
         })
         
         const promise = upload.promise()
-        
         // 이미지 업로드
         promise.then(
             function (data) {
@@ -339,10 +332,9 @@ const Setting = () => {
         setUserImgUrl({backgroundImage: "url(" + fileUrl + ")"});
     }
 
-    
     return (
         <Wrap>
-            <Nav />
+            <Nav/>
             <Section>
                 <div className="setting">
                     <h2>Setting</h2>
@@ -385,4 +377,5 @@ const Setting = () => {
         </Wrap>
     );
 }
+
 export default Setting;

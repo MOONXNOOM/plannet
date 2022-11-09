@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "../Utill/Nav";
 import Api from '../api/plannetApi'
-// import CommentMain from './CommentMain'
 
 const Wrap = styled.div`
     width: 1130px;
     height: 100vh;
     background-color: white;
     margin: 0 auto;
-    .copy{
+    .copy {
         width: 830px;
         text-align: center;
         color: #dfdfdf;
@@ -41,22 +40,22 @@ const Section = styled.div`
         background: none;
         /*스크롤바 뒷 배경 색상*/
     }
-    div{
+    div {
         width: 100%;
         padding: 10px 30px;
     }
-    .sub_box{
-        h2{
+    .sub_box {
+        h2 {
             font-size: 28px;
             margin-top: 35px;
             font-weight: 900;
         }
-        span{
+        span {
             float: left;
             margin-top: 10px;
             margin-bottom: 15px;
         }
-        button{
+        button {
             cursor: pointer;
             font-weight: 600;
             float: right;
@@ -71,31 +70,31 @@ const Section = styled.div`
                 color: #888;}
         }
     }
-    table{
+    table {
         border-collapse: collapse; 
         width:100%;
         background-color: #4555AE;
         border-bottom: solid 1px #4555AE;
         text-align: center;
-        tr:nth-child(2n) td{background-color: #f9f9f9;}
-        th{
+        tr:nth-child(2n) td {background-color: #f9f9f9;}
+        th { 
             padding: 10px; 
             color: white;}
-        td{padding: 10px; background-color: white; border-left: solid 1px #bbb; border-top: solid 1px #ddd;}
-        td:first-child{border-left: none};
-        td:nth-child(2){width: 400px; text-align: left; padding-left: 20px;}  
+        td {padding: 10px; background-color: white; border-left: solid 1px #bbb; border-top: solid 1px #ddd;}
+        td:first-child {border-left: none};
+        td:nth-child(2) {width: 400px; text-align: left; padding-left: 20px;}  
         tr:hover td, tr:hover a{color: #4555AE; background-color: #efefef; cursor: pointer;}
     }
-    .util_box{
+    .util_box {
         .page_list {
             width: 500px; 
             float:left;
-            li{
+            li {
                 list-style-type: none;
                 display: inline; 
                 padding: 0px 5px;
                 cursor: pointer;
-                span{
+                span {
                     width: 25px;
                     text-align: center;
                     line-height: 25px;
@@ -106,18 +105,17 @@ const Section = styled.div`
                     -webkit-transition: background-color 0.3s;
                     transition: background-color 0.3s;
                     &:active {background-color: #4555AE; color: #fff;}
-                    &:hover{color:#0d3c01; font-weight: bold;}
+                    &:hover {color:#0d3c01; font-weight: bold;}
                     &[aria-current] {background-color: #4555AE; color:white;}
                     &[disabled] {background: #eee; cursor: revert; transform: revert;}
                 }
             } 
         }
-        .search{
+        .search {
             float: right;
             width: 200px; height: 35px; padding: 0 10px; border: solid 2px #ddd; 
             background-color: white;
-            input{width: 150px; height: 31px; border: 0px; outline: none; margin-right: 10px;}
-
+            input {width: 150px; height: 31px; border: 0px; outline: none; margin-right: 10px;}
         }
     }
 `;
@@ -138,8 +136,9 @@ const Board = () => {
         window.location.assign(link);
         window.localStorage.setItem("boardNo",boardNo);
         window.localStorage.setItem("writerId",writerId);
-        
     }
+
+    // boardList 불러오기
     useEffect(() => {
         const boardData = async () => {
             try {
@@ -153,10 +152,9 @@ const Board = () => {
         boardData();
     }, []);
 
-    
     return (
         <Wrap>
-            <Nav />
+            <Nav/>
             <Section>
                 <div className="board_list sub_box"> 
                     <h2>자유게시판</h2>
@@ -200,7 +198,6 @@ const Board = () => {
                         <a href="#" onclick="submit"><i className="bi bi-search"></i></a>
                     </form> 
                 </div>
-                
             </Section>
             <div className="copy">&#169; Plannet.</div>
         </Wrap>

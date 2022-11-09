@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import Api from "../api/plannetApi";
 import Nav from "../Utill/Nav";
 import PlanList from "./PlanList";
-import Api from "../api/plannetApi";
-import { useParams } from "react-router-dom";
-
 
 const Wrap = styled.div`
     width: 1130px;
@@ -34,20 +33,20 @@ const Section = styled.div`
         background: none;
         /*스크롤바 뒷 배경 색상*/
     }
-    div{
+    div {
         width: 100%;
         padding: 10px 30px;
     }
-    .btnbox{
+    .btnbox {
         height: 90px;
         line-height: 70px;
         position: relative;
-        i{
+        i {
             font-size: 22px; 
             vertical-align: middle;
             transition: all .1s ease-in;
         }
-        button.back{
+        button.back {
             font-weight: 300;
             font-size: 16px; 
             vertical-align: middle;
@@ -56,7 +55,7 @@ const Section = styled.div`
             transition: all .1s ease-in;
             cursor: pointer;
         }
-        button.save{
+        button.save {
             cursor: pointer;
             font-weight: 600;
             float: right;
@@ -71,32 +70,32 @@ const Section = styled.div`
                 color: #888;}
         }       
     }
-    .btnbox:last-of-type{
+    .btnbox:last-of-type {
         height: 50px;
     }
-    .btnbox:first-of-type:hover i, .btnbox:first-of-type:hover button{
+    .btnbox:first-of-type:hover i, .btnbox:first-of-type:hover button {
         color: #bbb;
     }
-    .sub_box{
-        h2{
+    .sub_box {
+        h2 {
             font-size: 28px;
             margin-bottom: 10px;
             font-weight: 900;
         }
     }
-    .write_box{
+    .write_box {
         padding: 20px;
         width: 100%;
         background-color: #f9f9f9;
         border-radius: 5px;
     }
-    .plan_it{
+    .plan_it {
         height: 370px;
-        .write_box{
+        .write_box {
             height: 300px;
             padding-bottom: 0;
         }
-        ul{height: 230px;
+        ul {height: 230px;
             overflow-y: scroll;
                 &:focus {outline: none;}
                 &::-webkit-scrollbar {
@@ -115,30 +114,30 @@ const Section = styled.div`
                     /*스크롤바 뒷 배경 색상*/
                 }
         }
-        li{
+        li {
             line-height: 33px; 
             margin-bottom: 5px; 
             border-bottom: 2px solid #f5f5f5;
             transition: all .1s ease-in;
-            &:focus-within{
+            &:focus-within {
                 border-bottom-color: #4555AE;
             }
-            button{
+            button {
                 display: block;
                 float: right;
                 padding-right: 0;
-                i{
+                i {
                     font-size: 18px; 
                     line-height: 30px; 
                     color: #bbb;
                     transition: all .1s ease-in;
                 }
-                &:hover i{
+                &:hover i {
                     color: #4555AE;
                 }
             }
         }
-        button{
+        button {
             border: none;
             padding-right: 20px; 
             background: none;
@@ -146,16 +145,16 @@ const Section = styled.div`
             color: #bbb;
             font-weight: 700;
             transition: all .1s ease-in;
-            &:hover, &:hover i{color: #888;}
-            i{
+            &:hover, &:hover i {color: #888;}
+            i {
                 font-size: 16px; 
                 line-height: 48px; 
                 color: #bbb;
                 transition: all .1s ease-in;
             }
         }
-        input, span{vertical-align: middle;}
-        input[type="text"], span{
+        input, span {vertical-align: middle;}
+        input[type="text"], span {
             width: 400px;
             border: none;
             background: none;
@@ -166,11 +165,11 @@ const Section = styled.div`
             outline: none;
         }
     }
-    .diary{
+    .diary {
         height: 350px;
-        .write_box{
+        .write_box {
             height: 280px;
-            textarea{
+            textarea {
                 line-height: 1.4;
                 width: 765px;
                 height: 240px;
@@ -197,18 +196,18 @@ const Section = styled.div`
             }
         }
     }
-    hr{
+    hr {
         border: none;
          background: #ddd;
         height: 2px; 
     }
-    .defaultPlanColor{
+    .defaultPlanColor {
         color:#333;
     }
-    .firstPlanColor{
+    .firstPlanColor {
         color: #bbb;
     }
-    .donePlan{
+    .donePlan {
         color: #bbb;
         text-decoration: line-through;
     }
@@ -219,6 +218,7 @@ const Write = () => {
     const { date } = useParams();
     const [planList, setPlanList] = useState([]);
     const [diary, setDiary] = useState();
+
     const onChangeDiary = (e) => {
         setDiary(e.target.value);
     }
@@ -244,6 +244,7 @@ const Write = () => {
         }
         writeLoad();
     },[getId, date]);
+
     const onClickSave = async() => {
         await Api.writeSave(getId, date, planList, diary);
         window.location.replace('/home');
@@ -251,7 +252,7 @@ const Write = () => {
 
     return (
         <Wrap>
-            <Nav />
+            <Nav/>
             <Section>
                 <div className="btnbox">
                     <button className="back" onClick={onClickSave}>
@@ -282,4 +283,5 @@ const Write = () => {
         </Wrap>
     );
 }
+
 export default Write;
