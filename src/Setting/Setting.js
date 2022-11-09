@@ -294,7 +294,7 @@ const Setting = () => {
     AWS.config.update({
         region: "ap-northeast-2",
         credentials: new AWS.CognitoIdentityCredentials({
-        IdentityPoolId: "ap-northeast-2:b3a02944-c9e9-4639-8d1f-6a3b950cdd9d"
+        IdentityPoolId: "인증키"
         }),
     })
 
