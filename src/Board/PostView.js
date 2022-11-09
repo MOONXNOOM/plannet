@@ -251,6 +251,7 @@ const PostView = () => {
                         </>))}
                     <div>
                         <p>댓글</p>
+                        <input type='text' placeholder='댓글을 100자 이내로 입력하세요' value={comments} onChange={onChangeComments} name='comments'></input><button onClick={onClickSaveComments}>SAVE</button>
                         <table>
                             <tr>
                                 <th>Comment.No</th>
@@ -269,7 +270,7 @@ const PostView = () => {
                         </table>
                     </div>
                     <div>
-                        <ul className="page_list">
+                        <ul className="comments_list">
                             <li><span onclick = {()=> setPage(page - 1)} disabled = {page === 1}>«</span></li>
                             {Array(numPages).fill().map((_, i) => (
                             <li><span key={i + 1} onClick={() => setPage(i + 1)} aria-current={page === i + 1 ? "page" : null}>{i + 1}</span></li>
@@ -277,7 +278,6 @@ const PostView = () => {
                             <li><span onclick = {()=> setPage(page + 1)} disabled = {page === numPages}>»</span></li>
                         </ul>
                     </div>
-                    <input type='text' placeholder='댓글을 100자 이내로 입력하세요' value={comments} onChange={onChangeComments} name='comments'></input><button onClick={onClickSaveComments}>SAVE</button>
             </Section>
             <div className="copy">&#169; Plannet.</div>
         </Wrap>
