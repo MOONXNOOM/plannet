@@ -248,7 +248,6 @@ const PostView = () => {
         setComments(e.target.value);
     }
     // 댓글 수정
-    let today = new Date();
     const onClickSaveComments = async() => {
         await Api.boardCommentCreate(getNum, getId, comments);
         const nextPlanList = commentsList.concat({
@@ -257,6 +256,7 @@ const PostView = () => {
             id: getId,
         });
         setCommentsList(nextPlanList);
+        setComments("");
     } 
     
     useEffect(() => {
