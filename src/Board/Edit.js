@@ -1,10 +1,9 @@
+import { useState, useEffect } from 'react';
 import styled from "styled-components";
-import Nav from "../Utill/Nav";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import Api from "../api/plannetApi";
-import {useState, useEffect} from 'react';
-import { Link } from "react-router-dom";
+import Nav from "../Utill/Nav";
 
 const Wrap = styled.div`
     width: 1130px;
@@ -53,22 +52,22 @@ const Section = styled.div`
         background: none;
         /*스크롤바 뒷 배경 색상*/
     }
-    div{
+    div {
         width: 100%;
         padding: 10px 30px;
     }
-    .sub_box{
-        h2{
+    .sub_box {
+        h2 {
             font-size: 28px;
             margin-top: 35px;
             font-weight: 900;
         }
-        span{
+        span {
             float: left;
             margin-top: 10px;
             margin-bottom: 15px;
         }
-        button{
+        button {
             float:right;
             font-weight: 600;
             display: block;
@@ -81,7 +80,7 @@ const Section = styled.div`
             &:hover{background-color: #666;}
         }
     }
-    button{
+    button {
         border: none;
         padding-right: 20px; 
         background: none;
@@ -89,28 +88,28 @@ const Section = styled.div`
         color: #bbb;
         font-weight: 700;
         transition: all .1s ease-in;
-        &:hover, &:hover i{color: #888;}
-        i{
+        &:hover, &:hover i {color: #888;}
+        i {
             font-size: 16px; 
             line-height: 48px; 
             color: #bbb;
             transition: all .1s ease-in;
         }
     }
-    .postInfo{
+    .postInfo {
         border-collapse: collapse; 
         width: 100%;
         background-color: #4555AE;
         border-bottom: solid 1px #4555AE;
         text-align: center;
-        tr:nth-child(2n) td{background-color: #f9f9f9;}
-        th{padding: 10px; color: white;}
-        td{padding: 10px; background-color: white; border-left: solid 1px #bbb; border-top: solid 1px #ddd;}
-        td:first-child{border-left: none};
-        td:nth-child(2){width: 400px; text-align: left; padding-left: 20px;}  
-        tr:hover td, tr:hover a{color: #4555AE;}
+        tr:nth-child(2n) td {background-color: #f9f9f9;}
+        th {padding: 10px; color: white;}
+        td {padding: 10px; background-color: white; border-left: solid 1px #bbb; border-top: solid 1px #ddd;}
+        td:first-child {border-left: none};
+        td:nth-child(2) {width: 400px; text-align: left; padding-left: 20px;}  
+        tr:hover td, tr:hover a {color: #4555AE;}
     }
-    .copy{
+    .copy {
         width: 850px;
         position: absolute;
         bottom: 0;
@@ -118,26 +117,26 @@ const Section = styled.div`
         color: #dfdfdf;
         line-height: 50px;
     }
-    .util_box{
+    .util_box {
         .page_list {
             width: 500px; float:left;
-            li{list-style-type: none; display: inline; padding: 0px 5px;
-                a{
+            li {list-style-type: none; display: inline; padding: 0px 5px;
+                a {
                     display: inline-block; text-decoration: none; padding: 5px 10px; color:#000;
                     border-radius: 5px;
                     -webkit-transition: background-color 0.3s;
                     transition: background-color 0.3s;
                     &:active {background-color: #4caf50; color: #fff;}
-                    &:hover{color:#0d3c01; font-weight: bold;}
+                    &:hover {color:#0d3c01; font-weight: bold;}
                     &:hover:not(.active) {background-color: #4555AE; color:white;}
                 }
             } 
         }
-        .search{
+        .search {
             float: right;
             width: 200px; height: 35px; padding: 0 10px; border: solid 2px #ddd; 
             background-color: white;
-            input{width: 150px; height: 31px; border: 0px; outline: none; margin-right: 10px;}
+            input {width: 150px; height: 31px; border: 0px; outline: none; margin-right: 10px;}
         }
     }
     .form-wrapper {
@@ -155,16 +154,15 @@ const Section = styled.div`
         margin: 0 auto;
         border: none;
         background: none;
-        &:focus{border: none; background:none;}
+        &:focus {border: none; background:none;}
     }
-
     .text-area {
         width: 80%;
         min-height: 500px;
     }
     .button-area {
         text-align: right;
-        button{
+        button {
             display :inline-block;
             right: 30px;
             cursor: pointer;
@@ -176,22 +174,21 @@ const Section = styled.div`
             transition: all .1s ease-in;
             font-weight: 600;
             font-size: 16px;
-            &:hover, &:disabled{
+            &:hover, &:disabled {
                 background-color: #666;
                 color: #888;
             }
         }
-        button:nth-child(1){
+        button:nth-child(1) {
             margin-right: 10px;
         }
     }
-    
     .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
         height: 500px; 
     }
     .ck-editor__main {padding: 0;
-        .table{width: 100%;}
-        table, tr, td{
+        .table {width: 100%;}
+        table, tr, td {
             border-collapse: collapse;
             padding: 5px;
             border: 1px solid #ddd;
@@ -202,12 +199,12 @@ const Section = styled.div`
 
 function Edit() {
     const getId = window.localStorage.getItem("userId");
+    const getNum = window.localStorage.getItem("boardNo");
+    const [boardLoad, setBoardLoad] = useState();
     const [title, setTitle] = useState();
     const [detail, setDetail] = useState();
     const [isChecked, setIsChecked] = useState(false);
-    const [boardLoad, setBoardLoad] = useState();
     const [lengthCheck, setLengthCheck] = useState(false);
-    const getNum = window.localStorage.getItem("boardNo");
 
     useEffect(() => {
         const boardData = async () => {
@@ -216,7 +213,6 @@ function Edit() {
                 setBoardLoad(response.data);
                 setTitle(response.data[0].title);
                 setDetail(response.data);
-                console.log(response.data);
             } catch (e) {
                 console.log(e);
             }
@@ -224,16 +220,15 @@ function Edit() {
         boardData();
     }, []);
 
-    console.log(boardLoad);
-
+    // 해당 게시물 번호에 해당하는 Edit 페이지로 이동
     const onClickEdit = async() => {
         await Api.boardEdit(getId, getNum, title, detail);
-        console.log(getNum);
         const link = "/postView/" + getNum;
         window.location.assign(link);
         window.localStorage.setItem("boardNo", getNum);
     }
 
+    // 취소 버튼 클릭 시 게시물 번호에 해당하는 postView 페이지로 이동
     const onClickCancle = () => {
         console.log(getNum);
         const link = "/postView/" + getNum;
@@ -247,56 +242,53 @@ function Edit() {
 
     const handleChecked = (e) => {
         setIsChecked(e.target.checked);
-        
-      };
+    };
       
-
     return (
         <Wrap>
             <Nav></Nav>
             <Section>
-            {boardLoad&&boardLoad.map( e => (
-                    <>
-                <div className="board_list sub_box">
-                    <h2>자유게시판</h2>
-                    <p>
-                        <span>작성 시 유의해 주세요! 비방, 광고, 불건전한 내용의 글은 사전 동의 없이 삭제될 수 있습니다.</span>
-                    </p>    
-                    <table className="postInfo">
-                        <tr>
-                            <th colSpan={2}>게시물 수정</th>
-                        </tr>
-                        <tr>
-                            <td><input className="title-input" type='text' placeholder='제목을 입력하세요.' defaultValue={title} value={title} onChange={onChangeTitle} name='title' /></td>
-                            <td><StyledInput type="checkbox" checked={e.isChecked} onChange={handleChecked}/>익명</td>
-                        </tr>
-                    </table>           
-                </div>
-                <div className='form-wrapper'>
-                    <CKEditor editor={ClassicEditor} data={e.detail} onChange={(event, editor) => {
-                            const data = editor.getData();
-                            console.log({event, editor, data});
-                            setDetail(data);
-                            const getByteLengthOfUtf8String = (s) => {
-                                if(s != undefined && s != "") {
-                                    let b, i, c;
-                                    for(b=i=0;c=s.charCodeAt(i++);b+=c>>11?3:c>>7?2:1);
-                                    return b;
-                                } else {
-                                    return 0;
+            {boardLoad && boardLoad.map( e => (
+                <>
+                    <div className="board_list sub_box">
+                        <h2>자유게시판</h2>
+                        <p>
+                            <span>작성 시 유의해 주세요! 비방, 광고, 불건전한 내용의 글은 사전 동의 없이 삭제될 수 있습니다.</span>
+                        </p>    
+                        <table className="postInfo">
+                            <tr>
+                                <th colSpan={2}>게시물 수정</th>
+                            </tr>
+                            <tr>
+                                <td><input className="title-input" type='text' placeholder='제목을 입력하세요.' defaultValue={title} value={title} onChange={onChangeTitle} name='title' /></td>
+                                <td><StyledInput type="checkbox" checked={e.isChecked} onChange={handleChecked}/>익명</td>
+                            </tr>
+                        </table>           
+                    </div>
+                    <div className='form-wrapper'>
+                        <CKEditor editor={ClassicEditor} data={e.detail} onChange={(event, editor) => {
+                                const data = editor.getData();
+                                setDetail(data);
+                                const getByteLengthOfUtf8String = (s) => {
+                                    if(s != undefined && s != "") {
+                                        let b, i, c;
+                                        for(b = i = 0 ; c = s.charCodeAt(i++) ; b += c >> 11 ? 3 : c >> 7 ? 2 : 1);
+                                        return b;
+                                    } else {
+                                        return 0;
+                                    }
                                 }
-                            }
-                            const length = getByteLengthOfUtf8String(data);
-                            if(length > 11000){
-                                setLengthCheck(true);
-                                alert("내용이 너무 깁니다.");
-                            } else setLengthCheck(false);
-                    }}/>
-                </div>
-                <div className="button-area">
-                    <button onClick={onClickEdit} disabled={lengthCheck}>SAVE</button>
-                    <button onClick={onClickCancle}>CANCLE</button>
-                </div>
+                                const length = getByteLengthOfUtf8String(data);
+                                if(length > 11000) {
+                                    setLengthCheck(true);
+                                    alert("내용이 너무 깁니다.");
+                                } else setLengthCheck(false);
+                        }}/>
+                    </div>
+                    <div className="button-area">
+                        <button onClick={onClickEdit} disabled={lengthCheck}>SAVE</button>
+                        <button onClick={onClickCancle}>CANCLE</button>
+                    </div>
                 </>))}
             </Section>
             <div className="copy">&#169; Plannet.</div>
