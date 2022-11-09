@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Modal from '../Utill/Modal';
 import Api from '../api/plannetApi'
 import Nav from '../Utill/Nav';
+import moment from 'moment';
 
 const Wrap = styled.div`
     width: 1130px;
@@ -100,7 +101,7 @@ const Section = styled.div`
             background: none;
         }
     }
-    .button-area {
+    .button-area1 {
         text-align: right;
         .btn {
             cursor: pointer;
@@ -143,6 +144,65 @@ const Section = styled.div`
             input {width: 150px; height: 31px; border: 0px; outline: none; margin-right: 10px;}
         }
     }
+    h3 {
+        font-size: 28px;
+        font-weight: 900;
+        width: 100%;
+        padding: 10px 30px;
+    }
+    .comment_box {
+        width: 100%;
+        min-height: 300px;
+        table{width: 100%; margin: 10px 0;}
+        table, tr, td{
+            border-collapse: collapse;
+            padding: 5px;
+            border: 1px solid white;
+            background: none;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            text-align: left;
+            font-size: 20px;
+        }
+        .th_3 {
+            width: 100px;
+        }
+        tr td:first-child {
+            width: 100px;
+        }
+        tr td:nth-child(2) {
+            padding: 5px 15px;
+        }
+    }
+    .button-area2 {
+        text-align: right;
+        .comment_btn{
+            cursor: pointer;
+            font-weight: 600;
+            float: right;
+            font-size: 16px;
+            padding: 8px 35px;
+            border-radius: 25px;
+            background-color: #333;
+            color: white;
+            border: none;
+            transition: all .1s ease-in;
+            &:hover{background-color: #666;
+                color: #888;}
+        }
+        .comment_text {
+            position: relative;
+            font-weight: 600;
+            font-size: 16px;
+            right: 10px;
+            padding: 8px 35px;
+            border-radius: 25px;
+            background-color: #333;
+            color: white;
+            border: none;
+        }
+    }
 `;
 
 const PostView = () => {
@@ -161,7 +221,7 @@ const PostView = () => {
     const numPages = Math.ceil(commentsList.length / limit); // 필요한 댓글 페이지 개수
     
     // 게시물 삭제, 수정 팝업
-    const [comment, setCommnet] = useState("");
+    const [comment, setComment] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
     const [modalOption, setModalOption] = useState('');
     const closeModal = () => {
@@ -170,12 +230,12 @@ const PostView = () => {
     const onClickEdit = () => {
         setModalOpen(true);
         setModalOption('수정');
-        setCommnet("수정하시겠습니까?");
+        setComment("수정하시겠습니까?");
     }
     const deleteData = () => {
         setModalOpen(true);
         setModalOption('삭제');
-        setCommnet("삭제하시겠습니까?");
+        setComment("삭제하시겠습니까?");
     }
     const onClickLike = () => {
         setLikeChecked(!likeChecked);
@@ -188,8 +248,15 @@ const PostView = () => {
         setComments(e.target.value);
     }
     // 댓글 수정
+    let today = new Date();
     const onClickSaveComments = async() => {
-        await Api.commentCreate(getId,comment,getNum);
+        await Api.boardCommentCreate(getNum, getId, comments);
+        const nextPlanList = commentsList.concat({
+            date: moment().format('YYYY-MM-DD HH:mm'),
+            detail: comments,
+            id: getId,
+        });
+        setCommentsList(nextPlanList);
     } 
     
     useEffect(() => {
@@ -209,8 +276,8 @@ const PostView = () => {
                 setLikeCnt(response2.data.likeCnt);
                 const response3 = await Api.likeChecked(getId, getNum);
                 setLikeChecked(response3.data.likeChecked);
-                const response4 = await Api.commentLoad();
-                window.localStorage.setItem("commentNum",response4.data.value[1]);
+                const response4 = await Api.boardCommentLoad(getNum);
+                // window.localStorage.setItem("commentNum",response4.data.value[1]);
                 setCommentsList(response4.data);
             } catch (e) {
                 console.log(e);
@@ -219,64 +286,66 @@ const PostView = () => {
         if(getWriterId !== getId) increaseViews();
         boardDataUtil();
     }, [getNum]);
+    console.log(commentsList);
 
     return(
         <Wrap>
             <Nav/>
             <Section>
-                <Modal open={modalOpen} close={closeModal} header="글수정삭제" boardNo={getNum} option={modalOption}>{comment}</Modal>
-                    {boardLoad && boardLoad.map( e => (
-                        <><p>{likeChecked}</p>
-                            <div className="board_list sub_box"> 
-                                <h2>자유게시판</h2>
-                                <p><span>유저들이 작성한 글에 댓글과 좋아요를 남기며 소통해보세요! <br />커뮤니티 규칙에 맞지 않는 글과 댓글은 무통보 삭제됩니다.</span></p>  
-                                <table className='postInfo'>
-                                    <tr>
-                                        <td className="title-input" key={e.num} colSpan={4}>{e.title}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>No.{e.num}</td>
-                                        <td>Writer. {e.nickname}</td>
-                                        <td><i class="bi bi-eye"></i>{e.views}<i class="bi bi-heart-fill"></i>{likeCnt}</td>
-                                        <td>{(e.date).substring(0,10)}</td>
-                                    </tr>
-                                </table>
-                                <div className='detail' dangerouslySetInnerHTML={{__html: e.detail}}></div>
-                            </div>
-                            <div className="button-area">
-                                <button onClick={onClickLike}>{likeChecked === true ? <i className="bi bi-heart"></i> : <i className="bi bi-heart-fill"></i>}</button>
-                                <Link to='/board'><button className='btn left-space'>BACK</button></Link>
-                                {getId === e.id ? <><button className='btn left-space' onClick={onClickEdit}>EDIT</button><button className='btn left-space' onClick={deleteData}>DELETE</button></> : null}
-                            </div>
-                        </>))}
-                    <div>
-                        <p>댓글</p>
-                        <input type='text' placeholder='댓글을 100자 이내로 입력하세요' value={comments} onChange={onChangeComments} name='comments'></input><button onClick={onClickSaveComments}>SAVE</button>
+            <Modal open={modalOpen} close={closeModal} header="글수정삭제" boardNo={getNum} option={modalOption}>{comment}</Modal>
+                {boardLoad&&boardLoad.map( e => (
+                    <> <p>{likeChecked}</p>
+                        <div className="board_list sub_box"> 
+                            <h2>자유게시판</h2>
+                            <p><span>유저들이 작성한 글에 댓글과 좋아요를 남기며 소통해보세요! <br />커뮤니티 규칙에 맞지 않는 글과 댓글은 무통보 삭제됩니다.</span></p>  
+                            <table className='postInfo'>
+                                <tr>
+                                    <td className="title-input" key={e.num} colSpan={4}>{e.title}</td>
+                                </tr>
+                                <tr>
+                                    <td>No.{e.num}</td>
+                                    <td>Writer. {e.nickname}</td>
+                                    <td><i class="bi bi-eye"></i>{e.views}<i class="bi bi-heart-fill"></i>{likeCnt}</td>
+                                    <td>{(e.date).substring(0,10)}</td>
+                                </tr>
+                            </table>
+                            <div className='detail' dangerouslySetInnerHTML={{__html: e.detail}}></div>
+                        </div>
+                        <div className="button-area1">
+                            <button onClick={onClickLike}>{likeChecked === true ? <i className="bi bi-heart"></i> : <i className="bi bi-heart-fill"></i>}</button>
+                            <Link to='/board'><button className='btn left-space'>BACK</button></Link>
+                            {getId === e.id ? <><button className='btn left-space' onClick={onClickEdit}>EDIT</button><button className='btn left-space' onClick={deleteData}>DELETE</button></> : null}
+                        </div>
+                    </>))}
+                        <h3>댓글</h3>
+                        <div className='comment_box'>
                         <table>
                             <tr>
-                                <th>Comment.No</th>
                                 <th>Writer</th>
                                 <th>Comment</th>
-                                <th>Date</th>
-                                {commentsList.slice(offset, offset+limit).map(({commentNo,id,comment,date})=>(
-                                    <tr key={commentNo}>
-                                        <td>{commentNo}</td>
-                                        <td>{id}</td>
-                                        <td>{comment}</td>
-                                        <td>{date}</td>
-                                    </tr>
-                                ))}
+                                <th className='th_3'>Date</th>
                             </tr>
+                            {commentsList.slice(offset, offset+limit).map(({no, id, nickname, detail, date})=>(
+                                <tr key={no}>
+                                    <td>{id}</td>
+                                    <td>{detail}</td>
+                                    <td>{date}</td>
+                                </tr>
+                            ))}
                         </table>
-                    </div>
-                    <div>
-                        <ul className="comments_list">
+                    {/* <div>
+                        <ul className="page_list">
                             <li><span onclick = {()=> setPage(page - 1)} disabled = {page === 1}>«</span></li>
                             {Array(numPages).fill().map((_, i) => (
                             <li><span key={i + 1} onClick={() => setPage(i + 1)} aria-current={page === i + 1 ? "page" : null}>{i + 1}</span></li>
                             ))}
                             <li><span onclick = {()=> setPage(page + 1)} disabled = {page === numPages}>»</span></li>
                         </ul>
+                    </div> */}
+                    </div>
+                    <div className="button-area2">
+                    <input type='text' className='comment_text' placeholder='댓글 달기...' value={comments} onChange={onChangeComments} name='comments' size='60'></input>
+                    <button className='comment_btn' onClick={onClickSaveComments}>SAVE</button>
                     </div>
             </Section>
             <div className="copy">&#169; Plannet.</div>
