@@ -103,7 +103,7 @@ const Section = styled.div`
             background: none;
         }
     }
-    .button-area {
+    .button-area1 {
         text-align: right;
         .btn{
             cursor: pointer;
@@ -146,6 +146,51 @@ const Section = styled.div`
             input{width: 150px; height: 31px; border: 0px; outline: none; margin-right: 10px;}
         }
     }
+    h3 {
+        font-size: 28px;
+        font-weight: 900;
+        width: 100%;
+        padding: 10px 30px;
+    }
+    .comment_box {
+        width: 100%;
+        min-height: 300px;
+        table{width: 100%; margin: 10px 0;}
+        table, tr, td{
+            border-collapse: collapse;
+            padding: 5px;
+            border: 1px solid #ddd;
+            background: none;
+        }
+    }
+    .button-area2 {
+        text-align: right;
+        .comment_btn{
+            cursor: pointer;
+            font-weight: 600;
+            float: right;
+            font-size: 16px;
+            padding: 8px 35px;
+            border-radius: 25px;
+            background-color: #333;
+            color: white;
+            border: none;
+            transition: all .1s ease-in;
+            &:hover{background-color: #666;
+                color: #888;}
+        }
+        .comment_text {
+            position: relative;
+            font-weight: 600;
+            font-size: 16px;
+            right: 10px;
+            padding: 8px 35px;
+            border-radius: 25px;
+            background-color: #333;
+            color: white;
+            border: none;
+        }
+    }
 `;
 
 const PostView = () => {
@@ -165,7 +210,7 @@ const PostView = () => {
     const numPages = Math.ceil(commentsList.length / limit); // 필요한 페이지 개수
     
     // 로그아웃 팝업
-    const [comment, setCommnet] = useState("");
+    const [comment, setComment] = useState("");
     const [modalOpen, setModalOpen] = useState(false);
     const [modalOption, setModalOption] = useState('');
     const closeModal = () => {
@@ -175,13 +220,13 @@ const PostView = () => {
     const onClickEdit = () => {
         setModalOpen(true);
         setModalOption('수정');
-        setCommnet("수정하시겠습니까?");
+        setComment("수정하시겠습니까?");
     }
 
     const deleteData = () => {
         setModalOpen(true);
         setModalOption('삭제');
-        setCommnet("삭제하시겠습니까?");
+        setComment("삭제하시겠습니까?");
     }
     
     const onChangeComments = (e) => {
@@ -265,14 +310,14 @@ const PostView = () => {
                             </table>
                             <div className='detail' dangerouslySetInnerHTML={{__html: e.detail}}></div>
                         </div>
-                        <div className="button-area">
+                        <div className="button-area1">
                             <button onClick={onClickLike}>{likeChecked === true ? <i className="bi bi-heart"></i> : <i className="bi bi-heart-fill"></i>}</button>
                             <Link to='/board'><button className='btn left-space'>BACK</button></Link>
                             {getId === e.id ? <><button className='btn left-space' onClick={onClickEdit}>EDIT</button><button className='btn left-space' onClick={deleteData}>DELETE</button></> : null}
                         </div>
                     </>))}
-                    <div>
-                        <p>댓글</p>
+                        <h3>댓글</h3>
+                        <div className='comment_box'>
                         <table>
                             <tr>
                                 <th>Comment.No</th>
@@ -289,17 +334,20 @@ const PostView = () => {
                                 ))}
                             </tr>
                         </table>
-                    </div>
                     <div>
-                        <ul className="page_list">
+                        {/* <ul className="page_list">
                             <li><span onclick = {()=> setPage(page - 1)} disabled = {page === 1}>«</span></li>
                             {Array(numPages).fill().map((_, i) => (
                             <li><span key={i + 1} onClick={() => setPage(i + 1)} aria-current={page === i + 1 ? "page" : null}>{i + 1}</span></li>
                             ))}
                             <li><span onclick = {()=> setPage(page + 1)} disabled = {page === numPages}>»</span></li>
-                        </ul>
+                        </ul> */}
                     </div>
-                    <input type='text' placeholder='댓글을 100자 이내로 입력하세요' value={comments} onChange={onChangeComments} name='comments'></input><button onClick={onClickSaveComments}>SAVE</button>
+                    </div>
+                    <div className="button-area2">
+                    <input type='text' className='comment_text' placeholder='댓글 달기...' value={comments} onChange={onChangeComments} name='comments' size='60'></input>
+                    <button className='comment_btn' onClick={onClickSaveComments}>SAVE</button>
+                    </div>
             </Section>
             <div className="copy">&#169; Plannet.</div>
         </Wrap>
