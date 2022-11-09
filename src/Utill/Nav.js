@@ -138,7 +138,6 @@ const Nav = () => {
             try{
                 const response = await Api.userInfoLoad(userId);
                 setUserInfo(response.data[0]);
-                // setUserImgUrl({backgroundImage: "url(https://khprojectplannet.s3.ap-northeast-2.amazonaws.com/" + response.data[0].img + ")"});
                 const resNum = await Api.userDo(userId);
                 setNum(resNum.data.pes);
             } catch(e){
