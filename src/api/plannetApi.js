@@ -165,6 +165,7 @@ const plannetApi = {
     boardCommentCreate: async function(bnum, id, detail){
         const object = {
             bnum: bnum,
+            
             id: id,
             detail: detail
         };
