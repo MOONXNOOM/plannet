@@ -1,7 +1,8 @@
 
 import axios from "axios";
 const HEADER = 'application/json';
-const PLANNET_DOMAIN = "http://localhost:8090/Plannet_servlet/";
+const PLANNET_DOMAIN = "http://192.168.10.249:8090/Plannet_servlet/";
+// const PLANNET_DOMAIN = "http://localhost:8090/Plannet_servlet/";
 
 const plannetApi = {
     // 로그인 기능
